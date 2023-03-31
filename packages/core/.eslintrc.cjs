@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  extends: ["@c4x"],
+  extends: ["@likec4"],
   parserOptions: {
     tsconfigRootDir: __dirname
   },
@@ -9,5 +9,5 @@ module.exports = {
     ".eslintrc.cjs",
     "esbuild.cjs",
     "dist"
-  ]  
+  ]
 }

@@ -23,10 +23,13 @@
   "dependencies": {
     "@mobily/ts-belt": "^3.13.1",
     "rambdax": "^9.0.0",
+    "tiny-invariant": "^1.3.1",
     "type-fest": "^3.7.0"
   },
   "devDependencies": {
     "@likec4/eslint-config": "workspace:*",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
     "eslint": "^8.36.0",
     "typescript": "^5.0.2",
     "vite": "^4.2.1",
