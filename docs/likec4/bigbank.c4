@@ -29,7 +29,6 @@ model {
     }
 
     atm = softwaresystem "ATM" {
-      #gray
       description: "Allows customers to withdraw cash."
     }
 
@@ -124,10 +123,11 @@ model {
 views {
 
   view index {
-    title "Landscape"
-
-    include *
-    include customer -> bigbank.*
+    title "Context"
+    include
+      *,
+      customer -> bigbank.*
+    autoLayout LR
   }
 
   view landscape of bigbank {
@@ -139,14 +139,21 @@ views {
   view ibs of internetBankingSystem {
     title "Big Bank plc - Internet Banking System"
 
-    include -> internetBankingSystem ->, bigbank
+    include
+      -> internetBankingSystem.* ->
+    exclude
+      bigbank,
+      bigbank.*
+    include
+      internetBankingSystem
   }
 
   view customer of customer {
     include
-      *,
+      customer,
       bigbank,
-      customer ->
+      internetBankingSystem,
+      customer -> internetBankingSystem.*
   }
 
   view spa of singlePageApplication {
@@ -166,14 +173,17 @@ views {
   }
 
   view support of supportStaff {
-    include *,
+    include
+      *,
       bigbank,
       -> backoffice ->
   }
 
   view apiApp of internetBankingSystem.apiApplication {
     title "API Components"
-    include *, bigbank
+    include
+      *,
+      bigbank
     exclude mobileApp
 
     style * {
@@ -190,11 +200,22 @@ views {
   }
 
   view webapp of webApplication {
-    include *, internetBankingSystem, bigbank
+    include
+      *,
+      internetBankingSystem,
+      bigbank
 
     style bigbank {
       color muted
     }
+  }
+
+  view mobileApp of mobileApp {
+    include
+      *,
+      internetBankingSystem,
+      internetBankingSystem.apiApplication,
+      mobileApp -> internetBankingSystem.apiApplication.*
   }
 
 }
