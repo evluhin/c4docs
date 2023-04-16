@@ -1,5 +1,5 @@
 import type { DiagramNode } from '@likec4/core/types'
-import { useFirstMountState, useSyncedRef } from '@react-hookz/web/esm'
+import { useSyncedRef } from '@react-hookz/web/esm'
 import { animated, useSpring, type SpringValues } from '@react-spring/konva'
 import { useMemo } from 'react'
 import type { DiagramTheme } from '../types'
@@ -7,7 +7,7 @@ import { NodeTitle } from './Rectangle'
 import type { OnClickEvent, OnMouseEvent } from './types'
 import { mouseDefault, mousePointer } from './utils'
 
-function cylinderSVGPath(radius: number, height: number, tilt = 0.1) {
+export function cylinderSVGPath(radius: number, height: number, tilt = 0.1) {
   const tiltAdjustedHeight = height - radius * tilt;
   const diameter = radius * 2;
   const rx = radius;
@@ -58,10 +58,7 @@ export const CylinderShape = ({
 
   const springsRef = useSyncedRef(springs ?? null)
 
-  const isFirstRender = useFirstMountState()
-
   const [groupProps] = useSpring({
-    delay: isFirstRender && animate ? 50 : 0,
     to: {
       x: x + offsetX,
       y: y + offsetY,
@@ -126,15 +123,14 @@ export const CylinderShape = ({
     {...groupProps}
   >
     <animated.Path
-      cornerRadius={6}
       shadowBlur={12}
       shadowOpacity={0.3}
       shadowOffsetX={0}
       shadowOffsetY={8}
       data={path}
-      {...cylinderProps}
       width={springs?.width}
       height={springs?.height}
+      {...cylinderProps}
     />
     <NodeTitle
       y={offsetY + Math.round((width / 2) * 0.08)}
