@@ -26,7 +26,7 @@ const cfg = {
   platform: 'browser',
   format: 'esm',
   outdir: 'dist',
-  sourcemap: true,
+  sourcemap: false,
   sourcesContent: false,
   treeShaking: true,
   external: [...Object.keys(packageJson.dependencies), ...Object.keys(packageJson.peerDependencies)]
