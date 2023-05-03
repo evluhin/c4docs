@@ -125,6 +125,8 @@ model {
 views {
 
   view index {
+    title "Big Bank - Landscape"
+
     include
       *,
       customer -> bigbank.*
@@ -165,7 +167,10 @@ views {
       customer,
       bigbank,
       internetBankingSystem,
-      customer -> internetBankingSystem.*
+      customer -> internetBankingSystem.*,
+      customer -> bigbank.*
+
+    exclude webApplication
   }
 
   view spa of singlePageApplication {
