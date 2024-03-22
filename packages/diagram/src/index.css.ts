@@ -1,12 +1,18 @@
-import { defaultTheme, type ThemeColor } from '@likec4/core'
-import { createGlobalTheme, fallbackVar, globalStyle, style } from '@vanilla-extract/css'
-import { mantine, vars } from './theme'
+import type { ThemeColor } from '@likec4/core'
+import { defaultTheme } from '@likec4/core/colors'
+import { createGlobalTheme, fallbackVar, style } from '@vanilla-extract/css'
+import { mantine } from './mantine'
+import { vars, xyvars } from './theme.css'
 
 export const scope = style({})
 
-createGlobalTheme(':root, :host', vars, {
+createGlobalTheme(':root', {
+  ...vars,
+  xyflowbg: xyvars.background
+}, {
   compound: {
-    font: fallbackVar(vars.likec4.font, mantine.fontFamily)
+    font: fallbackVar(vars.likec4.font, mantine.fontFamily),
+    titleColor: vars.element.loContrast
   },
   element: {
     font: fallbackVar(vars.likec4.font, mantine.fontFamily),
@@ -16,7 +22,16 @@ createGlobalTheme(':root, :host', vars, {
     ...defaultTheme.relationships.slate
   },
   likec4: {
-    font: fallbackVar(mantine.fontFamily)
+    font: mantine.fontFamily,
+    backgroundColor: mantine.colors.body
+  },
+  xyflowbg: {
+    color: vars.likec4.backgroundColor
+    // pattern: {
+    //   dots: mantine.colors.defaultBorder,
+    //   lines: mantine.colors.body,
+    //   cross: mantine.colors.body
+    // }
   }
 })
 
@@ -37,31 +52,3 @@ for (const color of Object.keys(defaultTheme.elements)) {
     relation: defaultTheme.relationships[color as ThemeColor]
   })
 }
-
-// globalStyle('.mantine-ActionIcon-icon svg', {
-//   width: '75%',
-//   height: '75%'
-// })
-
-export const cssDisablePan = style({})
-
-globalStyle(`${cssDisablePan} .react-flow__pane`, {
-  cursor: 'default'
-})
-
-export const cssDisableBg = style({
-  backgroundColor: 'transparent !important',
-  vars: {
-    '--xy-background-color': 'transparent !important'
-  }
-})
-globalStyle(`${cssDisableBg} .react-flow__attribution`, {
-  display: 'none'
-})
-
-export const cssReactFlow = style({
-  backgroundColor: 'var(--color-page-background)',
-  vars: {
-    '--xy-background-color': 'var(--color-page-background)'
-  }
-})
