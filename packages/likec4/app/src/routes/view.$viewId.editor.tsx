@@ -10,7 +10,7 @@ export const Route = createFileRoute('/view/$viewId/editor')({
 
 function ViewEditor() {
   const router = useRouter()
-  const { viewId } = Route.useRouteContext()
+  const { viewId } = Route.useParams()
   const view = useLikeC4View(viewId)
 
   if (!view) {
