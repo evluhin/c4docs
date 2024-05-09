@@ -1,7 +1,8 @@
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin'
 import react from '@vitejs/plugin-react'
 import { consola } from 'consola'
-import { resolve } from 'path'
+import { readFile, rm, writeFile } from 'node:fs/promises'
+import { resolve } from 'node:path'
 import postcssPresetMantine from 'postcss-preset-mantine'
 import { build } from 'vite'
 import { shadowStyle } from 'vite-plugin-shadow-style'
@@ -10,9 +11,12 @@ import { modules } from '../src/vite/plugin'
 export async function buildWebcomponentBundle(_isDev = false) {
   const root = resolve('app')
   const outDir = resolve('dist/__app__/src/lib')
-  consola.start(`Building webcomponent bundle...`)
+  consola.start(`Bundling Webcomponent...`)
   consola.info(`root: ${root}`)
   consola.info(`outDir: ${outDir}`)
+
+  const outputFilename = 'webcomponent.mjs'
+
   // Static website
   await build({
     root,
@@ -54,7 +58,7 @@ export async function buildWebcomponentBundle(_isDev = false) {
       lib: {
         entry: 'webcomponent/webcomponent.tsx',
         fileName(_format, _entryName) {
-          return 'webcomponent.mjs'
+          return outputFilename
         },
         formats: ['es']
       },
@@ -88,4 +92,19 @@ export async function buildWebcomponentBundle(_isDev = false) {
       })
     ]
   })
+
+  const outputFilepath = resolve(outDir, outputFilename)
+
+  let webcomponent = await readFile(outputFilepath, 'utf-8')
+  let updated = webcomponent.replace('loadExternalIsValidProp(require("@emotion/is-prop-valid").default);', '')
+
+  if (updated !== webcomponent) {
+    await writeFile(outputFilepath, updated)
+  } else if (webcomponent.includes('@emotion/is-prop-valid')) {
+    throw new Error(
+      'webcomponent.mjs should contain loadExternalIsValidProp(require("@emotion/is-prop-valid").default)'
+    )
+  }
+
+  await rm(resolve(outDir, 'style.css'))
 }
