@@ -9,13 +9,16 @@
     "esModuleInterop": true,
     "noPropertyAccessFromIndexSignature": false,
     "noUnusedParameters": false,
+    "allowJs": true,
+    "checkJs": true,
     "jsx": "react-jsx",
     "rootDir": ".",
     "types": ["vite/client"]
   },
   "include": [
     "./src",
-    "./webcomponent"
+    "./webcomponent",
+    "./react"
   ],
   "references": [
     {
