@@ -1,0 +1,23 @@
+---
+import { LikeC4View, type LikeC4ViewId } from './likec4-views'
+interface Props {
+  viewId: LikeC4ViewId;
+}
+const { viewId } = Astro.props
+---
+
+<LikeC4View
+  className="likec4-dynamic-view"
+  viewId={viewId}
+  injectFontCss={false}
+  interactive={true}
+  client:only="react">
+</LikeC4View>
+
+<style>
+  .likec4-dynamic-view {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
