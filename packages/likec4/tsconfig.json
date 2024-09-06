@@ -2,26 +2,23 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@likec4/tsconfig/base.json",
   "compilerOptions": {
-    "noUnusedParameters": false,
-    "module": "esnext",
-    "rootDir": ".",
-    "baseUrl": ".",
-    "types": [
-      "node"
-    ],
+    // This is only for TSX
+    "esModuleInterop": true,
+    "isolatedModules": true,
     "paths": {
       "@/*": [
         "./src/*"
       ]
     }
   },
-  "include": [
-    "./src",
-    "./test",
-    "./scripts",
-    "package.json"
-  ],
+  "files": [],
   "references": [
+    {
+      "path": "./tsconfig.scripts.json"
+    },
+    {
+      "path": "./tsconfig.cli.json"
+    },
     {
       "path": "./app/tsconfig.json"
     }
