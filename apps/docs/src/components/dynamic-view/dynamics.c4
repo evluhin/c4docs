@@ -9,29 +9,38 @@ specification {
     notation "Software system"
     style {
       opacity 35%
-      color secondary
+      border none
     }
   }
   element component {
     style {
-      opacity 25%
-      border none
       color secondary
+      opacity 35%
+      border none
+    }
+  }
+  element storage {
+    notation "Data storage"
+    style {
+      color secondary
+      opacity 35%
+      shape storage
+      border none
     }
   }
   element database {
     notation "Relational Database"
     style {
+      color secondary
       shape storage
-      color muted
     }
   }
   element redis {
     notation "Redis"
     style {
+      color secondary
       icon tech:redis
       shape storage
-      color muted
     }
   }
 }
@@ -50,13 +59,19 @@ model {
       auth = component 'Authentication' {
         description 'Self-Hosted Authentication Service'
       }
+      auth -> cache 'keeps active sessions'
 
       api = component 'Backend API' {
-        description 'Java Spring Web-service
-        provides access via REST API'
+        technology 'java/spring'
+        description '
+          Java Spring Web-service
+          provides access via REST API
+        '
       }
 
       api -> auth 'validates bearer token'
+      api -> db 'requests persistent data'
+      api -> cache 'requests session data'
     }
 
     ui = component 'Frontend' {
@@ -72,19 +87,31 @@ model {
         technology 'React, Typescript'
         description 'Browser Single-Page Application'
         style {
+          icon tech:react
           shape browser
         }
       }
 
-      web -> auth
-      web -> api 'requests'
+      web -> auth 'refreshes token' {
+        navigateTo authTokenUpdateFlow
+      }
+      web -> api 'requests data' {
+        navigateTo index
+      }
     }
 
-    db = database 'Database' {
-      icon tech:postgresql
-    }
+    storage  = storage 'Data Stores' {
+      description 'Provides access to data'
 
-    cache = redis "Cache"
+      db = database 'Persistent Data' {
+        description 'Relational Database'
+        icon tech:postgresql
+      }
+
+      cache = redis 'Session Data' {
+        description 'Storage with temporary, session-only data'
+      }
+    }
   }
 
   customer -> web 'opens in browser'
@@ -92,107 +119,149 @@ model {
 
 // What diagrams to generate
 views {
-  view index of customer {
+  view customer of customer {
     include
       customer,
       cloud,
-      web
+      ui
 
     style cloud {
-      opacity 25%
-      color muted
+      opacity 40%
+      color secondary
     }
     style cloud.* {
-      color green
+      color secondary
     }
   }
 
   view cloud of cloud {
     include *
+    autoLayout LeftRight
   }
 
   view ui of ui {
-    include cloud, *
+    include
+      *,
+      backend._,
+    exclude
+      api -> auth
   }
 
   view backend of backend {
-    include cloud, *
+    include
+      cloud,
+      *,
+      backend.* -> storage with {
+        title ''
+      }
 
     style cloud, backend {
-      opacity 0%
-      border dashed
+      opacity 40%
       color muted
     }
-  }
-
-  view web of web {
-    include *, cloud, backend._
-    exclude ui
-
-
-    style cloud, backend {
-      opacity 0%
-      border dashed
-      color muted
-    }
-  }
-
-  dynamic view example {
-    title 'Dynamic View Example'
-    customer -> web
-    web -> auth 'updates bearer token if needed'
-    web -> api 'POST request'
-    api -> auth 'validates bearer token'
-    api -> api 'process request'
-    web <- api 'returns JSON'
-    include cloud, ui, backend
-
-    style cloud {
-      color muted
-      opacity 0%
-    }
-    style ui._ {
+    style backend._ {
       color green
     }
   }
 
-  dynamic view parallel-example {
-    title 'Dynamic View Example'
-    ui -> api {
-      notes '
-        🏛️ - Requests data using predefined GraphQL queries
-        ( ONLY )
+  view storage of storage {
+    include
+      *,
+      backend._
+  }
 
-        🤖 - Queries regression on CI
+
+  dynamic view index {
+    title 'Story 1.1 - User dashboard'
+
+    customer -> web '' {
+      notes '
+        Opens application in the browser via secured connection, authenticates and navigates to the dashboard'
+    }
+
+    web -> auth 'updates token if needed' {
+      navigateTo authTokenUpdateFlow
+      notes '
+        Frontend application checks access token expiration.
+        If expired - requests a new using refresh token
+      '
+    }
+
+    web -> api 'GET request' {
+      notes '
+        Requests data from API endpoint with access token
       '
     }
     parallel {
-      api -> cache {
-        notes "
-          First, API checks if data is cached already.
-          Second, is it stale?
-        "
+      api -> db '' {
+        notes 'Requests persistent data with SQL'
       }
-      api -> db {
-        notes "If no data cached, queries persistent data  (SQL)"
+      api -> cache '' {
+        notes 'Requests session data'
       }
-
     }
+
+    api -> api 'process' {
+      notes '
+        Transforms received data and prepares user dashboard
+      '
+    }
+    web <- api {
+      notes 'Returns data to frontend as JSON'
+    }
+
+    include cloud, storage
+
+    style cloud._ {
+      color secondary
+      opacity 30%
+    }
+  }
+
+  dynamic view authTokenUpdateFlow {
+    title 'Auth token update'
+    customer -> web 'interacts'
+    web -> auth {
+      notes '
+        Frontend application checks access token expiration.
+        If expired - requests a new using refresh token
+      '
+    }
+    auth -> cache 'lookups' {
+      notes '
+        Lookups for refresh token
+      '
+    }
+    auth -> auth {
+      notes '
+        Validates refresh token, issues new access token
+      '
+    }
+    parallel {
+      auth -> cache 'stores' {
+        notes '
+          Updates refresh token and stores a new issued access token
+        '
+      }
+      web <- auth 'returns tokens' {
+        notes '
+          Returns updated refresh token and new acess token,
+        '
+      }
+    }
+    web -> web {
+      notes '
+        Stores tokens in localStorage
+      '
+    }
+
     include
       cloud,
-      ui with {
-        color secondary
-        icon tech:react
-      },
-      api with {
-        color secondary
-        icon tech:graphql
-    }
+      storage
 
-
-    style cloud {
-      opacity 10%
+    style customer, cloud._ {
+      color secondary
+      opacity 40%
     }
-    autoLayout TopBottom
   }
 }
