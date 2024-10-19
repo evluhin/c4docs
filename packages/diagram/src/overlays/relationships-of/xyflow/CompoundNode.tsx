@@ -27,7 +27,7 @@ export function CompoundNode({
           css.compoundNodeBody,
           'likec4-compound-node'
         ])}
-        data-compound-depth={2}
+        data-compound-depth={3}
         data-likec4-color={element.color}
         animate={{
           opacity: data.dimmed ? 0.15 : 1,

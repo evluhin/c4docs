@@ -1,3 +1,4 @@
+import { rem } from '@mantine/core'
 import { globalStyle, style } from '@vanilla-extract/css'
 import { mantine, vars, whereLight, xyvars } from '../../../theme-vars'
 
@@ -49,7 +50,7 @@ export const compoundNodeBody = style({
   width: '100%',
   height: '100%',
   boxShadow: '0 4px 10px 0.5px rgba(0,0,0,0.1) , 0 2px 2px -1px rgba(0,0,0,0.4)',
-  background: `color-mix(in srgb , ${vars.element.fill},  transparent 45%)`,
+  background: `color-mix(in srgb , ${vars.element.fill},  transparent 10%)`,
   borderRadius: 4
 })
 
@@ -64,13 +65,7 @@ export const compoundNodeTitle = style({
   paddingTop: 12,
   paddingLeft: 10,
   mixBlendMode: 'screen',
-  color: vars.compound.titleColor,
-  selectors: {
-    [`${whereLight} &`]: {
-      mixBlendMode: 'darken',
-      color: vars.element.stroke
-    }
-  }
+  color: vars.compound.titleColor
 })
 
 export const cssShapeSvg = style({
@@ -130,8 +125,15 @@ export const edgeLabel = style({
 export const edgeLabelText = style({
   textAlign: 'center',
   whiteSpaceCollapse: 'preserve-breaks',
-  fontSize: mantine.fontSizes.sm,
+  fontSize: rem(15),
   lineHeight: mantine.lineHeights.xs
+})
+
+export const edgeLabelTechnology = style({
+  textAlign: 'center',
+  whiteSpaceCollapse: 'preserve-breaks',
+  fontSize: mantine.fontSizes.sm,
+  lineHeight: 1
 })
 
 export const emptyNode = style({

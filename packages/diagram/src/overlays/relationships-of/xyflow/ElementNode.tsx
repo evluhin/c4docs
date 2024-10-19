@@ -3,10 +3,10 @@ import { IconFileSymlink, IconTransform, IconZoomScan } from '@tabler/icons-reac
 import { Handle, type NodeProps, Position } from '@xyflow/react'
 import clsx from 'clsx'
 import { m } from 'framer-motion'
-import { useOverlayDialog } from '../../../components'
 import { type DiagramState, useDiagramState } from '../../../hooks'
 import { ElementShapeSvg } from '../../../xyflow/nodes/element/ElementShapeSvg'
 import { stopPropagation } from '../../../xyflow/utils'
+import { useOverlayDialog } from '../../OverlayContext'
 import type { XYFlowTypes } from '../_types'
 import * as css from './styles.css'
 
