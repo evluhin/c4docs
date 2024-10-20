@@ -490,7 +490,7 @@ Your <a href="https://github.com/likec4/likec4/discussions/343" target="_blank">
 
 ### Style predicates
 
-Style predicates define how elements are rendered.  
+Style predicates define how elements are rendered, and applied in the order they are defined merging with previous ones:
 
 ```likec4
 view apiApp of internetBankingSystem.apiApplication {
@@ -530,73 +530,90 @@ view apiApp of internetBankingSystem.apiApplication {
 }
 ```
 
-Please note, that [overrides](#with-overrides) have higher priority.
-
 #### Shared local styles :badge[v1.13]{variant="success"}
 
-Styles can be shared within `views` group:
+Styles can be shared within `views` block (_"local styles"_):
 
 ```likec4
 views {
-  // apply to all elements in all views in this views block
+  // apply to all views in this block
   style * {
     color muted
     opacity 10%
   }
 
-  view apiApp of internetBankingSystem.apiApplication {
+  view of apiApp {
     include *
+    style cloud.web.* {
+      color green
+    }
   }
 
-  view mobileApp of internetBankingSystem.mobileApplication {
+  view of mobileApp {
     include *
-  }
-}
-```
-
-#### Global style predicates
-
-Style predicates can be defined globally and applied to multiple views.
-
-```likec4
-global {
-  // apply to all elements
-  style all_elements * {
-    color muted
-    opacity 10%
-  }
-
-  // apply only to these elements
-  style applications singlePageApplication, mobileApp {
-    color secondary
-  }
-
-  // apply only to elements with specific tag
-  style deprecated element.tag = #deprecated {
-    color muted
+    style cloud.ui.* {
+      color amber
+    }    
   }
 }
 
 views {
-  view apiApp of internetBankingSystem.apiApplication {
+  // Styles from previous block are not applied here
+  // ...
+}
+```
 
-    include *
+<Aside title="Order">
+Styles are applied in the order they are defined.  
+First, local styles from `views` block and then from `view`
+</Aside>
 
-    global style all_elements
+:::caution
+[Overrides](#with-overrides) are always applied last, after all styles
+:::
 
-    global style applications
 
-    // apply only to nested of apiApplication
-    style apiApplication.* {
-      color primary
-    }
+#### Shared global styles :badge[v1.13]{variant="success"}
 
-    global style deprecated
+Styles can be shared globally.  
+Global styles must be named and defined in `global` block:
 
-    style element.tag != #deprecated {
-      opacity 20%
-    }
+```likec4
+global {
+  // Format:
+  //  style <name> <targets> { ... }
+  style mute_all * {
+    color muted
+    opacity 10%
   }
+
+  style applications
+    singlePageApplication._,
+    mobileApp._ {
+      color secondary
+    } 
+
+  style mute_deprecated
+    element.tag = #deprecated {
+      color muted
+    }  
+}
+
+views {
+  view of singlePageApplication {  
+    // Styles are applied in the order they are defined
+    // 1. Apply global style
+    global style mute_all
+
+    // 2. Then this
+    style cloud.* {
+      color green
+    }
+
+    // 3. and 4.
+    global style mute_deprecated
+    global style applications
+  }  
 }
 ```
 
