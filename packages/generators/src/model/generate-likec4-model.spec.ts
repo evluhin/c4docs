@@ -1,5 +1,6 @@
 import { Builder, LikeC4Model } from '@likec4/core'
-import { computeViews } from '@likec4/core/compute-view'
+import { computeViews, withReadableEdges } from '@likec4/core/compute-view'
+import { mapValues } from 'remeda'
 import { describe, expect, it } from 'vitest'
 import { generateLikeC4Model } from './generate-likec4-model'
 
@@ -146,7 +147,9 @@ const builder = b
       )
     )
   )
-const m = LikeC4Model.create(computeViews(builder.build()))
+const computed = computeViews(builder.build())
+computed.views = mapValues(computed.views, withReadableEdges)
+const m = LikeC4Model.create(computed)
 
 describe('generateLikeC4Model', () => {
   it('should generate', () => {
