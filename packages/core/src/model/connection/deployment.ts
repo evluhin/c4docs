@@ -3,26 +3,21 @@ import { DeploymentConnectionModel } from '../DeploymentConnectionModel'
 import type { DeploymentElementModel } from '../DeploymentElementModel'
 import type { AnyAux } from '../types'
 
-export function mergeConnections<M extends AnyAux>(
-  connections: Iterable<DeploymentConnectionModel<M>>
-): DeploymentConnectionModel<M>[] {
-  const map = new Map<string, DeploymentConnectionModel<M>>()
-  for (const conn of connections) {
-    const existing = map.get(conn.id)
-    if (existing) {
-      map.set(conn.id, existing.mergeWith(conn))
-    } else {
-      map.set(conn.id, conn)
-    }
-  }
-  return [...map.values()]
-}
+export { mergeConnections } from './model'
 
+/**
+ * Resolve connection from source to target
+ * If direction is `both`, also look for reverse connection
+ */
 export function findConnection<M extends AnyAux>(
   source: DeploymentElementModel<M>,
   target: DeploymentElementModel<NoInfer<M>>,
   direction: 'directed' | 'both' = 'directed'
-): readonly DeploymentConnectionModel<M>[] {
+):
+  | readonly [DeploymentConnectionModel<M>, DeploymentConnectionModel<M>]
+  | readonly [DeploymentConnectionModel<M>]
+  | readonly []
+{
   if (source === target) {
     return []
   }
@@ -61,40 +56,54 @@ export function findConnection<M extends AnyAux>(
 }
 
 /**
- * Resolve all connection between element and others (any direction)
+ * Resolve all connections between element and others
+ * By default, look for both directions.
  */
 export function findConnectionsBetween<M extends AnyAux>(
   element: DeploymentElementModel<M>,
-  others: Iterable<DeploymentElementModel<NoInfer<M>>>
+  others: Iterable<DeploymentElementModel<NoInfer<M>>>,
+  direction: 'directed' | 'both' = 'both'
 ): readonly DeploymentConnectionModel<M>[] {
-  const otherElements = [...others]
-  if (otherElements.length === 0) {
-    return []
-  }
   if (element.allIncoming.isEmpty && element.allOutgoing.isEmpty) {
     return []
   }
 
-  const result = [] as DeploymentConnectionModel<M>[]
+  // We separate resolved connection,
+  // because we want return outgoing first
+  const outgoing = [] as DeploymentConnectionModel<M>[]
+  const incoming = [] as DeploymentConnectionModel<M>[]
   for (const _other of others) {
-    result.push(
-      ...findConnection(element, _other, 'both')
-    )
+    if (element === _other) {
+      continue
+    }
+    for (const found of findConnection(element, _other, direction)) {
+      if (found.source === element) {
+        outgoing.push(found)
+      } else {
+        incoming.push(found)
+      }
+    }
   }
-  return result
+  return [
+    ...outgoing,
+    ...incoming
+  ]
 }
 
+/**
+ * Resolve all connections within a given set of elements
+ */
 export function findConnectionsWithin<M extends AnyAux>(
   elements: Iterable<DeploymentElementModel<M>>
 ): readonly DeploymentConnectionModel<M>[] {
   return [...elements].reduce((acc, el, index, array) => {
-    // return acc if last element
+    // skip for last element
     if (index === array.length - 1) {
       return acc
     }
-    const connections = findConnectionsBetween(el, array.slice(index + 1))
-    // We reverse connect
-    acc.push(...connections)
+    acc.push(
+      ...findConnectionsBetween(el, array.slice(index + 1), 'both')
+    )
     return acc
   }, [] as DeploymentConnectionModel<M>[])
 }
