@@ -1,8 +1,13 @@
 // Define deployment node kinds
 specification {
   deploymentNode node
+  deploymentNode region {
+    notation 'Geo Region'
+  }
   deploymentNode zone
+  deploymentNode group
   deploymentNode environment {
+    notation 'Environment'
     style {
       color gray
     }
@@ -12,21 +17,43 @@ specification {
 // Deployment model
 deployment {
 
-  node customerNode {
+  node customer {
     instanceOf customer
   }
 
-  environment prod 'Production' {
-    eu = zone 'EU' {
+  environment prod {
+    title 'Production environment'
+    technology 'OpenTofu'
+
+    region eu 'EU' {
+
       zone zone1 {
         node server1 {
-          instanceOf cloud.ui.dashboard
-          instanceOf cloud.ui.supportPanel
+          instanceOf cloud.ui
+          instanceOf cloud.next.graphql
         }
         node server2 {
-          api = instanceOf cloud.next.backend
-          instanceOf cloud.next.graphql
+          instanceOf cloud.ui
+          instanceOf cloud.next.graphql          
+        }
+        node server3 {
+          instanceOf cloud.next.backend
+          instanceOf cloud.legacy
           instanceOf cloud.next.events
+        }
+        node server4 {
+          instanceOf cloud.next.backend
+          instanceOf cloud.legacy
+        }
+
+        group amazon {
+          instanceOf amazon.rds
+        }
+
+        server4.backend -> server3.events 'reuse' {
+          style {
+            color red
+          }
         }
       }
     }
@@ -35,14 +62,37 @@ deployment {
 
 views {
 
-  deployment view view_deployment_57 {
-    title 'Untited'
+  deployment view production {
+    title 'Production deployment'
     
     include
-      *,
-      prod.zone1.server1._,
-      prod.zone1.server2._
+      * -> eu,
+      eu.**
+
+    exclude
+      server1.ui -> server3.legacy,
+      server1.ui -> server4.legacy,
+      server2.ui -> server3.legacy,
+      server2.ui -> server4.legacy,
+      server1.ui -> zone1.rds,
+      server2.ui -> zone1.rds,
+      server3.legacy -> zone1.rds,
+      server4.legacy -> zone1.rds
     
+    style eu._ {
+      color muted
+    }
+
+    style server1._, server4._ {
+      color green
+    }
+    style server2._ {
+      color indigo
+    }
+
+    style amazon._ {
+      color amber
+    }
   }
 
 }
