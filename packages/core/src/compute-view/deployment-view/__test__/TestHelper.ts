@@ -120,7 +120,6 @@ export class TestHelper<T extends AnyTypes> {
     toEqual: (...matchers: ConnectionEqual<T>) => {
       const [matcher, ...rest] = matchers
       if (isString(matcher)) {
-        this._expect.soft
         this._expect(connections.map(c => c.expression)).toEqual([matcher, ...rest])
         return
       }
@@ -225,8 +224,11 @@ class ProcessPredicates<T extends AnyTypes> {
       ...this.predicates,
       ...predicates,
     ]
-    this.predicates.reduce((vb, rule) => rule(vb), vb)
+    for (const rule of this.predicates) {
+      rule(vb)
+    }
     this.previousMemory = this.memory
+    this.viewrules = view.rules
     this.memory = processPredicatesImpl(this.t.model.deployment, view.rules)
     this.age++
     return this
