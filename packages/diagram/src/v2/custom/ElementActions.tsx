@@ -30,7 +30,7 @@ export const ElementActions = (props: ElementActionsProps) => {
       icon: <IconTransform />,
       onClick: (e) => {
         e.stopPropagation()
-        // store.getState().openOverlay({ relationshipsOf: fqn })
+        diagram.send({ type: 'openRelationshipsBrowser', fqn })
       },
     })
   }
