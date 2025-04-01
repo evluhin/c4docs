@@ -9,8 +9,8 @@ import {
 import { useDeepCompareMemo } from '@react-hookz/web'
 import { hasAtLeast } from 'remeda'
 import { ZIndexes } from '../../base/const'
-import { LayoutRelationshipsViewResult } from './-useRelationshipsView'
 import type { RelationshipsBrowserTypes } from './_types'
+import { LayoutRelationshipsViewResult } from './layout'
 
 // const nodeZIndex = (node: DiagramNode) => node.level - (node.children.length > 0 ? 1 : 0)
 export function viewToNodesEdge(
@@ -183,6 +183,8 @@ export function viewToNodesEdge(
       // hidden: !visiblePredicate(edge),
       deletable: false,
       data: {
+        sourceFqn: edge.sourceFqn,
+        targetFqn: edge.targetFqn,
         relations: edge.relations,
         color: edge.color ?? 'gray',
         label: edge.label,
