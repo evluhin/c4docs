@@ -6,7 +6,7 @@ on:
 env:
   NODE_ENV: production
   FORCE_COLOR: true
-  HUSKY: "0"
+  DO_NOT_TRACK: "1"
 
 jobs:
   e2e-tests:

@@ -1,0 +1,164 @@
+name: checks
+
+on:
+  workflow_call:
+
+env:
+  NODE_ENV: production
+  CLOUDFLARE_ENV: "production"
+  FORCE_COLOR: true
+  DO_NOT_TRACK: "1"
+
+jobs:
+  check-types:
+    name: ʦ typescript
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🛠️ bootstrap
+        uses: ./.github/actions/bootstrap
+
+      - name: ⚙️ generate
+        run: pnpm generate
+
+      - name: ʦ typecheck
+        run: pnpm ci:typecheck
+
+  check-build:
+    name: 🛠️ build
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🛠️ bootstrap
+        uses: ./.github/actions/bootstrap
+
+      - name: ⚙️ build
+        run: pnpm ci:build
+
+  check-tests:
+    name: 🔬 tests
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🛠️ bootstrap
+        uses: ./.github/actions/bootstrap
+
+      - name: ⚙️ generate
+        run: pnpm generate
+
+      - name: 🔬 test
+        env:
+          NODE_ENV: test
+        run: pnpm ci:test
+
+  check-docs-astro:
+    name: 📖 docs
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    needs:
+      - check-build
+      - check-types
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🛠️ bootstrap
+        uses: ./.github/actions/bootstrap
+
+      - name: ʦ typecheck
+        run: |
+          pnpm turbo run typecheck --filter='@likec4/docs-astro'
+
+      - name: ⚙️ build
+        run: |
+          pnpm turbo run build --filter='@likec4/docs-astro'
+
+  check-e2e-tests:
+    name: 🔬 e2e tests
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    needs:
+      - check-build
+      - check-types
+      - check-tests
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🛠️ bootstrap
+        uses: ./.github/actions/bootstrap
+
+      - name: 📦 pack
+        run: |
+          pnpm turbo run pack --filter='@likec4/core' --filter='likec4'
+
+      - name: 🛠️ install e2e dependencies
+        working-directory: e2e
+        env:
+          NODE_ENV: development
+        run: |
+          pnpm install
+          pnpm install:chromium
+          pnpm bootstrap
+
+      - name: ⚙️ run playwright tests
+        working-directory: e2e
+        run: pnpm test
+
+      - id: cloudflare
+        if: ${{ failure() && github.repository_owner == 'likec4' }}
+        name: ⚙️ publish playwright-report
+        uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          command: pages deploy playwright-report --project-name likec4-e2e --commit-dirty --branch preview
+          workingDirectory: e2e
+          packageManager: pnpm
+
+      - name: print url to published report
+        if: ${{ failure() && github.repository_owner == 'likec4' }}
+        run: |
+          echo "::warning::Report published at ${{ steps.cloudflare.outputs.deployment-url }}"
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: e2e/playwright-report/
+          compression-level: 9
+          retention-days: 5
+
+  check-e2e-types:
+    name: 🔬 e2e types
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    needs:
+      - check-build
+      - check-types
+      - check-tests
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🛠️ bootstrap
+        uses: ./.github/actions/bootstrap
+
+      - name: 📦 pack
+        run: |
+          pnpm turbo run pack --filter='@likec4/core' --filter='likec4'
+
+      - name: 🛠️ install e2e dependencies
+        working-directory: e2e
+        env:
+          NODE_ENV: development
+        run: |
+          pnpm install
+          pnpm bootstrap
+
+      - name: ʦ typecheck test
+        working-directory: e2e
+        run: pnpm typecheck
