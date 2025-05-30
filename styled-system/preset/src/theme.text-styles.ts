@@ -59,6 +59,15 @@ import { defineTextStyles } from '@pandacss/dev'
 
 export const textStyles = defineTextStyles({
   likec4: {
+    tag: {
+      description: 'Tag text, usually a tag',
+      value: {
+        fontFamily: 'var(--likec4-element-font, {fonts.likec4})',
+        fontWeight: '500',
+        fontSize: 'sm',
+        lineHeight: '1',
+      },
+    },
     node: {
       primary: {
         description: 'Primary text, usually a title or name',
