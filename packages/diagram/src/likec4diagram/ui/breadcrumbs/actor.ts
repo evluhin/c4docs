@@ -9,10 +9,10 @@ import {
   raise,
   setup,
 } from 'xstate'
-import type { CurrentViewModelContextType } from '../../../likec4model/LikeC4ModelContext'
+import type { CurrentViewModel } from '../../../likec4model/LikeC4ModelContext'
 
 export interface BreadcrumbsActorInput {
-  viewModel: CurrentViewModelContextType
+  viewModel: CurrentViewModel
 }
 
 export type BreadcrumbsActorEvent =
@@ -57,7 +57,7 @@ export type DropdownColumnItem =
   }
 
 export interface BreadcrumbsContext {
-  viewModel: CurrentViewModelContextType
+  viewModel: CurrentViewModel
   breadcrumbs: Array<BreadcrumbItem>
   /**
    * Who initiated the dropdown
