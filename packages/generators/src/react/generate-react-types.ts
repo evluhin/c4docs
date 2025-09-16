@@ -2,9 +2,10 @@ import type { AnyLikeC4Model } from '@likec4/core/model'
 import { invariant } from '@likec4/core/utils'
 import { generateAux } from '../model/generate-aux'
 
-export function generateReactTypes(model: AnyLikeC4Model) {
+export function generateReactTypes(model: AnyLikeC4Model, options: { useCorePackage?: boolean } = {}) {
+  const { useCorePackage = false } = options
   invariant(!model.isParsed(), 'can not generate react types for parsed model')
-  const aux = generateAux(model)
+  const aux = generateAux(model, options)
 
   return `
 /* prettier-ignore-start */
@@ -17,8 +18,8 @@ export function generateReactTypes(model: AnyLikeC4Model) {
 
 import type { PropsWithChildren } from 'react'
 import type { JSX } from 'react/jsx-runtime'
-import type { LikeC4Model } from '@likec4/core/model'
-import type { DiagramView } from '@likec4/core/types'
+import type { LikeC4Model } from '${useCorePackage ? '@likec4/core' : 'likec4'}/model'
+import type { DiagramView } from '${useCorePackage ? '@likec4/core/types' : 'likec4/model'}'
 import type {
   LikeC4ViewProps as GenericLikeC4ViewProps,
   ReactLikeC4Props as GenericReactLikeC4Props
