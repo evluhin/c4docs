@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { Builder } from '../../../builder'
 
-describe('Project styles', () => {
+describe('computed nodes and edges inherit project styles', () => {
   const builder = Builder
     .specification({
       elements: {
@@ -15,7 +15,7 @@ describe('Project styles', () => {
         full: {
           style: {
             border: 'none',
-            opacity: 0.2,
+            opacity: 37,
             size: 'xs',
             padding: 'xs',
           },
@@ -35,129 +35,116 @@ describe('Project styles', () => {
       )
     )
 
-  it('inherit styles', () => {
-    const m = builder.toLikeC4Model({
+  it('inherits element styles', () => {
+    const view = builder.toLikeC4Model({
       id: 'test',
       styles: {
         defaults: {
-          element: {
-            shape: 'browser',
-            color: 'red',
-            size: 'lg',
-          },
+          shape: 'browser',
+          color: 'red',
+          size: 'lg',
         },
       },
-    })
+    }).view('index')
 
-    expect(m.element('el').shape).toBe('browser')
-    expect(m.element('el').color).toBe('red')
-    expect(m.element('el').style).toMatchInlineSnapshot(
-      {
-        border: 'solid',
-        opacity: 100,
-        size: 'lg',
-      },
+    const elnode = view.node('el')
+    expect(elnode.color).toBe('red')
+    expect(elnode.shape).toBe('browser')
+    expect(elnode.style).toMatchInlineSnapshot(
       `
       {
-        "border": "solid",
-        "opacity": 100,
+        "border": "dashed",
+        "opacity": 15,
         "size": "lg",
       }
     `,
     )
 
-    expect(m.element('queue').shape).toBe('queue')
-    expect(m.element('queue').color).toBe('green')
-    expect(m.element('queue').style).toMatchInlineSnapshot(
-      {
-        border: 'solid',
-        opacity: 100,
-        size: 'lg',
-      },
+    const queuenode = view.node('queue')
+    expect(queuenode.color).toBe('green')
+    expect(queuenode.shape).toBe('queue')
+    expect(queuenode.style).toMatchInlineSnapshot(
       `
       {
-        "border": "solid",
-        "opacity": 100,
+        "border": "dashed",
+        "opacity": 15,
         "size": "lg",
       }
     `,
     )
 
-    expect(m.element('full').shape).toBe('browser')
-    expect(m.element('full').color).toBe('red')
-    expect(m.element('full').style).toMatchInlineSnapshot(
-      {
-        border: 'none',
-        opacity: 0.2,
-        padding: 'xs',
-        size: 'xs',
-      },
+    const fullnode = view.node('full')
+    expect(fullnode.color).toBe('red')
+    expect(fullnode.shape).toBe('browser')
+    expect(fullnode.style).toMatchInlineSnapshot(
       `
       {
         "border": "none",
-        "opacity": 0.2,
+        "opacity": 37,
         "padding": "xs",
         "size": "xs",
       }
     `,
     )
+  })
+
+  it('inherits relationship styles', () => {
+    const m = builder
+      .clone()
+      .model((_, m) => m(_.rel('full', 'queue')))
+      .toLikeC4Model({
+        id: 'test',
+        styles: {
+          defaults: {
+            relationship: {
+              color: 'green',
+              line: 'solid',
+              arrow: 'diamond',
+            },
+          },
+        },
+      })
 
     const view = m.view('index')
+    const edges = [...view.edges()]
+    expect(edges.length).toBe(1)
+    const edge = edges[0]!
 
-    const el = view.node('el')
-    expect(el.shape).toBe('browser')
-    expect(el.color).toBe('red')
-    expect(el.style).toMatchInlineSnapshot(
-      {
-        border: 'solid',
-        opacity: 100,
-        size: 'lg',
-      },
-      `
-      {
-        "border": "solid",
-        "opacity": 100,
-        "size": "lg",
-      }
-    `,
-    )
+    expect(edge.color).toBe('green')
+    expect(edge.line).toBe('solid')
+    expect(edge.head).toBe('diamond')
+  })
 
-    const queue = view.node('queue')
-    expect(queue.shape).toBe('queue')
-    expect(queue.color).toBe('green')
-    expect(queue.style).toMatchInlineSnapshot(
-      {
-        border: 'solid',
-        opacity: 100,
-        size: 'lg',
-      },
-      `
-      {
-        "border": "solid",
-        "opacity": 100,
-        "size": "lg",
-      }
-    `,
-    )
+  it('overrides relationship styles', () => {
+    const m = builder
+      .clone()
+      .model((_, m) =>
+        m(_.rel('full', 'queue', {
+          color: 'blue',
+          line: 'dotted',
+          head: 'dot',
+        }))
+      )
+      .toLikeC4Model({
+        id: 'test',
+        styles: {
+          defaults: {
+            relationship: {
+              color: 'green',
+              line: 'solid',
+              arrow: 'diamond',
+            },
+          },
+        },
+      })
 
-    const full = view.node('full')
-    expect(full.shape).toBe('browser')
-    expect(full.color).toBe('red')
-    expect(full.style).toMatchInlineSnapshot(
-      {
-        border: 'none',
-        opacity: 0.2,
-        padding: 'xs',
-        size: 'xs',
-      },
-      `
-      {
-        "border": "none",
-        "opacity": 0.2,
-        "padding": "xs",
-        "size": "xs",
-      }
-    `,
-    )
+    const view = m.view('index')
+    const edges = [...view.edges()]
+    expect(edges.length).toBe(1)
+    const edge = edges[0]!
+
+    expect(edge.color).toBe('blue')
+    expect(edge.line).toBe('dotted')
+    expect(edge.head).toBe('dot')
   })
 })
