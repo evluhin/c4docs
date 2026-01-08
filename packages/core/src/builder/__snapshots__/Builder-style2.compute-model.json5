@@ -98,7 +98,11 @@
         },
       },
     },
-    "relationships": {},
+    "relationships": {
+      "like": {
+        "technology": "thumbs up",
+      },
+    },
     "tags": {
       "tag1": {
         "color": "#FFF",
