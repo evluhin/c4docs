@@ -1,13 +1,8 @@
-import { Box, Burger, Code, ScrollArea } from '@mantine/core'
 import { createFileRoute, notFound } from '@tanstack/react-router'
-import { Group, Panel, Separator } from 'react-resizable-panels'
-import { CopyToClipboard } from '../../components/CopyToClipboard'
-import { SidebarDrawerOps } from '../../components/sidebar/state'
-import * as styles from './view.css'
-import { cssCodeBlock, cssScrollArea, viewWithTopPadding } from './view_viewId_.css'
+import { ViewAsDot } from '../../pages/ViewAsDot'
 
 export const Route = createFileRoute('/_single/view/$viewId/dot')({
-  component: ViewAsDot,
+  component: Page,
   staleTime: Infinity,
   loader: async ({ params, context }) => {
     const projectId = context.projectId
@@ -28,45 +23,7 @@ export const Route = createFileRoute('/_single/view/$viewId/dot')({
   },
 })
 
-function ViewAsDot() {
+function Page() {
   const { dot, dotSvg } = Route.useLoaderData()
-  return (
-    <>
-      <Group className={viewWithTopPadding}>
-        <Panel>
-          <ScrollArea
-            className={cssScrollArea}
-            p={5}
-            styles={{
-              viewport: {
-                borderRadius: 6,
-              },
-            }}>
-            <Code block className={cssCodeBlock}>
-              {dot}
-            </Code>
-            <CopyToClipboard text={dot} />
-          </ScrollArea>
-        </Panel>
-        <Separator
-          style={{
-            width: 10,
-          }} />
-        <Panel>
-          <ScrollArea h={'100%'}>
-            <div className={styles.svgContainer} dangerouslySetInnerHTML={{ __html: dotSvg }}></div>
-          </ScrollArea>
-        </Panel>
-      </Group>
-      <Box
-        pos={'fixed'}
-        top={14}
-        left={10}>
-        <Burger
-          size={'sm'}
-          onClick={SidebarDrawerOps.open}
-          aria-label="Toggle navigation" />
-      </Box>
-    </>
-  )
+  return <ViewAsDot dot={dot} dotSvg={dotSvg} />
 }
