@@ -1,11 +1,10 @@
+import { WithFileSystem, WithLikeC4ManualLayouts } from '@likec4/language-server/filesystem'
+import { WithMCPServer } from '@likec4/language-server/mcp'
 import {
   createLanguageServices as createCustomLanguageServices,
   NoFileSystem,
   NoLikeC4ManualLayouts,
-  WithFileSystem,
-  WithLikeC4ManualLayouts,
-  WithMCPServer,
-} from '@likec4/language-server'
+} from '@likec4/language-server/module'
 import { GraphvizWasmAdapter, QueueGraphvizLayoter } from '@likec4/layouts'
 import { GraphvizBinaryAdapter } from '@likec4/layouts/graphviz/binary'
 import { configureLogger, getConsoleStderrSink, loggable, rootLogger } from '@likec4/log'
