@@ -1,71 +1,107 @@
 ---
 name: changeset-generator
-description: Generate changeset based on current branch changes or staged files
+description:
+  Generates changeset files based on changes. Use when user asks to create a changeset or at the end of a feature implementation, when the user asks to wrap up or finalize changes
 ---
-
-# Changeset Generator for LikeC4
 
 Generate changeset files based on current branch changes or staged files.
 
-## 1. Identify Changes
+# 1. Identify Changes
 
-**Step 1: Check for staged changes**
+## Step 1: Detect change source
 
-```bash
-git diff --staged --name-only
-```
-
-If there are staged files, use only staged changes and skip to Step 3.
-
-**Step 2: Find commits since main branch** (if no staged changes)
+Determine where to read changes from, in this priority order:
 
 ```bash
-# Get all changed files compared to main
-git diff --name-only main...HEAD
+# First: check for staged changes
+STAGED=$(git diff --staged --name-only)
 
-# List commits since diverging from main
-git log --oneline main..HEAD
+if [ -n "$STAGED" ]; then
+  echo "Using staged changes"
+else
+  # Second: check for branch changes vs main
+  BRANCH_DIFF=$(git diff --name-only main...HEAD 2>/dev/null)
+
+  if [ -n "$BRANCH_DIFF" ]; then
+    echo "Using branch changes vs main"
+  else
+    # Third: check for uncommitted changes
+    UNCOMMITTED=$(git diff --name-only)
+    echo "Using uncommitted changes"
+  fi
+fi
 ```
 
-**Step 3: Gather context from commit messages**
+Use whichever source has changes. If none have changes, tell the user and stop.
+
+## Step 2: Gather context
+
+For **staged changes:**
 
 ```bash
-git log --format="%s%n%b" main..HEAD
+git diff --staged --name-only          # changed files
+git diff --staged --stat               # change size overview
+git diff --staged -- '*.ts' '*.tsx'    # actual code diff for key files
 ```
 
-- Use commit messages to understand intent behind changes
-- Conventional Commits hints:
-  - `feat:` / `fix:` - Usually needs changeset
-  - `chore:` / `test:` / `refactor:` - Usually skip unless user-facing
+For **branch changes:**
 
-## 2. Map Files to Packages
+```bash
+git diff --name-only main...HEAD       # changed files
+git log --oneline main..HEAD           # commit list
+git log --format="%s%n%b" main..HEAD   # commit messages for intent
+```
 
-Group changed files by their package folder:
+Read the actual diff for non-trivial files when commit messages are vague — file names alone are often insufficient for writing a good summary.
 
-- `packages/<name>/*` - Read `packages/<name>/package.json`
-- `apps/<name>/*` - Read `apps/<name>/package.json`
-- `styled-system/<name>/*` - Read `styled-system/<name>/package.json`
+**Conventional Commits hints:**
 
-**Skip packages** with only:
+- `feat:` / `fix:` — usually needs a changeset
+- `chore:` / `test:` / `refactor:` — usually skip unless user-facing
+
+# 2. Map Files to Packages
+
+Group changed files by their package:
+
+- `packages/<name>/*` → read `packages/<name>/package.json` for the package name
+- `apps/<name>/*` → read `apps/<name>/package.json`
+- `styled-system/<name>/*` → read `styled-system/<name>/package.json`
+
+**Skip packages** where the only changes are:
 
 - Test files (`*.spec.ts`, `__tests__/*`, `__snapshots__/*`)
-- Generated files (in `.gitignore`)
-- Internal packages: `@likec4/icons`, `@likec4/tsconfig`
+- Generated files (anything in `.gitignore`)
+- Internal packages that are never published: `@likec4/icons`, `@likec4/tsconfig`
 
-## 3. Generate Summary
+If no packages remain after filtering, tell the user there are no user-facing changes and stop — do not create a changeset.
 
-For each affected package:
+# 3. Generate Summary
 
-- Focus on **user-facing changes** only
-- Write from user's perspective: what they can now do, what was fixed
-- Be concise: 1-3 bullet points or a single sentence
-- **DO NOT mention**: test changes, internal refactors, type-only changes, code cleanup
+Write from the **user's perspective** — what they can now do, what was fixed, what changed for them.
 
-## 4. Create Changeset File
+**Rules:**
 
-**Always use `patch`** - versioning is handled manually.
+- Be concise: 1–3 bullet points or a single sentence
+- Focus on user-facing/public impact only
+- Reference issues when relevant: `Fixes [#123](https://github.com/likec4/likec4/issues/123)`
 
-Create file at `.changeset/<random-readable-name>.md`:
+**Do NOT mention:** test changes, internal refactors, config changes, code cleanup, dependency bumps.
+
+# 4. Create Changeset File
+
+**Always use `patch`** — versioning is handled manually by maintainers.
+
+## File naming
+
+Derive the filename from the summary — lowercase, hyphens, descriptive:
+
+- `add-cloud-shape.md`
+- `fix-diagram-zoom-reset.md`
+- `element-notes-feature.md`
+
+## File format
+
+Create at `.changeset/<name>.md`:
 
 ```markdown
 ---
@@ -76,9 +112,24 @@ Create file at `.changeset/<random-readable-name>.md`:
 <summary>
 ```
 
-## Examples
+## Validate before writing
 
-### Good:
+Before creating the file, verify each package name exists:
+
+```bash
+# For each package in your changeset, confirm it's real
+cat packages/<name>/package.json | grep '"name"'
+```
+
+If a package name doesn't match, fix it before writing the changeset.
+
+# 5. Confirm with User
+
+Show the user the changeset content and file path before or after writing. If something looks off, iterate.
+
+# Examples
+
+## Good:
 
 ```markdown
 ---
@@ -100,14 +151,14 @@ First iteration of element notes feature:
 - Display visual indicator on diagrams
 ```
 
-### Bad (avoid):
+## Bad (avoid):
 
-- "Refactored XyzService to use DI" (internal)
-- "Fixed failing tests" (tests are internal)
-- "Updated types for better inference" (internal)
+- "Refactored XyzService to use DI" — internal implementation detail
+- "Fixed failing tests" — tests are not user-facing
+- "Updated types for better inference" — internal improvement
+- "Bumped dependencies" — maintenance, not a feature
 
-## Notes
+# Notes
 
 - Combine multiple packages in one changeset if they're part of the same feature
-- File names: lowercase with hyphens (e.g., `add-notes-feature.md`)
-- Link issues when relevant: `Fixes [#123](https://github.com/likec4/likec4/issues/123)`
+- If a branch has multiple independent features, suggest creating separate changesets for each
