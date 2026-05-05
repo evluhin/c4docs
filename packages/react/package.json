@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "@likec4/core": "workspace:*",
-    "immer": "catalog:utils",
     "type-fest": "catalog:externals"
   },
   "peerDependencies": {

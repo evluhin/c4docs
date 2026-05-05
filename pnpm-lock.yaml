@@ -2455,9 +2455,6 @@ importers:
       '@likec4/core':
         specifier: workspace:*
         version: link:../core
-      immer:
-        specifier: catalog:utils
-        version: 11.1.4
       type-fest:
         specifier: ^4.41.0
         version: 4.41.0
