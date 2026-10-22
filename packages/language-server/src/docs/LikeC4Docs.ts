@@ -157,7 +157,13 @@ export class DefaultLikeC4Docs extends ADisposable implements LikeC4Docs {
 
   /**
    * Resolves a relative asset reference against the doc's folder, producing the
-   * absolute source path and a build output path relative to the project folder.
+   * absolute source path and a build output path.
+   *
+   * `outputPath` is **root-absolute** (leading `/`, e.g. `/docs/img/overview.png`)
+   * so the rewritten `src` resolves to the copied asset at `<base>/docs/img/overview.png`
+   * regardless of the doc's current route. The SPA applies the configured base path
+   * when rendering doc HTML (see `DocsPage`); the build copies the asset into the
+   * publicDir at the same path (leading slash stripped).
    */
   private resolveAsset(project: Project, docUri: URI, reference: string): DocAsset | null {
     const clean = reference.split('?')[0]!.split('#')[0]!
@@ -173,7 +179,8 @@ export class DefaultLikeC4Docs extends ADisposable implements LikeC4Docs {
     if (!assetUri.path.startsWith(projectPrefix)) {
       return null
     }
-    const outputPath = posix.normalize(UriUtils.relative(project.folderUri, assetUri)).replace(/\\/g, '/')
+    const relative = posix.normalize(UriUtils.relative(project.folderUri, assetUri)).replace(/\\/g, '/')
+    const outputPath = '/' + relative.replace(/^\/+/, '')
     return {
       sourceAbsPath: assetUri.fsPath,
       outputPath,

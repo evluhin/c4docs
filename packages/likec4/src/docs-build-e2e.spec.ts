@@ -60,14 +60,19 @@ describeBuild('docs-as-code build e2e', () => {
       expect(bundle).toContain('Welcome') // home page content
       expect(bundle).toContain('Decisions') // adr folder label from index.md
       // the copied asset's output path is present (the rewritten <img src>)
-      expect(bundle).toContain('docs/img/overview.png')
+      expect(bundle).toContain('/docs/img/overview.png')
 
       // The rendered page HTML points at the rewritten (copied) asset path, not
       // the original relative reference. `raw` intentionally keeps the original,
       // so assert on the modeled HTML rather than the whole bundle.
       const docs = await languageServices.docsModel('docs-as-code')
       const home = docs.pages['']!
-      expect(home.html).toContain('docs/img/overview.png')
+      // The rewritten src must be ROOT-ABSOLUTE (leading '/') so it resolves to
+      // the copied asset at <base>/docs/img/overview.png regardless of the
+      // doc's current route — never a bare relative path (which the browser
+      // would resolve against the route and 404).
+      expect(home.html).toContain('src="/docs/img/overview.png"')
+      expect(home.html).not.toContain('src="docs/img/overview.png"')
       expect(home.html).not.toContain('./img/overview.png')
     } finally {
       await rm(outDir, { recursive: true, force: true })

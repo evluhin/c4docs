@@ -19,10 +19,11 @@ import {
 import { useDisclosure, useDocumentTitle } from '@mantine/hooks'
 import { useStore } from '@nanostores/react'
 import { Link } from '@tanstack/react-router'
-import { pageTitle } from 'likec4:app-config'
+import { basepath, pageTitle } from 'likec4:app-config'
 import type { DocsModel } from 'likec4:docs'
 import type { Atom } from 'nanostores'
 import { DocsNav } from '../components/DocsNav'
+import { applyBaseToDocHtml } from './doc-html-base'
 
 export interface DocsPageProps {
   $docs: Atom<DocsModel>
@@ -113,8 +114,9 @@ export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
         <Box className={contentContainer}>
           {page
             ? (
-              // HTML is sanitized server-side by markdownToHtml (rehype-sanitize)
-              <div className={prose} dangerouslySetInnerHTML={{ __html: page.html }} />
+              // HTML is sanitized server-side by markdownToHtml (rehype-sanitize);
+              // applyBaseToDocHtml only prefixes the already-safe root-absolute doc URLs.
+              <div className={prose} dangerouslySetInnerHTML={{ __html: applyBaseToDocHtml(page.html, basepath) }} />
             )
             : <DocNotFound path={path} />}
         </Box>

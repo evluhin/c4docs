@@ -77,6 +77,19 @@ describe('copyDocsAssets', () => {
     expect(await readFile(join(dest, 'docs', 'img', 'a.png'), 'utf8')).toBe('fake-png')
   })
 
+  it('copies root-absolute output paths (leading slash) into the publicDir root', async () => {
+    await mkdir(join(src, 'img'), { recursive: true })
+    await writeFile(join(src, 'img', 'overview.png'), 'fake-png')
+
+    const entries = await copyDocsAssets(
+      [{ sourceAbsPath: join(src, 'img', 'overview.png'), outputPath: '/docs/img/overview.png' }],
+      dest,
+    )
+
+    expect(entries).toEqual(['docs'])
+    expect(await readFile(join(dest, 'docs', 'img', 'overview.png'), 'utf8')).toBe('fake-png')
+  })
+
   it('deduplicates repeated assets and skips missing sources', async () => {
     await writeFile(join(src, 'b.png'), 'b')
     const entries = await copyDocsAssets(

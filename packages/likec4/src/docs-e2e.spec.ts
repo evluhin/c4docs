@@ -58,10 +58,13 @@ describe('docs-as-code (phase 1 e2e)', () => {
     // Docs-first landing entry resolves to the root index
     expect(docs.entry).toBe('')
 
-    // Relative image asset resolved into the manifest and src rewritten
+    // Relative image asset resolved into the manifest and src rewritten.
+    // The rewritten src is ROOT-ABSOLUTE (leading '/') so it resolves to the
+    // copied asset at <base>/docs/img/overview.png regardless of the route.
     expect(home.assets).toHaveLength(1)
-    expect(home.assets[0]!.outputPath).toBe('docs/img/overview.png')
-    expect(home.html).toContain('docs/img/overview.png')
+    expect(home.assets[0]!.outputPath).toBe('/docs/img/overview.png')
+    expect(home.html).toContain('src="/docs/img/overview.png"')
+    expect(home.html).not.toContain('src="docs/img/overview.png"')
     expect(home.html).not.toContain('./img/overview.png')
   })
 })
