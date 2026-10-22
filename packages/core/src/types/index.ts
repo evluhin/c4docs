@@ -27,6 +27,14 @@ export type * from '../geometry'
 export { BBox, RectBox } from '../geometry'
 
 export * from './const'
+export type {
+  DiagramRef,
+  DocAsset,
+  DocFrontmatter,
+  DocPage,
+  DocsModel,
+  DocTreeNode,
+} from './docs'
 export * from './expression'
 export * from './expression-model'
 export * from './fqnRef'
