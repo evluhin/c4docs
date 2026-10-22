@@ -1,6 +1,6 @@
 import { rootLogger } from '@likec4/log'
 import { existsSync, statSync } from 'node:fs'
-import { cp, mkdtemp, readdir, writeFile } from 'node:fs/promises'
+import { cp, mkdir, mkdtemp, readdir, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { dirname, join, relative, resolve } from 'node:path'
 import { cwd } from 'node:process'
@@ -75,4 +75,46 @@ export async function copyUserPublicDir(
   const entries = await readdir(userPublicDir)
   await cp(userPublicDir, destPublicDir, { recursive: true, errorOnExist: false })
   return entries
+}
+
+/**
+ * A doc-referenced static asset to copy into the build output.
+ */
+export interface DocsAsset {
+  /** absolute path of the source file on disk */
+  sourceAbsPath: string
+  /** path (relative to the output root) the rewritten `src` points to */
+  outputPath: string
+}
+
+/**
+ * Copies doc-referenced relative assets (resolved during modeling) into the
+ * build's publicDir at their rewritten output paths, so the static site serves
+ * them at the same URLs the rendered HTML points to. Driven by the per-doc asset
+ * manifest, not a single directory — complementary to `--public`.
+ *
+ * Returns the top-level entry names copied (so a single-file build can preserve them).
+ */
+export async function copyDocsAssets(
+  assets: readonly DocsAsset[],
+  destPublicDir: string,
+): Promise<string[]> {
+  const topLevel = new Set<string>()
+  const seen = new Set<string>()
+  for (const asset of assets) {
+    const normalized = asset.outputPath.replace(/\\/g, '/').replace(/^\/+/, '')
+    if (normalized === '' || seen.has(normalized)) {
+      continue
+    }
+    seen.add(normalized)
+    if (!existsSync(asset.sourceAbsPath) || !statSync(asset.sourceAbsPath).isFile()) {
+      viteLogger.warn(`docs asset not found, skipping: ${asset.sourceAbsPath}`)
+      continue
+    }
+    const dest = resolve(destPublicDir, normalized)
+    await mkdir(dirname(dest), { recursive: true })
+    await cp(asset.sourceAbsPath, dest, { errorOnExist: false })
+    topLevel.add(normalized.split('/')[0]!)
+  }
+  return [...topLevel]
 }

@@ -8,7 +8,7 @@ import { build } from 'vite'
 import { viteConfig } from './config-app'
 import type { LikeC4ViteConfig } from './config-app'
 import { viteWebcomponentConfig } from './config-webcomponent'
-import { copyUserPublicDir, mkTempPublicDir } from './utils'
+import { type DocsAsset, copyDocsAssets, copyUserPublicDir, mkTempPublicDir } from './utils'
 
 type Config = SetOptional<LikeC4ViteConfig, 'likec4AssetsDir'> & {
   buildWebcomponent?: boolean
@@ -191,6 +191,21 @@ export async function viteBuild({
     }
   }
 
+  // Copy doc-referenced relative assets (images) into the output, driven by the
+  // per-doc asset manifest produced during modeling. No-op for projects without docs.
+  const docsAssets: DocsAsset[] = []
+  for (const project of projects) {
+    try {
+      const docs = await languageServices.docsModel(project.id)
+      for (const page of Object.values(docs.pages)) {
+        docsAssets.push(...page.assets)
+      }
+    } catch {
+      config.customLogger.warn(`${k.dim('docs:')} ${project.id} ${k.yellow('failed to resolve docs assets')}`)
+    }
+  }
+  const docsPublicEntries = await copyDocsAssets(docsAssets, publicDir)
+
   if (buildWebcomponent && !outputSingleFile) {
     const webcomponentConfig = viteWebcomponentConfig({
       webcomponentPrefix,
@@ -215,7 +230,7 @@ export async function viteBuild({
     // Inline the favicon before cleanup removes the asset it references,
     // so the single HTML file stays self-contained (no dangling 404).
     inlineSingleFileFavicon(config.build.outDir)
-    removeAllButPreserved(config.build.outDir, ['index.html', ...userPublicEntries])
+    removeAllButPreserved(config.build.outDir, ['index.html', ...userPublicEntries, ...docsPublicEntries])
   }
 
   // Copy index.html to 404.html

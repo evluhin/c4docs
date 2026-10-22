@@ -2,7 +2,7 @@ import { mkdir, mkdtemp, readdir, readFile, rm, writeFile } from 'node:fs/promis
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
-import { copyUserPublicDir } from './utils'
+import { copyDocsAssets, copyUserPublicDir } from './utils'
 
 describe('copyUserPublicDir', () => {
   let src: string
@@ -47,5 +47,47 @@ describe('copyUserPublicDir', () => {
     const file = join(src, 'a-file.txt')
     await writeFile(file, 'hi')
     await expect(copyUserPublicDir(file, dest)).rejects.toThrow(/not a directory/)
+  })
+})
+
+describe('copyDocsAssets', () => {
+  let src: string
+  let dest: string
+
+  beforeEach(async () => {
+    src = await mkdtemp(join(tmpdir(), 'likec4-docs-src-'))
+    dest = await mkdtemp(join(tmpdir(), 'likec4-docs-dest-'))
+  })
+
+  afterEach(async () => {
+    await rm(src, { recursive: true, force: true })
+    await rm(dest, { recursive: true, force: true })
+  })
+
+  it('copies each manifest asset to its output path and returns top-level entries', async () => {
+    await mkdir(join(src, 'img'), { recursive: true })
+    await writeFile(join(src, 'img', 'a.png'), 'fake-png')
+
+    const entries = await copyDocsAssets(
+      [{ sourceAbsPath: join(src, 'img', 'a.png'), outputPath: 'docs/img/a.png' }],
+      dest,
+    )
+
+    expect(entries).toEqual(['docs'])
+    expect(await readFile(join(dest, 'docs', 'img', 'a.png'), 'utf8')).toBe('fake-png')
+  })
+
+  it('deduplicates repeated assets and skips missing sources', async () => {
+    await writeFile(join(src, 'b.png'), 'b')
+    const entries = await copyDocsAssets(
+      [
+        { sourceAbsPath: join(src, 'b.png'), outputPath: 'docs/b.png' },
+        { sourceAbsPath: join(src, 'b.png'), outputPath: 'docs/b.png' },
+        { sourceAbsPath: join(src, 'missing.png'), outputPath: 'docs/missing.png' },
+      ],
+      dest,
+    )
+    expect(entries).toEqual(['docs'])
+    expect(await readdir(join(dest, 'docs'))).toEqual(['b.png'])
   })
 })
