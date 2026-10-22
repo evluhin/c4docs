@@ -1,0 +1,32 @@
+specification {
+  element actor {
+    style {
+      shape person
+    }
+  }
+  element system
+  element component
+}
+
+model {
+  customer = actor 'Customer'
+
+  shop = system 'Shop' {
+    ui = component 'Web UI'
+    api = component 'API'
+  }
+
+  customer -> ui 'uses'
+  ui -> api 'calls'
+}
+
+views {
+  view index {
+    title 'Landscape'
+    include *
+  }
+
+  view shop of shop {
+    include *
+  }
+}

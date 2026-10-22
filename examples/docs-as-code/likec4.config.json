@@ -1,0 +1,7 @@
+{
+  "name": "docs-as-code",
+  "title": "Docs as Code",
+  "docs": {
+    "landing": true
+  }
+}
