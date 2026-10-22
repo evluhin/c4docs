@@ -20,6 +20,8 @@ type ProjectData = {
   landingPage: LikeC4ProjectConfig['landingPage']
   relationshipBrowserDefaultScope: RelationshipBrowserScope
   exportFormats: WebappExportFormat[]
+  /** Whether this project opts in to docs as the default landing page */
+  docsLanding: boolean
 }
 
 const code = (projects: NonEmptyArray<ProjectData>) => `
@@ -67,6 +69,7 @@ export const projectsModule = {
         landingPage: p.config.landingPage,
         relationshipBrowserDefaultScope: p.config.webapp?.relationshipsBrowser?.defaultScope ?? 'view',
         exportFormats: effectiveWebappExportFormats(p.config),
+        docsLanding: p.config.docs?.landing === true,
       }))),
       moduleType: 'js',
     }

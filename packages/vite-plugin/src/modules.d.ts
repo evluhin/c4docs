@@ -19,6 +19,8 @@ declare module 'likec4:projects' {
     landingPage?: LandingPageConfig
     relationshipBrowserDefaultScope: RelationshipBrowserScope
     exportFormats: readonly WebappExportFormat[]
+    /** Whether this project opts in to docs as the default landing page */
+    docsLanding: boolean
   }
   export const isSingleProject: boolean
   export const projects: readonly [Project, ...Project[]]
@@ -60,6 +62,24 @@ declare module 'likec4:model' {
     useLikeC4Views: () => ReadonlyArray<DiagramView<UnknownLayouted>>
     useLikeC4View: (viewId: string) => DiagramView<UnknownLayouted> | null
   }>
+}
+
+declare module 'likec4:docs' {
+  import type { DocPage, DocsModel, DocTreeNode } from 'likec4/model'
+  import type { Atom } from 'likec4/vite-plugin/internal'
+
+  export type { Atom, DocPage, DocsModel, DocTreeNode }
+
+  export function loadDocs(projectId: string): Promise<{
+    $docs: Atom<DocsModel>
+  }>
+}
+
+declare module 'likec4:docs/*' {
+  import type { DocsModel } from 'likec4/model'
+  import type { Atom } from 'likec4/vite-plugin/internal'
+
+  export const $docs: Atom<DocsModel>
 }
 
 declare module 'likec4:single-project' {

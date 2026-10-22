@@ -25,6 +25,7 @@ import { type ProjectsData, type SharedVirtualModuleOptions, k } from './virtual
 import { type AppConfig, createAppConfigModule } from './virtuals/app-config'
 import { d2Module, projectD2Module } from './virtuals/d2'
 import { diffsModule, projectDiffsModule } from './virtuals/diffs'
+import { docsModule, projectDocsModule } from './virtuals/docs'
 import { dotModule, projectDotSourcesModule } from './virtuals/dot'
 import { drawioModule, projectDrawioModule } from './virtuals/drawio'
 import { effectiveWebappExportFormats } from './virtuals/export-formats'
@@ -189,6 +190,7 @@ const hmrProjectListVirtuals = [
  */
 const projectVirtuals = [
   ...hmrProjectVirtuals,
+  projectDocsModule,
   projectReactModule,
   projectWebcomponentsModule,
 ]
@@ -196,6 +198,7 @@ const projectVirtuals = [
 const _virtuals = [
   projectsModule,
   modelModule,
+  docsModule,
   projectsOverviewModule,
   singleProjectModule,
   singleProjectReactModule,
@@ -267,6 +270,7 @@ export function LikeC4VitePlugin({
       path: p.path,
       folder: p.folder.toString(),
       landingPage: p.config.landingPage,
+      docsLanding: p.config.docs?.landing === true,
       exportFormats: effectiveWebappExportFormats(p.config),
     })) satisfies (data: ProjectsData) => any
     let _last: any
@@ -478,6 +482,16 @@ export function LikeC4VitePlugin({
             }
           }
         }))
+
+        // Reload the docs virtual modules when a .md file under a project's docs
+        // dir changes (the docs service already recomputed on handleFileSystemUpdate).
+        likec4.onDocsUpdate(({ projectId }) => {
+          logger.trace(
+            k.dim('onDocsUpdate project') + ' ' + k.cyan(projectId),
+          )
+          void reloadModule(projectDocsModule.virtualId(projectId))
+          void reloadModule(docsModule.virtualId)
+        })
       }
     },
 
