@@ -91,6 +91,41 @@ export const WebappConfigSchema = z
 
 export type WebappConfig = z.infer<typeof WebappConfigSchema>
 
+export const DocsConfigSchema = z
+  .strictObject({
+    dir: z.string()
+      .default('docs')
+      .meta({
+        description: [
+          'Path to the documentation folder, relative to the folder containing the project config.',
+          '',
+          'Defaults to \'docs\'.',
+        ].join('\n'),
+      }),
+    entry: z.string()
+      .optional()
+      .meta({
+        description: [
+          'Route path of the documentation entry (landing) page, relative to the docs folder, without extension.',
+          'Defaults to the root index.md when present, otherwise the first top-level doc.',
+        ].join('\n'),
+      }),
+    landing: z.boolean()
+      .default(false)
+      .meta({
+        description: [
+          'Make the documentation entry the default landing page of the project.',
+          'Opt-in; defaults to false, keeping the existing landing behavior.',
+        ].join('\n'),
+      }),
+  })
+  .meta({
+    id: 'DocsConfig',
+    description: 'Configuration for documentation-as-code (Markdown docs alongside .c4 files)',
+  })
+
+export type DocsConfig = z.infer<typeof DocsConfigSchema>
+
 export const LandingPageSchema = z
   .union([
     z.strictObject({
@@ -167,6 +202,7 @@ export const LikeC4ProjectJsonConfigSchema = z.object({
     }),
   landingPage: LandingPageSchema.optional(),
   webapp: WebappConfigSchema.optional(),
+  docs: DocsConfigSchema.optional(),
 })
   .meta({
     id: 'LikeC4ProjectConfig',

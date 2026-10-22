@@ -6,6 +6,7 @@
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
 export type {
+  DocsConfig,
   GeneratorFn,
   GeneratorFnContext,
   GeneratorFnParams,
@@ -19,6 +20,7 @@ export type {
 } from './schema'
 
 export {
+  DocsConfigSchema,
   LikeC4ProjectConfigOps,
   RelationshipBrowserScopeSchema,
   RelationshipsBrowserConfigSchema,

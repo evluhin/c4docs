@@ -207,6 +207,47 @@ describe('ProjectConfig schema', () => {
       })
     })
 
+    describe('docs field', () => {
+      it('should accept a valid docs block', ({ expect }) => {
+        const result = validateConfig({
+          name: 'test',
+          docs: { dir: 'documentation', entry: 'index', landing: true },
+        })
+        expect(result.docs).toEqual({ dir: 'documentation', entry: 'index', landing: true })
+      })
+
+      it('should apply defaults for dir and landing', ({ expect }) => {
+        const result = validateConfig({
+          name: 'test',
+          docs: {},
+        })
+        expect(result.docs).toEqual({ dir: 'docs', landing: false })
+      })
+
+      it('should stay backward compatible when docs is omitted', ({ expect }) => {
+        const result = validateConfig({ name: 'test' })
+        expect(result.docs).toBeUndefined()
+      })
+
+      it('should reject unknown keys inside docs', ({ expect }) => {
+        expect(() =>
+          validateConfig({
+            name: 'test',
+            docs: { dir: 'docs', unknown: true },
+          })
+        ).toThrow()
+      })
+
+      it('should reject a non-boolean landing', ({ expect }) => {
+        expect(() =>
+          validateConfig({
+            name: 'test',
+            docs: { landing: 'yes' },
+          })
+        ).toThrow()
+      })
+    })
+
     describe('imageAliases field', () => {
       it('should accept valid imageAliases', ({ expect }) => {
         const validConfigs = [
