@@ -1,7 +1,7 @@
 import { assertSpecificationCompatible, Builder } from '@likec4/core/builder'
 import type { AnyTypes, BuilderMode, BuilderSpecification, Types } from '@likec4/core/builder'
 import type { LikeC4Model } from '@likec4/core/model'
-import type { LayoutedView, NonEmptyArray, ProjectId } from '@likec4/core/types'
+import type { DocsModel, LayoutedView, NonEmptyArray, ProjectId } from '@likec4/core/types'
 import { generate as generateLikeC4Source } from '@likec4/generators/likec4'
 import type {
   FormatOptions,
@@ -127,6 +127,15 @@ Please specify a project folder`)
   async diagrams(project?: string | undefined): Promise<LayoutedView[]> {
     const projectId = this.projectsManager.ensureProjectId(project as ProjectId)
     return await this.viewsService.diagrams(projectId as ProjectId)
+  }
+
+  /**
+   * Returns the documentation model (tree, pages, entry) for the given project,
+   * discovered from the project's docs folder. Empty when the project has no docs.
+   */
+  async docsModel(project?: string | undefined): Promise<DocsModel> {
+    const projectId = this.projectsManager.ensureProjectId(project as ProjectId)
+    return await this.languageServices.docsModel(projectId)
   }
 
   /**

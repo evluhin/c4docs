@@ -48,7 +48,10 @@ export class ChokidarFileSystemWatcher implements FileSystemWatcher {
    * changes the model.
    */
   private isWatchedFile(path: string): boolean {
-    return isAnyLikeC4File(path) || this.services.workspace.DescriptionFiles.isReferenced(URI.file(path))
+    const uri = URI.file(path)
+    return isAnyLikeC4File(path)
+      || this.services.workspace.DescriptionFiles.isReferenced(uri)
+      || this.services.workspace.Docs.isDocsFile(uri)
   }
 
   async dispose(): Promise<void> {
@@ -142,6 +145,11 @@ export class ChokidarFileSystemWatcher implements FileSystemWatcher {
         await workspace.DescriptionFiles.handleFileSystemUpdate({ update: uri })
         break
       }
+      case workspace.Docs.isDocsFile(uri): {
+        logger.debug`docs file changed: ${path}`
+        await workspace.Docs.handleFileSystemUpdate({ update: uri })
+        break
+      }
       case hasLikeC4Ext(filename): {
         logger.debug`file changed: ${path}`
         await workspace.DocumentBuilder.update([uri], [])
@@ -176,6 +184,11 @@ export class ChokidarFileSystemWatcher implements FileSystemWatcher {
       case workspace.DescriptionFiles.isReferenced(URI.file(path)): {
         logger.debug`description file removed: ${path}`
         await workspace.DescriptionFiles.handleFileSystemUpdate({ delete: URI.file(path) })
+        break
+      }
+      case workspace.Docs.isDocsFile(URI.file(path)): {
+        logger.debug`docs file removed: ${path}`
+        await workspace.Docs.handleFileSystemUpdate({ delete: URI.file(path) })
         break
       }
       default: {

@@ -1,5 +1,6 @@
 import type { LikeC4ProjectConfig } from '@likec4/config'
 import {
+  type DocsModel,
   type LayoutedView,
   type NonEmptyArray,
   type ProjectId,
@@ -10,12 +11,13 @@ import {
 import { type LayoutedProjectsView, computeProjectsView } from '@likec4/core/compute-view'
 import { LikeC4Model } from '@likec4/core/model'
 import { loggable } from '@likec4/log'
-import { TextDocument, URI } from 'langium'
+import { type Disposable, TextDocument, URI } from 'langium'
 import { entries, filter, flatMap, hasAtLeast, indexBy, map, pipe, prop } from 'remeda'
 import type { CancellationToken } from 'vscode-jsonrpc'
 import type { Diagnostic, FormattingOptions, Range } from 'vscode-languageserver-types'
 import { DiagnosticSeverity } from 'vscode-languageserver-types'
 import { type LikeC4LangiumDocument, isLikeC4LangiumDocument } from './ast'
+import type { DocsUpdateListener } from './filesystem/types'
 import { logger as mainLogger } from './logger'
 import type { LikeC4ModelBuilder } from './model'
 import type { LikeC4ModelChanges } from './model-change/ModelChanges'
@@ -122,6 +124,17 @@ export interface LikeC4LanguageServices {
    * Returns the location of the specified element, relation, view or deployment element
    */
   locate(params: Locate.Params): Locate.Res
+
+  /**
+   * Returns the docs model (tree, pages, entry) for the specified project.
+   * If no {@link project} is specified, returns for the default project.
+   */
+  docsModel(project?: ProjectId | undefined): Promise<DocsModel>
+
+  /**
+   * Registers a listener called when a project's docs change (dev HMR).
+   */
+  onDocsUpdate(listener: DocsUpdateListener): Disposable
 
   /**
    * Returns the current in-memory text of a document, or `undefined` if the document is not known.
@@ -368,6 +381,15 @@ export class DefaultLikeC4LanguageServices implements LikeC4LanguageServices {
     }
   }
 
+  async docsModel(project?: ProjectId | undefined): Promise<DocsModel> {
+    const projectId = this.projectsManager.ensureProjectId(project)
+    return await this.services.shared.workspace.Docs.docsModel(projectId)
+  }
+
+  onDocsUpdate(listener: DocsUpdateListener): Disposable {
+    return this.services.shared.workspace.Docs.onDocsUpdate(listener)
+  }
+
   documentText(uri: string): string | undefined {
     const doc = this.services.shared.workspace.LangiumDocuments.getDocument(URI.parse(uri))
     return doc?.textDocument.getText()
@@ -467,6 +489,7 @@ export class DefaultLikeC4LanguageServices implements LikeC4LanguageServices {
       this.services.likec4.LastSeen.dispose()
       this.services.Rpc.dispose()
       this.services.shared.workspace.ManualLayouts.dispose()
+      this.services.shared.workspace.Docs.dispose()
       this.services.shared.workspace.ProjectsManager.dispose()
       await this.services.shared.workspace.FileSystemWatcher.dispose()
     } catch (e) {

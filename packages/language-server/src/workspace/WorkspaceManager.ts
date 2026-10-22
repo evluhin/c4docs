@@ -130,6 +130,15 @@ export class LikeC4WorkspaceManager extends DefaultWorkspaceManager {
 
       if (projectsCount > 0) {
         likec4Files.push(...await this.scanProjectIncludePaths())
+        // Prime each project's docs so the docs dir is scanned and added to the
+        // watch set alongside the .c4 scan (dev HMR picks up .md changes).
+        for (const projectId of this.services.workspace.ProjectsManager.all) {
+          try {
+            await this.services.workspace.Docs.docsModel(projectId)
+          } catch (error) {
+            this.#logger.warn(`Failed to scan docs for project {projectId}`, { projectId, error })
+          }
+        }
       }
 
       const documents = await this.loadDocuments(likec4Files)

@@ -10,6 +10,7 @@ import type {
   PartialLangiumSharedServices,
 } from 'langium/lsp'
 import { createDefaultModule, createDefaultSharedModule } from 'langium/lsp'
+import { DefaultLikeC4Docs } from './docs'
 import { LikeC4DocumentationProvider } from './documentation'
 import type {
   FileSystemModuleContext,
@@ -21,6 +22,7 @@ import type {
 } from './filesystem'
 import { DefaultLikeC4DescriptionFiles } from './filesystem/LikeC4DescriptionFiles'
 import { NoFileSystem, NoLikeC4ManualLayouts, NoopFileSystemProvider } from './filesystem/noop'
+import type { LikeC4Docs } from './filesystem/types'
 import { LikeC4Formatter } from './formatting/LikeC4Formatter'
 import {
   LikeC4GeneratedModule,
@@ -95,6 +97,7 @@ interface LikeC4AddedSharedServices {
     FileSystemWatcher: FileSystemWatcher
     ManualLayouts: LikeC4ManualLayouts
     DescriptionFiles: LikeC4DescriptionFiles
+    Docs: LikeC4Docs
   }
 }
 
@@ -125,6 +128,7 @@ function createLikeC4SharedModule(context: LikeC4SharedModuleContext): Module<
       FileSystemWatcher: services => context.fileSystemWatcher(services),
       ManualLayouts: services => context.manualLayouts(services),
       DescriptionFiles: services => new DefaultLikeC4DescriptionFiles(services),
+      Docs: services => new DefaultLikeC4Docs(services),
     },
   })
 }

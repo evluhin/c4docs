@@ -153,6 +153,40 @@ export type DescriptionFileUpdateEvent = {
 
 export type DescriptionFileUpdateListener = (event: DescriptionFileUpdateEvent) => void
 
+export type DocsUpdateEvent = {
+  readonly projectId: ProjectId
+}
+
+export type DocsUpdateListener = (event: DocsUpdateEvent) => void
+
+export interface LikeC4Docs extends Disposable {
+  /**
+   * Returns the docs model for the given project, discovering and modeling the
+   * project's docs folder on first use and caching the result per project.
+   */
+  docsModel(projectId: ProjectId): Promise<import('@likec4/core/types').DocsModel>
+
+  /**
+   * Whether `uri` points at a file inside a known project's docs directory.
+   */
+  isDocsFile(uri: URI): boolean
+
+  /**
+   * Re-reads a project's docs after a docs file changed on disk, and notifies
+   * listeners so dependents (dev HMR) can reload.
+   */
+  handleFileSystemUpdate(
+    event: { update: URI; delete?: never } | { delete: URI; update?: never },
+  ): Promise<void>
+
+  /**
+   * Registers a listener called when a project's docs changed.
+   */
+  onDocsUpdate(listener: DocsUpdateListener): Disposable
+
+  clearCaches(): void
+}
+
 export type ManualLayoutsSnapshot = {
   hash: string
   views: Record<ViewId, LayoutedView>
