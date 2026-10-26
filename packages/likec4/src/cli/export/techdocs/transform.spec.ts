@@ -34,6 +34,12 @@ describe('transformToTechDocs', () => {
     expect(out).toContain('[View interactive version →](https://c4.acme.dev/view/flow)')
   })
 
+  it('prefixes the image path with ../ for a nested doc so it reaches docs/images', () => {
+    const raw = '```likec4-view\nview: shop\n```\n'
+    const out = transformToTechDocs(raw, opts({ docRoute: 'adr/0001' }))
+    expect(out).toContain('![shop](../images/shop.abcd1234.svg)')
+  })
+
   it('leaves an unresolved embed (no manifest entry) as its original block', () => {
     const raw = '```likec4-view\nview: missing\n```\n'
     const out = transformToTechDocs(raw, opts())

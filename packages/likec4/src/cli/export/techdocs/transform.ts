@@ -66,6 +66,25 @@ function trimTrailingSlash(url: string): string {
 }
 
 /**
+ * Builds the path of an image, relative to a document at `docRoute`, given the
+ * image's path relative to `imagesDir` and the images directory's path relative
+ * to the `docs/` root. Forward-slashed.
+ *
+ * MkDocs resolves Markdown image links relative to the source `.md` file's
+ * location (and rewrites them to compensate for `use_directory_urls`), so a
+ * nested page such as `docs/adr/0001.md` must reach `docs/images/` through the
+ * matching number of `../` segments. A root-level page keeps the bare
+ * `images/<file>` reference.
+ */
+function relativeImagePath(docRoute: string, imagesDir: string, imagePath: string): string {
+  const docDir = docRoute.includes('/') ? docRoute.slice(0, docRoute.lastIndexOf('/')) : ''
+  const depth = docDir === '' ? 0 : docDir.split('/').length
+  const prefix = depth === 0 ? '' : '../'.repeat(depth)
+  const target = imagesDir === '' ? imagePath : `${imagesDir}/${imagePath}`
+  return `${prefix}${target}`
+}
+
+/**
  * Builds the TechDocs page path (relative, with `.md`) for a target doc route,
  * resolved from the current doc's folder. The root route maps to `index.md`.
  */
@@ -145,7 +164,7 @@ function rewriteViewEmbeds(body: string, opts: TransformToTechDocsOptions): stri
     if (imagePath === undefined) {
       return whole
     }
-    const src = imagesDir === '' ? imagePath : `${imagesDir}/${imagePath}`
+    const src = relativeImagePath(opts.docRoute, imagesDir, imagePath)
     const image = `![${viewId}](${src})`
     const link = `[View interactive version →](${siteBase}/view/${viewId})`
     return `${lead}${image}\n\n${link}`
