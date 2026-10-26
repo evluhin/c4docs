@@ -110,14 +110,15 @@ function DocsButton({ isTablet }: { isTablet: boolean }) {
   }
   return (
     <Button
-      component={Link}
-      to={isInsideProject ? '/project/$projectId/docs/' : '/docs/'}
-      {...(isInsideProject ? { params: { projectId: project.id } } : {})}
       size={isTablet ? 'compact-md' : 'xs'}
       fz={isTablet ? 'sm' : 'xs'}
       variant="subtle"
       color="gray"
-      leftSection={<IconBook2 size={14} />}>
+      leftSection={<IconBook2 size={14} />}
+      renderRoot={(props) =>
+        isInsideProject
+          ? <Link to="/project/$projectId/docs/" params={{ projectId: project.id }} {...props} />
+          : <Link to="/docs/" {...props} />}>
       Docs
     </Button>
   )

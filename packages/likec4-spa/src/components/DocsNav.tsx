@@ -32,8 +32,8 @@ const navRoot = css({
     paddingBlock: '[6px]',
     paddingInline: '[10px]',
     borderRadius: 'sm',
-    minHeight: 'unset',
-    transition: 'background-color 100ms ease',
+    minHeight: '[unset]',
+    transition: '[background-color 100ms ease]',
     _hover: {
       backgroundColor: '[var(--mantine-color-default-hover)]',
     },

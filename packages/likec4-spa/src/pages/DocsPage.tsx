@@ -123,16 +123,7 @@ export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
         <Group h="100%" px="md" gap="sm">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" aria-label="Toggle docs navigation" />
           <Text fw={600} size="sm">Documentation</Text>
-          <Button
-            component={Link}
-            to={projectId ? '/project/$projectId/view/$viewId/' : '/view/$viewId/'}
-            {...(projectId ? { params: { projectId, viewId: 'index' } } : { params: { viewId: 'index' } })}
-            size="xs"
-            variant="subtle"
-            color="dimmed"
-            leftSection={<IconHierarchy2 size={14} />}>
-            Diagrams
-          </Button>
+          <DiagramsButton projectId={projectId} />
         </Group>
       </AppShell.Header>
       <AppShell.Navbar>
@@ -165,5 +156,21 @@ function DocNotFound({ path }: { path: string }) {
         Go to overview
       </Button>
     </Alert>
+  )
+}
+
+function DiagramsButton({ projectId }: { projectId?: string | undefined }) {
+  return (
+    <Button
+      size="xs"
+      variant="subtle"
+      color="dimmed"
+      leftSection={<IconHierarchy2 size={14} />}
+      renderRoot={(props) =>
+        projectId
+          ? <Link to="/project/$projectId/view/$viewId/" params={{ projectId, viewId: 'index' }} {...props} />
+          : <Link to="/view/$viewId/" params={{ viewId: 'index' }} {...props} />}>
+      Diagrams
+    </Button>
   )
 }
