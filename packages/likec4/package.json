@@ -126,6 +126,7 @@
     "esbuild": "catalog:esbuild",
     "fdir": "catalog:externals",
     "immer": "catalog:utils",
+    "mermaid": "catalog:",
     "nano-spawn": "catalog:externals",
     "picomatch": "catalog:externals",
     "playwright": "catalog:",
