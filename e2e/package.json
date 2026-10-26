@@ -14,7 +14,8 @@
     "typecheck": "vitest run",
     "test:update-screenshots": "playwright test --update-snapshots",
     "test:playground": "playwright test -c playwright.playground.config.ts",
-    "test:mcp-app": "playwright test -c playwright.mcp-app.config.ts"
+    "test:mcp-app": "playwright test -c playwright.mcp-app.config.ts",
+    "test:docs-nav": "playwright test -c playwright.docs-nav.config.ts"
   },
   "dependencies": {
     "@likec4/core": "file:../packages/core/package.tgz",

@@ -7,7 +7,7 @@
 
 import type { DocAsset, DocPage, DocsModel, ProjectId } from '@likec4/core/types'
 import { onNextTick } from '@likec4/core/utils'
-import { Disposable, URI, UriUtils } from 'langium'
+import { Disposable, DocumentState, URI, UriUtils } from 'langium'
 import { posix } from 'node:path'
 import type {
   DocsUpdateEvent,
@@ -76,6 +76,16 @@ export class DefaultLikeC4Docs extends ADisposable implements LikeC4Docs {
       this.onDispose(
         services.workspace.ProjectsManager.onProjectsUpdate(() => this.clearCaches()),
       )
+      // The docs model is primed during workspace init, before any `.c4`
+      // document is linked, so view-link resolution cannot see the model yet.
+      // Clear the cache whenever the model is (re)parsed so the next docs read
+      // rebuilds with resolved `likec4://view/<id>` links.
+      const likec4 = services.ServiceRegistry.all.find(isLikeC4Services)
+      if (likec4) {
+        this.onDispose(
+          likec4.likec4.ModelBuilder.onModelParsed(() => this.clearCaches()),
+        )
+      }
     })
   }
 
@@ -167,7 +177,7 @@ export class DefaultLikeC4Docs extends ADisposable implements LikeC4Docs {
       files.map((f) => [UriUtils.relative(docsDir, f.uri).replace(/\\/g, '/'), f.uri] as const),
     )
 
-    const linkResolution = this.buildLinkResolution(projectId, docs.map((d) => d.path))
+    const linkResolution = await this.buildLinkResolution(projectId, docs.map((d) => d.path))
 
     const pages: DocPage[] = []
     for (const doc of docs) {
@@ -233,15 +243,24 @@ export class DefaultLikeC4Docs extends ADisposable implements LikeC4Docs {
    * view id is considered to exist (a warning is logged). The single-vs-project
    * route form mirrors the SPA signal (`hasMultipleProjects()`).
    */
-  private buildLinkResolution(projectId: ProjectId, knownPaths: readonly string[]): DocLinkResolution {
+  private async buildLinkResolution(projectId: ProjectId, knownPaths: readonly string[]): Promise<DocLinkResolution> {
     const likec4 = this.services.ServiceRegistry.all.find(isLikeC4Services)
     let viewExists: (viewId: string) => boolean = () => false
     if (likec4) {
-      const model = safeCall(() => likec4.likec4.ModelBuilder.unsafeSyncComputeModel(projectId))
-      if (model) {
-        viewExists = (viewId) => model.findView(viewId) != null
-      } else {
-        docsLogger.warn(`Could not compute model for project ${projectId}; doc view links will not resolve`)
+      // `computeModel` waits for the DocumentBuilder to reach the `Linked` state
+      // before returning a model with computed views. During workspace init the
+      // docs model is primed *before* any `.c4` document is linked, so awaiting
+      // here would deadlock (the build phase can only advance after this prime
+      // completes). In that case skip view resolution — the model is re-parsed
+      // afterwards, which clears the docs cache (see constructor) so the next
+      // read resolves links. Once linking is done, await to resolve views.
+      if (this.services.workspace.DocumentBuilder.currentPhase >= DocumentState.Linked) {
+        try {
+          const model = await likec4.likec4.ModelBuilder.computeModel(projectId)
+          viewExists = (viewId) => model.findView(viewId) != null
+        } catch (err) {
+          docsLogger.warn(`Could not compute model for project ${projectId}; doc view links will not resolve`, { err })
+        }
       }
     } else {
       docsLogger.warn('LikeC4 services are not registered; doc view links will not resolve')

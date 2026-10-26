@@ -19,10 +19,12 @@ import {
 import { useDisclosure, useDocumentTitle } from '@mantine/hooks'
 import { useStore } from '@nanostores/react'
 import { IconHierarchy2 } from '@tabler/icons-react'
-import { Link } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
 import { basepath, pageTitle } from 'likec4:app-config'
 import type { DocsModel } from 'likec4:docs'
 import type { Atom } from 'nanostores'
+import type { MouseEvent } from 'react'
+import { useCallback } from 'react'
 import { DocsNav } from '../components/DocsNav'
 import { applyBaseToDocHtml } from './doc-html-base'
 
@@ -102,12 +104,98 @@ const prose = css({
   },
 })
 
+/**
+ * Internal in-app route prefixes that the click interceptor routes through
+ * TanStack Router. A pathname is internal when it equals one of these exactly
+ * (e.g. `/docs`) or starts with one followed by a `/` (e.g. `/docs/architecture`).
+ */
+const INTERNAL_ROUTE_PREFIXES = ['/docs', '/view', '/project'] as const
+
+/**
+ * Resolves a clicked anchor to an in-app navigation target, or `null` when the
+ * click must fall through to default browser behavior.
+ *
+ * The rewritten doc hrefs (produced during docs modeling and base-prefixed by
+ * {@link applyBaseToDocHtml}) are plain root-absolute `<a>`, so a click would
+ * otherwise trigger a full page reload. Returns `{ to, search }` only for
+ * same-origin internal app routes (`/docs/...`, `/view/...`, `/project/<id>/...`);
+ * external links, bare anchors, `target=_blank`, and `mailto:`/other schemes
+ * return `null`.
+ */
+function resolveInternalDocNavigation(
+  anchor: HTMLAnchorElement,
+  basepath: string,
+): { to: string; search: Record<string, string> } | null {
+  if (anchor.target && anchor.target !== '_self') {
+    return null
+  }
+  if (anchor.hasAttribute('download')) {
+    return null
+  }
+  // `anchor.href` is the fully-resolved absolute URL; comparing origins filters
+  // out external links and bare `#anchor` jumps (which keep the current path).
+  if (anchor.origin !== window.location.origin) {
+    return null
+  }
+
+  const base = basepath.endsWith('/') ? basepath.slice(0, -1) : basepath
+  let pathname = anchor.pathname
+  if (base !== '') {
+    if (pathname === base) {
+      pathname = '/'
+    } else if (pathname.startsWith(base + '/')) {
+      pathname = pathname.slice(base.length)
+    } else {
+      // Outside the configured base — not an in-app route.
+      return null
+    }
+  }
+
+  const isInternal = INTERNAL_ROUTE_PREFIXES.some(
+    (prefix) => pathname === prefix || pathname.startsWith(prefix + '/'),
+  )
+  if (!isInternal) {
+    return null
+  }
+
+  const search: Record<string, string> = {}
+  for (const [key, value] of new URLSearchParams(anchor.search)) {
+    search[key] = value
+  }
+  return { to: pathname, search }
+}
+
 export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
   const docs = useStore($docs)
   const [opened, { toggle, close }] = useDisclosure()
   const page = docs.pages[path]
+  const navigate = useNavigate()
 
   useDocumentTitle(page ? `${page.title} — ${pageTitle}` : pageTitle)
+
+  // Intercept clicks on rewritten internal links so they navigate as SPA
+  // transitions instead of full page reloads. Modifier/middle clicks,
+  // target=_blank, downloads, external links, and bare #anchors fall through
+  // to the browser.
+  const onContentClick = useCallback((event: MouseEvent<HTMLDivElement>) => {
+    if (event.defaultPrevented) {
+      return
+    }
+    // Left click only; let the browser handle modified and non-primary clicks.
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) {
+      return
+    }
+    const anchor = (event.target as HTMLElement | null)?.closest('a')
+    if (!anchor) {
+      return
+    }
+    const target = resolveInternalDocNavigation(anchor, basepath)
+    if (!target) {
+      return
+    }
+    event.preventDefault()
+    navigate({ to: target.to, search: target.search }).catch(console.error)
+  }, [navigate])
 
   return (
     <AppShell
@@ -137,7 +225,11 @@ export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
             ? (
               // HTML is sanitized server-side by markdownToHtml (rehype-sanitize);
               // applyBaseToDocHtml only prefixes the already-safe root-absolute doc URLs.
-              <div className={prose} dangerouslySetInnerHTML={{ __html: applyBaseToDocHtml(page.html, basepath) }} />
+              <div
+                className={prose}
+                onClick={onContentClick}
+                dangerouslySetInnerHTML={{ __html: applyBaseToDocHtml(page.html, basepath) }}
+              />
             )
             : <DocNotFound path={path} />}
         </Box>

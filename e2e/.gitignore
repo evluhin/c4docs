@@ -20,6 +20,7 @@ tests/*.spec.ts
 !tests/static-build-relationship-popover.spec.ts
 !tests/static-build-model-diffs.spec.ts
 !tests/markdown-image.spec.ts
+!tests/docs-nav.spec.ts
 !tests/manual-layout-views.spec.ts
 !tests/webcomponent-overlay.spec.ts
 !tests/diagram-a11y.spec.ts

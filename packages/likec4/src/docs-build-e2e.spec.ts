@@ -74,6 +74,24 @@ describeBuild('docs-as-code build e2e', () => {
       expect(home.html).toContain('src="/docs/img/overview.png"')
       expect(home.html).not.toContain('src="docs/img/overview.png"')
       expect(home.html).not.toContain('./img/overview.png')
+
+      // Inter-doc link: `[architecture](./architecture.md)` is rewritten to the
+      // in-app `/docs/architecture` route (never the raw `.md` reference), so a
+      // click can be intercepted and routed as an SPA navigation.
+      expect(home.html).toContain('href="/docs/architecture"')
+      expect(home.html).not.toContain('architecture.md')
+
+      // likec4:// link: `likec4://view/shop` is rewritten to the single-project
+      // diagram route `/view/shop/` and the resolved view id is collected into
+      // DocPage.links.
+      expect(home.html).toContain('href="/view/shop/"')
+      expect(home.html).not.toContain('likec4://view/shop')
+      expect(home.links).toContain('shop')
+
+      // The nav.yaml drives the tree: the unlisted ADR is hidden from the tree
+      // but still present in pages (reachable by direct route).
+      expect(home.raw).toContain('likec4://view/shop')
+      expect(docs.pages['adr/0001-record-architecture-decisions']).toBeDefined()
     } finally {
       await rm(outDir, { recursive: true, force: true })
     }

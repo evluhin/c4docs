@@ -1,0 +1,13 @@
+# Explicit documentation navigation (mkdocs-style).
+# When this file exists the docs tree is built entirely from it: order,
+# nesting, and section labels come from here and the convention ordering is
+# ignored. Paths are relative to docs/ and the .md suffix is optional.
+#
+# Note: docs/adr/0001-record-architecture-decisions.md is intentionally left
+# unlisted to demonstrate that unlisted files are hidden from the navigation
+# (a build warning is emitted) while still reachable by direct route.
+nav:
+  - index.md
+  - Architecture Guide: architecture.md
+  - Decisions:
+      - adr/index.md
