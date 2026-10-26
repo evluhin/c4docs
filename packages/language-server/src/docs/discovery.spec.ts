@@ -1,5 +1,21 @@
 import { describe, expect, it } from 'vitest'
-import { discoverDocs, docRoutePath } from './discovery'
+import { discoverDocs, docRoutePath, encodeRoutePath } from './discovery'
+
+describe('encodeRoutePath', () => {
+  it('returns the root route unchanged', () => {
+    expect(encodeRoutePath('')).toBe('')
+  })
+
+  it('leaves plain segments untouched', () => {
+    expect(encodeRoutePath('adr/0001-use-event-bus')).toBe('adr/0001-use-event-bus')
+  })
+
+  it('encodes a space per segment while keeping slash separators', () => {
+    expect(encodeRoutePath('common/unified token/adr-usl-user-context-token')).toBe(
+      'common/unified%20token/adr-usl-user-context-token',
+    )
+  })
+})
 
 describe('docRoutePath', () => {
   it('strips the .md extension', () => {

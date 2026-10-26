@@ -61,6 +61,23 @@ export function docRoutePath(relativePath: string): string {
 }
 
 /**
+ * Encodes a route path for use in a URL, applying {@link encodeURIComponent}
+ * **per segment** (not to the whole path) so `/` separators survive while
+ * URL-significant characters inside a segment (spaces, `#`, `?`, …) are escaped.
+ *
+ * The route path itself (the `DocsModel.pages` key) stays in its human form with
+ * literal spaces; this encoded form is what hrefs embed. The SPA reverses it by
+ * decoding each segment before looking the page up, so a segment with a space
+ * round-trips: `unified token` ↔ `unified%20token` ↔ `unified token`.
+ */
+export function encodeRoutePath(route: string): string {
+  if (route === '') {
+    return ''
+  }
+  return route.split('/').map(encodeURIComponent).join('/')
+}
+
+/**
  * Maps discovered `.md` files (relative paths to the docs dir) to route paths,
  * recording a diagnostic for any two files that resolve to the same route path.
  */

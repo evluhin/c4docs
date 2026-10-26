@@ -20,6 +20,13 @@ export {
 export { collapseUnchanged, diffLines, type LineChange } from './diff-lines'
 
 export {
+  type ParsedViewBlock,
+  type ParsedViewBlockError,
+  type ParsedViewBlockState,
+  parseLikeC4ViewBlock,
+} from './docs/parse-view-block'
+
+export {
   ancestorsFqn,
   commonAncestor,
   compareByFqnHierarchically,

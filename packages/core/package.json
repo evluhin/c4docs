@@ -145,6 +145,7 @@
     "oxlint": "catalog:",
     "rehype-format": "5.0.1",
     "rehype-prism-plus": "catalog:",
+    "rehype-raw": "7.0.0",
     "rehype-sanitize": "^6.0.0",
     "rehype-stringify": "10.0.1",
     "remark-gfm": "4.0.1",

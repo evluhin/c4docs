@@ -1,6 +1,14 @@
 import { describe, expect, it, vi } from 'vitest'
-import type { DocLinkDiagnostic, DocLinkResolution, DocViewLinkState } from './model-doc'
-import { deriveTitle, modelDocFile, resolveDocLinks, resolveViewLinks, splitFrontmatter } from './model-doc'
+import type { DocLinkDiagnostic, DocLinkResolution, DocViewLinkState, DocViewResolution } from './model-doc'
+import {
+  deriveTitle,
+  extractLikeC4ViewEmbeds,
+  extractMermaidBlocks,
+  modelDocFile,
+  resolveDocLinks,
+  resolveViewLinks,
+  splitFrontmatter,
+} from './model-doc'
 
 describe('splitFrontmatter', () => {
   it('returns empty frontmatter and full body when no frontmatter', () => {
@@ -55,11 +63,15 @@ describe('modelDocFile', () => {
     expect(page.links).toEqual([])
   })
 
-  it('leaves a ```likec4-view code block as a plain code block in Phase 1', () => {
+  it('extracts a ```likec4-view block into a placeholder and collects an (unresolved) ref', () => {
     const raw = '# H\n\n```likec4-view\nview: index\n```\n'
     const page = modelDocFile({ path: 'guide', sourceAbsPath: '/p/docs/guide.md', raw })
-    expect(page.html).toContain('<pre')
-    expect(page.html).toContain('view: index')
+    expect(page.html).toContain('<div data-likec4-view-embed="0"></div>')
+    expect(page.html).not.toContain('view: index')
+    expect(page.refs).toHaveLength(1)
+    expect(page.refs[0]!.viewId).toBe('index')
+    // No resolution context supplied, so the ref stays unresolved.
+    expect(page.refs[0]!.resolved).toBe(false)
   })
 
   it('resolves relative image assets and rewrites their src', () => {
@@ -144,6 +156,18 @@ describe('resolveDocLinks', () => {
     expect(body).toBe('[missing](./nope.md)')
     expect(diagnostics).toHaveLength(1)
     expect(diagnostics[0]!.target).toBe('./nope.md')
+  })
+
+  it('round-trips a space-containing segment: %20 target ↔ human key ↔ %20 href, no .md', () => {
+    const spacedPaths = new Set(['', 'common/unified token/adr-usl-user-context-token'])
+    const { body, diagnostics } = resolveDocLinks(
+      '[ctx](./common/unified%20token/adr-usl-user-context-token.md)',
+      { docRoute: '', knownPaths: spacedPaths },
+    )
+    // decoded target resolves to the literal-space key; href re-encodes per segment, no .md
+    expect(body).toBe('[ctx](/docs/common/unified%20token/adr-usl-user-context-token)')
+    expect(body).not.toContain('.md')
+    expect(diagnostics).toEqual([])
   })
 })
 
@@ -238,5 +262,104 @@ describe('modelDocFile with link resolution', () => {
     expect(onDiagnostics).toHaveBeenCalledTimes(1)
     const reported = onDiagnostics.mock.calls[0]![0]
     expect(reported).toHaveLength(2)
+  })
+})
+
+describe('extractLikeC4ViewEmbeds', () => {
+  const resolution: DocViewResolution = {
+    viewExists: (id) => id === 'index' || id === 'shop',
+    elementExists: (fqn) => fqn === 'customer' || fqn === 'shop.api',
+  }
+
+  it('replaces a block with the exact placeholder markup and resolves a valid ref', () => {
+    const { body, refs, diagnostics } = extractLikeC4ViewEmbeds('# H\n\n```likec4-view\nview: index\n```\n', {
+      path: 'guide',
+      resolution,
+    })
+    expect(body).toContain('<div data-likec4-view-embed="0"></div>')
+    expect(body).not.toContain('view: index')
+    expect(refs).toHaveLength(1)
+    expect(refs[0]!.viewId).toBe('index')
+    expect(refs[0]!.resolved).toBe(true)
+    expect(refs[0]!.error).toBeUndefined()
+    expect(diagnostics).toEqual([])
+  })
+
+  it('numbers multiple embeds by 0-based document order', () => {
+    const raw = '```likec4-view\nview: index\n```\n\ntext\n\n```likec4-view\nview: shop\n```\n'
+    const { body, refs } = extractLikeC4ViewEmbeds(raw, { path: 'guide', resolution })
+    expect(body).toContain('<div data-likec4-view-embed="0"></div>')
+    expect(body).toContain('<div data-likec4-view-embed="1"></div>')
+    expect(refs.map((r) => r.viewId)).toEqual(['index', 'shop'])
+  })
+
+  it('carries the resolved optional state and source location', () => {
+    const raw = '# H\n\n```likec4-view\nview: shop\nfocus: shop.api\ndynamic: sequence\ntheme: dark\npadding: 16\n```\n'
+    const { refs } = extractLikeC4ViewEmbeds(raw, { path: 'guide', resolution })
+    expect(refs[0]!.state).toEqual({ focus: 'shop.api', dynamic: 'sequence', theme: 'dark', padding: 16 })
+    expect(refs[0]!.sourceLocation).toEqual({ path: 'guide', line: 3, column: 1 })
+  })
+
+  it('keeps an unknown-view ref with resolved:false and an error', () => {
+    const { refs, diagnostics } = extractLikeC4ViewEmbeds('```likec4-view\nview: ghost\n```', {
+      path: 'guide',
+      resolution,
+    })
+    expect(refs).toHaveLength(1)
+    expect(refs[0]!.resolved).toBe(false)
+    expect(refs[0]!.error).toContain('Unknown view')
+    expect(diagnostics).toHaveLength(1)
+  })
+
+  it('keeps an unknown-focus ref with resolved:false and an error', () => {
+    const { refs } = extractLikeC4ViewEmbeds('```likec4-view\nview: index\nfocus: ghost\n```', {
+      path: 'guide',
+      resolution,
+    })
+    expect(refs[0]!.resolved).toBe(false)
+    expect(refs[0]!.error).toContain('Unknown focus element')
+  })
+
+  it('keeps a parse-error ref (missing view) with resolved:false', () => {
+    const { refs } = extractLikeC4ViewEmbeds('```likec4-view\nfocus: customer\n```', {
+      path: 'guide',
+      resolution,
+    })
+    expect(refs).toHaveLength(1)
+    expect(refs[0]!.viewId).toBe('')
+    expect(refs[0]!.resolved).toBe(false)
+    expect(refs[0]!.error).toContain('Missing required "view"')
+  })
+
+  it('does NOT intercept a bare ```likec4 code block', () => {
+    const raw = '```likec4\nspecification {\n}\n```'
+    const { body, refs } = extractLikeC4ViewEmbeds(raw, { path: 'guide', resolution })
+    expect(body).toBe(raw)
+    expect(refs).toEqual([])
+  })
+
+  it('leaves the ref unresolved when no resolution context is supplied', () => {
+    const { refs } = extractLikeC4ViewEmbeds('```likec4-view\nview: index\n```', { path: 'guide' })
+    expect(refs[0]!.viewId).toBe('index')
+    expect(refs[0]!.resolved).toBe(false)
+  })
+})
+
+describe('extractMermaidBlocks', () => {
+  it('replaces a ```mermaid block with a data-mermaid div carrying escaped source', () => {
+    const { body } = extractMermaidBlocks('# H\n\n```mermaid\ngraph TD\n  A --> B\n```\n')
+    expect(body).toContain('<div data-mermaid>graph TD\n  A --&gt; B</div>')
+    expect(body).not.toContain('```mermaid')
+  })
+
+  it('HTML-escapes &, < and > in the source', () => {
+    const { body } = extractMermaidBlocks('```mermaid\nX & <Y> Z\n```')
+    expect(body).toBe('<div data-mermaid>X &amp; &lt;Y&gt; Z</div>')
+  })
+
+  it('does not touch a bare ```likec4 or ```likec4-view block', () => {
+    const raw = '```likec4-view\nview: index\n```\n\n```likec4\nmodel {}\n```'
+    const { body } = extractMermaidBlocks(raw)
+    expect(body).toBe(raw)
   })
 })

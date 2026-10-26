@@ -5,10 +5,10 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { DocAsset, DocFrontmatter, DocPage, ViewId } from '@likec4/core/types'
-import { markdownToHtml } from '@likec4/core/utils'
+import type { DiagramRef, DocAsset, DocFrontmatter, DocPage, Fqn, ViewId } from '@likec4/core/types'
+import { markdownToHtml, parseLikeC4ViewBlock } from '@likec4/core/utils'
 import { parse as parseYaml } from 'yaml'
-import { docRoutePath } from './discovery'
+import { docRoutePath, encodeRoutePath } from './discovery'
 
 /**
  * A `---` fenced block at the very start of a document, followed by the body.
@@ -52,6 +52,19 @@ export interface DocLinkDiagnostic {
   target: string
 }
 
+/**
+ * Optional context that lets modeling resolve ```likec4-view embeds against the
+ * computed model. When omitted, {@link modelDocFile} still extracts embeds into
+ * placeholders but marks every ref unresolved (`resolved: false`), so Phase-1-style
+ * callers keep working.
+ */
+export interface DocViewResolution {
+  /** Whether a given view id exists in the computed model. */
+  viewExists: (viewId: string) => boolean
+  /** Whether a given element FQN exists in the computed model (validates `focus`). */
+  elementExists: (fqn: string) => boolean
+}
+
 export interface ModelDocInput {
   /** route path (no extension) */
   path: string
@@ -70,6 +83,12 @@ export interface ModelDocInput {
    * links are left untouched (Phase 1 behavior).
    */
   linkResolution?: DocLinkResolution
+  /**
+   * Optional ```likec4-view resolution context. When omitted, embeds are still
+   * extracted into placeholders and collected into `refs`, but every ref stays
+   * unresolved (`resolved: false`).
+   */
+  viewResolution?: DocViewResolution
   /**
    * Receives lenient link diagnostics (unknown doc targets, unknown view ids)
    * collected while modeling. Never throws; the caller decides how to surface them.
@@ -179,6 +198,25 @@ function isExternalOrAnchor(target: string): boolean {
 const LINK_RE = /(^|[^!])(\[[^\]]*\]\()([^)\s]+)(\s+"[^"]*")?(\))/g
 
 /**
+ * Decodes each `/`-separated segment of a relative path with
+ * {@link decodeURIComponent}, leaving the separators intact. Malformed escapes
+ * are left as-is (lenient). This maps a `%20`-encoded link target back to the
+ * human route key that stores a literal space.
+ */
+function decodePathSegments(path: string): string {
+  return path
+    .split('/')
+    .map((segment) => {
+      try {
+        return decodeURIComponent(segment)
+      } catch {
+        return segment
+      }
+    })
+    .join('/')
+}
+
+/**
  * Resolves a relative path against the current doc's folder, returning a
  * normalized forward-slash path with no leading slash or `./`/`../` segments.
  */
@@ -234,7 +272,11 @@ export function resolveDocLinks(
       if (!/\.md$/i.test(pathPart)) {
         return whole
       }
-      const resolvedPath = resolveAgainstDoc(opts.docRoute, pathPart)
+      // Decode per segment so a `%20`-encoded relative target resolves to the
+      // human route key (which keeps a literal space). The href is re-encoded
+      // per segment below via encodeRoutePath, so the whole thing round-trips.
+      const decodedPathPart = decodePathSegments(pathPart)
+      const resolvedPath = resolveAgainstDoc(opts.docRoute, decodedPathPart)
       const route = docRoutePath(resolvedPath)
       if (!opts.knownPaths.has(route)) {
         diagnostics.push({
@@ -243,7 +285,7 @@ export function resolveDocLinks(
         })
         return whole
       }
-      const href = `/docs/${route}${anchor}`
+      const href = `/docs/${encodeRoutePath(route)}${anchor}`
       return `${prefix}${open}${href}${title}${close}`
     },
   )
@@ -309,6 +351,133 @@ export function resolveViewLinks(
 }
 
 /**
+ * Matches a fenced code block opened with ``` and a single-token info-string,
+ * capturing the info-string and the block body. Only fences that start at the
+ * beginning of a line (optionally after the preceding newline) are matched, so
+ * indented/nested code is left alone — mirroring {@link resolveAssets}' guard.
+ */
+const FENCED_BLOCK_RE = /(^|\n)```([^\s`\n]+)[ \t]*\r?\n([\s\S]*?)\r?\n```[ \t]*(?=\n|$)/g
+
+/** HTML-escapes `&`, `<`, and `>` so rehype-sanitize keeps a plain text child. */
+function escapeHtmlText(text: string): string {
+  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
+
+/**
+ * Computes the 1-based line and column of an offset within the source body.
+ */
+function lineColumnAt(body: string, offset: number): { line: number; column: number } {
+  let line = 1
+  let lastNewline = -1
+  for (let i = 0; i < offset; i++) {
+    if (body[i] === '\n') {
+      line++
+      lastNewline = i
+    }
+  }
+  return { line, column: offset - lastNewline }
+}
+
+/**
+ * Finds fenced ```likec4-view blocks, replaces each with the sanitizer-safe
+ * placeholder `<div data-likec4-view-embed="<index>"></div>` (0-based document
+ * order), parses the block via {@link parseLikeC4ViewBlock}, resolves the view id
+ * and `focus` element against `opts`, and collects a {@link DiagramRef} per block.
+ *
+ * Invalid refs are KEPT (`resolved: false` with an `error`) — never dropped.
+ *
+ * Pure: returns the rewritten body, the refs in document order, and any diagnostics.
+ */
+export function extractLikeC4ViewEmbeds(
+  body: string,
+  opts: { path: string; resolution?: DocViewResolution },
+): { body: string; refs: DiagramRef[]; diagnostics: DocLinkDiagnostic[] } {
+  const refs: DiagramRef[] = []
+  const diagnostics: DocLinkDiagnostic[] = []
+  let index = 0
+  const rewritten = body.replace(
+    FENCED_BLOCK_RE,
+    (whole, lead: string, info: string, blockBody: string, matchOffset: number) => {
+      if (info !== 'likec4-view') {
+        return whole
+      }
+      const current = index++
+      // Position of the opening fence (after the leading newline, if any).
+      const fenceOffset = matchOffset + lead.length
+      const { line, column } = lineColumnAt(body, fenceOffset)
+
+      const parsed = parseLikeC4ViewBlock(blockBody)
+      const errorMessages = parsed.errors.map((e) => e.message)
+
+      let resolved = parsed.errors.length === 0 && parsed.viewId !== undefined
+      if (resolved && opts.resolution) {
+        if (!opts.resolution.viewExists(parsed.viewId!)) {
+          resolved = false
+          errorMessages.push(`Unknown view: "${parsed.viewId}"`)
+        } else if (parsed.state.focus !== undefined && !opts.resolution.elementExists(parsed.state.focus)) {
+          resolved = false
+          errorMessages.push(`Unknown focus element: "${parsed.state.focus}"`)
+        }
+      } else if (resolved && !opts.resolution) {
+        // No resolution context: keep as unresolved without inventing an error.
+        resolved = false
+      }
+
+      const state: DiagramRef['state'] = {}
+      if (parsed.state.focus !== undefined) {
+        state.focus = parsed.state.focus as Fqn
+      }
+      if (parsed.state.dynamic !== undefined) {
+        state.dynamic = parsed.state.dynamic
+      }
+      if (parsed.state.theme !== undefined) {
+        state.theme = parsed.state.theme
+      }
+      if (parsed.state.padding !== undefined) {
+        state.padding = parsed.state.padding
+      }
+
+      const ref: DiagramRef = {
+        viewId: (parsed.viewId ?? '') as ViewId,
+        state,
+        sourceLocation: { path: opts.path, line, column },
+        resolved,
+      }
+      if (errorMessages.length > 0) {
+        ref.error = errorMessages.join('; ')
+        for (const message of errorMessages) {
+          diagnostics.push({ message, target: parsed.viewId ?? opts.path })
+        }
+      }
+      refs.push(ref)
+
+      return `${lead}<div data-likec4-view-embed="${current}"></div>`
+    },
+  )
+  return { body: rewritten, refs, diagnostics }
+}
+
+/**
+ * Finds fenced ```mermaid blocks and replaces each with the sanitizer-safe
+ * placeholder `<div data-mermaid>…</div>`, carrying the RAW mermaid source as an
+ * HTML-escaped text child (so rehype-sanitize keeps a plain div with safe text).
+ *
+ * Pure: returns the rewritten body.
+ */
+export function extractMermaidBlocks(body: string): { body: string } {
+  const rewritten = body.replace(
+    FENCED_BLOCK_RE,
+    (whole, lead: string, info: string, blockBody: string) => {
+      if (info !== 'mermaid') {
+        return whole
+      }
+      return `${lead}<div data-mermaid>${escapeHtmlText(blockBody)}</div>`
+    },
+  )
+  return { body: rewritten }
+}
+
+/**
  * Models a single doc file into a {@link DocPage}:
  * - `raw` preserved byte-for-byte
  * - frontmatter split and parsed
@@ -326,10 +495,10 @@ export function modelDocFile(input: ModelDocInput): DocPage {
   const { frontmatter, body } = splitFrontmatter(raw)
   const { body: bodyWithAssets, assets } = resolveAssets(body, input.resolveAsset)
 
+  const diagnostics: DocLinkDiagnostic[] = []
   let resolvedBody = bodyWithAssets
   let links: ViewId[] = []
   if (input.linkResolution) {
-    const diagnostics: DocLinkDiagnostic[] = []
     const docResult = resolveDocLinks(resolvedBody, {
       docRoute: path,
       knownPaths: input.linkResolution.knownPaths,
@@ -344,10 +513,20 @@ export function modelDocFile(input: ModelDocInput): DocPage {
     resolvedBody = viewResult.body
     links = viewResult.links
     diagnostics.push(...viewResult.diagnostics)
+  }
 
-    if (diagnostics.length > 0) {
-      input.onDiagnostics?.(diagnostics)
-    }
+  const embedResult = extractLikeC4ViewEmbeds(resolvedBody, {
+    path,
+    ...(input.viewResolution ? { resolution: input.viewResolution } : {}),
+  })
+  resolvedBody = embedResult.body
+  diagnostics.push(...embedResult.diagnostics)
+
+  const mermaidResult = extractMermaidBlocks(resolvedBody)
+  resolvedBody = mermaidResult.body
+
+  if (diagnostics.length > 0) {
+    input.onDiagnostics?.(diagnostics)
   }
 
   const html = markdownToHtml(resolvedBody)
@@ -358,7 +537,7 @@ export function modelDocFile(input: ModelDocInput): DocPage {
     frontmatter,
     html,
     raw,
-    refs: [],
+    refs: embedResult.refs,
     links,
     assets,
   }

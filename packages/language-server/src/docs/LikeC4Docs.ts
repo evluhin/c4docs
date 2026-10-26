@@ -20,7 +20,7 @@ import type { LikeC4Services, LikeC4SharedServices } from '../module'
 import { ADisposable, safeCall } from '../utils'
 import type { Project } from '../workspace/ProjectsManager'
 import { discoverDocs, docRoutePath } from './discovery'
-import type { DocLinkDiagnostic, DocLinkResolution, DocViewLinkState } from './model-doc'
+import type { DocLinkDiagnostic, DocLinkResolution, DocViewLinkState, DocViewResolution } from './model-doc'
 import { modelDocFile } from './model-doc'
 import { assembleDocsTreeFromNav, parseNavYaml } from './nav'
 import { assembleDocsTree } from './tree'
@@ -177,7 +177,7 @@ export class DefaultLikeC4Docs extends ADisposable implements LikeC4Docs {
       files.map((f) => [UriUtils.relative(docsDir, f.uri).replace(/\\/g, '/'), f.uri] as const),
     )
 
-    const linkResolution = await this.buildLinkResolution(projectId, docs.map((d) => d.path))
+    const { linkResolution, viewResolution } = await this.buildResolution(projectId, docs.map((d) => d.path))
 
     const pages: DocPage[] = []
     for (const doc of docs) {
@@ -192,6 +192,7 @@ export class DefaultLikeC4Docs extends ADisposable implements LikeC4Docs {
         raw,
         resolveAsset: (reference) => this.resolveAsset(project, uri, reference),
         linkResolution,
+        ...(viewResolution ? { viewResolution } : {}),
         onDiagnostics: (diagnostics) => this.logLinkDiagnostics(projectId, doc.path, diagnostics),
       })
       pages.push(page)
@@ -243,9 +244,13 @@ export class DefaultLikeC4Docs extends ADisposable implements LikeC4Docs {
    * view id is considered to exist (a warning is logged). The single-vs-project
    * route form mirrors the SPA signal (`hasMultipleProjects()`).
    */
-  private async buildLinkResolution(projectId: ProjectId, knownPaths: readonly string[]): Promise<DocLinkResolution> {
+  private async buildResolution(
+    projectId: ProjectId,
+    knownPaths: readonly string[],
+  ): Promise<{ linkResolution: DocLinkResolution; viewResolution: DocViewResolution | undefined }> {
     const likec4 = this.services.ServiceRegistry.all.find(isLikeC4Services)
     let viewExists: (viewId: string) => boolean = () => false
+    let viewResolution: DocViewResolution | undefined
     if (likec4) {
       // `computeModel` waits for the DocumentBuilder to reach the `Linked` state
       // before returning a model with computed views. During workspace init the
@@ -253,17 +258,24 @@ export class DefaultLikeC4Docs extends ADisposable implements LikeC4Docs {
       // here would deadlock (the build phase can only advance after this prime
       // completes). In that case skip view resolution — the model is re-parsed
       // afterwards, which clears the docs cache (see constructor) so the next
-      // read resolves links. Once linking is done, await to resolve views.
+      // read resolves links and refs. Once linking is done, await to resolve.
       if (this.services.workspace.DocumentBuilder.currentPhase >= DocumentState.Linked) {
         try {
           const model = await likec4.likec4.ModelBuilder.computeModel(projectId)
           viewExists = (viewId) => model.findView(viewId) != null
+          viewResolution = {
+            viewExists,
+            elementExists: (fqn) => model.findElement(fqn) != null,
+          }
         } catch (err) {
-          docsLogger.warn(`Could not compute model for project ${projectId}; doc view links will not resolve`, { err })
+          docsLogger.warn(
+            `Could not compute model for project ${projectId}; doc view links and refs will not resolve`,
+            { err },
+          )
         }
       }
     } else {
-      docsLogger.warn('LikeC4 services are not registered; doc view links will not resolve')
+      docsLogger.warn('LikeC4 services are not registered; doc view links and refs will not resolve')
     }
 
     const isProjectScoped = this.services.workspace.ProjectsManager.hasMultipleProjects()
@@ -271,9 +283,12 @@ export class DefaultLikeC4Docs extends ADisposable implements LikeC4Docs {
       buildViewRoute(isProjectScoped ? projectId : undefined, viewId, state)
 
     return {
-      knownPaths: new Set(knownPaths),
-      viewExists,
-      routeFor,
+      linkResolution: {
+        knownPaths: new Set(knownPaths),
+        viewExists,
+        routeFor,
+      },
+      viewResolution,
     }
   }
 

@@ -124,6 +124,40 @@ describe('LikeC4Docs', () => {
     )
   })
 
+  it('extracts a ```likec4-view embed into a placeholder and populates page.refs', async ({ expect }) => {
+    const { fs, projectId, docs } = await createTestServices()
+    mockDocs(fs, docsDir, {
+      'index.md': '# Home\n\n```likec4-view\nview: index\n```\n',
+    })
+
+    const model = await docs.docsModel(projectId)
+    const page = model.pages['']!
+    // placeholder markup survives sanitization; raw mermaid/view source is gone
+    expect(page.html).toContain('<div data-likec4-view-embed="0"></div>')
+    expect(page.html).not.toContain('view: index')
+    // the ref is collected even though, with no computed model registered, it is unresolved
+    expect(page.refs).toHaveLength(1)
+    expect(page.refs[0]!.viewId).toBe('index')
+    expect(page.refs[0]!.resolved).toBe(false)
+    // raw stays byte-for-byte
+    expect(page.raw).toBe('# Home\n\n```likec4-view\nview: index\n```\n')
+  })
+
+  it('rewrites a ```mermaid block into a sanitizer-safe data-mermaid div with escaped source', async ({ expect }) => {
+    const { fs, projectId, docs } = await createTestServices()
+    mockDocs(fs, docsDir, {
+      'index.md': '# Home\n\n```mermaid\ngraph TD\n  A --> B\n```\n',
+    })
+
+    const model = await docs.docsModel(projectId)
+    const page = model.pages['']!
+    expect(page.html).toContain('data-mermaid')
+    // raw mermaid source is preserved as the div's text child
+    expect(page.html).toContain('graph TD')
+    expect(page.html).toContain('A --> B')
+    expect(page.html).not.toContain('```mermaid')
+  })
+
   it('builds tree order, nesting, and labels from nav.yaml and hides unlisted files', async ({ expect }) => {
     const { fs, projectId, docs } = await createTestServices()
     mockDocs(
