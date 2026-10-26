@@ -19,9 +19,10 @@ import { logger as rootLogger } from '../logger'
 import type { LikeC4Services, LikeC4SharedServices } from '../module'
 import { ADisposable, safeCall } from '../utils'
 import type { Project } from '../workspace/ProjectsManager'
-import { discoverDocs } from './discovery'
+import { discoverDocs, docRoutePath } from './discovery'
 import type { DocLinkDiagnostic, DocLinkResolution, DocViewLinkState } from './model-doc'
 import { modelDocFile } from './model-doc'
+import { assembleDocsTreeFromNav, parseNavYaml } from './nav'
 import { assembleDocsTree } from './tree'
 
 function isLikeC4Services(services: object): services is LikeC4Services {
@@ -186,7 +187,41 @@ export class DefaultLikeC4Docs extends ADisposable implements LikeC4Docs {
       pages.push(page)
     }
 
-    return assembleDocsTree(pages, { entryConfig: project.config.docs?.entry })
+    const entryConfig = project.config.docs?.entry
+    const knownPaths = new Set(pages.map((p) => p.path))
+
+    // Optional docs/nav.yaml explicit navigation (mkdocs-style). When present and
+    // well-formed, the tree is built ENTIRELY from it; otherwise fall back to the
+    // convention tree. The two are mutually exclusive and never merged.
+    const navUri = UriUtils.resolvePath(docsDir, 'nav.yaml')
+    // Watch nav.yaml so dev HMR reloads when it is created/changed (handled by the
+    // docs-dir-keyed handleFileSystemUpdate, which invalidates the cache).
+    this.services.workspace.FileSystemWatcher?.watch(navUri.fsPath)
+    const navExists = await provider.exists(navUri).catch(() => false)
+    if (navExists) {
+      const source = await provider.readFile(navUri)
+      const { entries, diagnostics, malformed } = parseNavYaml(source, { knownPaths, docRoutePath })
+      if (!malformed) {
+        const result = assembleDocsTreeFromNav(pages, entries, { entryConfig })
+        for (const diagnostic of diagnostics) {
+          docsLogger.warn(`[${projectId}] nav.yaml: ${diagnostic.message}`)
+        }
+        if (result.hidden.length > 0) {
+          docsLogger.warn(
+            `[${projectId}] nav.yaml does not list ${result.hidden.length} doc(s), hidden from the tree: ${
+              result.hidden.map((p) => p || '/').join(', ')
+            }`,
+          )
+        }
+        const { tree, pages: pagesByPath, entry } = result
+        return { tree, pages: pagesByPath, entry }
+      }
+      for (const diagnostic of diagnostics) {
+        docsLogger.warn(`[${projectId}] nav.yaml: ${diagnostic.message}`)
+      }
+    }
+
+    return assembleDocsTree(pages, { entryConfig })
   }
 
   /**

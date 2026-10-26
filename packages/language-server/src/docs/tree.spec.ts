@@ -1,5 +1,6 @@
 import type { DocFrontmatter, DocPage } from '@likec4/core/types'
 import { describe, expect, it } from 'vitest'
+import { type NavEntry, assembleDocsTreeFromNav } from './nav'
 import { assembleDocsTree } from './tree'
 
 function page(path: string, frontmatter: DocFrontmatter = {}, title?: string): DocPage {
@@ -89,5 +90,82 @@ describe('assembleDocsTree', () => {
       const { entry } = assembleDocsTree([])
       expect(entry).toBeNull()
     })
+  })
+})
+
+describe('assembleDocsTreeFromNav', () => {
+  it('honors nav order and nesting over any convention ordering', () => {
+    const pages = [
+      page('', {}, 'Home'),
+      page('architecture', {}, 'Architecture'),
+      page('adr/0001-a', {}, '0001 A'),
+      page('adr/0002-b', {}, '0002 B'),
+    ]
+    const nav: NavEntry[] = [
+      { kind: 'doc', path: 'architecture' },
+      { kind: 'doc', path: '' },
+      {
+        kind: 'section',
+        label: 'Decisions',
+        children: [
+          { kind: 'doc', path: 'adr/0002-b' },
+          { kind: 'doc', path: 'adr/0001-a' },
+        ],
+      },
+    ]
+    const { tree } = assembleDocsTreeFromNav(pages, nav)
+    expect(tree.map((n) => n.path)).toEqual(['architecture', '', ''])
+    expect(tree[0]!.kind).toBe('doc')
+    const section = tree[2]!
+    expect(section.kind).toBe('folder')
+    expect(section.label).toBe('Decisions')
+    expect(section.children?.map((c) => c.path)).toEqual(['adr/0002-b', 'adr/0001-a'])
+  })
+
+  it('resolves a doc label as explicit nav label -> page title -> humanized filename', () => {
+    const pages = [
+      page('a', {}, 'Alpha Title'),
+      page('b', {}, 'Bravo Title'),
+    ]
+    const nav: NavEntry[] = [
+      { kind: 'doc', label: 'Explicit', path: 'a' },
+      { kind: 'doc', path: 'b' },
+      // no page for this path -> humanized filename fallback
+      { kind: 'doc', path: 'c-doc' },
+    ]
+    const { tree } = assembleDocsTreeFromNav(pages, nav)
+    expect(tree.map((n) => n.label)).toEqual(['Explicit', 'Bravo Title', 'C Doc'])
+  })
+
+  it('hides pages not referenced by nav from the tree but keeps them in pages', () => {
+    const pages = [
+      page('a', {}, 'Alpha'),
+      page('hidden', {}, 'Hidden'),
+    ]
+    const nav: NavEntry[] = [{ kind: 'doc', path: 'a' }]
+    const { tree, pages: pagesByPath, hidden } = assembleDocsTreeFromNav(pages, nav)
+    expect(tree.map((n) => n.path)).toEqual(['a'])
+    expect(Object.keys(pagesByPath).sort()).toEqual(['a', 'hidden'])
+    expect(hidden).toEqual(['hidden'])
+  })
+
+  it('defaults entry to the first nav entry', () => {
+    const pages = [page('', {}, 'Home'), page('guide', {}, 'Guide')]
+    const nav: NavEntry[] = [
+      { kind: 'doc', path: 'guide' },
+      { kind: 'doc', path: '' },
+    ]
+    const { entry } = assembleDocsTreeFromNav(pages, nav)
+    expect(entry).toBe('guide')
+  })
+
+  it('lets config entry override the first nav entry', () => {
+    const pages = [page('', {}, 'Home'), page('guide', {}, 'Guide')]
+    const nav: NavEntry[] = [
+      { kind: 'doc', path: 'guide' },
+      { kind: 'doc', path: '' },
+    ]
+    const { entry } = assembleDocsTreeFromNav(pages, nav, { entryConfig: 'index.md' })
+    expect(entry).toBe('')
   })
 })

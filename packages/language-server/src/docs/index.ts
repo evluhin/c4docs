@@ -25,4 +25,14 @@ export {
   resolveViewLinks,
   splitFrontmatter,
 } from './model-doc'
+export {
+  assembleDocsTreeFromNav,
+  type AssembleNavTreeOptions,
+  type AssembleNavTreeResult,
+  type NavDiagnostic,
+  type NavEntry,
+  type ParseNavOptions,
+  type ParseNavResult,
+  parseNavYaml,
+} from './nav'
 export { assembleDocsTree, type AssembleTreeOptions } from './tree'

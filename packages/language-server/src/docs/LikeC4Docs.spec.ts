@@ -9,6 +9,7 @@ describe('LikeC4Docs', () => {
     const fs = services.shared.workspace.FileSystemProvider
     vi.spyOn(fs, 'scanDirectory')
     vi.spyOn(fs, 'readFile')
+    vi.spyOn(fs, 'exists')
 
     const projectData = await services.shared.workspace.ProjectsManager.registerProject({
       config: {
@@ -23,10 +24,14 @@ describe('LikeC4Docs', () => {
   }
 
   function mockDocs(
-    fs: { scanDirectory: unknown; readFile: unknown },
+    fs: { scanDirectory: unknown; readFile: unknown; exists: unknown },
     docsDir: string,
     files: Record<string, string>,
+    nav?: string,
   ) {
+    const prefix = `${docsDir}/`
+    const navPath = `${docsDir}/nav.yaml`
+    // scanDirectory only returns markdown files (the real filter is isMarkdownFile).
     vi.mocked(fs.scanDirectory as any).mockResolvedValue(
       Object.keys(files).map((rel) => ({
         uri: URI.file(`${docsDir}/${rel}`),
@@ -34,8 +39,11 @@ describe('LikeC4Docs', () => {
         isDirectory: false,
       })),
     )
-    const prefix = `${docsDir}/`
+    vi.mocked(fs.exists as any).mockImplementation(async (uri: URI) => uri.fsPath === navPath && nav != null)
     vi.mocked(fs.readFile as any).mockImplementation(async (uri: URI) => {
+      if (uri.fsPath === navPath) {
+        return nav ?? ''
+      }
       const rel = uri.fsPath.startsWith(prefix) ? uri.fsPath.slice(prefix.length) : uri.fsPath
       return files[rel] ?? ''
     })
@@ -114,6 +122,106 @@ describe('LikeC4Docs', () => {
     expect(model.pages['architecture']!.raw).toBe(
       '# Architecture\n\nBack [home](./index.md) and [diagram](likec4://view/ghost).',
     )
+  })
+
+  it('builds tree order, nesting, and labels from nav.yaml and hides unlisted files', async ({ expect }) => {
+    const { fs, projectId, docs } = await createTestServices()
+    mockDocs(
+      fs,
+      docsDir,
+      {
+        'index.md': '# Home',
+        'architecture.md': '# Architecture',
+        'adr/0001-use-event-bus.md': '# Use an event bus',
+        'orphan.md': '# Orphan',
+      },
+      [
+        'nav:',
+        '  - Overview: architecture.md',
+        '  - Home: index.md',
+        '  - Decisions:',
+        '    - adr/0001-use-event-bus.md',
+      ].join('\n'),
+    )
+
+    const model = await docs.docsModel(projectId)
+
+    // order and nesting come entirely from nav.yaml
+    expect(model.tree.map((n) => ({ label: n.label, path: n.path }))).toEqual([
+      { label: 'Overview', path: 'architecture' },
+      { label: 'Home', path: '' },
+      { label: 'Decisions', path: '' },
+    ])
+    const decisions = model.tree[2]!
+    expect(decisions.kind).toBe('folder')
+    expect(decisions.children?.map((c) => c.path)).toEqual(['adr/0001-use-event-bus'])
+
+    // unlisted orphan.md is hidden from the tree but still present in pages
+    expect(model.tree.some((n) => n.path === 'orphan')).toBe(false)
+    expect(Object.keys(model.pages)).toContain('orphan')
+
+    // entry defaults to the first nav entry
+    expect(model.entry).toBe('architecture')
+  })
+
+  it('falls back to the convention tree when nav.yaml is absent', async ({ expect }) => {
+    const { fs, projectId, docs } = await createTestServices()
+    mockDocs(fs, docsDir, {
+      'index.md': '---\ntitle: Home\n---\n# Home',
+      'adr/index.md': '---\ntitle: Decisions\n---\n# ADRs',
+      'adr/0001-use-event-bus.md': '# Use an event bus',
+    })
+
+    const model = await docs.docsModel(projectId)
+    const adr = model.tree.find((n) => n.path === 'adr')
+    expect(adr?.kind).toBe('folder')
+    expect(adr?.label).toBe('Decisions')
+    expect(model.entry).toBe('')
+  })
+
+  it('falls back to the convention tree when nav.yaml is malformed', async ({ expect }) => {
+    const { fs, projectId, docs } = await createTestServices()
+    mockDocs(
+      fs,
+      docsDir,
+      {
+        'index.md': '# Home',
+        'architecture.md': '# Architecture',
+      },
+      'nav: not-a-list\n',
+    )
+
+    const model = await docs.docsModel(projectId)
+    // convention: alphabetical top-level docs, no hiding
+    expect(model.tree.map((n) => n.path).sort()).toEqual(['architecture'])
+    expect(Object.keys(model.pages).sort()).toEqual(['', 'architecture'])
+  })
+
+  it('rebuilds when nav.yaml changes', async ({ expect }) => {
+    const { fs, projectId, docs } = await createTestServices()
+    mockDocs(
+      fs,
+      docsDir,
+      { 'index.md': '# Home', 'architecture.md': '# Architecture' },
+      'nav:\n  - Home: index.md\n',
+    )
+    let model = await docs.docsModel(projectId)
+    expect(model.tree.map((n) => n.path)).toEqual([''])
+
+    const events: string[] = []
+    docs.onDocsUpdate((e) => events.push(e.projectId))
+
+    mockDocs(
+      fs,
+      docsDir,
+      { 'index.md': '# Home', 'architecture.md': '# Architecture' },
+      'nav:\n  - Home: index.md\n  - Arch: architecture.md\n',
+    )
+    await docs.handleFileSystemUpdate({ update: URI.file(`${docsDir}/nav.yaml`) })
+
+    expect(events).toContain(projectId)
+    model = await docs.docsModel(projectId)
+    expect(model.tree.map((n) => n.path)).toEqual(['', 'architecture'])
   })
 
   it('handleFileSystemUpdate invalidates the cache and notifies listeners', async ({ expect }) => {
