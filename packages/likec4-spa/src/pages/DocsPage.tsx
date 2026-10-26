@@ -5,6 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
+import type { Fqn } from '@likec4/core'
+import type { OnInitialized } from '@likec4/diagram'
 import { css } from '@likec4/styles/css'
 import {
   Alert,
@@ -15,6 +17,7 @@ import {
   Group,
   ScrollArea,
   Text,
+  useComputedColorScheme,
 } from '@mantine/core'
 import { useDisclosure, useDocumentTitle } from '@mantine/hooks'
 import { useStore } from '@nanostores/react'
@@ -22,11 +25,16 @@ import { IconHierarchy2 } from '@tabler/icons-react'
 import { Link, useNavigate } from '@tanstack/react-router'
 import { basepath, pageTitle } from 'likec4:app-config'
 import type { DocsModel } from 'likec4:docs'
+import { LikeC4View } from 'likec4:react'
 import type { Atom } from 'nanostores'
 import type { MouseEvent } from 'react'
-import { useCallback } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { DocsNav } from '../components/DocsNav'
 import { applyBaseToDocHtml } from './doc-html-base'
+import type { EmbedResolution, EmbedViewProps } from './docs-embeds/embed'
+import { resolveEmbed } from './docs-embeds/embed'
+import { renderMermaid } from './docs-embeds/mermaid'
 
 export interface DocsPageProps {
   $docs: Atom<DocsModel>
@@ -165,11 +173,21 @@ function resolveInternalDocNavigation(
   return { to: pathname, search }
 }
 
+/** A doc embed placeholder paired with its resolved hydration decision. */
+interface EmbedPortal {
+  node: HTMLElement
+  resolution: EmbedResolution
+}
+
 export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
   const docs = useStore($docs)
   const [opened, { toggle, close }] = useDisclosure()
   const page = docs.pages[path]
   const navigate = useNavigate()
+  const colorScheme = useComputedColorScheme('light')
+
+  const contentRef = useRef<HTMLDivElement | null>(null)
+  const [embedPortals, setEmbedPortals] = useState<EmbedPortal[]>([])
 
   useDocumentTitle(page ? `${page.title} — ${pageTitle}` : pageTitle)
 
@@ -196,6 +214,67 @@ export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
     event.preventDefault()
     navigate({ to: target.to, search: target.search }).catch(console.error)
   }, [navigate])
+
+  // Hydrate the sanitizer-safe placeholders FEAT-001 emits into the doc HTML.
+  // Placeholders are empty `<div>`s, so everything rendered into them is managed
+  // by React portals — we never mutate a node we also portal into, which keeps
+  // the top-level prose div (and its click interceptor) untouched.
+  const refs = page?.refs
+  const html = page?.html
+
+  // Embeds depend only on the rendered DOM + refs, NOT on the color scheme: a
+  // theme toggle re-renders the mounted LikeC4View in place rather than tearing
+  // the portals down. Portals are cleared on cleanup so they unmount before the
+  // host nodes are replaced (e.g. navigating to another doc).
+  useEffect(() => {
+    const container = contentRef.current
+    if (!container) {
+      setEmbedPortals([])
+      return
+    }
+    const embedNodes = container.querySelectorAll<HTMLElement>('[data-likec4-view-embed]')
+    const portals: EmbedPortal[] = []
+    embedNodes.forEach((node) => {
+      const index = Number.parseInt(node.getAttribute('data-likec4-view-embed') ?? '', 10)
+      portals.push({ node, resolution: resolveEmbed(refs ?? [], index) })
+    })
+    setEmbedPortals(portals)
+    return () => setEmbedPortals([])
+  }, [html, refs])
+
+  // Mermaid blocks are never portaled, so rendering their SVG via innerHTML is
+  // safe. Re-runs when the computed color scheme changes so diagrams re-theme.
+  useEffect(() => {
+    const container = contentRef.current
+    if (!container) {
+      return
+    }
+    let cancelled = false
+    const mermaidNodes = [...container.querySelectorAll<HTMLElement>('[data-mermaid]')]
+    const slug = path.replace(/[^\w-]/g, '_')
+    // Render blocks sequentially: mermaid relies on global state + a shared DOM
+    // id while rendering, so concurrent renders on the same page race.
+    void (async () => {
+      for (let i = 0; i < mermaidNodes.length; i++) {
+        const node = mermaidNodes[i]!
+        const source = node.textContent ?? ''
+        if (source.trim() === '') {
+          continue
+        }
+        try {
+          const svg = await renderMermaid(`docs-mermaid-${slug}-${i}`, source, colorScheme)
+          if (cancelled) return
+          node.innerHTML = svg
+        } catch {
+          if (cancelled) return
+          node.replaceChildren(inlineNotice('Failed to render Mermaid diagram'))
+        }
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [html, path, colorScheme])
 
   return (
     <AppShell
@@ -226,15 +305,93 @@ export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
               // HTML is sanitized server-side by markdownToHtml (rehype-sanitize);
               // applyBaseToDocHtml only prefixes the already-safe root-absolute doc URLs.
               <div
+                ref={contentRef}
                 className={prose}
                 onClick={onContentClick}
                 dangerouslySetInnerHTML={{ __html: applyBaseToDocHtml(page.html, basepath) }}
               />
             )
             : <DocNotFound path={path} />}
+          {embedPortals.map(({ node, resolution }, i) => {
+            const content = <EmbedContent resolution={resolution} />
+            return createPortal(content, node, `embed-${path}-${i}`)
+          })}
         </Box>
       </AppShell.Main>
     </AppShell>
+  )
+}
+
+const inlineNoticeClass = css({
+  borderWidth: '[1px]',
+  borderStyle: 'solid',
+  borderColor: '[var(--mantine-color-orange-outline)]',
+  borderRadius: 'sm',
+  paddingInline: 'sm',
+  paddingBlock: 'xs',
+  marginBlock: 'xs',
+  fontSize: '[0.85rem]',
+  color: '[var(--mantine-color-orange-text)]',
+  backgroundColor: '[var(--mantine-color-orange-light)]',
+})
+
+/**
+ * Builds a non-fatal inline notice as a detached DOM node, used by the mermaid
+ * hydration path which renders into placeholder nodes directly (not via React).
+ */
+function inlineNotice(message: string): HTMLElement {
+  const el = document.createElement('div')
+  el.setAttribute('role', 'note')
+  el.className = inlineNoticeClass
+  el.textContent = message
+  return el
+}
+
+/** Renders an embed placeholder's content: either the view or a notice. */
+function EmbedContent({ resolution }: { resolution: EmbedResolution }) {
+  if (resolution.kind === 'notice') {
+    return <InlineNotice message={resolution.message} />
+  }
+  return <EmbeddedView props={resolution.props} />
+}
+
+/** Non-fatal inline notice rendered into an embed placeholder via a portal. */
+function InlineNotice({ message }: { message: string }) {
+  return <div role="note" className={inlineNoticeClass}>{message}</div>
+}
+
+/**
+ * The interactive LikeC4View mounted into an embed placeholder.
+ *
+ * `focus` has no corresponding LikeC4View prop; it is applied through the
+ * diagram runtime once initialized. We use the `onInitialized` callback (which
+ * hands us the owning diagram's {@link DiagramApi}) rather than a hook, so focus
+ * works regardless of which `@likec4/diagram` module instance owns the embedded
+ * view — the hooks exported from this app bind to a different instance.
+ */
+function EmbeddedView({ props }: { props: EmbedViewProps }) {
+  const focus = props.focus
+  const onInitialized: OnInitialized | undefined = focus
+    ? ({ diagram }) => {
+      try {
+        diagram.focusOnElement(focus as Fqn)
+      } catch (error) {
+        console.error('focusOnElement failed:', error)
+      }
+    }
+    : undefined
+  return (
+    <LikeC4View
+      viewId={props.viewId}
+      {...props.colorScheme && { colorScheme: props.colorScheme }}
+      {...props.dynamicViewVariant && { dynamicViewVariant: props.dynamicViewVariant }}
+      {...props.fitViewPadding !== undefined && { fitViewPadding: props.fitViewPadding }}
+      {
+        // `onInitialized` is not declared on LikeC4ViewProps but is forwarded to the
+        // underlying LikeC4Diagram, which gives us the owning diagram's API.
+        ...onInitialized && ({ onInitialized } as { onInitialized: OnInitialized })
+      }
+    />
   )
 }
 
