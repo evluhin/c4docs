@@ -14,7 +14,7 @@ export const Route = createFileRoute('/_single/export/$viewId')({
   validateSearch: z.object({
     description: z.boolean().optional().catch(false),
     download: z.boolean().optional().catch(false),
-    format: z.enum(['png', 'jpeg']).optional().catch('png'),
+    format: z.enum(['png', 'jpeg', 'svg']).optional().catch('png'),
     notation: z.boolean().optional().catch(false),
     quality: z.number().min(0).max(1).optional().catch(undefined),
   }),

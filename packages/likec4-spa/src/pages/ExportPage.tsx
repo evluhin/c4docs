@@ -111,6 +111,43 @@ async function downloadAsJpeg({
 }
 
 /**
+ * Global key the SVG export writes the rendered markup to, so the Playwright
+ * capture step can read it with `page.evaluate`. PNG/JPEG do not use it.
+ */
+export const EXPORT_SVG_RESULT_KEY = '__likec4ExportSvg'
+
+/**
+ * Converts the export viewport into an SVG string, exposes it on `window` for the
+ * CLI capture step, and starts a browser download. Keeps a transparent background
+ * like PNG.
+ */
+async function downloadAsSvg({
+  filename,
+  viewport,
+}: {
+  filename: string
+  viewport: HTMLElement
+}) {
+  try {
+    const { toSvg } = await import('html-to-image')
+    const dataUrl = await toSvg(viewport, {
+      backgroundColor: 'transparent',
+      cacheBust: true,
+      imagePlaceholder: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
+    })
+    const comma = dataUrl.indexOf(',')
+    const svg = decodeURIComponent(dataUrl.slice(comma + 1))
+    // Expose the markup for the CLI capture step (it reads this via page.evaluate).
+    const svgWindow = window as unknown as Record<string, string>
+    svgWindow[EXPORT_SVG_RESULT_KEY] = svg
+    await triggerDownload(dataUrl, `${filename}.svg`)
+  } catch (err) {
+    console.error(err)
+    window.alert(`Failed to export to SVG, check the console for more details.`)
+  }
+}
+
+/**
  * Renders the single-view export page used by browser downloads and CLI screenshots.
  */
 export function ExportPage() {
@@ -125,13 +162,14 @@ export function ExportPage() {
     return <div>Loading...</div>
   }
 
-  return <GuardedExportPage diagram={diagram} isJpeg={isJpeg} />
+  return <GuardedExportPage diagram={diagram} format={imageFormat} />
 }
 
 /**
  * Renders the measured export viewport for a loaded diagram.
  */
-function GuardedExportPage({ diagram, isJpeg }: { diagram: LayoutedView; isJpeg: boolean }) {
+function GuardedExportPage({ diagram, format }: { diagram: LayoutedView; format: 'png' | 'jpeg' | 'svg' }) {
+  const isJpeg = format === 'jpeg'
   const {
     padding = 20,
     download = false,
@@ -171,17 +209,25 @@ function GuardedExportPage({ diagram, isJpeg }: { diagram: LayoutedView; isJpeg:
       loadingOverlay.style.display = 'none'
     }
     downloadedRef.current = true
-    if (isJpeg) {
-      void downloadAsJpeg({
-        filename: diagram.id,
-        viewport,
-        quality: quality ?? 0.8,
-      })
-    } else {
-      void downloadAsPng({
-        pngFilename: diagram.id,
-        viewport,
-      })
+    switch (format) {
+      case 'jpeg':
+        void downloadAsJpeg({
+          filename: diagram.id,
+          viewport,
+          quality: quality ?? 0.8,
+        })
+        break
+      case 'svg':
+        void downloadAsSvg({
+          filename: diagram.id,
+          viewport,
+        })
+        break
+      default:
+        void downloadAsPng({
+          pngFilename: diagram.id,
+          viewport,
+        })
     }
   }
 

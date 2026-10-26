@@ -44,8 +44,8 @@ export type PngExportArgs = {
   chromiumSandbox?: boolean
   /** Use sequence layout for dynamic views. */
   sequence?: boolean | undefined
-  /** Image format: 'png' or 'jpeg'. Defaults to 'png'. */
-  format?: 'png' | 'jpeg'
+  /** Image format: 'png', 'jpeg', or 'svg'. Defaults to 'png'. */
+  format?: 'png' | 'jpeg' | 'svg'
   /** JPEG quality (1-100). Only used when format is 'jpeg'. Defaults to 80. */
   quality?: number
   /** Include view notation in exported images. */
@@ -82,7 +82,7 @@ export async function exportViewsToPNG(
     maxAttempts?: number
     chromiumSandbox?: boolean
     sequence?: boolean
-    format?: 'png' | 'jpeg'
+    format?: 'png' | 'jpeg' | 'svg'
     quality?: number | undefined
     notation?: boolean
     description?: boolean

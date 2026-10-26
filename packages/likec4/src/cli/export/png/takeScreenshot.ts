@@ -7,6 +7,7 @@
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
 import type { DiagramView, DynamicViewDisplayVariant, NonEmptyArray } from '@likec4/core'
+import { writeFile } from 'node:fs/promises'
 import { relative, resolve } from 'node:path'
 import { setTimeout as sleep } from 'node:timers/promises'
 import type { BrowserContext, Page } from 'playwright'
@@ -14,6 +15,13 @@ import { clamp, isTruthy } from 'remeda'
 import k from 'tinyrainbow'
 import { withQuery } from 'ufo'
 import type { ViteLogger } from '../../../logger'
+
+/**
+ * Global key the export page writes the rendered SVG markup to; must match
+ * `EXPORT_SVG_RESULT_KEY` in `packages/likec4-spa/src/pages/ExportPage.tsx`.
+ * Duplicated as a literal because the SPA is a private, non-importable package.
+ */
+const EXPORT_SVG_RESULT_KEY = '__likec4ExportSvg'
 
 type TakeScreenshotParams = {
   browserContext: BrowserContext
@@ -25,7 +33,7 @@ type TakeScreenshotParams = {
   dynamicVariant?: DynamicViewDisplayVariant
   outputType: 'relative' | 'flat'
   theme: 'light' | 'dark'
-  format?: 'png' | 'jpeg'
+  format?: 'png' | 'jpeg' | 'svg'
   quality?: number | undefined
   notation?: boolean
   description?: boolean
@@ -45,14 +53,16 @@ export function createExportViewUrl({
   format = 'png',
   notation = false,
   description = false,
+  download = false,
 }: {
   viewId: string
   padding: number
   theme: 'light' | 'dark'
   dynamicVariant?: DynamicViewDisplayVariant | undefined
-  format?: 'png' | 'jpeg'
+  format?: 'png' | 'jpeg' | 'svg'
   notation?: boolean
   description?: boolean
+  download?: boolean
 }): string {
   return withQuery(`export/${encodeURIComponent(viewId)}/`, {
     padding,
@@ -60,7 +70,8 @@ export function createExportViewUrl({
     dynamic: dynamicVariant,
     ...(notation ? { notation: true } : {}),
     ...(description ? { description: true } : {}),
-    ...(format === 'jpeg' ? { format: 'jpeg' } : {}),
+    ...(format !== 'png' ? { format } : {}),
+    ...(download ? { download: true } : {}),
   })
 }
 
@@ -123,7 +134,7 @@ export async function takeScreenshot({
           relativePath = '.'
         }
       }
-      const fileExt = format === 'jpeg' ? '.jpg' : '.png'
+      const fileExt = format === 'jpeg' ? '.jpg' : format === 'svg' ? '.svg' : '.png'
       const path = resolve(output, relativePath, `${view.id}${fileExt}`)
 
       page ??= await browserContext.newPage()
@@ -147,6 +158,9 @@ export async function takeScreenshot({
         format,
         notation,
         description,
+        // SVG is produced in the browser via html-to-image; the export page only
+        // runs that path when `download` is set and exposes the markup on window.
+        download: format === 'svg',
       }))
 
       logger.info(k.cyan(url) + k.dim(` -> ${relative(output, path)}`))
@@ -168,14 +182,23 @@ export async function takeScreenshot({
         await waitAllImages(page, timeout)
       }
 
-      await exportPage.screenshot({
-        animations: 'disabled',
-        path,
-        type: format === 'jpeg' ? 'jpeg' : 'png',
-        ...(format === 'jpeg'
-          ? { quality: quality ?? 80, omitBackground: false }
-          : { omitBackground: true }),
-      })
+      if (format === 'svg') {
+        const svg = await page.waitForFunction(
+          key => (window as unknown as Record<string, string | undefined>)[key],
+          EXPORT_SVG_RESULT_KEY,
+          { timeout },
+        ).then(handle => handle.jsonValue() as Promise<string>)
+        await writeFile(path, svg, 'utf-8')
+      } else {
+        await exportPage.screenshot({
+          animations: 'disabled',
+          path,
+          type: format === 'jpeg' ? 'jpeg' : 'png',
+          ...(format === 'jpeg'
+            ? { quality: quality ?? 80, omitBackground: false }
+            : { omitBackground: true }),
+        })
+      }
 
       succeed.push({ view, path })
     } catch (error) {
