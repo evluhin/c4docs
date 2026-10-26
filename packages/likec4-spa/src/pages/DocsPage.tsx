@@ -18,6 +18,7 @@ import {
 } from '@mantine/core'
 import { useDisclosure, useDocumentTitle } from '@mantine/hooks'
 import { useStore } from '@nanostores/react'
+import { IconHierarchy2 } from '@tabler/icons-react'
 import { Link } from '@tanstack/react-router'
 import { basepath, pageTitle } from 'likec4:app-config'
 import type { DocsModel } from 'likec4:docs'
@@ -33,28 +34,49 @@ export interface DocsPageProps {
   projectId?: string | undefined
 }
 
+// Light, Backstage-like reading surface. Uses Mantine's body color CSS variable so it
+// follows light/dark but renders a bright background rather than the dark app chrome.
+const docsShell = css({
+  '& .mantine-AppShell-main': {
+    backgroundColor: '[var(--mantine-color-body)]',
+  },
+  '& .mantine-AppShell-navbar': {
+    backgroundColor: '[var(--mantine-color-body)]',
+    borderInlineEndColor: '[var(--mantine-color-default-border)]',
+  },
+  '& .mantine-AppShell-header': {
+    backgroundColor: '[var(--mantine-color-body)]',
+    borderBottomColor: '[var(--mantine-color-default-border)]',
+  },
+})
+
 const contentContainer = css({
   maxWidth: '[820px]',
   marginInline: 'auto',
-  padding: 'lg',
+  paddingInline: 'md',
+  paddingBlock: 'sm',
 })
 
 const prose = css({
-  lineHeight: '[1.6]',
+  lineHeight: '[1.55]',
+  fontSize: '[0.9375rem]',
   '& h1, & h2, & h3, & h4': {
     fontWeight: '[600]',
     lineHeight: '[1.25]',
-    marginTop: 'lg',
-    marginBottom: 'sm',
+    marginTop: 'md',
+    marginBottom: 'xs',
   },
-  '& h1': { fontSize: '[1.9rem]' },
-  '& h2': { fontSize: '[1.5rem]' },
-  '& h3': { fontSize: '[1.25rem]' },
+  '& h1': { fontSize: '[1.7rem]', marginTop: '0' },
+  '& h2': { fontSize: '[1.35rem]' },
+  '& h3': { fontSize: '[1.15rem]' },
   '& p, & ul, & ol, & blockquote, & pre, & table': {
-    marginBottom: 'md',
+    marginBottom: 'sm',
   },
   '& ul, & ol': {
     paddingLeft: 'lg',
+  },
+  '& li': {
+    marginBottom: '[2px]',
   },
   '& a': {
     textDecoration: 'underline',
@@ -89,9 +111,10 @@ export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
 
   return (
     <AppShell
-      header={{ height: 48 }}
+      className={docsShell}
+      header={{ height: 44 }}
       navbar={{
-        width: 300,
+        width: 260,
         breakpoint: 'sm',
         collapsed: { mobile: !opened },
       }}
@@ -99,10 +122,17 @@ export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
       <AppShell.Header>
         <Group h="100%" px="md" gap="sm">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" aria-label="Toggle docs navigation" />
-          <Button component={Link} to="/" search size="xs" variant="subtle" color="dimmed">
-            Overview
-          </Button>
           <Text fw={600} size="sm">Documentation</Text>
+          <Button
+            component={Link}
+            to={projectId ? '/project/$projectId/view/$viewId/' : '/view/$viewId/'}
+            {...(projectId ? { params: { projectId, viewId: 'index' } } : { params: { viewId: 'index' } })}
+            size="xs"
+            variant="subtle"
+            color="dimmed"
+            leftSection={<IconHierarchy2 size={14} />}>
+            Diagrams
+          </Button>
         </Group>
       </AppShell.Header>
       <AppShell.Navbar>

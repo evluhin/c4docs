@@ -17,7 +17,7 @@ import {
   useMantineTheme,
 } from '@mantine/core'
 import { useDisclosure, useMediaQuery } from '@mantine/hooks'
-import { IconChevronDown, IconShare } from '@tabler/icons-react'
+import { IconBook2, IconChevronDown, IconShare } from '@tabler/icons-react'
 import {
   Link,
   useMatches,
@@ -63,6 +63,7 @@ export const Header = memo(() => {
                 ? (
                   <>
                     <SelectProject />
+                    <DocsButton isTablet={isTablet} />
                     {projects.length <= 1 && (
                       <Button
                         size={isTablet ? 'compact-md' : 'xs'}
@@ -97,6 +98,30 @@ export const Header = memo(() => {
     </>
   )
 })
+
+function DocsButton({ isTablet }: { isTablet: boolean }) {
+  const project = useCurrentProject()
+  const isInsideProject = useMatches({
+    select: matches => matches.some(({ routeId }) => routeId === '/project/$projectId'),
+  })
+  // Show only when the project opts into docs (has a docs landing entry).
+  if (!project.docsLanding) {
+    return null
+  }
+  return (
+    <Button
+      component={Link}
+      to={isInsideProject ? '/project/$projectId/docs/' : '/docs/'}
+      {...(isInsideProject ? { params: { projectId: project.id } } : {})}
+      size={isTablet ? 'compact-md' : 'xs'}
+      fz={isTablet ? 'sm' : 'xs'}
+      variant="subtle"
+      color="gray"
+      leftSection={<IconBook2 size={14} />}>
+      Docs
+    </Button>
+  )
+}
 
 const enableDownload = <P extends Record<string, unknown>>(params: P): P & { download: true } => ({
   ...params,

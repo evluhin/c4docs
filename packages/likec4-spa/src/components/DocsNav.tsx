@@ -22,8 +22,49 @@ export interface DocsNavProps {
 const navRoot = css({
   display: 'flex',
   flexDirection: 'column',
-  gap: '2',
-  padding: 'sm',
+  // A small gap separates items so each reads as its own clickable row, not a
+  // wall of text. Wrapped lines stay tight *inside* a row (line-height below).
+  gap: '[2px]',
+  paddingBlock: '2',
+  paddingInline: '2',
+  '& .mantine-NavLink-root': {
+    // Comfortable click target per item, clearly separated from neighbours.
+    paddingBlock: '[6px]',
+    paddingInline: '[10px]',
+    borderRadius: 'sm',
+    minHeight: 'unset',
+    transition: 'background-color 100ms ease',
+    _hover: {
+      backgroundColor: '[var(--mantine-color-default-hover)]',
+    },
+    // Active item: tinted background + left accent bar, like a docs sidebar.
+    '&[data-active]': {
+      backgroundColor: '[var(--mantine-primary-color-light)]',
+      boxShadow: '[inset 3px 0 0 0 var(--mantine-primary-color-filled)]',
+    },
+    '&[data-active] .mantine-NavLink-label': {
+      fontWeight: '[600]',
+      color: '[var(--mantine-color-text)]',
+    },
+  },
+  '& .mantine-NavLink-label': {
+    fontSize: '[0.8125rem]',
+    lineHeight: '[1.25]',
+    color: '[var(--mantine-color-text)]',
+  },
+  '& .mantine-NavLink-children': {
+    marginTop: '[2px]',
+  },
+})
+
+// Folder rows read as section headers: slightly muted, uppercase-ish tracking.
+const folderNode = css({
+  '& > .mantine-NavLink-label': {
+    fontWeight: '[600]',
+    fontSize: '[0.75rem]',
+    letterSpacing: '[0.02em]',
+    color: '[var(--mantine-color-dimmed)]',
+  },
 })
 
 export const DocsNav = memo<DocsNavProps>(({ tree, currentPath, projectId }) => {
@@ -55,9 +96,10 @@ function DocsNavNode({
     const active = currentPath === node.path || currentPath.startsWith(node.path + '/')
     return (
       <NavLink
+        className={folderNode}
         label={node.label}
         defaultOpened={active}
-        childrenOffset={14}>
+        childrenOffset={12}>
         {node.children?.map((child) => (
           <DocsNavNode
             key={child.path + ':' + child.kind}
