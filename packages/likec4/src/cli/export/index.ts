@@ -7,9 +7,10 @@ import { jpgCmd } from './jpg/handler'
 import { jsonCmd } from './json/handler'
 import { markdownCmd } from './markdown/handler'
 import { pngCmd } from './png/handler'
+import { techdocsCmd } from './techdocs/handler'
 
 /**
- * Registers the `export` command with subcommands png, jpg, json, drawio, markdown, image.
+ * Registers the `export` command with subcommands png, jpg, json, drawio, markdown, image, techdocs.
  * @param yargs - yargs instance to extend
  * @returns yargs chain with export <format> [path] and format-specific options
  */
@@ -17,7 +18,7 @@ const exportCmd = (yargs: yargs.Argv) => {
   return yargs
     .command({
       command: 'export <format> [path]',
-      describe: 'Export to images, JSON, DrawIO, Markdown, or doc-referenced SVG images',
+      describe: 'Export to images, JSON, DrawIO, Markdown, doc-referenced SVG images, or TechDocs',
       builder: yargs =>
         pipe(
           yargs.usage(`${k.bold('Usage:')} $0 export <format> [path]`),
@@ -27,6 +28,7 @@ const exportCmd = (yargs: yargs.Argv) => {
           drawioCmd,
           markdownCmd,
           imageCmd,
+          techdocsCmd,
         )
           .updateStrings({
             'Commands:': k.bold('Formats:'),
