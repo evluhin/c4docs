@@ -28,6 +28,7 @@ import { enabledWebappExportFormats } from '../../export-formats'
 import { useCurrentProject, useCurrentViewId } from '../../hooks'
 import { ColorSchemeToggle } from '../ColorSchemeToggle'
 import { NavigationPanel } from '../NavigationPanel'
+import { DocsBackrefButton } from './DocsBackrefButton'
 import { SelectProject } from './SelectProject'
 import { ShareModal } from './ShareModal'
 import { useHeaderVisible } from './state'
@@ -63,6 +64,7 @@ export const Header = memo(() => {
                 ? (
                   <>
                     <SelectProject />
+                    <DocsBackrefButton isTablet={isTablet} />
                     <DocsButton isTablet={isTablet} />
                     {projects.length <= 1 && (
                       <Button

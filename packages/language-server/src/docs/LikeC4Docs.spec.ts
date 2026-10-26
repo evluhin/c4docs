@@ -1,8 +1,38 @@
-import { describe, it, vi } from 'vitest'
+import type { LogRecord } from '@likec4/log'
+import { configureLogger } from '@likec4/log'
+import { afterEach, describe, it, vi } from 'vitest'
 import { URI } from 'vscode-uri'
 import { createLanguageServices } from '../module'
 
+let shouldResetLogger = false
+
+/** Captures `warning`+ log records from the `likec4` logger tree (incl. docs). */
+function captureLogRecords(): LogRecord[] {
+  const records = [] as LogRecord[]
+  shouldResetLogger = true
+  configureLogger({
+    sinks: {
+      capture: record => records.push(record),
+    },
+    loggers: [
+      {
+        category: 'likec4',
+        sinks: ['capture'],
+        lowestLevel: 'warning',
+      },
+    ],
+  })
+  return records
+}
+
 describe('LikeC4Docs', () => {
+  afterEach(() => {
+    if (shouldResetLogger) {
+      shouldResetLogger = false
+      configureLogger()
+    }
+  })
+
   async function createTestServices(docsConfig?: { dir?: string; entry?: string; landing?: boolean }) {
     const services = createLanguageServices().likec4
 
@@ -156,6 +186,41 @@ describe('LikeC4Docs', () => {
     expect(page.html).toContain('graph TD')
     expect(page.html).toContain('A --> B')
     expect(page.html).not.toContain('```mermaid')
+  })
+
+  it('surfaces bad refs and links as lenient warnings without failing the model build', async ({ expect }) => {
+    const records = captureLogRecords()
+    const { fs, projectId, docs } = await createTestServices()
+    mockDocs(fs, docsDir, {
+      // an unknown view embed + a bad inter-doc link + a bad likec4:// view link,
+      // all in one doc — none of these may throw or drop the page.
+      'index.md': [
+        '# Home',
+        '',
+        '```likec4-view',
+        'view: does-not-exist',
+        '```',
+        '',
+        'See [missing](./nope.md) and the [ghost](likec4://view/ghost).',
+      ].join('\n'),
+    })
+
+    // The build does NOT throw, and still produces the page.
+    const model = await docs.docsModel(projectId)
+    const page = model.pages['']!
+    expect(page).toBeDefined()
+    // The placeholder is still emitted and the (invalid) ref is kept.
+    expect(page.html).toContain('<div data-likec4-view-embed="0"></div>')
+    expect(page.refs).toHaveLength(1)
+    expect(page.refs[0]!.resolved).toBe(false)
+    // raw stays byte-for-byte
+    expect(page.raw).toContain('view: does-not-exist')
+
+    // Diagnostics are surfaced as warnings via docsLogger (dev logs + build output).
+    const warnings = records
+      .filter(r => r.level === 'warning')
+      .map(r => String(r.rawMessage))
+    expect(warnings.some(m => m.includes('nope.md') || m.toLowerCase().includes('link'))).toBe(true)
   })
 
   it('builds tree order, nesting, and labels from nav.yaml and hides unlisted files', async ({ expect }) => {
