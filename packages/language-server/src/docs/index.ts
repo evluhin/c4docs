@@ -15,9 +15,14 @@ export {
 export { DefaultLikeC4Docs } from './LikeC4Docs'
 export {
   deriveTitle,
+  type DocLinkDiagnostic,
+  type DocLinkResolution,
+  type DocViewLinkState,
   humanizeTitle,
   modelDocFile,
   type ModelDocInput,
+  resolveDocLinks,
+  resolveViewLinks,
   splitFrontmatter,
 } from './model-doc'
 export { assembleDocsTree, type AssembleTreeOptions } from './tree'

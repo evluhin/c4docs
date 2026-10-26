@@ -95,6 +95,27 @@ describe('LikeC4Docs', () => {
     expect(docs.isDocsFile(URI.file(`${docsDir}/readme.txt`))).toBe(false)
   })
 
+  it('rewrites inter-doc links and leaves unknown view links untouched (logged)', async ({ expect }) => {
+    const { fs, projectId, docs } = await createTestServices()
+    mockDocs(fs, docsDir, {
+      'index.md': '# Home\n\nSee [Architecture](./architecture.md).',
+      'architecture.md': '# Architecture\n\nBack [home](./index.md) and [diagram](likec4://view/ghost).',
+    })
+
+    const model = await docs.docsModel(projectId)
+
+    // inter-doc links resolve against the discovered known paths
+    expect(model.pages['']!.html).toContain('/docs/architecture')
+    expect(model.pages['architecture']!.html).toContain('/docs/')
+    // no model/view registered -> unknown view link is not rewritten to a route
+    expect(model.pages['architecture']!.html).not.toContain('/view/ghost/')
+    expect(model.pages['architecture']!.links).toEqual([])
+    // raw stays byte-for-byte
+    expect(model.pages['architecture']!.raw).toBe(
+      '# Architecture\n\nBack [home](./index.md) and [diagram](likec4://view/ghost).',
+    )
+  })
+
   it('handleFileSystemUpdate invalidates the cache and notifies listeners', async ({ expect }) => {
     const { fs, projectId, docs } = await createTestServices()
     mockDocs(fs, docsDir, { 'index.md': '# A' })

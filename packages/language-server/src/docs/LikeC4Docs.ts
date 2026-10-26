@@ -16,12 +16,42 @@ import type {
 } from '../filesystem/types'
 import { isMarkdownFile } from '../filesystem/utils'
 import { logger as rootLogger } from '../logger'
-import type { LikeC4SharedServices } from '../module'
+import type { LikeC4Services, LikeC4SharedServices } from '../module'
 import { ADisposable, safeCall } from '../utils'
 import type { Project } from '../workspace/ProjectsManager'
 import { discoverDocs } from './discovery'
+import type { DocLinkDiagnostic, DocLinkResolution, DocViewLinkState } from './model-doc'
 import { modelDocFile } from './model-doc'
 import { assembleDocsTree } from './tree'
+
+function isLikeC4Services(services: object): services is LikeC4Services {
+  return 'likec4' in services
+}
+
+/**
+ * Builds the in-app diagram route href for a view link.
+ *
+ * - single project: `/view/<id>/`
+ * - project-scoped: `/project/<projectId>/view/<id>/`
+ *
+ * `?focus` maps to the `focusOnElement` search param and `?dynamic` to `dynamic`.
+ * The href is root-absolute so the SPA's base-path prefixing applies.
+ */
+function buildViewRoute(projectId: ProjectId | undefined, viewId: string, state: DocViewLinkState): string {
+  const encodedView = encodeURIComponent(viewId)
+  const base = projectId
+    ? `/project/${encodeURIComponent(projectId)}/view/${encodedView}/`
+    : `/view/${encodedView}/`
+  const params = new URLSearchParams()
+  if (state.focus) {
+    params.set('focusOnElement', state.focus)
+  }
+  if (state.dynamic) {
+    params.set('dynamic', state.dynamic)
+  }
+  const query = params.toString()
+  return query ? `${base}?${query}` : base
+}
 
 const docsLogger = rootLogger.getChild('docs')
 
@@ -136,6 +166,8 @@ export class DefaultLikeC4Docs extends ADisposable implements LikeC4Docs {
       files.map((f) => [UriUtils.relative(docsDir, f.uri).replace(/\\/g, '/'), f.uri] as const),
     )
 
+    const linkResolution = this.buildLinkResolution(projectId, docs.map((d) => d.path))
+
     const pages: DocPage[] = []
     for (const doc of docs) {
       const uri = relativeToUri.get(doc.relativePath)
@@ -148,11 +180,57 @@ export class DefaultLikeC4Docs extends ADisposable implements LikeC4Docs {
         sourceAbsPath: uri.fsPath,
         raw,
         resolveAsset: (reference) => this.resolveAsset(project, uri, reference),
+        linkResolution,
+        onDiagnostics: (diagnostics) => this.logLinkDiagnostics(projectId, doc.path, diagnostics),
       })
       pages.push(page)
     }
 
     return assembleDocsTree(pages, { entryConfig: project.config.docs?.entry })
+  }
+
+  /**
+   * Builds the per-project link-resolution context used by {@link modelDocFile}
+   * to rewrite inter-doc and `likec4://view/<id>` links.
+   *
+   * View-id existence is checked against the computed model for the project; if
+   * the model cannot be obtained (missing LikeC4 services or EMPTY model), no
+   * view id is considered to exist (a warning is logged). The single-vs-project
+   * route form mirrors the SPA signal (`hasMultipleProjects()`).
+   */
+  private buildLinkResolution(projectId: ProjectId, knownPaths: readonly string[]): DocLinkResolution {
+    const likec4 = this.services.ServiceRegistry.all.find(isLikeC4Services)
+    let viewExists: (viewId: string) => boolean = () => false
+    if (likec4) {
+      const model = safeCall(() => likec4.likec4.ModelBuilder.unsafeSyncComputeModel(projectId))
+      if (model) {
+        viewExists = (viewId) => model.findView(viewId) != null
+      } else {
+        docsLogger.warn(`Could not compute model for project ${projectId}; doc view links will not resolve`)
+      }
+    } else {
+      docsLogger.warn('LikeC4 services are not registered; doc view links will not resolve')
+    }
+
+    const isProjectScoped = this.services.workspace.ProjectsManager.hasMultipleProjects()
+    const routeFor = (viewId: string, state: DocViewLinkState): string =>
+      buildViewRoute(isProjectScoped ? projectId : undefined, viewId, state)
+
+    return {
+      knownPaths: new Set(knownPaths),
+      viewExists,
+      routeFor,
+    }
+  }
+
+  private logLinkDiagnostics(
+    projectId: ProjectId,
+    docPath: string,
+    diagnostics: readonly DocLinkDiagnostic[],
+  ): void {
+    for (const diagnostic of diagnostics) {
+      docsLogger.warn(`[${projectId}] ${docPath || '/'}: ${diagnostic.message}`)
+    }
   }
 
   /**
