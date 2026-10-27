@@ -29,6 +29,7 @@ import previewCmd from './preview'
 import publishCmd from './publish'
 import safeDeleteCmd from './safe-delete'
 import serveCmd from './serve'
+import skillCmd from './skill'
 import syncCmd from './sync'
 import validateCmd from './validate'
 
@@ -69,7 +70,7 @@ async function main() {
     previewCmd,
     publishCmd,
     syncCmd,
-    validateCmd,
+    y => skillCmd(validateCmd(y)),
     y => safeDeleteCmd(diffCmd(y)),
     listIconsCmd,
     mcpCmd,

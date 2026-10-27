@@ -2269,6 +2269,9 @@ importers:
       wireit:
         specifier: 'catalog:'
         version: 0.14.13
+      yaml:
+        specifier: 2.9.1
+        version: 2.9.1
       zx:
         specifier: 'catalog:'
         version: 8.8.5

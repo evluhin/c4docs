@@ -127,7 +127,7 @@ pnpm dlx likec4 validate --json --no-layout --file <edited-file> <project-dir>
 
 For evals/gradings/executions, be **runner-tolerant** (`npx`/`bunx`/`pnpm dlx`), and judge correctness by subcommand + flags + project scope.
 
-This skill declares its supported `likec4` range in frontmatter `metadata.likec4`. That range is bumped together with the skill whenever DSL/CLI syntax changes, and `likec4 skill check` verifies the installed skill against the running CLI. Before relying on version-specific syntax, compare `likec4 --version` against the declared range; if the installed CLI falls outside it, stop and tell the user rather than guessing.
+This skill installs with `npx skills add evluhin/likec4 --agent <type>` and is independent of the `likec4` dependency, so the two are kept in sync as two steps: update the package and re-run the `skills add` command together. The skill declares its supported `likec4` range in frontmatter `metadata.likec4`. That range is bumped together with the skill whenever DSL/CLI syntax changes, and `likec4 skill check` is the guard that verifies the installed skill against the running CLI. Before relying on version-specific syntax, compare `likec4 --version` against the declared range; if the installed CLI falls outside it, stop and tell the user rather than guessing.
 
 Example output:
 

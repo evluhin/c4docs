@@ -31,6 +31,33 @@ This uses the <a href="https://www.skillsdk.dev/" target="_blank">Agent Skills D
 
 Works with Claude Code, Cursor, Windsurf, and other agents that support the protocol.
 
+### Keep the CLI and the skill in sync
+
+The skill and the `likec4` CLI are two independent installs, so you manage them as two steps and keep them aligned:
+
+1. **Add or update the dependency** — install the CLI/package in your project:
+
+   ```sh
+   pnpm add -D @c4docs/likec4
+   ```
+
+2. **Add or update the skill** — install (or re-install) the matching skill from this repository:
+
+   ```sh
+   npx skills add evluhin/likec4 --agent <type>
+   ```
+
+   Replace `<type>` with your agent (for example `claude`, `cursor`, `windsurf`).
+
+The skill declares the `likec4` versions it supports as a semver range in its frontmatter `metadata.likec4`.
+Because the two installs are separate, the range is bumped together with the skill whenever DSL/CLI syntax changes, and a human (or your CI) keeps the two steps in sync.
+
+`likec4 skill check` is the loud guard against drift: it reads the installed skill's declared range, compares it against the running CLI version, and exits non-zero with a clear message when they disagree — so you can wire it into CI. The agent itself can also compare `likec4 --version` against the declared range before relying on version-specific syntax.
+
+<Aside type="note">
+LikeC4 ships **no** CI templates and knows nothing about Confluence, Backstage, or GitLab. The two-step install and the `skill check` guard are platform-neutral building blocks; wiring them into a delivery pipeline is up to you.
+</Aside>
+
 ## MCP Server
 
 LikeC4 <a href="https://modelcontextprotocol.io" target="_blank">MCP Server</a> provides knowledge of your LikeC4 model to LLMs.

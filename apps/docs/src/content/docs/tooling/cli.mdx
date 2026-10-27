@@ -336,6 +336,23 @@ This command checks for:
 
 If any errors are found, the command exits with a non-zero return code.
 
+### Agent skill check
+
+Verify that an installed [agent skill](/tooling/ai-tools/#agent-skills) is compatible with this `likec4` version:
+
+```sh
+# Auto-detect a SKILL.md in common agent directories
+likec4 skill check
+# Or point at a specific SKILL.md
+likec4 skill check --skill ./.claude/skills/likec4-dsl/SKILL.md
+```
+
+It reads the skill's declared `likec4` semver range from its frontmatter `metadata.likec4` and compares it against the running CLI version. On a match it prints an OK line and exits `0`; on a mismatch it prints a message naming both the running version and the declared range (with the `npx skills add evluhin/likec4 --agent <type>` re-install hint) and exits with a non-zero code — so you can run it as a CI guard.
+
+| Option     | Description                                             |
+| ---------- | ------------------------------------------------------- |
+| `--skill`  | Path to a `SKILL.md` to check (overrides auto-detect)   |
+
 ### Format
 
 Format `.c4` source files in place:
