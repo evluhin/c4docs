@@ -1,6 +1,9 @@
 ---
 name: likec4-dsl
 description: Use when working with `.c4`/`.likec4` files or LikeC4 CLI/config questions where exact DSL/CLI syntax is required, especially for strict command/snippet-first answers, validate/export flags, predicates `*`/`_`/`**`, deployment snippets, dynamic views, or relationship extension matching.
+compatibility: Requires the likec4 CLI/package >=1.60.0 <2.0.0
+metadata:
+  likec4: '>=1.60.0 <2.0.0'
 ---
 
 # LikeC4 DSL Skill
@@ -124,7 +127,7 @@ pnpm dlx likec4 validate --json --no-layout --file <edited-file> <project-dir>
 
 For evals/gradings/executions, be **runner-tolerant** (`npx`/`bunx`/`pnpm dlx`), and judge correctness by subcommand + flags + project scope.
 
-If workspace already has `likec4` as a dependency, check its version from package.json and ensure it is at least 1.53.0. If pinning is needed, use the active runner (`npx`/`bunx`/`pnpm dlx`) with `likec4@1.53.0`.
+This skill declares its supported `likec4` range in frontmatter `metadata.likec4`. That range is bumped together with the skill whenever DSL/CLI syntax changes, and `likec4 skill check` verifies the installed skill against the running CLI. Before relying on version-specific syntax, compare `likec4 --version` against the declared range; if the installed CLI falls outside it, stop and tell the user rather than guessing.
 
 Example output:
 
