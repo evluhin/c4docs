@@ -256,6 +256,12 @@ Config file (`likec4.config.json`, `.likec4rc`, or `likec4.config.{ts,js}`) defi
 Key options: `name` (required, unique ID in the workspace), `title` (display name)
 Full reference → `references/configuration.md`
 
+## Documentation as code
+
+Markdown docs in a `docs/` folder beside the `.c4` files, opt-in via the `docs` config block. Docs embed live diagrams with ` ```likec4-view ` (by view id), link with `likec4://view/<id>` and relative `.md` links, order via `nav.yaml` or frontmatter, and export to MkDocs/TechDocs or a portable Markdown bundle.
+
+Full reference → `references/docs-as-code.md`
+
 ## Specification
 
 Defines all named vocabularies: element kinds, deployment node kinds, relationship kinds, tags, and custom color tokens. Must appear before those kinds are used in `model` or `deployment` blocks.
@@ -409,21 +415,22 @@ When a model errors or an eval answer seems wrong, load `references/troubleshoot
 
 Load a reference file when the task involves the corresponding topic. Claude reads SKILL.md first; these files are loaded on demand only when needed.
 
-| File                                         | Purpose — load when...                                                                                                          |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `references/specification.md`                | Writing/editing `specification { }` blocks, defining element/deploymentNode/relationship/tag/color kinds                        |
-| `references/model.md`                        | Writing/editing `model { }` blocks, element hierarchy, relationships, `extend` patterns, property names                         |
-| `references/deployment.md`                   | Writing/editing `deployment { }` blocks, `instanceOf`, named instances, multi-environment topology, deployment metadata filters |
-| `references/style-tokens-colors.md`          | Applying colors, shapes, icons, or relationship line styles; need exact token names                                             |
-| `references/views.md`                        | Writing views, include/exclude rules, style rules in views, groups, autoLayout, global predicates                               |
-| `references/predicates.md`                   | Complex `where` conditions, metadata filters, `with` overrides, global predicate groups, reusable predicates                    |
-| `references/include-predicates-wildcards.md` | Wildcard confusion suspected (`*` vs `_` vs `**`); need exact scoped-view semantics                                             |
-| `references/dynamic-views.md`                | Writing dynamic views: steps, return arrows, chained steps, flow-control blocks (`parallel`/`opt`/`loop`/`alt`/`try`), `variant sequence` |
-| `references/identifier-validity.md`          | Identifier vs FQN confusion; "dots in names" errors; understanding FQN construction                                             |
-| `references/relationships-bidirectional.md`  | Bidirectional relationship syntax and `<->` view predicate patterns                                                             |
-| `references/diffs.md`                        | Planned model changes (`diff` blocks), applying or discarding them, safe delete of elements                                     |
-| `references/bridge-leanix-drawio.md`         | LeanIX bridge · `drawio --profile leanix` · round-trip · mapping · MCP vs bridge · sync/artifacts/managed cells                 |
-| `references/cli.md`                          | Full CLI reference: serve, build, export, codegen, mcp, format; flag disambiguation                                             |
-| `references/configuration.md`                | Project config options, multi-project setup, include/exclude paths, generators                                                  |
-| `references/examples.md`                     | Compact real-world examples: extend, groups, globals, dynamic views, deployment, rank                                           |
-| `references/troubleshooting.md`              | Errors, unexpected output, eval failures — 6 error tables, 5-step debug workflow, 7 best practices                              |
+| File                                         | Purpose — load when...                                                                                                                             |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `references/specification.md`                | Writing/editing `specification { }` blocks, defining element/deploymentNode/relationship/tag/color kinds                                           |
+| `references/model.md`                        | Writing/editing `model { }` blocks, element hierarchy, relationships, `extend` patterns, property names                                            |
+| `references/deployment.md`                   | Writing/editing `deployment { }` blocks, `instanceOf`, named instances, multi-environment topology, deployment metadata filters                    |
+| `references/style-tokens-colors.md`          | Applying colors, shapes, icons, or relationship line styles; need exact token names                                                                |
+| `references/views.md`                        | Writing views, include/exclude rules, style rules in views, groups, autoLayout, global predicates                                                  |
+| `references/predicates.md`                   | Complex `where` conditions, metadata filters, `with` overrides, global predicate groups, reusable predicates                                       |
+| `references/include-predicates-wildcards.md` | Wildcard confusion suspected (`*` vs `_` vs `**`); need exact scoped-view semantics                                                                |
+| `references/dynamic-views.md`                | Writing dynamic views: steps, return arrows, chained steps, flow-control blocks (`parallel`/`opt`/`loop`/`alt`/`try`), `variant sequence`          |
+| `references/identifier-validity.md`          | Identifier vs FQN confusion; "dots in names" errors; understanding FQN construction                                                                |
+| `references/relationships-bidirectional.md`  | Bidirectional relationship syntax and `<->` view predicate patterns                                                                                |
+| `references/diffs.md`                        | Planned model changes (`diff` blocks), applying or discarding them, safe delete of elements                                                        |
+| `references/bridge-leanix-drawio.md`         | LeanIX bridge · `drawio --profile leanix` · round-trip · mapping · MCP vs bridge · sync/artifacts/managed cells                                    |
+| `references/cli.md`                          | Full CLI reference: serve, build, export, codegen, mcp, format; flag disambiguation                                                                |
+| `references/configuration.md`                | Project config options, multi-project setup, include/exclude paths, generators                                                                     |
+| `references/docs-as-code.md`                 | Markdown docs in `docs/`, `docs` config, nav.yaml, ```likec4-view embeds, likec4:// & inter-doc links, ADRs, export image/techdocs/markdown-bundle |
+| `references/examples.md`                     | Compact real-world examples: extend, groups, globals, dynamic views, deployment, rank                                                              |
+| `references/troubleshooting.md`              | Errors, unexpected output, eval failures — 6 error tables, 5-step debug workflow, 7 best practices                                                 |

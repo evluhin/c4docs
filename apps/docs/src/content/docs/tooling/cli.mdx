@@ -25,6 +25,7 @@ The `likec4` CLI is a tool for various operations and automation tasks, such as:
 - Start development server to preview diagrams (with hot-reload)
 - Build a static website for sharing and embedding diagrams
 - Export to PNG, JPEG, JSON, Mermaid, Dot, D2, DrawIO
+- Export [documentation](/tooling/documentation-as-code/) to MkDocs / Backstage TechDocs or a portable Markdown bundle
 - Generate [source code artifacts](/tooling/code-generation/react/):
   - React components
   - Web Components
@@ -227,6 +228,75 @@ likec4 export drawio --profile leanix -o ./diagrams
 :::note
 Export to DrawIO requires layout. If Graphviz is not installed, the CLI uses bundled WASM; for large diagrams, install [Graphviz](https://graphviz.org/) and use `--use-dot` for better performance. Use `--roundtrip` when re-exporting after an import so the generated DrawIO matches the previously imported layout and waypoints. Use `--profile leanix` when exporting for LeanIX interoperability; see [Draw.io — Export profiles](/tooling/drawio/#export-profiles).
 :::
+
+### Export doc-referenced images
+
+Render every view referenced by your [documentation](/tooling/documentation-as-code/) to a content-hashed SVG, plus an `images.json` manifest (view id → image path).
+
+```sh
+likec4 export image -p my-project -o ./docs/assets src/likec4
+```
+
+A `dynamic: sequence` reference renders the sequence variant.
+
+| Option                  | Description                                                              |
+| ----------------------- | ------------------------------------------------------------------------ |
+| `path`                  | Path to project (default: current directory)                             |
+| `--project, -p`         | Select LikeC4 project by name or path                                    |
+| `--outdir, -o, --output`| Output directory for SVG images and `images.json` (**required**)         |
+
+:::note
+Requires React and Playwright (you are prompted to install if missing). Embeds reference views by id — see [Documentation as code](/tooling/documentation-as-code/#embed-a-diagram).
+:::
+
+### Export to MkDocs / Backstage TechDocs
+
+Export [documentation](/tooling/documentation-as-code/) to a MkDocs / Backstage TechDocs tree: Markdown pages, images, and a generated `mkdocs.yml`.
+
+```sh
+likec4 export techdocs -p my-project -o ./techdocs --site-url https://c4.acme.dev src/likec4
+```
+
+Emits `docs/<route>.md`, images under `docs/images/`, and `mkdocs.yml` with `site_name` and `nav:`. A ` ```likec4-view ` embed becomes a static image plus a `View interactive version →` link; ` ```mermaid ` blocks pass through.
+
+| Option                  | Description                                                              |
+| ----------------------- | ------------------------------------------------------------------------ |
+| `path`                  | Path to project (default: current directory)                             |
+| `--project, -p`         | Select LikeC4 project by name or path                                    |
+| `--outdir, -o, --output`| Output directory for the TechDocs tree (**required**)                    |
+| `--site-url`            | Base URL of the interactive LikeC4 site for interactive links (default: `/`) |
+
+:::note
+Requires React and Playwright (you are prompted to install if missing).
+:::
+
+### Export a portable Markdown bundle
+
+Export [documentation](/tooling/documentation-as-code/) to a platform-neutral Markdown + images bundle for external publishers (Confluence, a wiki, etc.).
+
+```sh
+likec4 export markdown-bundle -p my-project -o ./bundle src/likec4
+likec4 export markdown-bundle -p my-project -o ./bundle --site-url https://c4.acme.dev src/likec4
+```
+
+Emits `<route>.md` pages, images under `images/`, and a `manifest.json` describing the doc tree, order, and entry. A ` ```likec4-view ` embed becomes a relative image reference (plus a `View interactive version →` link only when `--site-url` is given); ` ```mermaid ` blocks are left as fenced blocks for the downstream publisher.
+
+| Option                  | Description                                                              |
+| ----------------------- | ------------------------------------------------------------------------ |
+| `path`                  | Path to project (default: current directory)                             |
+| `--project, -p`         | Select LikeC4 project by name or path                                    |
+| `--outdir, -o, --output`| Output directory for the bundle (**required**)                           |
+| `--site-url`            | Optional base URL of the interactive LikeC4 site for interactive links   |
+
+:::note
+Requires React and Playwright (you are prompted to install if missing). LikeC4 is platform-neutral: delivery to Confluence or elsewhere lives in your CI via a third-party publisher.
+:::
+
+<LinkCard
+  title="Documentation as code"
+  description="Author Markdown docs alongside your model and publish them"
+  href="/tooling/documentation-as-code/"
+/>
 
 ### Generate Mermaid, Dot, D2, PlantUml
 
