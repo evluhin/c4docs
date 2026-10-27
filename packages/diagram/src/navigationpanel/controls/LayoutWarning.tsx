@@ -1,6 +1,6 @@
-import { cx } from '@likec4/styles/css'
-import { hstack } from '@likec4/styles/patterns'
-import { navigationPanelActionIcon } from '@likec4/styles/recipes'
+import { cx } from '@c4docs/likec4-styles/css'
+import { hstack } from '@c4docs/likec4-styles/patterns'
+import { navigationPanelActionIcon } from '@c4docs/likec4-styles/recipes'
 import {
   Button,
   HoverCard,

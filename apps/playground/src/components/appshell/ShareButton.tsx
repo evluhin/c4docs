@@ -1,7 +1,7 @@
 import { usePlaygroundSnapshot, usePlaygroundWorkspace } from '$hooks/usePlayground'
 import { useWorkspaces } from '$hooks/useWorkspaces'
-import { css } from '@likec4/styles/css'
-import { VStack } from '@likec4/styles/jsx'
+import { css } from '@c4docs/likec4-styles/css'
+import { VStack } from '@c4docs/likec4-styles/jsx'
 import {
   Alert as MantineAlert,
   Button as MantineButton,

@@ -8,10 +8,10 @@ import {
   ViewportPortal as XYViewportPortal,
 } from '@xyflow/react'
 
-import type { Types } from '@likec4/diagram'
+import type { Types } from '@c4docs/likec4-diagram'
 
-export * from '@likec4/diagram'
-export * from '@likec4/diagram/custom'
+export * from '@c4docs/likec4-diagram'
+export * from '@c4docs/likec4-diagram/custom'
 
 export const xyflow = {
   ControlButton: XYControlButton,

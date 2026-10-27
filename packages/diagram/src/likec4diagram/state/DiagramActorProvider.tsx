@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { DiagramView, DynamicViewDisplayVariant, WhereOperator } from '@likec4/core/types'
+import type { DiagramView, DynamicViewDisplayVariant, WhereOperator } from '@c4docs/likec4-core/types'
 import { useActorRef } from '@xstate/react'
 import { useStoreApi } from '@xyflow/react'
 import { type PropsWithChildren, useEffect, useRef } from 'react'

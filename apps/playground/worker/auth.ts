@@ -1,5 +1,5 @@
+import { invariant, nonNullable } from '@c4docs/likec4-core'
 import { githubAuth } from '@hono/oauth-providers/github'
-import { invariant, nonNullable } from '@likec4/core'
 import { CookieStore, sessionMiddleware } from 'hono-sessions'
 import { type GithubLogin, type HonoContext, type UserSession, factory } from './types'
 

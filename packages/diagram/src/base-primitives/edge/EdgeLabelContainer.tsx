@@ -3,8 +3,8 @@
 // Copyright (c) 2023-2026 Denis Davydkov
 // Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 //
-import type { DiagramEdge } from '@likec4/core/types'
-import { cx } from '@likec4/styles/css'
+import type { DiagramEdge } from '@c4docs/likec4-core/types'
+import { cx } from '@c4docs/likec4-styles/css'
 import { EdgeLabelRenderer } from '@xyflow/react'
 import type { HTMLAttributes } from 'react'
 import { isNumber } from 'remeda'

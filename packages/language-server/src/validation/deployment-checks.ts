@@ -1,5 +1,5 @@
-import { FqnRef, isSameHierarchy, nonNullable } from '@likec4/core'
-import { loggable } from '@likec4/log'
+import { FqnRef, isSameHierarchy, nonNullable } from '@c4docs/likec4-core'
+import { loggable } from '@c4docs/likec4-log'
 import { type ValidationCheck, AstUtils } from 'langium'
 import { ast } from '../ast'
 import { logger } from '../logger'

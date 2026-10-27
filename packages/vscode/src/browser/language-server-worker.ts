@@ -1,4 +1,4 @@
-import { startLanguageServer } from '@likec4/language-server/browser'
+import { startLanguageServer } from '@c4docs/likec4-language-server/browser'
 
 // This is an example copied as is from here:
 // https://github.com/microsoft/vscode-extension-samples/blob/main/lsp-web-extension-sample/server/src/browserServerMain.ts

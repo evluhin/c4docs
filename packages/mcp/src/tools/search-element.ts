@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { ifilter } from '@likec4/core/utils'
+import { ifilter } from '@c4docs/likec4-core/utils'
 import * as z from 'zod/v4'
 import { likec4Tool, logger } from '../utils'
 import { includedInViews, includedInViewsSchema } from './_common'

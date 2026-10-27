@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { NTuple } from '@likec4/core'
+import type { NTuple } from '@c4docs/likec4-core'
 import { ActionIcon, useComputedColorScheme, useMantineColorScheme } from '@mantine/core'
 import { IconMoonStars, IconSun } from '@tabler/icons-react'
 import { useNavigate, useSearch } from '@tanstack/react-router'

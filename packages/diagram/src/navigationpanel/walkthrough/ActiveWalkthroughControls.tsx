@@ -1,5 +1,5 @@
-import { css } from '@likec4/styles/css'
-import { Box } from '@likec4/styles/jsx'
+import { css } from '@c4docs/likec4-styles/css'
+import { Box } from '@c4docs/likec4-styles/jsx'
 import { Badge, Button, Portal } from '@mantine/core'
 import {
   IconPlayerSkipBackFilled,

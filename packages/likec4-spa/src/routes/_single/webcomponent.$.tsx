@@ -1,4 +1,4 @@
-import { Box } from '@likec4/styles/jsx'
+import { Box } from '@c4docs/likec4-styles/jsx'
 import { useMantineColorScheme } from '@mantine/core'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { ComponentName } from 'likec4:app-config'

@@ -1,5 +1,5 @@
-import { css, cx } from '@likec4/styles/css'
-import { hstack } from '@likec4/styles/patterns'
+import { css, cx } from '@c4docs/likec4-styles/css'
+import { hstack } from '@c4docs/likec4-styles/patterns'
 import { UnstyledButton } from '@mantine/core'
 import { IconLock, IconLockOpen2 } from '@tabler/icons-react'
 import { m } from 'motion/react'

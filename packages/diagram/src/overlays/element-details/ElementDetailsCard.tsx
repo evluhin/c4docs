@@ -14,9 +14,9 @@ import type {
   NodeId,
   scalar,
   ViewId,
-} from '@likec4/core/types'
-import { css, cx } from '@likec4/styles/css'
-import { HStack, styled } from '@likec4/styles/jsx'
+} from '@c4docs/likec4-core/types'
+import { css, cx } from '@c4docs/likec4-styles/css'
+import { HStack, styled } from '@c4docs/likec4-styles/jsx'
 import {
   type TextProps,
   ActionIcon,

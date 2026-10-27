@@ -1,4 +1,4 @@
-import { nonNullable } from '@likec4/core'
+import { nonNullable } from '@c4docs/likec4-core'
 import { createContext, use } from 'react'
 import type { TypedUIMessage, TypedUIMessages, UseChatReturn } from './useChat'
 

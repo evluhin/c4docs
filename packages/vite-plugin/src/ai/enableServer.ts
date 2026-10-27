@@ -1,4 +1,4 @@
-import { invariant } from '@likec4/core'
+import { invariant } from '@c4docs/likec4-core'
 import { chat, convertMessagesToModelMessages, toServerSentEventsResponse } from '@tanstack/ai'
 import type { ModelMessage, UIMessage } from '@tanstack/ai'
 import { Readable } from 'node:stream'

@@ -1,4 +1,4 @@
-import type * as c4 from '@likec4/core'
+import type * as c4 from '@c4docs/likec4-core'
 import {
   hasAtLeast,
   isEmpty,

@@ -10,17 +10,17 @@ import {
   type LikeC4ProjectConfig,
   type LikeC4ProjectConfigInput,
   LikeC4ProjectConfigOps,
-} from '@likec4/config'
-import type { NonEmptyArray, NonEmptyReadonlyArray } from '@likec4/core'
-import type { ProjectId } from '@likec4/core/types'
+} from '@c4docs/likec4-config'
+import type { NonEmptyArray, NonEmptyReadonlyArray } from '@c4docs/likec4-core'
+import type { ProjectId } from '@c4docs/likec4-core/types'
 import {
   compareNaturalHierarchically,
   DefaultMap,
   invariant,
   isString,
   nonNullable,
-} from '@likec4/core/utils'
-import { loggable, wrapError } from '@likec4/log'
+} from '@c4docs/likec4-core/utils'
+import { loggable, wrapError } from '@c4docs/likec4-log'
 import {
   type Cancellation,
   type LangiumDocument,

@@ -5,21 +5,21 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type * as c4 from '@likec4/core'
+import type * as c4 from '@c4docs/likec4-core'
 import {
   type MultiMap,
   type ViewId,
   isDeploymentNode,
   isGlobalFqn,
-} from '@likec4/core'
-import { resolveRulesExtendedViews } from '@likec4/core/compute-view'
-import { computeColorValues } from '@likec4/core/styles'
-import { _stage, _type, exact, FqnRef, isExtendsElementView } from '@likec4/core/types'
+} from '@c4docs/likec4-core'
+import { resolveRulesExtendedViews } from '@c4docs/likec4-core/compute-view'
+import { computeColorValues } from '@c4docs/likec4-core/styles'
+import { _stage, _type, exact, FqnRef, isExtendsElementView } from '@c4docs/likec4-core/types'
 import {
   compareNatural,
   parentFqn,
   sortParentsFirst,
-} from '@likec4/core/utils'
+} from '@c4docs/likec4-core/utils'
 import { type LangiumDocument, UriUtils } from 'langium'
 import {
   filter,

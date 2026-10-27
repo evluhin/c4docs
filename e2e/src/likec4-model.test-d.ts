@@ -1,4 +1,4 @@
-import type { LayoutedView, LikeC4ViewModel } from 'likec4/model'
+import type { LayoutedView, LikeC4ViewModel } from '@c4docs/likec4/model'
 import { expectTypeOf, test } from 'vitest'
 import { likec4model } from './likec4-model'
 

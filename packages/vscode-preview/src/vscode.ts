@@ -1,4 +1,4 @@
-import type { LayoutedProjectsView } from '@likec4/core'
+import type { LayoutedProjectsView } from '@c4docs/likec4-core'
 import type {
   ComputedLikeC4ModelData,
   DiagramView,
@@ -6,7 +6,7 @@ import type {
   ProjectId,
   ViewChange,
   ViewId,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import { CancellationTokenImpl, HOST_EXTENSION } from 'vscode-messenger-common'
 import { Messenger } from 'vscode-messenger-webview'
 import {

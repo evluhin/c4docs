@@ -1,4 +1,4 @@
-import { IconRendererProvider } from '@likec4/diagram'
+import { IconRendererProvider } from '@c4docs/likec4-diagram'
 import { getProjectIcons } from 'likec4:icons'
 import { type PropsWithChildren, useMemo } from 'react'
 

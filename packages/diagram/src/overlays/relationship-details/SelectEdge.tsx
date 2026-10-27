@@ -1,4 +1,4 @@
-import type { DiagramEdge, DiagramView } from '@likec4/core'
+import type { DiagramEdge, DiagramView } from '@c4docs/likec4-core'
 import {
   Box,
   Button,

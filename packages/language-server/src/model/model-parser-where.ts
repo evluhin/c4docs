@@ -1,5 +1,5 @@
-import type * as c4 from '@likec4/core'
-import { invariant, isAndOperator, isNonEmptyArray, isOrOperator, nonexhaustive } from '@likec4/core'
+import type * as c4 from '@c4docs/likec4-core'
+import { invariant, isAndOperator, isNonEmptyArray, isOrOperator, nonexhaustive } from '@c4docs/likec4-core'
 import { ast } from '../ast'
 
 const parseMetadataEquals = (

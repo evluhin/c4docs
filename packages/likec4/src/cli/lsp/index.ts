@@ -1,7 +1,7 @@
 import k from 'tinyrainbow'
 import type { Argv } from 'yargs'
 
-import { configureLanguageServerLogger, startLanguageServer } from '@likec4/language-server'
+import { configureLanguageServerLogger, startLanguageServer } from '@c4docs/likec4-language-server'
 import { createConnection, ProposedFeatures } from 'vscode-languageserver/node'
 import { logLevel, useDotBin, verbose, verboseLogLevel } from '../options'
 

@@ -34,7 +34,7 @@
     "test": "vitest run --no-isolate",
     "test:affected": "turbo run test --affected --filter=\"!./apps/*\"",
     "test:watch": "vitest --no-isolate",
-    "pretest:e2e": "NODE_ENV=production pnpm turbo run pack --filter=\"@likec4/core\" --filter=\"@likec4/diagram\" --filter=\"@likec4/icons\" --filter=\"@likec4/mcp\" --filter=\"@likec4/styles\" --filter=\"likec4\"",
+    "pretest:e2e": "NODE_ENV=production pnpm turbo run pack --filter=\"@c4docs/likec4-core\" --filter=\"@c4docs/likec4-diagram\" --filter=\"@c4docs/likec4-icons\" --filter=\"@c4docs/likec4-mcp\" --filter=\"@c4docs/likec4-styles\" --filter=\"@c4docs/likec4\"",
     "test:e2e": "cd e2e && pnpm install --no-lockfile && pnpm install:chromium && pnpm bootstrap && pnpm test",
     "test:e2e:typecheck": "pnpm run pretest:e2e && cd e2e && pnpm install --no-lockfile && pnpm bootstrap && pnpm typecheck",
     "vitest:ui": "vitest --ui --no-isolate"
@@ -45,9 +45,9 @@
     ]
   },
   "devDependencies": {
+    "@c4docs/likec4-devops": "workspace:*",
     "@changesets/changelog-github": "catalog:",
     "@changesets/cli": "catalog:",
-    "@likec4/devops": "workspace:*",
     "@vitest/ui": "catalog:vitest",
     "dprint": "catalog:",
     "global": "^4.4.0",

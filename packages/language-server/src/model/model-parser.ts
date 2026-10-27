@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { ProjectId } from '@likec4/core'
-import { hasProp, invariant, MultiMap, objectHash } from '@likec4/core/utils'
+import type { ProjectId } from '@c4docs/likec4-core'
+import { hasProp, invariant, MultiMap, objectHash } from '@c4docs/likec4-core/utils'
 import { type LangiumDocument, type Stream, type URI, Disposable, DocumentState, UriUtils } from 'langium'
 import { pipe } from 'remeda'
 import {

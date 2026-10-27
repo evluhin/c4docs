@@ -1,5 +1,5 @@
-import { invariant } from '@likec4/core'
-import type { ProjectId, ViewId } from '@likec4/core/types'
+import { invariant } from '@c4docs/likec4-core'
+import type { ProjectId, ViewId } from '@c4docs/likec4-core/types'
 import {
   type EffectScope,
   computed,

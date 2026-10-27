@@ -1,4 +1,4 @@
-import { ElementShapes, IconPositions, Sizings } from '@likec4/core/styles'
+import { ElementShapes, IconPositions, Sizings } from '@c4docs/likec4-core/styles'
 import { describe } from 'vitest'
 import { test } from './asserts'
 

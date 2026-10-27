@@ -1,4 +1,4 @@
-import { cx } from '@likec4/styles/css'
+import { cx } from '@c4docs/likec4-styles/css'
 import { useStore } from '@nanostores/react'
 import { atom } from 'nanostores'
 import { type PropsWithChildren, useMemo, useRef, useState } from 'react'

@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { DocsModel, DocTreeNode } from '@likec4/core'
+import type { DocsModel, DocTreeNode } from '@c4docs/likec4-core'
 import { docFilePath } from './transform'
 
 /**

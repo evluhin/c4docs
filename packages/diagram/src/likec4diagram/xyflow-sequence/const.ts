@@ -1,4 +1,4 @@
-import type { ThemeColor } from '@likec4/core/types'
+import type { ThemeColor } from '@c4docs/likec4-core/types'
 
 // minimum space between actors
 export const ACTOR_GAP = 80

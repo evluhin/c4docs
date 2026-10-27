@@ -1,6 +1,6 @@
-import { css } from '@likec4/styles/css'
-import { Box } from '@likec4/styles/jsx'
-import { hstack } from '@likec4/styles/patterns'
+import { css } from '@c4docs/likec4-styles/css'
+import { Box } from '@c4docs/likec4-styles/jsx'
+import { hstack } from '@c4docs/likec4-styles/patterns'
 import {
   type TooltipProps,
   Popover,

@@ -1,4 +1,4 @@
-import { configureLogger, getConsoleSink, getTextFormatter } from '@likec4/log'
+import { configureLogger, getConsoleSink, getTextFormatter } from '@c4docs/likec4-log'
 import { startLanguageServer as startLanguim } from 'langium/lsp'
 import { BrowserMessageReader, BrowserMessageWriter, createConnection } from 'vscode-languageserver/browser'
 import type { LikeC4Services, LikeC4SharedServices } from '../module'

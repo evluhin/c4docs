@@ -1,5 +1,5 @@
-import type { DiagramView, LayoutedDynamicView, LayoutedElementView } from '@likec4/core/types'
-import { scalar } from '@likec4/core/types'
+import type { DiagramView, LayoutedDynamicView, LayoutedElementView } from '@c4docs/likec4-core/types'
+import { scalar } from '@c4docs/likec4-core/types'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createActor, fromCallback } from 'xstate'
 import { DefaultFeatures } from '../../context/DiagramFeatures'

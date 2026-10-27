@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { ProjectId } from '@likec4/core/types'
-import { fromSources } from '@likec4/language-services/node'
+import { ProjectId } from '@c4docs/likec4-core/types'
+import { fromSources } from '@c4docs/likec4-language-services/node'
 import { registerAppTool } from '@modelcontextprotocol/ext-apps/server'
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types'

@@ -3,18 +3,18 @@
  * Used by gen leanix dry-run and sync leanix.
  */
 
-import type { AnyLikeC4Model } from '@likec4/core/model'
+import type { AnyLikeC4Model } from '@c4docs/likec4-core/model'
 import {
   buildBridgeReport,
   toBridgeManifest,
   toLeanixInventoryDryRun,
-} from '@likec4/leanix-bridge'
+} from '@c4docs/likec4-leanix-bridge'
 import type {
   BridgeManifest,
   BridgeModelInput,
   BridgeReport,
   LeanixInventoryDryRun,
-} from '@likec4/leanix-bridge'
+} from '@c4docs/likec4-leanix-bridge'
 import { mkdir, writeFile } from 'node:fs/promises'
 import { relative, resolve } from 'node:path'
 import k from 'tinyrainbow'

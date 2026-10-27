@@ -1,6 +1,6 @@
 #!/usr/bin/env -S pnpm tsx
 
-import { LikeC4VitePlugin } from '@likec4/vite-plugin'
+import { LikeC4VitePlugin } from '@c4docs/likec4-vite-plugin'
 import postcssPanda from '@pandacss/dev/postcss'
 import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
 import react from '@vitejs/plugin-react'
@@ -57,9 +57,9 @@ const main = defineCommand({
         alias: {
           // Local paths for dev
           'likec4/react': resolve('../react/dist/index.mjs'),
-          '@likec4/diagram/adhoc-editor': resolve('../diagram/src/adhoc-editor/index.ts'),
-          '@likec4/diagram/custom': resolve('../diagram/src/custom/index.ts'),
-          '@likec4/diagram': resolve('../diagram/src/index.ts'),
+          '@c4docs/likec4-diagram/adhoc-editor': resolve('../diagram/src/adhoc-editor/index.ts'),
+          '@c4docs/likec4-diagram/custom': resolve('../diagram/src/custom/index.ts'),
+          '@c4docs/likec4-diagram': resolve('../diagram/src/index.ts'),
           'likec4/vite-plugin/internal': resolve('../vite-plugin/src/internal.ts'),
         },
       },

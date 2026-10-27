@@ -1,4 +1,4 @@
-import type { ComputedView } from '@likec4/core/types'
+import type { ComputedView } from '@c4docs/likec4-core/types'
 import { prepareLLMInput } from './llm-input'
 import { parseOutput } from './llm-output'
 import { logger } from './logger'

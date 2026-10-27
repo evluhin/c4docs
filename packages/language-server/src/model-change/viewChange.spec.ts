@@ -1,4 +1,4 @@
-import type { LayoutedView, ViewId } from '@likec4/core'
+import type { LayoutedView, ViewId } from '@c4docs/likec4-core'
 import { UriUtils } from 'langium'
 import { vol } from 'memfs'
 import stripIndent from 'strip-indent'

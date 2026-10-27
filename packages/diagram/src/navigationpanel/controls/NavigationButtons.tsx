@@ -1,4 +1,4 @@
-import { hstack } from '@likec4/styles/patterns'
+import { hstack } from '@c4docs/likec4-styles/patterns'
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react'
 import * as m from 'motion/react-m'
 import { selectDiagramContext, useDiagram, useDiagramSelector } from '../../hooks/useDiagram'

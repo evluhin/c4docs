@@ -1,7 +1,7 @@
 import type {
   LayoutedLikeC4ModelData,
-} from '@likec4/core/types'
-import { nonexhaustive } from '@likec4/core/utils'
+} from '@c4docs/likec4-core/types'
+import { nonexhaustive } from '@c4docs/likec4-core/utils'
 import { addDays, addMonths, getUnixTime, startOfMinute } from 'date-fns'
 import { HTTPException } from 'hono/http-exception'
 import { nanoid } from 'nanoid'

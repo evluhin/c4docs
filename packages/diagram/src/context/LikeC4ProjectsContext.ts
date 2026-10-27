@@ -1,4 +1,4 @@
-import type { ProjectId } from '@likec4/core/types'
+import type { ProjectId } from '@c4docs/likec4-core/types'
 import { createContext, useContext } from 'react'
 import type { LikeC4ProjectData } from '../LikeC4ProjectsProvider'
 

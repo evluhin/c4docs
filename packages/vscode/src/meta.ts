@@ -3,7 +3,7 @@
 
 // Meta info
 export const publisher = "likec4"
-export const name = "likec4-vscode"
+export const name = "@c4docs/likec4-vscode"
 export const version = "1.60.0"
 export const displayName = "LikeC4"
 export const description = "Support for the LikeC4 modeling language"
@@ -24,7 +24,7 @@ export type CommandKey =
   | "likec4.semantic-layout-with-ai"
 
 /**
- * Commands map registered by `likec4.likec4-vscode`
+ * Commands map registered by `likec4.@c4docs/likec4-vscode`
  */
 export const commands = {
   /**
@@ -83,7 +83,7 @@ export type LanguageKey =
   | "likec4"
 
 /**
- * Languages map registed by `likec4.likec4-vscode`
+ * Languages map registed by `likec4.@c4docs/likec4-vscode`
  */
 export const languages = {
   json5: "json5",
@@ -105,7 +105,7 @@ export interface ChatParticipantTypeMap {
 export type ChatParticipantItem<T extends keyof ChatParticipantTypeMap> = ChatParticipantTypeMap[T]
 
 /**
- * ChatParticipants map registed by `likec4.likec4-vscode`
+ * ChatParticipants map registed by `likec4.@c4docs/likec4-vscode`
  */
 export const chatParticipants = {
   /**
@@ -176,7 +176,7 @@ export interface ConfigItem<T extends keyof ConfigKeyTypeMap> {
 
 
 /**
- * Configs map registered by `likec4.likec4-vscode`
+ * Configs map registered by `likec4.@c4docs/likec4-vscode`
  */
 export const configs = {
   /**

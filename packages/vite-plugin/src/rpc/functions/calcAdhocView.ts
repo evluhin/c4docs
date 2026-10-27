@@ -1,4 +1,4 @@
-import type { LayoutedElementView } from '@likec4/core/types'
+import type { LayoutedElementView } from '@c4docs/likec4-core/types'
 import k from 'tinyrainbow'
 import type { LikeC4VitePluginRpc } from '../protocol'
 import type { PluginRPCParams } from '../rpc'

@@ -61,7 +61,7 @@ jobs:
           pnpm lint:package
 
       - name: ⚙️ MCP packed install smoke
-        run: pnpm --filter @likec4/mcp run smoke:pack
+        run: pnpm --filter @c4docs/likec4-mcp run smoke:pack
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
@@ -199,13 +199,13 @@ jobs:
 
       - name: ʦ typecheck
         run: |
-          pnpm turbo run typecheck --filter='@likec4/docs-astro'
+          pnpm turbo run typecheck --filter='@c4docs/likec4-docs-astro'
 
       - name: ⚙️ build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pnpm turbo run build --filter='@likec4/docs-astro'
+          pnpm turbo run build --filter='@c4docs/likec4-docs-astro'
 
   check-playground:
     name: 🎮 playground
@@ -223,11 +223,11 @@ jobs:
 
       - name: ʦ typecheck
         run: |
-          pnpm turbo run typecheck --filter='@likec4/playground'
+          pnpm turbo run typecheck --filter='@c4docs/likec4-playground'
 
       - name: ⚙️ build
         run: |
-          pnpm turbo run build --filter='@likec4/playground'
+          pnpm turbo run build --filter='@c4docs/likec4-playground'
 
   check-e2e-tests:
     name: 🔬 e2e tests

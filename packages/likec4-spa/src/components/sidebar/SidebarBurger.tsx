@@ -1,4 +1,4 @@
-import { Box } from '@likec4/styles/jsx'
+import { Box } from '@c4docs/likec4-styles/jsx'
 import { Burger } from '@mantine/core'
 import { SidebarDrawerOps } from './state'
 

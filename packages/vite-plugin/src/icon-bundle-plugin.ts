@@ -1,4 +1,4 @@
-import { DefaultMap } from '@likec4/core'
+import { DefaultMap } from '@c4docs/likec4-core'
 import { existsSync } from 'node:fs'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { createRequire } from 'node:module'
@@ -29,7 +29,7 @@ export function iconBundlePlugin(options: {
 
   const resolveIcon = async (group: string, icon: string) => {
     try {
-      const resolvedPath = require.resolve(`@likec4/icons/${group}/${icon}`, {
+      const resolvedPath = require.resolve(`@c4docs/likec4-icons/${group}/${icon}`, {
         paths: paths,
       })
       logger.trace(k.dim(`found in package `) + resolvedPath)

@@ -1,6 +1,6 @@
+import { delay } from '@c4docs/likec4-core/utils'
+import { loggable, rootLogger } from '@c4docs/likec4-log'
 import { Graphviz } from '@hpcc-js/wasm-graphviz'
-import { delay } from '@likec4/core/utils'
-import { loggable, rootLogger } from '@likec4/log'
 import pLimit from 'p-limit'
 import { randomString } from 'remeda'
 import type { GraphvizPort } from '../GraphvizLayoter'

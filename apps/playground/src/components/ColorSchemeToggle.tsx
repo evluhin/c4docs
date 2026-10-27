@@ -1,4 +1,4 @@
-import { css } from '@likec4/styles/css'
+import { css } from '@c4docs/likec4-styles/css'
 import { ActionIcon, useComputedColorScheme, useMantineColorScheme } from '@mantine/core'
 import { IconMoonStars, IconSun } from '@tabler/icons-react'
 

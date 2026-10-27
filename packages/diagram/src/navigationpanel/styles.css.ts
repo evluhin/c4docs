@@ -1,4 +1,4 @@
-import { cva } from '@likec4/styles/css'
+import { cva } from '@c4docs/likec4-styles/css'
 
 export const breadcrumbTitle = cva({
   base: {

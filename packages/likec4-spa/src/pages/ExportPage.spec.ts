@@ -19,7 +19,7 @@ const testState = vi.hoisted(() => ({
   },
 }))
 
-vi.mock('@likec4/diagram', () => ({
+vi.mock('@c4docs/likec4-diagram', () => ({
   LikeC4Diagram: () => React.createElement('div', { 'data-testid': 'diagram' }),
   pickViewBounds: () => testState.diagram.bounds,
   useLikeC4Styles: () => ({
@@ -34,12 +34,12 @@ vi.mock('@likec4/diagram', () => ({
   }),
 }))
 
-vi.mock('@likec4/diagram/custom', () => ({
+vi.mock('@c4docs/likec4-diagram/custom', () => ({
   ElementShape: () => React.createElement('div'),
   Markdown: ({ children }: { children: React.ReactNode }) => React.createElement('div', null, children),
 }))
 
-vi.mock('@likec4/styles/jsx', () => ({
+vi.mock('@c4docs/likec4-styles/jsx', () => ({
   Box: ({ children, css: _css, ...props }: React.PropsWithChildren<Record<string, unknown>>) =>
     React.createElement('div', props, children),
 }))

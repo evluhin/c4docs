@@ -1,5 +1,5 @@
 {
-  "name": "@likec4/core",
+  "name": "@c4docs/likec4-core",
   "version": "1.60.0",
   "description": "A core package for LikeC4, containing types, api, utilities and guards.",
   "homepage": "https://likec4.dev",
@@ -115,10 +115,10 @@
     "zod": "catalog:externals"
   },
   "devDependencies": {
+    "@c4docs/likec4-devops": "workspace:*",
+    "@c4docs/likec4-style-preset": "workspace:*",
+    "@c4docs/likec4-tsconfig": "workspace:*",
     "@dagrejs/dagre": "catalog:",
-    "@likec4/devops": "workspace:*",
-    "@likec4/style-preset": "workspace:*",
-    "@likec4/tsconfig": "workspace:*",
     "@mantine/colors-generator": "catalog:mantine",
     "@rolldown/plugin-node-polyfills": "catalog:tsdown",
     "@types/chroma-js": "catalog:utils",

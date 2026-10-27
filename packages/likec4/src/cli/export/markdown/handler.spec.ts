@@ -7,12 +7,12 @@ import { GENERATED_MARKER, runExportMarkdown } from './handler'
 
 const fromWorkspace = vi.hoisted(() => vi.fn<(path: string, opts: unknown) => Promise<unknown>>())
 
-vi.mock('@likec4/generators', () => ({
+vi.mock('@c4docs/likec4-generators', () => ({
   generateMarkdown: (model: { projectId: string }, options?: { description?: string }) =>
     `# ${model.projectId}${options?.description ? '\n\n' + options.description : ''}\n`,
 }))
 
-vi.mock('@likec4/language-services/node', () => ({ fromWorkspace }))
+vi.mock('@c4docs/likec4-language-services/node', () => ({ fromWorkspace }))
 
 vi.mock('node:fs/promises', async importOriginal => {
   const actual = await importOriginal<typeof import('node:fs/promises')>()

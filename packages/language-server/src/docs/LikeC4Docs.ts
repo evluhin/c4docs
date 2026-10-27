@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { DocAsset, DocPage, DocsModel, ProjectId } from '@likec4/core/types'
-import { onNextTick } from '@likec4/core/utils'
+import type { DocAsset, DocPage, DocsModel, ProjectId } from '@c4docs/likec4-core/types'
+import { onNextTick } from '@c4docs/likec4-core/utils'
 import { Disposable, DocumentState, URI, UriUtils } from 'langium'
 import { posix } from 'node:path'
 import type {

@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import { type DiagramEdge, type DiagramNode, type DiagramView, GroupElementKind, scalar } from '@likec4/core'
+import { type DiagramEdge, type DiagramNode, type DiagramView, GroupElementKind, scalar } from '@c4docs/likec4-core'
 import { describe, expect, it } from 'vitest'
 import { diagramToXY } from './diagram-view'
 

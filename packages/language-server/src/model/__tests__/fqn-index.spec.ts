@@ -1,6 +1,6 @@
 import type {
   Fqn,
-} from '@likec4/core'
+} from '@c4docs/likec4-core'
 import { type ExpectStatic, describe, it } from 'vitest'
 import type { LikeC4Services } from '../../module'
 import { createTestServices } from '../../test'

@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import type { Fqn, ViewId } from '@likec4/core/types'
+import type { Fqn, ViewId } from '@c4docs/likec4-core/types'
 import { createContext, useContext } from 'react'
 
 export interface SearchContextValue {

@@ -1,4 +1,4 @@
-import { fromWorkspace } from '@likec4/language-services/node'
+import { fromWorkspace } from '@c4docs/likec4-language-services/node'
 import isInsideContainer from 'is-inside-container'
 import { printServerUrls } from '../../vite/printServerUrls'
 import { vitePreview } from '../../vite/vite-preview'

@@ -1,4 +1,4 @@
-import { isSameHierarchy } from '@likec4/core'
+import { isSameHierarchy } from '@c4docs/likec4-core'
 import { type ValidationCheck, AstUtils } from 'langium'
 import { isEmpty } from 'remeda'
 import { ast } from '../ast'

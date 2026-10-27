@@ -1,10 +1,10 @@
+import { loggable, logger } from '@c4docs/likec4-log'
 import type { IDisposable } from '@codingame/monaco-vscode-editor-api'
 import * as monaco from '@codingame/monaco-vscode-editor-api'
 import {
   type RegisteredFileSystemProvider,
   RegisteredMemoryFile,
 } from '@codingame/monaco-vscode-files-service-override'
-import { loggable, logger } from '@likec4/log'
 import { first, forEach } from 'remeda'
 
 export const setActiveEditor = (filename: monaco.Uri) => {

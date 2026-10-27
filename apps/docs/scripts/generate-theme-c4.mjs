@@ -4,7 +4,7 @@
  * - views for each theme color
  * - nested shapes (6 levels)
  */
-import { LikeC4Styles } from '@likec4/core/styles'
+import { LikeC4Styles } from '@c4docs/likec4-core/styles'
 import { writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 

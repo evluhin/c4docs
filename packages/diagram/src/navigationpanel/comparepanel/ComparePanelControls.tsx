@@ -1,4 +1,4 @@
-import { Box, HStack } from '@likec4/styles/jsx'
+import { Box, HStack } from '@c4docs/likec4-styles/jsx'
 import { Divider as MantineDivider } from '@mantine/core'
 import { IconX } from '@tabler/icons-react'
 import { useDiagramCompareLayout } from '../../hooks/useDiagramCompareLayout'

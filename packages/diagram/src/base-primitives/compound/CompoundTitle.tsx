@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { Color, ComputedNodeStyle, NodeId } from '@likec4/core/types'
+import type { Color, ComputedNodeStyle, NodeId } from '@c4docs/likec4-core/types'
 import { IconRenderer } from '../../context/IconRenderer'
 
 type RequiredData = {

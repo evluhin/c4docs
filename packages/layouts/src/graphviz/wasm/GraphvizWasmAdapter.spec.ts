@@ -1,7 +1,7 @@
-import type { ComputedView } from '@likec4/core'
-import { Builder } from '@likec4/core/builder'
-import { computeProjectsView } from '@likec4/core/compute-view'
-import { BBox, isOrthoSpline, polylineToSegments, splineToPolyline } from '@likec4/core/geometry'
+import type { ComputedView } from '@c4docs/likec4-core'
+import { Builder } from '@c4docs/likec4-core/builder'
+import { computeProjectsView } from '@c4docs/likec4-core/compute-view'
+import { BBox, isOrthoSpline, polylineToSegments, splineToPolyline } from '@c4docs/likec4-core/geometry'
 import { map, pick } from 'remeda'
 import { describe, it } from 'vitest'
 import {

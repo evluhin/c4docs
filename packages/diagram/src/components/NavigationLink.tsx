@@ -1,5 +1,5 @@
-import { cx } from '@likec4/styles/css'
-import { navigationLink } from '@likec4/styles/recipes'
+import { cx } from '@c4docs/likec4-styles/css'
+import { navigationLink } from '@c4docs/likec4-styles/recipes'
 import { type NavLinkProps, NavLink } from '@mantine/core'
 import { forwardRef } from 'react'
 import type { ComponentPropsWithoutRef } from 'react'

@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { Any } from '@likec4/core/types'
+import type { Any } from '@c4docs/likec4-core/types'
 import { useCustomCompareMemo } from '@react-hookz/web'
 import { type FitViewOptions, ReactFlowProvider as XYFlowProvider } from '@xyflow/react'
 import { deepEqual } from 'fast-equals'

@@ -1,4 +1,4 @@
-import type { ViewId } from '@likec4/core'
+import type { ViewId } from '@c4docs/likec4-core'
 import { deepEqual } from 'fast-equals'
 import { indexBy } from 'remeda'
 import { describe } from 'vitest'

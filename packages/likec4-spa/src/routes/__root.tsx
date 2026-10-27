@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { ProjectId } from '@likec4/core/types'
-import { FramerMotionConfig, LikeC4MantineProvider } from '@likec4/diagram'
+import type { ProjectId } from '@c4docs/likec4-core/types'
+import { FramerMotionConfig, LikeC4MantineProvider } from '@c4docs/likec4-diagram'
 import { createRootRouteWithContext, Outlet, stripSearchParams } from '@tanstack/react-router'
 import { defaultTheme } from 'likec4:app-config'
 import { map } from 'remeda'

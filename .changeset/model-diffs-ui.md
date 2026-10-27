@@ -1,7 +1,7 @@
 ---
-'@likec4/diagram': patch
-'@likec4/style-preset': patch
-'likec4': patch
+'@c4docs/likec4-diagram': patch
+'@c4docs/likec4-style-preset': patch
+'@c4docs/likec4': patch
 ---
 
 Model diffs in the UI, see [discussion #1192](https://github.com/likec4/likec4/discussions/1192):

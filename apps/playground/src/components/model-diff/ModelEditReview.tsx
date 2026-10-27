@@ -1,6 +1,6 @@
 import { usePlayground, usePlaygroundContext } from '$/hooks/usePlayground'
-import { type LineChange, collapseUnchanged, diffLines } from '@likec4/core/utils'
-import type { DocumentChange } from '@likec4/language-server/protocol'
+import { type LineChange, collapseUnchanged, diffLines } from '@c4docs/likec4-core/utils'
+import type { DocumentChange } from '@c4docs/likec4-language-server/protocol'
 import { Alert, Box, Button, Checkbox, Group, Loader, Modal, ScrollArea, Stack, Text } from '@mantine/core'
 import { useMemo, useState } from 'react'
 

@@ -70,7 +70,7 @@ export default defineConfig({
   deps: {
     onlyBundle: false,
     neverBundle: [
-      /^@likec4\/core/,
+      /^@c4docs\/likec4-core/,
       'immer',
       'type-fest',
       /^react(\/|$)/,
@@ -86,7 +86,7 @@ export default defineConfig({
     viteAliasPlugin({
       entries: [
         {
-          find: /@likec4\/styles\/(.*)/,
+          find: /@c4docs\/likec4-styles\/(.*)/,
           replacement: join(process.cwd(), 'styled-system', '$1', 'index.mjs'),
         },
       ],

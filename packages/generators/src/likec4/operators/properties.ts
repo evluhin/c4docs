@@ -1,4 +1,4 @@
-import { type Color, type ElementStyle, type Link, type MarkdownOrString, exact } from '@likec4/core/types'
+import { type Color, type ElementStyle, type Link, type MarkdownOrString, exact } from '@c4docs/likec4-core/types'
 import { entries, isArray, isNot, isString, piped } from 'remeda'
 import type { ConditionalKeys } from 'type-fest'
 import * as common from '../schemas/common'

@@ -1,4 +1,4 @@
-import { LikeC4MantineProvider } from '@likec4/diagram'
+import { LikeC4MantineProvider } from '@c4docs/likec4-diagram'
 import { LoadingOverlay } from '@mantine/core'
 import { useDebouncedValue } from '@mantine/hooks'
 import { QueryClientProvider, useIsFetching } from '@tanstack/react-query'

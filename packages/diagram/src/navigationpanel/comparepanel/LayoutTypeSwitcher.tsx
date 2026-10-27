@@ -1,5 +1,5 @@
-import { type LayoutType, invariant } from '@likec4/core'
-import { css } from '@likec4/styles/css'
+import { type LayoutType, invariant } from '@c4docs/likec4-core'
+import { css } from '@c4docs/likec4-styles/css'
 import { type SegmentedControlItem, SegmentedControl } from '@mantine/core'
 import * as m from 'motion/react-m'
 

@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { DocsModel } from '@likec4/core'
+import type { DocsModel } from '@c4docs/likec4-core'
 
 /** A view variant that the image pipeline must render. */
 export interface ReferencedView {

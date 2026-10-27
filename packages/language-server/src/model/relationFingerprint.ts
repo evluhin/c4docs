@@ -4,8 +4,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { Relationship } from '@likec4/core'
-import { FqnRef } from '@likec4/core/types'
+import type { Relationship } from '@c4docs/likec4-core'
+import { FqnRef } from '@c4docs/likec4-core/types'
 import { stringHash } from '../utils/stringHash'
 
 type FingerprintSource = {

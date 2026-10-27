@@ -1,5 +1,5 @@
-import type { LikeC4Model, LikeC4ViewModel } from '@likec4/core/model'
-import type { aux, ProcessedView } from '@likec4/core/types'
+import type { LikeC4Model, LikeC4ViewModel } from '@c4docs/likec4-core/model'
+import type { aux, ProcessedView } from '@c4docs/likec4-core/types'
 import { test } from 'vitest'
 import { fakeComputedView3Levels, fakeDiagram, fakeDiagram2 } from '../__mocks__/data'
 import { generateMermaid } from '../mmd/generate-mmd'

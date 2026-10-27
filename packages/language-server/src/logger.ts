@@ -1,4 +1,4 @@
-import { nonexhaustive } from '@likec4/core/utils'
+import { nonexhaustive } from '@c4docs/likec4-core/utils'
 import {
   type Logger,
   type Sink,
@@ -8,7 +8,7 @@ import {
   getTextFormatter,
   loggable,
   logger as root,
-} from '@likec4/log'
+} from '@c4docs/likec4-log'
 import type { Connection } from 'vscode-languageserver'
 
 export const logger: Logger = root.getChild('server')

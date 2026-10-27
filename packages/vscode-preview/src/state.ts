@@ -4,9 +4,9 @@ import type {
   ProjectId,
   scalar,
   UnknownComputed,
-} from '@likec4/core/types'
-import { nonNullable, stringHash } from '@likec4/core/utils'
-import { type LikeC4EditorCallbacks, useLikeC4Model, useUpdateEffect } from '@likec4/diagram'
+} from '@c4docs/likec4-core/types'
+import { nonNullable, stringHash } from '@c4docs/likec4-core/utils'
+import { type LikeC4EditorCallbacks, useLikeC4Model, useUpdateEffect } from '@c4docs/likec4-diagram'
 import { useStore } from '@nanostores/react'
 import { useQuery } from '@tanstack/react-query'
 import { atom, batched, onSet } from 'nanostores'

@@ -1,4 +1,4 @@
-import { type MarkdownOrString, hasProp, invariant } from '@likec4/core'
+import { type MarkdownOrString, hasProp, invariant } from '@c4docs/likec4-core'
 import {
   type Generated,
   type GeneratorNode,

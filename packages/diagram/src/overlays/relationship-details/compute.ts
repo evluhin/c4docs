@@ -1,13 +1,13 @@
-import type { EdgeId, NonEmptyReadonlyArray } from '@likec4/core'
-import { treeFromElements } from '@likec4/core/compute-view'
+import type { EdgeId, NonEmptyReadonlyArray } from '@c4docs/likec4-core'
+import { treeFromElements } from '@c4docs/likec4-core/compute-view'
 import type {
   ElementModel,
   LikeC4ViewModel,
   RelationshipModel,
-} from '@likec4/core/model'
-import { modelConnection } from '@likec4/core/model'
-import type { AnyAux } from '@likec4/core/types'
-import { invariant, isAncestor, sortParentsFirst } from '@likec4/core/utils'
+} from '@c4docs/likec4-core/model'
+import { modelConnection } from '@c4docs/likec4-core/model'
+import type { AnyAux } from '@c4docs/likec4-core/types'
+import { invariant, isAncestor, sortParentsFirst } from '@c4docs/likec4-core/utils'
 import { hasAtLeast } from 'remeda'
 
 export interface RelationshipDetailsViewData {

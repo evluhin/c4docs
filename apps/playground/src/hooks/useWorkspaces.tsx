@@ -1,7 +1,7 @@
 import { Examples } from '$/examples'
 import { WorkspacePersistence } from '$state/persistence'
 import type { LocalWorkspace } from '$state/types'
-import { invariant } from '@likec4/core'
+import { invariant } from '@c4docs/likec4-core'
 import { Button, Group, TextInput } from '@mantine/core'
 import { useLocalStorage } from '@mantine/hooks'
 import { modals } from '@mantine/modals'

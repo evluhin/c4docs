@@ -1,5 +1,5 @@
-import type { LikeC4ProjectConfig } from '@likec4/config'
-import type { LayoutedView } from '@likec4/core/types'
+import type { LikeC4ProjectConfig } from '@c4docs/likec4-config'
+import type { LayoutedView } from '@c4docs/likec4-core/types'
 
 export function filterLandingPageViews(
   views: ReadonlyArray<LayoutedView>,

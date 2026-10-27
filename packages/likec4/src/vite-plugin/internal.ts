@@ -1,1 +1,1 @@
-export * from '@likec4/vite-plugin/internal'
+export * from '@c4docs/likec4-vite-plugin/internal'

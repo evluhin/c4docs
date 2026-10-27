@@ -3,7 +3,7 @@
  * Shared by sync leanix and gen leanix inventory.
  */
 
-import { LeanixApiClient } from '@likec4/leanix-bridge'
+import { LeanixApiClient } from '@c4docs/likec4-leanix-bridge'
 
 const LEANIX_BASE_URL_DEFAULT = 'https://app.leanix.net'
 const LEANIX_REQUEST_DELAY_MS = 200

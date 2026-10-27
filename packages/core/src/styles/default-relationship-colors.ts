@@ -1,4 +1,4 @@
-import { RelationshipColors as DefaultRelationshipColors } from '@likec4/style-preset/defaults'
+import { RelationshipColors as DefaultRelationshipColors } from '@c4docs/likec4-style-preset/defaults'
 import type { RelationshipColorValues, ThemeColor } from './types'
 
 // ensure types are correct

@@ -5,8 +5,8 @@ import {
   type NonEmptyArray,
   flowGuards,
   StepPath,
-} from '@likec4/core/types'
-import { invariant, nonexhaustive, nonNullable } from '@likec4/core/utils'
+} from '@c4docs/likec4-core/types'
+import { invariant, nonexhaustive, nonNullable } from '@c4docs/likec4-core/utils'
 import * as kiwi from '@lume/kiwi'
 import defu from 'defu'
 import {

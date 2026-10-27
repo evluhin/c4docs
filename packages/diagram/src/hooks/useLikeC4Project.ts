@@ -1,4 +1,4 @@
-import type { ProjectId } from '@likec4/core/types'
+import type { ProjectId } from '@c4docs/likec4-core/types'
 import { useOptionalLikeC4Model } from '../context/LikeC4ModelContext'
 import { type LikeC4ProjectsContext, useOptionalProjectsContext } from '../context/LikeC4ProjectsContext'
 import type { LikeC4ProjectData } from '../LikeC4ProjectsProvider'

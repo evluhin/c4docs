@@ -11,8 +11,8 @@ export default defineConfig(({ mode }) => {
     resolve: {
       conditionNames: ['sources', 'module', 'import', 'default'],
       alias: {
-        '@likec4/diagram': resolve('..', 'diagram', 'src'),
-        '@likec4/styles': resolve('styled-system'),
+        '@c4docs/likec4-diagram': resolve('..', 'diagram', 'src'),
+        '@c4docs/likec4-styles': resolve('styled-system'),
       },
     },
     mode: isDev ? 'development' : 'production',

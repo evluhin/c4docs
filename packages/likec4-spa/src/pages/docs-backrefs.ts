@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { DocsModel } from '@likec4/core/types'
+import type { DocsModel } from '@c4docs/likec4-core/types'
 
 /** A doc that references a given view, for the "Referenced in docs" affordance. */
 export interface DocBackref {

@@ -1,5 +1,5 @@
 {
-  "name": "@likec4/devops",
+  "name": "@c4docs/likec4-devops",
   "version": "1.59.4",
   "private": true,
   "sideEffects": false,
@@ -31,7 +31,7 @@
     "zx": "catalog:"
   },
   "devDependencies": {
-    "@likec4/tsconfig": "workspace:*",
+    "@c4docs/likec4-tsconfig": "workspace:*",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "catalog:",
     "@types/parse-gitignore": "^1.0.2",

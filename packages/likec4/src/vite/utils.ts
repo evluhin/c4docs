@@ -1,4 +1,4 @@
-import { rootLogger } from '@likec4/log'
+import { rootLogger } from '@c4docs/likec4-log'
 import { existsSync, statSync } from 'node:fs'
 import { cp, mkdir, mkdtemp, readdir, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'

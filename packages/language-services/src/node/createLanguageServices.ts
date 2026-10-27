@@ -1,13 +1,13 @@
-import { WithFileSystem, WithLikeC4ManualLayouts } from '@likec4/language-server/filesystem'
+import { WithFileSystem, WithLikeC4ManualLayouts } from '@c4docs/likec4-language-server/filesystem'
 import {
   createLanguageServices as createCustomLanguageServices,
   NoFileSystem,
   NoLikeC4ManualLayouts,
   WithGraphviz,
-} from '@likec4/language-server/module'
-import { GraphvizWasmAdapter } from '@likec4/layouts'
-import { GraphvizBinaryAdapter } from '@likec4/layouts/graphviz/binary'
-import { rootLogger } from '@likec4/log'
+} from '@c4docs/likec4-language-server/module'
+import { GraphvizWasmAdapter } from '@c4docs/likec4-layouts'
+import { GraphvizBinaryAdapter } from '@c4docs/likec4-layouts/graphviz/binary'
+import { rootLogger } from '@c4docs/likec4-log'
 import defu from 'defu'
 import k from 'tinyrainbow'
 import type { LikeC4Langium } from '../common/LikeC4'

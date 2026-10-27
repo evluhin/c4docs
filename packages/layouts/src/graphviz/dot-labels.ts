@@ -4,8 +4,8 @@ import {
   type ShapeSize,
   LikeC4Styles,
   RichText,
-} from '@likec4/core'
-import { nonexhaustive } from '@likec4/core/utils'
+} from '@c4docs/likec4-core'
+import { nonexhaustive } from '@c4docs/likec4-core/utils'
 import { identity, isDefined, isTruthy } from 'remeda'
 import wordWrap from 'word-wrap'
 import { IconSizePoints, pxToPoints } from './utils'

@@ -1,4 +1,4 @@
-import { vstack } from '@likec4/styles/patterns'
+import { vstack } from '@c4docs/likec4-styles/patterns'
 import { AnimatePresence, LayoutGroup, m, MotionConfig } from 'motion/react'
 import { memo } from 'react'
 import { PortalToContainer } from '../../../components/PortalToContainer'

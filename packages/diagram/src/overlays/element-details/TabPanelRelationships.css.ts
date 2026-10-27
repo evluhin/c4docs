@@ -1,4 +1,4 @@
-import { css } from '@likec4/styles/css'
+import { css } from '@c4docs/likec4-styles/css'
 
 export const fqn = css({
   display: 'inline-block',

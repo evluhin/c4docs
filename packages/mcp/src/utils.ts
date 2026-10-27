@@ -14,9 +14,9 @@ import type {
 } from '@modelcontextprotocol/sdk/types.js'
 import { type ZodRawShape, z } from 'zod/v4'
 
-import { hasProp } from '@likec4/core'
-import type { LikeC4LanguageServices } from '@likec4/language-server'
-import { loggable, logger as mainLogger } from '@likec4/log'
+import { hasProp } from '@c4docs/likec4-core'
+import type { LikeC4LanguageServices } from '@c4docs/likec4-language-server'
+import { loggable, logger as mainLogger } from '@c4docs/likec4-log'
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { isEmptyish } from 'remeda'
 import type { IsUnknown } from 'type-fest'

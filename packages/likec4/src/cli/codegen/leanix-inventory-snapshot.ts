@@ -4,7 +4,7 @@
  * Inbound only; no DSL generation.
  */
 
-import { fetchLeanixInventorySnapshot } from '@likec4/leanix-bridge'
+import { fetchLeanixInventorySnapshot } from '@c4docs/likec4-leanix-bridge'
 import { mkdir, writeFile } from 'node:fs/promises'
 import { relative, resolve } from 'node:path'
 import k from 'tinyrainbow'

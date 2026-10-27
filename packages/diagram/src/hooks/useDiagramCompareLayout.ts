@@ -1,5 +1,5 @@
-import { nonNullable } from '@likec4/core'
-import type * as t from '@likec4/core/types'
+import { nonNullable } from '@c4docs/likec4-core'
+import type * as t from '@c4docs/likec4-core/types'
 import { useSelector as useXstateSelector } from '@xstate/react'
 import { shallowEqual } from 'fast-equals'
 import { deriveToggledFeatures } from '../likec4diagram/state/machine.setup'

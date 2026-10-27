@@ -8,7 +8,7 @@ import {
 import { WorkspaceFileTabs } from '$components/workspace/WorkspaceFileTabs'
 import { PlaygroundActorContextProvider } from '$state/context'
 import { WorkspacePersistence, WorkspaceSessionPersistence } from '$state/persistence'
-import { css } from '@likec4/styles/css'
+import { css } from '@c4docs/likec4-styles/css'
 import { AppShell, AppShellHeader, AppShellMain, Box, Stack } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { createFileRoute, Outlet } from '@tanstack/react-router'

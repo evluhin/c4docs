@@ -1,4 +1,4 @@
-import { loggable } from '@likec4/log'
+import { loggable } from '@c4docs/likec4-log'
 import {
   defineExtension,
 } from 'reactive-vscode'

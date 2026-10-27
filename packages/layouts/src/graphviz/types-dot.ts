@@ -1,4 +1,4 @@
-import type { EdgeId, Fqn } from '@likec4/core'
+import type { EdgeId, Fqn } from '@c4docs/likec4-core'
 import type { Tagged } from 'type-fest'
 
 export type GvNodeName = Tagged<string, 'GvNodeName'>

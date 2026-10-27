@@ -4,8 +4,8 @@ import {
   type Segment,
   distanceBetween,
   placeLabelAlongSegments,
-} from '@likec4/core/geometry'
-import type { EdgeRouting } from '@likec4/core/types'
+} from '@c4docs/likec4-core/geometry'
+import type { EdgeRouting } from '@c4docs/likec4-core/types'
 import type { XYPosition } from '@xyflow/react'
 import { firstBy } from 'remeda'
 

@@ -1,4 +1,4 @@
-import { HStack } from '@likec4/styles/jsx'
+import { HStack } from '@c4docs/likec4-styles/jsx'
 import { ActionIcon, Button, Textarea } from '@mantine/core'
 import { IconPlayerStopFilled } from '@tabler/icons-react'
 import { useRef, useState } from 'react'

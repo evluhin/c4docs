@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { useLikeC4Projects } from '@likec4/diagram'
+import { useLikeC4Projects } from '@c4docs/likec4-diagram'
 import {
   Button,
   Divider,

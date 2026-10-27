@@ -16,7 +16,7 @@ import {
   RegisterProject,
   ReloadProjects,
   ValidateLayout,
-} from '@likec4/language-server/protocol'
+} from '@c4docs/likec4-language-server/protocol'
 import { defineService, useDisposable } from 'reactive-vscode'
 import type { Location, Uri } from 'vscode'
 import type { DocumentUri } from 'vscode-languageserver-types'

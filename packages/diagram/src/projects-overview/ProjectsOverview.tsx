@@ -1,5 +1,5 @@
-import type { ProjectId } from '@likec4/core'
-import type { LayoutedProjectsView } from '@likec4/core/compute-view'
+import type { ProjectId } from '@c4docs/likec4-core'
+import type { LayoutedProjectsView } from '@c4docs/likec4-core/compute-view'
 import { useSyncedRef } from '@react-hookz/web'
 import { useActorRef } from '@xstate/react'
 import { ReactFlowProvider } from '@xyflow/react'

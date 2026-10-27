@@ -1,5 +1,5 @@
 ---
-'@likec4/language-server': patch
+'@c4docs/likec4-language-server': patch
 ---
 
 Faster model updates while editing: parsed and computed models are cached and rebuilt only for affected projects.

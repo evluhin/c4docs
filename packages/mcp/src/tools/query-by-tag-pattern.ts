@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import { isDeploymentNodeModel } from '@likec4/core/model'
+import { isDeploymentNodeModel } from '@c4docs/likec4-core/model'
 import * as z from 'zod/v4'
 import { likec4Tool } from '../utils'
 import { elementSummarySchema, projectIdSchema, serializeElement } from './_common'

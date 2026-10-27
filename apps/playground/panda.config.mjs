@@ -1,4 +1,4 @@
-import { defineConfig } from '@likec4/styles/dev'
+import { defineConfig } from '@c4docs/likec4-styles/dev'
 
 export default defineConfig({
   clean: true,

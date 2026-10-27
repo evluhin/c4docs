@@ -5,7 +5,7 @@ import {
   type Fqn,
   type ViewId,
   invariant,
-} from '@likec4/core'
+} from '@c4docs/likec4-core'
 import {
   type EdgeChange,
   type NodeChange,

@@ -1,5 +1,5 @@
-import { FqnExpr } from '@likec4/core/types'
-import { nonexhaustive } from '@likec4/core/utils'
+import { FqnExpr } from '@c4docs/likec4-core/types'
+import { nonexhaustive } from '@c4docs/likec4-core/utils'
 import type { ValidationCheck } from 'langium'
 import { AstUtils } from 'langium'
 import { ast, getViewRulePredicateContainer } from '../../ast'

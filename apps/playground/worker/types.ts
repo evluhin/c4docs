@@ -1,4 +1,4 @@
-import type { LayoutedLikeC4ModelData } from '@likec4/core/types'
+import type { LayoutedLikeC4ModelData } from '@c4docs/likec4-core/types'
 import { formatISO } from 'date-fns'
 import type { Context } from 'hono'
 import type { Session } from 'hono-sessions'

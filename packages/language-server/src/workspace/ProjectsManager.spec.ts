@@ -5,10 +5,10 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { LikeC4ProjectJsonConfig } from '@likec4/config'
-import type { ProjectId } from '@likec4/core'
-import type { LogRecord } from '@likec4/log'
-import { configureLogger } from '@likec4/log'
+import type { LikeC4ProjectJsonConfig } from '@c4docs/likec4-config'
+import type { ProjectId } from '@c4docs/likec4-core'
+import type { LogRecord } from '@c4docs/likec4-log'
+import { configureLogger } from '@c4docs/likec4-log'
 import { UriUtils } from 'langium'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { URI } from 'vscode-uri'

@@ -1,5 +1,5 @@
-import { css } from '@likec4/styles/css'
-import { container } from '@likec4/styles/patterns'
+import { css } from '@c4docs/likec4-styles/css'
+import { container } from '@c4docs/likec4-styles/patterns'
 
 export { focusable } from './_shared.css'
 

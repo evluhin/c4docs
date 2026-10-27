@@ -19,8 +19,8 @@ import type { PublishPayload } from './payload'
 // its module registry with `handler.spec.ts` - see that module's header. `fromWorkspace` is
 // mocked here too, but only so the double defaults to the real implementation no matter which
 // file registers the mock first: this suite always runs against real language services.
-vi.mock('@likec4/language-services/node', async importOriginal => {
-  const actual = await importOriginal<typeof import('@likec4/language-services/node')>()
+vi.mock('@c4docs/likec4-language-services/node', async importOriginal => {
+  const actual = await importOriginal<typeof import('@c4docs/likec4-language-services/node')>()
   const doubles = await import('./__doubles__')
   doubles.rememberRealWorkspace(actual.fromWorkspace)
   return { ...actual, fromWorkspace: doubles.fromWorkspace }
@@ -169,7 +169,7 @@ describe('publish handler (real workspace)', () => {
     expect(logs.warn.join('\n')).not.toMatch(/is empty, skipping/)
   })
 
-  // The one test that proves the icon walk against what `@likec4/core` really emits, rather
+  // The one test that proves the icon walk against what `@c4docs/likec4-core` really emits, rather
   // than against a hand-written model: `local-icons` puts the same file behind a specification
   // element style, an element property and a view rule style override.
   it('inlines local icons and rewrites every reference', { timeout: 60_000 }, async () => {

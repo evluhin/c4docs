@@ -5,9 +5,9 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { DiagramView } from '@likec4/core/types'
-import { StaticLikeC4Diagram, useUpdateEffect } from '@likec4/diagram'
-import { Box } from '@likec4/styles/jsx'
+import type { DiagramView } from '@c4docs/likec4-core/types'
+import { StaticLikeC4Diagram, useUpdateEffect } from '@c4docs/likec4-diagram'
+import { Box } from '@c4docs/likec4-styles/jsx'
 import {
   type TreeNodeData,
   Button,

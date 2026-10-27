@@ -1,4 +1,4 @@
-import type { NonEmptyArray, ProjectId } from '@likec4/core/types'
+import type { NonEmptyArray, ProjectId } from '@c4docs/likec4-core/types'
 import {
   createBrowserHistory,
   createHashHistory,

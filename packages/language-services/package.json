@@ -1,5 +1,5 @@
 {
-  "name": "@likec4/language-services",
+  "name": "@c4docs/likec4-language-services",
   "version": "1.60.0",
   "description": "LikeC4 Language Services",
   "homepage": "https://likec4.dev",
@@ -70,12 +70,12 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@likec4/config": "workspace:*",
-    "@likec4/core": "workspace:*",
-    "@likec4/generators": "workspace:*",
-    "@likec4/language-server": "workspace:*",
-    "@likec4/layouts": "workspace:*",
-    "@likec4/log": "workspace:*",
+    "@c4docs/likec4-config": "workspace:*",
+    "@c4docs/likec4-core": "workspace:*",
+    "@c4docs/likec4-generators": "workspace:*",
+    "@c4docs/likec4-language-server": "workspace:*",
+    "@c4docs/likec4-layouts": "workspace:*",
+    "@c4docs/likec4-log": "workspace:*",
     "defu": "catalog:utils",
     "langium": "catalog:langium",
     "pathe": "catalog:utils",
@@ -88,8 +88,8 @@
     "vscode-uri": "catalog:vscode"
   },
   "devDependencies": {
-    "@likec4/devops": "workspace:*",
-    "@likec4/tsconfig": "workspace:*",
+    "@c4docs/likec4-devops": "workspace:*",
+    "@c4docs/likec4-tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "memfs": "catalog:",
     "oxlint": "catalog:",

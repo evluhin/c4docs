@@ -1,5 +1,5 @@
-import type { LikeC4ProjectConfig } from '@likec4/config'
-import type { ProjectId } from '@likec4/core/types'
+import type { LikeC4ProjectConfig } from '@c4docs/likec4-config'
+import type { ProjectId } from '@c4docs/likec4-core/types'
 import { existsSync, statSync } from 'node:fs'
 import { resolve, sep } from 'node:path'
 import { URI } from 'vscode-uri'

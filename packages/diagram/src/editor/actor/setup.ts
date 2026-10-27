@@ -1,4 +1,4 @@
-import type * as t from '@likec4/core/types'
+import type * as t from '@c4docs/likec4-core/types'
 import {
   type ActorRefFromLogic,
   type StateMachine,

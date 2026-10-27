@@ -5,9 +5,9 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { Fqn } from '@likec4/core'
-import type { OnInitialized } from '@likec4/diagram'
-import { css } from '@likec4/styles/css'
+import type { Fqn } from '@c4docs/likec4-core'
+import type { OnInitialized } from '@c4docs/likec4-diagram'
+import { css } from '@c4docs/likec4-styles/css'
 import {
   Alert,
   AppShell,
@@ -366,7 +366,7 @@ function InlineNotice({ message }: { message: string }) {
  * `focus` has no corresponding LikeC4View prop; it is applied through the
  * diagram runtime once initialized. We use the `onInitialized` callback (which
  * hands us the owning diagram's {@link DiagramApi}) rather than a hook, so focus
- * works regardless of which `@likec4/diagram` module instance owns the embedded
+ * works regardless of which `@c4docs/likec4-diagram` module instance owns the embedded
  * view — the hooks exported from this app bind to a different instance.
  */
 function EmbeddedView({ props }: { props: EmbedViewProps }) {

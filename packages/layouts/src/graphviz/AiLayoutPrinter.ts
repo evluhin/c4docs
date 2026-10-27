@@ -6,7 +6,7 @@ import type {
   EdgeId,
   HexColor,
   LikeC4Styles,
-} from '@likec4/core'
+} from '@c4docs/likec4-core'
 
 import { entries, first, isNonNullish, isNumber, last } from 'remeda'
 import type { EdgeModel, RootGraphModel } from 'ts-graphviz'

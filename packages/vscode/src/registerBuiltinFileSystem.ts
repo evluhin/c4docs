@@ -1,5 +1,5 @@
-import { Scheme } from '@likec4/language-server/likec4lib'
-import * as BuildIn from '@likec4/language-server/likec4lib'
+import { Scheme } from '@c4docs/likec4-language-server/likec4lib'
+import * as BuildIn from '@c4docs/likec4-language-server/likec4lib'
 import { defineService, useDisposable } from 'reactive-vscode'
 import * as vscode from 'vscode'
 

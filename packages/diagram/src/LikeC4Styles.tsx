@@ -2,7 +2,7 @@ import type {
   ElementColorValues,
   LikeC4Styles as LikeC4StylesLib,
   ThemeColorValues,
-} from '@likec4/core'
+} from '@c4docs/likec4-core'
 import { useMantineStyleNonce } from '@mantine/core'
 import { memo, useMemo } from 'react'
 import type { JSX } from 'react/jsx-runtime'

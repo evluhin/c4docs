@@ -1,4 +1,4 @@
-import type { DocFrontmatter, DocPage } from '@likec4/core/types'
+import type { DocFrontmatter, DocPage } from '@c4docs/likec4-core/types'
 import { describe, expect, it } from 'vitest'
 import { type NavEntry, assembleDocsTreeFromNav } from './nav'
 import { assembleDocsTree } from './tree'

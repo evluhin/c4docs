@@ -1,4 +1,4 @@
-import type { ViewId } from '@likec4/core'
+import type { ViewId } from '@c4docs/likec4-core'
 import type { Disposable } from 'langium'
 import { describe, vi } from 'vitest'
 import { ast } from '../../ast'

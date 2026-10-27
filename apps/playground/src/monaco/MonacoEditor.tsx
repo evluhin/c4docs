@@ -1,7 +1,7 @@
 import { usePlayground } from '$/hooks/usePlayground'
 import type { LayoutedModelApi } from '$components/drawio/DrawioContextMenuProvider'
+import { loggable, rootLogger } from '@c4docs/likec4-log'
 import * as monaco from '@codingame/monaco-vscode-editor-api'
-import { loggable, rootLogger } from '@likec4/log'
 import { useCallbackRef } from '@mantine/hooks'
 import { useSyncedRef, useUpdateEffect } from '@react-hookz/web'
 import { MonacoEditorReactComp } from '@typefox/monaco-editor-react'

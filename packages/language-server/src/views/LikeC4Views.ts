@@ -6,7 +6,7 @@ import type {
   LayoutType,
   ProjectId,
   ViewId,
-} from '@likec4/core'
+} from '@c4docs/likec4-core'
 import {
   _layout,
   applyCachedLayout,
@@ -14,12 +14,12 @@ import {
   calcDriftsFromSnapshot,
   DefaultMap,
   invariant,
-} from '@likec4/core'
-import { type AdhocViewPredicate, computeAdhocView } from '@likec4/core/compute-view'
-import type { LikeC4Model } from '@likec4/core/model'
-import { type LayoutTaskParams, type QueueGraphvizLayoter, GraphvizLayouter } from '@likec4/layouts'
-import type { AILayoutHints } from '@likec4/layouts/ai'
-import { type Logger, loggable } from '@likec4/log'
+} from '@c4docs/likec4-core'
+import { type AdhocViewPredicate, computeAdhocView } from '@c4docs/likec4-core/compute-view'
+import type { LikeC4Model } from '@c4docs/likec4-core/model'
+import { type LayoutTaskParams, type QueueGraphvizLayoter, GraphvizLayouter } from '@c4docs/likec4-layouts'
+import type { AILayoutHints } from '@c4docs/likec4-layouts/ai'
+import { type Logger, loggable } from '@c4docs/likec4-log'
 import { type WorkspaceCache, Disposable, interruptAndCheck } from 'langium'
 import { isTruthy, values } from 'remeda'
 import type { Writable } from 'type-fest'

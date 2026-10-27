@@ -1,4 +1,4 @@
-import { nonNullable } from '@likec4/core'
+import { nonNullable } from '@c4docs/likec4-core'
 import { join } from 'pathe'
 import {
   computed,

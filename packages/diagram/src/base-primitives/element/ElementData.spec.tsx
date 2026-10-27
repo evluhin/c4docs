@@ -2,8 +2,8 @@
 //
 // Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import type { ComputedNodeStyle, NodeId } from '@likec4/core'
-import type { Color } from '@likec4/core/types'
+import type { ComputedNodeStyle, NodeId } from '@c4docs/likec4-core'
+import type { Color } from '@c4docs/likec4-core/types'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { ElementData } from './ElementData'

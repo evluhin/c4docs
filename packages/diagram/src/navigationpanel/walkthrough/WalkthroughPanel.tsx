@@ -1,6 +1,6 @@
-import { RichText } from '@likec4/core'
-import { styled } from '@likec4/styles/jsx'
-import { vstack } from '@likec4/styles/patterns'
+import { RichText } from '@c4docs/likec4-core'
+import { styled } from '@c4docs/likec4-styles/jsx'
+import { vstack } from '@c4docs/likec4-styles/patterns'
 import {
   ScrollAreaAutosize,
 } from '@mantine/core'

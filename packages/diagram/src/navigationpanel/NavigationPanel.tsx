@@ -1,7 +1,7 @@
-import { getViewFolderPath } from '@likec4/core/model'
-import { hasProp, isDynamicView } from '@likec4/core/types'
-import { VStack } from '@likec4/styles/jsx'
-import { hstack } from '@likec4/styles/patterns'
+import { getViewFolderPath } from '@c4docs/likec4-core/model'
+import { hasProp, isDynamicView } from '@c4docs/likec4-core/types'
+import { VStack } from '@c4docs/likec4-styles/jsx'
+import { hstack } from '@c4docs/likec4-styles/patterns'
 import {
   Popover,
   PopoverTarget,

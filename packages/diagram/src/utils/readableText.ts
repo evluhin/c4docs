@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import { type MarkdownOrString, RichText } from '@likec4/core'
+import { type MarkdownOrString, RichText } from '@c4docs/likec4-core'
 
 const WHITESPACE = /\s+/g
 

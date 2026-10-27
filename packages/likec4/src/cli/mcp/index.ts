@@ -1,5 +1,5 @@
-import { configureLanguageServerLogger } from '@likec4/language-server'
-import { startLikeC4MCP } from '@likec4/mcp'
+import { configureLanguageServerLogger } from '@c4docs/likec4-language-server'
+import { startLikeC4MCP } from '@c4docs/likec4-mcp'
 import k from 'tinyrainbow'
 import type { Argv } from 'yargs'
 import { boxen } from '../../logger'

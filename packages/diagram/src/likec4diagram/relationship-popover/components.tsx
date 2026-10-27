@@ -3,9 +3,9 @@
 // Copyright (c) 2023-2026 Denis Davydkov
 // Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 //
-import type { Color } from '@likec4/core/types'
-import { styled } from '@likec4/styles/jsx'
-import { txt } from '@likec4/styles/patterns'
+import type { Color } from '@c4docs/likec4-core/types'
+import { styled } from '@c4docs/likec4-styles/jsx'
+import { txt } from '@c4docs/likec4-styles/patterns'
 import type { PropsWithChildren } from 'react'
 
 export const Endpoint = ({ children, likec4color }: PropsWithChildren<{ likec4color: Color }>) => {

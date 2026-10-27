@@ -1,4 +1,4 @@
-import type { LayoutedLikeC4ModelData } from '@likec4/core'
+import type { LayoutedLikeC4ModelData } from '@c4docs/likec4-core'
 import { relative } from 'node:path'
 import type { GitCommit, GitProvenance } from './git'
 

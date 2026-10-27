@@ -1,4 +1,4 @@
-import { HStack, styled } from '@likec4/styles/jsx'
+import { HStack, styled } from '@c4docs/likec4-styles/jsx'
 import { IconChevronRight } from '@tabler/icons-react'
 import { Fragment } from 'react'
 import { useDiagram } from '../../../hooks/safeContext'

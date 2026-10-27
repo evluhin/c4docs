@@ -1,4 +1,4 @@
-import { css, cx } from '@likec4/styles/css'
+import { css, cx } from '@c4docs/likec4-styles/css'
 
 export const treeNode = css({
   [`&[data-level='1']`]: {

@@ -1,4 +1,4 @@
-import { fromWorkspace } from '@likec4/language-services/node'
+import { fromWorkspace } from '@c4docs/likec4-language-services/node'
 import { mkdtemp } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'

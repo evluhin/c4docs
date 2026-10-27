@@ -5,10 +5,10 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { ProjectId } from '@likec4/core/types'
-import type { LikeC4LanguageServices } from '@likec4/language-services'
-import { fromWorkspace } from '@likec4/language-services/node'
-import { loggable } from '@likec4/log'
+import type { ProjectId } from '@c4docs/likec4-core/types'
+import type { LikeC4LanguageServices } from '@c4docs/likec4-language-services'
+import { fromWorkspace } from '@c4docs/likec4-language-services/node'
+import { loggable } from '@c4docs/likec4-log'
 import type { AnyTextAdapter } from '@tanstack/ai'
 import pDebounce from 'p-debounce'
 import { funnel, hasAtLeast, isBoolean, isDeepEqual, map } from 'remeda'

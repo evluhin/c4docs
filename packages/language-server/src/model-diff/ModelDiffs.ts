@@ -1,11 +1,11 @@
-import type { DiagramView, DiffId, DiffSummary, ParsedLikeC4ModelData, ProjectId, ViewId } from '@likec4/core'
+import type { DiagramView, DiffId, DiffSummary, ParsedLikeC4ModelData, ProjectId, ViewId } from '@c4docs/likec4-core'
 import {
   type CompareModels,
   type CompareViewResult,
   computeCompareViews,
   createCompareModels,
-} from '@likec4/core/compute-view'
-import { getOrCreate } from '@likec4/core/utils'
+} from '@c4docs/likec4-core/compute-view'
+import { getOrCreate } from '@c4docs/likec4-core/utils'
 import { AstUtils } from 'langium'
 import { keys, values } from 'remeda'
 import { type Position, type Range, DiagnosticSeverity } from 'vscode-languageserver-types'

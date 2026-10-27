@@ -1,4 +1,4 @@
-import type { TagSpecification } from '@likec4/core'
+import type { TagSpecification } from '@c4docs/likec4-core'
 import { describe, expect, it } from 'vitest'
 import { generateColorVars } from './TagStylesContext'
 

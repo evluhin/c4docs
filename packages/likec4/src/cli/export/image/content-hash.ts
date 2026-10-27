@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { DiagramView } from '@likec4/core'
-import { objectHash } from '@likec4/core/utils'
+import type { DiagramView } from '@c4docs/likec4-core'
+import { objectHash } from '@c4docs/likec4-core/utils'
 
 /** Length of the short hex digest embedded into image file names. */
 const HASH_LENGTH = 8

@@ -1,4 +1,4 @@
-import type { DiffSummary, LayoutedView } from '@likec4/core/types'
+import type { DiffSummary, LayoutedView } from '@c4docs/likec4-core/types'
 import JSON5 from 'json5'
 import { logGenerating } from '../logger'
 import { type ProjectVirtualModule, generateCombinedProjects, generateMatches } from './_shared'
@@ -12,7 +12,7 @@ interface ProjectDiffs {
 }
 
 const code = (data: ProjectDiffs) => `
-import { atom } from 'likec4/vite-plugin/internal'
+import { atom } from '@c4docs/likec4/vite-plugin/internal'
 
 export let $diffs = atom(${JSON5.stringify(data)})
 

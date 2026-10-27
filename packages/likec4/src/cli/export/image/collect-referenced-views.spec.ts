@@ -1,4 +1,4 @@
-import type { DiagramRef, DocPage, DocsModel, ViewId } from '@likec4/core'
+import type { DiagramRef, DocPage, DocsModel, ViewId } from '@c4docs/likec4-core'
 import { describe, expect, it } from 'vitest'
 import { collectReferencedViews } from './collect-referenced-views'
 

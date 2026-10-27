@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@likec4/tsconfig/base.json",
+  "extends": "@c4docs/likec4-tsconfig/base.json",
   "compilerOptions": {
     "exactOptionalPropertyTypes": false,
     "customConditions": [

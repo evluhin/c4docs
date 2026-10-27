@@ -31,7 +31,7 @@ export const useDotBin = {
 export const useCorePackage = {
   boolean: true,
   type: 'boolean',
-  desc: 'use `@likec4/core` package in types',
+  desc: 'use `@c4docs/likec4-core` package in types',
   default: false,
 } as const satisfies Options
 

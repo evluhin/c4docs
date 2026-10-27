@@ -7,7 +7,7 @@ import {
   invariant,
   isAncestor,
   nonNullable,
-} from '@likec4/core'
+} from '@c4docs/likec4-core'
 import { type AstNode, GrammarUtils } from 'langium'
 import { entries, filter, findLast, isTruthy, last } from 'remeda'
 import { type Range, TextEdit } from 'vscode-languageserver-types'

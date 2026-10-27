@@ -1,5 +1,5 @@
-import { type DiagramNode, type Icon, type LayoutedView, type ProjectId, type ViewId, exact } from '@likec4/core'
-import { onNextTick, stringHash } from '@likec4/core/utils'
+import { type DiagramNode, type Icon, type LayoutedView, type ProjectId, type ViewId, exact } from '@c4docs/likec4-core'
+import { onNextTick, stringHash } from '@c4docs/likec4-core/utils'
 import JSON5 from 'json5'
 import { Disposable, SimpleCache, URI, UriUtils } from 'langium'
 import pLimit from 'p-limit'

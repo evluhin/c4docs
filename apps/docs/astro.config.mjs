@@ -1,6 +1,6 @@
 import react from '@astrojs/react'
 import starlight from '@astrojs/starlight'
-import { LikeC4VitePlugin } from '@likec4/vite-plugin'
+import { LikeC4VitePlugin } from '@c4docs/likec4-vite-plugin'
 import tailwindcss from '@tailwindcss/vite'
 import skills from 'astro-skills'
 import { defineConfig } from 'astro/config'
@@ -151,8 +151,8 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        // '@likec4/icons': new URL('../../packages/icons', import.meta.url).pathname,
-        // '@likec4/core': new URL('../../packages/core/src', import.meta.url).pathname,
+        // '@c4docs/likec4-icons': new URL('../../packages/icons', import.meta.url).pathname,
+        // '@c4docs/likec4-core': new URL('../../packages/core/src', import.meta.url).pathname,
         'likec4/model': new URL('../../packages/likec4/src/model', import.meta.url).pathname,
         // Alias to bundled React components, can't use 'development' condition
         'likec4/react': new URL('../../packages/react/dist/index.mjs', import.meta.url).pathname,

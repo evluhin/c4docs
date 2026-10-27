@@ -1,5 +1,5 @@
-import { onNextTick } from '@likec4/core/utils'
-import { type GraphvizPort, QueueGraphvizLayoter } from '@likec4/layouts'
+import { onNextTick } from '@c4docs/likec4-core/utils'
+import { type GraphvizPort, QueueGraphvizLayoter } from '@c4docs/likec4-layouts'
 import type { Module } from 'langium'
 import { DocumentState, inject, WorkspaceCache } from 'langium'
 import type {

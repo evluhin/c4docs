@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { ProjectId, ViewId } from '@likec4/core/types'
+import type { ProjectId, ViewId } from '@c4docs/likec4-core/types'
 import { computed, extensionContext, useIsDarkTheme, watch } from 'reactive-vscode'
 import { type Webview, type WebviewPanel, Uri } from 'vscode'
 import { hasAI, isProd } from '../const.ts'

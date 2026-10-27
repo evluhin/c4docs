@@ -1,4 +1,4 @@
-import { type ProjectId, DiffId, FqnRef } from '@likec4/core'
+import { type ProjectId, DiffId, FqnRef } from '@c4docs/likec4-core'
 import { type ValidationCheck, AstUtils, DocumentState, WorkspaceCache } from 'langium'
 import { ast } from '../ast'
 import { type DiffOverlap, findDiffOverlaps, overlapsOf } from '../model-diff/overlaps'

@@ -1,5 +1,5 @@
 {
-  "name": "@likec4/leanix-bridge",
+  "name": "@c4docs/likec4-leanix-bridge",
   "version": "1.60.0",
   "description": "Bridge from LikeC4 semantic model to LeanIX-shaped inventory artifacts (supports optional live sync or dry-run modes)",
   "homepage": "https://likec4.dev",
@@ -44,12 +44,12 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@likec4/core": "workspace:*",
+    "@c4docs/likec4-core": "workspace:*",
     "remeda": "catalog:utils"
   },
   "devDependencies": {
-    "@likec4/devops": "workspace:*",
-    "@likec4/tsconfig": "workspace:*",
+    "@c4docs/likec4-devops": "workspace:*",
+    "@c4docs/likec4-tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "tsdown": "catalog:tsdown",
     "typescript": "catalog:",

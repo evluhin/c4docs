@@ -10,11 +10,11 @@ import {
   type Point,
   _layout,
   _stage,
-} from '@likec4/core'
-import type { ComputedProjectsView, LayoutedProjectsView } from '@likec4/core/compute-view'
-import { BBox } from '@likec4/core/geometry'
-import { invariant } from '@likec4/core/utils'
-import { logger } from '@likec4/log'
+} from '@c4docs/likec4-core'
+import type { ComputedProjectsView, LayoutedProjectsView } from '@c4docs/likec4-core/compute-view'
+import { BBox } from '@c4docs/likec4-core/geometry'
+import { invariant } from '@c4docs/likec4-core/utils'
+import { logger } from '@c4docs/likec4-log'
 import { hasAtLeast, isTruthy } from 'remeda'
 import type { Writable } from 'type-fest'
 import { EDGE_LABEL_MAX_CHARS, EDGE_LABEL_MAX_LINES, wrap } from './dot-labels'

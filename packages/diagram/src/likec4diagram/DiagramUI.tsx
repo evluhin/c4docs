@@ -1,4 +1,4 @@
-import { hasProp, isDynamicView } from '@likec4/core'
+import { hasProp, isDynamicView } from '@c4docs/likec4-core'
 import { useRerender } from '@react-hookz/web'
 import { useCallback } from 'react'
 import { ErrorBoundary } from '../components/ErrorFallback'

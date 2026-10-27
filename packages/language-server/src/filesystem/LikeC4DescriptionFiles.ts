@@ -1,4 +1,4 @@
-import { onNextTick } from '@likec4/core/utils'
+import { onNextTick } from '@c4docs/likec4-core/utils'
 import { Disposable, URI, UriUtils } from 'langium'
 import { entries, groupBy, uniqueBy } from 'remeda'
 import { logger as rootLogger } from '../logger'

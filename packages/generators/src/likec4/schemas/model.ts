@@ -1,7 +1,7 @@
 import type {
   Fqn,
   RelationId,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import { produce } from 'immer'
 import { indexBy, isNonNullish, pickBy, prop, randomString } from 'remeda'
 import * as z from 'zod/v4'

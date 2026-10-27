@@ -1,4 +1,4 @@
-import { type ProjectId, nonexhaustive } from '@likec4/core'
+import { type ProjectId, nonexhaustive } from '@c4docs/likec4-core'
 import type { AstNode } from 'langium'
 import {
   type AstNodeDescription,

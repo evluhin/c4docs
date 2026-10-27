@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { configureLanguageServerLogger } from '@likec4/language-server'
-import { type LikeC4, fromWorkspace } from '@likec4/language-services/node'
+import { configureLanguageServerLogger } from '@c4docs/likec4-language-server'
+import { type LikeC4, fromWorkspace } from '@c4docs/likec4-language-services/node'
 import { defu } from 'defu'
 import { resolve } from 'node:path'
 import type { Readable, Writable } from 'node:stream'

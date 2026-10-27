@@ -1,4 +1,4 @@
-import { css } from '@likec4/styles/css'
+import { css } from '@c4docs/likec4-styles/css'
 import { Tooltip } from '@mantine/core'
 import { getBezierPath } from '@xyflow/system'
 import {

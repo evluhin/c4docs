@@ -1,4 +1,4 @@
-import { type EdgeId, type Fqn, nonNullable } from '@likec4/core'
+import { type EdgeId, type Fqn, nonNullable } from '@c4docs/likec4-core'
 import { useSelector } from '@xstate/react'
 import { shallowEqual } from 'fast-equals'
 import { createContext, useContext, useMemo } from 'react'

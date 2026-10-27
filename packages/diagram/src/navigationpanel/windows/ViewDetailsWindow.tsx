@@ -1,6 +1,6 @@
-import * as types from '@likec4/core/types'
-import { css, cx } from '@likec4/styles/css'
-import { Box, HStack, styled, Txt, VStack } from '@likec4/styles/jsx'
+import * as types from '@c4docs/likec4-core/types'
+import { css, cx } from '@c4docs/likec4-styles/css'
+import { Box, HStack, styled, Txt, VStack } from '@c4docs/likec4-styles/jsx'
 import {
   Button,
   DataList,

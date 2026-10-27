@@ -1,8 +1,8 @@
-import type { LayoutedLikeC4ModelData } from '@likec4/core'
-import type { ProjectId } from '@likec4/core/types'
-import type { LikeC4 as LikeC4Instance } from '@likec4/language-services/node'
-import { fromWorkspace } from '@likec4/language-services/node'
-import { loggable } from '@likec4/log'
+import type { LayoutedLikeC4ModelData } from '@c4docs/likec4-core'
+import type { ProjectId } from '@c4docs/likec4-core/types'
+import type { LikeC4 as LikeC4Instance } from '@c4docs/likec4-language-services/node'
+import { fromWorkspace } from '@c4docs/likec4-language-services/node'
+import { loggable } from '@c4docs/likec4-log'
 import ky, { HTTPError } from 'ky'
 import { realpathSync } from 'node:fs'
 import { basename, dirname, join, resolve } from 'node:path'
@@ -25,7 +25,7 @@ const PUBLISH_ENDPOINT = '/api/publish'
  * Id of the synthetic project the language server always appends to
  * `projectsManager.all` (`ProjectsManager.DefaultProjectId`).
  *
- * It is not re-exported from `@likec4/language-server`, so it is mirrored here. The value is
+ * It is not re-exported from `@c4docs/likec4-language-server`, so it is mirrored here. The value is
  * safe to pin: `likec4.config.json` validation rejects `"default"` as a project name, so a
  * real project can never claim this id. If it ever drifted, the failure would be loud (a
  * duplicate `workspacePath`), not silent — see {@link selectProjects}.

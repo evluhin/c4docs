@@ -9,7 +9,7 @@ import type {
   ParsedElementView as ElementView,
   RelationId,
   ViewId,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 
 /**
               ┌──────────────────────────────────────────────────┐

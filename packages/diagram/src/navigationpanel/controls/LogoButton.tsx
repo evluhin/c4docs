@@ -1,5 +1,5 @@
-import { css, cx } from '@likec4/styles/css'
-import { hstack } from '@likec4/styles/patterns'
+import { css, cx } from '@c4docs/likec4-styles/css'
+import { hstack } from '@c4docs/likec4-styles/patterns'
 import { UnstyledButton } from '@mantine/core'
 import * as m from 'motion/react-m'
 import { Logo, LogoIcon } from '../../components/Logo'

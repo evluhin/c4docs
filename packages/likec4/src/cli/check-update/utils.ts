@@ -1,5 +1,5 @@
-import { invariant } from '@likec4/core'
-import { loggable } from '@likec4/log'
+import { invariant } from '@c4docs/likec4-core'
+import { loggable } from '@c4docs/likec4-log'
 import isInsideContainer from 'is-inside-container'
 import ky from 'ky'
 import spawn from 'nano-spawn'

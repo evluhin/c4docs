@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { type ProjectId, FqnRef, isSameHierarchy } from '@likec4/core'
+import { type ProjectId, FqnRef, isSameHierarchy } from '@c4docs/likec4-core'
 import { type ValidationCheck, AstUtils, DocumentState, WorkspaceCache } from 'langium'
 import { flatMap, map, pipe } from 'remeda'
 import { ast } from '../ast'

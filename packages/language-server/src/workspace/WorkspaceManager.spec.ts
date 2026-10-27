@@ -2,8 +2,8 @@
 //
 // Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import { LikeC4ProjectConfigOps } from '@likec4/config'
-import type { ProjectId } from '@likec4/core'
+import { LikeC4ProjectConfigOps } from '@c4docs/likec4-config'
+import type { ProjectId } from '@c4docs/likec4-core'
 import { describe, vi } from 'vitest'
 import type { WorkspaceFolder } from 'vscode-languageserver'
 import { URI } from 'vscode-uri'

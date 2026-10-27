@@ -1,5 +1,5 @@
 import useLanguageClient from '#useLanguageClient'
-import { loggable } from '@likec4/log'
+import { loggable } from '@c4docs/likec4-log'
 import { type TelemetryEventProperties, TelemetryReporter } from '@vscode/extension-telemetry'
 import { deepEqual } from 'fast-equals'
 import {

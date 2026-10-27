@@ -1,5 +1,5 @@
-import type { ProjectId } from '@likec4/core'
-import { LikeC4ProjectsProvider } from '@likec4/diagram'
+import type { ProjectId } from '@c4docs/likec4-core'
+import { LikeC4ProjectsProvider } from '@c4docs/likec4-diagram'
 import { useCallbackRef } from '@mantine/hooks'
 import { useNavigate } from '@tanstack/react-router'
 import { useLikeC4Projects } from 'likec4:projects'

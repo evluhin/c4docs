@@ -6,7 +6,7 @@ import type {
   ViewRuleGlobalPredicateRef,
   ViewRuleGlobalStyle,
   ViewRuleRank,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import { isNonNullish, keys, pickBy, values } from 'remeda'
 import * as common from './common'
 import * as schemas from './expression'

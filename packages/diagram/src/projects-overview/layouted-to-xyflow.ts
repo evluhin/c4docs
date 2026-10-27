@@ -2,7 +2,7 @@ import type {
   LayoutedProjectEdge,
   LayoutedProjectNode,
   LayoutedProjectsView,
-} from '@likec4/core/compute-view'
+} from '@c4docs/likec4-core/compute-view'
 import { map } from 'remeda'
 import { ZIndexes } from '../base/const'
 import type { ProjectsOverviewTypes } from './_types'

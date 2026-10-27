@@ -1,5 +1,5 @@
-import { LikeC4MantineProvider } from '@likec4/diagram'
-import { configureLogger, getAnsiColorFormatter, getConsoleSink } from '@likec4/log'
+import { LikeC4MantineProvider } from '@c4docs/likec4-diagram'
+import { configureLogger, getAnsiColorFormatter, getConsoleSink } from '@c4docs/likec4-log'
 import { ModalsProvider } from '@mantine/modals'
 import ReactDOM from 'react-dom/client'
 import { Routes } from './router'

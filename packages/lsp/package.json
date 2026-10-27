@@ -1,5 +1,5 @@
 {
-  "name": "@likec4/lsp",
+  "name": "@c4docs/likec4-lsp",
   "version": "1.60.0",
   "description": "Standalone LikeC4 Language Server for editor integrations",
   "keywords": [
@@ -51,11 +51,11 @@
     "std-env": "catalog:externals"
   },
   "devDependencies": {
-    "@likec4/devops": "workspace:*",
-    "@likec4/language-server": "workspace:*",
-    "@likec4/layouts": "workspace:*",
-    "@likec4/log": "workspace:*",
-    "@likec4/tsconfig": "workspace:*",
+    "@c4docs/likec4-devops": "workspace:*",
+    "@c4docs/likec4-language-server": "workspace:*",
+    "@c4docs/likec4-layouts": "workspace:*",
+    "@c4docs/likec4-log": "workspace:*",
+    "@c4docs/likec4-tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "langium": "catalog:langium",
     "tsdown": "catalog:tsdown",

@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { isAnyOf, nonexhaustive } from '@likec4/core'
+import { isAnyOf, nonexhaustive } from '@c4docs/likec4-core'
 import {
   type AstNode,
   type CompositeCstNode,

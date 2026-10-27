@@ -1,7 +1,7 @@
-import { RichText } from '@likec4/core'
-import { Markdown } from '@likec4/diagram/custom'
-import { css } from '@likec4/styles/css'
-import { Txt } from '@likec4/styles/jsx'
+import { RichText } from '@c4docs/likec4-core'
+import { Markdown } from '@c4docs/likec4-diagram/custom'
+import { css } from '@c4docs/likec4-styles/css'
+import { Txt } from '@c4docs/likec4-styles/jsx'
 import { Notification } from '@mantine/core'
 import {
   ChatMessage as TanstackChatMessage,

@@ -1,4 +1,4 @@
-import { type ViewsBuilder, Builder } from '@likec4/core/builder'
+import { type ViewsBuilder, Builder } from '@c4docs/likec4-core/builder'
 import { describe, expect as viExpect, it } from 'vitest'
 import { materialize } from './base'
 import { deploymentView as deploymentViewOp, views as viewsOp } from './views'

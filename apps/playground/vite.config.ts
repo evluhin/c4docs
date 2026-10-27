@@ -16,13 +16,13 @@ const alias = {
   'decode-named-character-reference': require.resolve('decode-named-character-reference'),
   '@tabler/icons-react': '@tabler/icons-react/dist/esm/icons/index.mjs',
   'react-dom/server': resolve('./src/react-dom-server-mock.ts'),
-  '@likec4/styles/': resolve('./styled-system/'),
-  // '@likec4/core/compute-view/relationships': path.resolve(
+  '@c4docs/likec4-styles/': resolve('./styled-system/'),
+  // '@c4docs/likec4-core/compute-view/relationships': path.resolve(
   //   __dirname,
   //   '../../packages/core/src/compute-view/relationships-view/index.ts',
   // ),
-  // '@likec4/core': path.resolve(__dirname, '../../packages/core/src'),
-  // '@likec4/language-server': path.resolve(__dirname, '../../packages/language-server/src'),
+  // '@c4docs/likec4-core': path.resolve(__dirname, '../../packages/core/src'),
+  // '@c4docs/likec4-language-server': path.resolve(__dirname, '../../packages/language-server/src'),
 } satisfies AliasOptions
 
 export default defineConfig(({ command: _command }) => ({
@@ -48,7 +48,7 @@ export default defineConfig(({ command: _command }) => ({
       },
       optimizeDeps: {
         include: [
-          '@likec4/icons/all',
+          '@c4docs/likec4-icons/all',
           '@hpcc-js/wasm-graphviz',
           'langium/lsp',
           'langium',

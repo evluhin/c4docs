@@ -1,10 +1,10 @@
-import { LikeC4Model } from '@likec4/core/model'
+import { LikeC4Model } from '@c4docs/likec4-core/model'
 import JSON5 from 'json5'
 import { logGenerating } from '../logger'
 import { type ProjectVirtualModule, generateCombinedProjects, generateMatches } from './_shared'
 
 const projectModelCode = (model: LikeC4Model.Layouted) => `
-import { createHooksForModel, atom } from 'likec4/vite-plugin/internal'
+import { createHooksForModel, atom } from '@c4docs/likec4/vite-plugin/internal'
 
 export let $likec4data = atom(${JSON5.stringify(model.$data)})
 

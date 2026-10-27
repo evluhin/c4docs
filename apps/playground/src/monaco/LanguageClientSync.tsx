@@ -1,20 +1,19 @@
 import type { LayoutedModelApi } from '$components/drawio/DrawioContextMenuProvider'
-import type { IDisposable } from '@codingame/monaco-vscode-editor-api'
-import type { DiagramView, DiffId, Fqn, ViewChange, ViewId } from '@likec4/core'
+import type { DiagramView, DiffId, Fqn, ViewChange, ViewId } from '@c4docs/likec4-core'
 import type {
   ApplyEditsResult,
   LayoutView as LayoutViewProtocol,
   ModelEditRequest,
-} from '@likec4/language-server/protocol'
+} from '@c4docs/likec4-language-server/protocol'
+import type { IDisposable } from '@codingame/monaco-vscode-editor-api'
 import type { Location } from 'vscode-languageserver-types'
 import type { CustomWrapperConfig } from './config'
 import type { MonacoHandle } from './handle'
 
 import { usePlayground, usePlaygroundSnapshot } from '$/hooks/usePlayground'
 import { DRAWIO_EXPORT_EVENT } from '$components/drawio/drawio-events'
-import * as monaco from '@codingame/monaco-vscode-editor-api'
-import { invariant, nonNullable } from '@likec4/core'
-import { LikeC4Model } from '@likec4/core/model'
+import { invariant, nonNullable } from '@c4docs/likec4-core'
+import { LikeC4Model } from '@c4docs/likec4-core/model'
 import {
   ApplyModelEdit,
   BuildDocuments,
@@ -30,8 +29,9 @@ import {
   Locate,
   PreviewModelEdit,
   RollbackModelEdit,
-} from '@likec4/language-server/protocol'
-import { loggable, rootLogger } from '@likec4/log'
+} from '@c4docs/likec4-language-server/protocol'
+import { loggable, rootLogger } from '@c4docs/likec4-log'
+import * as monaco from '@codingame/monaco-vscode-editor-api'
 import { useCallbackRef } from '@mantine/hooks'
 import { useRouter } from '@tanstack/react-router'
 import { useEffect, useRef } from 'react'

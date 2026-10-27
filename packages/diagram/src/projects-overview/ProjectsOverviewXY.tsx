@@ -1,4 +1,4 @@
-import { cx } from '@likec4/styles/css'
+import { cx } from '@c4docs/likec4-styles/css'
 import { shallowEqual } from 'fast-equals'
 import { memo } from 'react'
 import { BaseXYFlow } from '../base/BaseXYFlow'

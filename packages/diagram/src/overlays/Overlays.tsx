@@ -1,4 +1,4 @@
-import { nonexhaustive } from '@likec4/core'
+import { nonexhaustive } from '@c4docs/likec4-core'
 import { animate } from 'motion'
 import { AnimatePresence, LayoutGroup, useReducedMotionConfig } from 'motion/react'
 import { useEffect } from 'react'

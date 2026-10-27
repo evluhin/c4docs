@@ -263,10 +263,10 @@ if (!Number.isSafeInteger(port) || port < 1 || port > 65_535 || String(port) !==
 
 const require = createRequire(import.meta.url)
 const e2eRoot = dirname(fileURLToPath(import.meta.url))
-const mcpPackageRoot = dirname(require.resolve('@likec4/mcp/package.json'))
+const mcpPackageRoot = dirname(require.resolve('@c4docs/likec4-mcp/package.json'))
 const mcpBin = resolve(mcpPackageRoot, 'bin/likec4-mcp.mjs')
 if (!existsSync(mcpBin)) {
-  throw new Error(`Installed @likec4/mcp binary does not exist: ${mcpBin}`)
+  throw new Error(`Installed @c4docs/likec4-mcp binary does not exist: ${mcpBin}`)
 }
 
 const mcpRequire = createRequire(resolve(mcpPackageRoot, 'package.json'))

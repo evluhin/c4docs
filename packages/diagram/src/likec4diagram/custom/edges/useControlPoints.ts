@@ -1,4 +1,4 @@
-import type { EdgeRouting } from '@likec4/core/types'
+import type { EdgeRouting } from '@c4docs/likec4-core/types'
 import type { XYPosition } from '@xyflow/react'
 import { deepEqual } from 'fast-equals'
 import { useState } from 'react'

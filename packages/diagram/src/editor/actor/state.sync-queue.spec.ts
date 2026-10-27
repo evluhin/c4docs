@@ -1,4 +1,4 @@
-import { scalar } from '@likec4/core/types'
+import { scalar } from '@c4docs/likec4-core/types'
 import { describe, expect, it, vi } from 'vitest'
 import { createActor, fromPromise, waitFor } from 'xstate'
 import { shouldWaitForViewSync } from '../LikeC4EditorCallbacks'

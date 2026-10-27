@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { LikeC4ProjectJsonConfig } from '@likec4/config'
-import { createTestServices } from '@likec4/language-server/test'
+import type { LikeC4ProjectJsonConfig } from '@c4docs/likec4-config'
+import { createTestServices } from '@c4docs/likec4-language-server/test'
 import { Client } from '@modelcontextprotocol/sdk/client/index.js'
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js'
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'

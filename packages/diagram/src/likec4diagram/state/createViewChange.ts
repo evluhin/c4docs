@@ -3,7 +3,7 @@ import type {
   DiagramNode,
   LayoutedView,
   ViewChange,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import { getNodeDimensions } from '@xyflow/system'
 import { hasAtLeast, map } from 'remeda'
 import { calcViewBounds } from '../../utils/view-bounds'

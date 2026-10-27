@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import { ReadBootstrapIcon } from '@likec4/vscode-preview/protocol'
+import { ReadBootstrapIcon } from '@c4docs/likec4-vscode-preview/protocol'
 import { describe, expect, it, vi } from 'vitest'
 import { createBootstrapIconLoader, isBootstrapIconName } from './bootstrapIcon'
 

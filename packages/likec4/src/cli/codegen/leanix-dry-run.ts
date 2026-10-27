@@ -4,7 +4,7 @@
  * Writes manifest.json, leanix-dry-run.json, report.json to out/bridge (or -o/--outdir).
  */
 
-import { fromWorkspace } from '@likec4/language-services/node'
+import { fromWorkspace } from '@c4docs/likec4-language-services/node'
 import k from 'tinyrainbow'
 import { createLikeC4Logger, startTimer } from '../../logger'
 import { LikeC4Model } from '../../model'

@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { DiagramRef } from '@likec4/core'
+import type { DiagramRef } from '@c4docs/likec4-core'
 
 /**
  * Props passed to the embedded `<LikeC4View>` when a ref resolves.

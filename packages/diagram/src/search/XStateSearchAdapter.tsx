@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import type { Fqn, ViewId } from '@likec4/core/types'
+import type { Fqn, ViewId } from '@c4docs/likec4-core/types'
 import { useSelector } from '@xstate/react'
 import { type PropsWithChildren, useMemo } from 'react'
 import { useCallbackRef } from '../hooks/useCallbackRef'

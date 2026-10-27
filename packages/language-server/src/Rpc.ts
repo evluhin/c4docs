@@ -8,8 +8,8 @@ import {
   type ProjectId,
   invariant,
   nonexhaustive,
-} from '@likec4/core'
-import { LikeC4Model } from '@likec4/core/model'
+} from '@c4docs/likec4-core'
+import { LikeC4Model } from '@c4docs/likec4-core/model'
 import { Disposable, interruptAndCheck, URI, UriUtils } from 'langium'
 import { DiagnosticSeverity } from 'vscode-languageserver-protocol'
 import {

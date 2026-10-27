@@ -1,1 +1,1 @@
-export * from '@likec4/core/builder'
+export * from '@c4docs/likec4-core/builder'

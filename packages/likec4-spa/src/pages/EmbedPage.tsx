@@ -4,7 +4,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { pickViewBounds, StaticLikeC4Diagram } from '@likec4/diagram'
+import { pickViewBounds, StaticLikeC4Diagram } from '@c4docs/likec4-diagram'
 import { useSearch } from '@tanstack/react-router'
 import { useCurrentProject, useCurrentView, useTransparentBackground } from '../hooks'
 import { useRelationshipBrowserScope } from '../relationship-browser/scope'

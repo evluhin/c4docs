@@ -2,8 +2,8 @@
 //
 // Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import type { Fqn, ViewId } from '@likec4/core/types'
-import { type SearchContextValue, normalizeSearch, SearchContext } from '@likec4/diagram'
+import type { Fqn, ViewId } from '@c4docs/likec4-core/types'
+import { type SearchContextValue, normalizeSearch, SearchContext } from '@c4docs/likec4-diagram'
 import { useNavigate } from '@tanstack/react-router'
 import { type PropsWithChildren, useCallback, useMemo, useState } from 'react'
 

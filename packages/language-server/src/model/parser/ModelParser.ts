@@ -5,9 +5,9 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type * as c4 from '@likec4/core'
-import { invariant, LinkedList, nonexhaustive, nonNullable } from '@likec4/core'
-import { exact, FqnRef } from '@likec4/core/types'
+import type * as c4 from '@c4docs/likec4-core'
+import { invariant, LinkedList, nonexhaustive, nonNullable } from '@c4docs/likec4-core'
+import { exact, FqnRef } from '@c4docs/likec4-core/types'
 import { filter, first, hasAtLeast, isDefined, isEmpty, isEmptyish, isTruthy, map, mapToObj, pipe } from 'remeda'
 import {
   type LikeC4LangiumDocument,

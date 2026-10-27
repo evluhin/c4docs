@@ -1,5 +1,5 @@
-import { cx } from '@likec4/styles/css'
-import { overlay } from '@likec4/styles/recipes'
+import { cx } from '@c4docs/likec4-styles/css'
+import { overlay } from '@c4docs/likec4-styles/recipes'
 import {
   RemoveScroll,
 } from '@mantine/core'

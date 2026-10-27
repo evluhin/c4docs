@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { LikeC4ProjectConfig, RelationshipBrowserScope, WebappExportFormat } from '@likec4/config'
-import type { NonEmptyArray } from '@likec4/core'
+import type { LikeC4ProjectConfig, RelationshipBrowserScope, WebappExportFormat } from '@c4docs/likec4-config'
+import type { NonEmptyArray } from '@c4docs/likec4-core'
 import JSON5 from 'json5'
 import { map } from 'remeda'
 import { logGenerating } from '../logger'
@@ -25,7 +25,7 @@ type ProjectData = {
 }
 
 const code = (projects: NonEmptyArray<ProjectData>) => `
-import { atom, useStore } from 'likec4/vite-plugin/internal'
+import { atom, useStore } from '@c4docs/likec4/vite-plugin/internal'
 
 export const isSingleProject = ${projects.length === 1};
 export const projects = ${JSON5.stringify(projects, null, 2)};

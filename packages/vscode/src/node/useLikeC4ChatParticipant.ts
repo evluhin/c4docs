@@ -1,5 +1,5 @@
-import { enhanceLayoutWithAI } from '@likec4/layouts/ai'
-import { loggable } from '@likec4/log'
+import { enhanceLayoutWithAI } from '@c4docs/likec4-layouts/ai'
+import { loggable } from '@c4docs/likec4-log'
 import { defineService, extensionContext, toValue, useDisposable } from 'reactive-vscode'
 import * as vscode from 'vscode'
 import { commands } from '../meta.ts'

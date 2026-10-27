@@ -1,4 +1,4 @@
-import { rootLogger } from '@likec4/log'
+import { rootLogger } from '@c4docs/likec4-log'
 import { k } from './virtuals/_shared'
 
 export const logger = rootLogger.getChild('vite')

@@ -1,4 +1,4 @@
-import { css } from '@likec4/styles/css'
+import { css } from '@c4docs/likec4-styles/css'
 
 /**
  * The outline reads as a stack of planes: the nesting level the walkthrough is standing on

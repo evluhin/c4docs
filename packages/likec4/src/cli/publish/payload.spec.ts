@@ -1,5 +1,5 @@
-import type { LayoutedLikeC4ModelData } from '@likec4/core'
-import { ProjectId } from '@likec4/core'
+import type { LayoutedLikeC4ModelData } from '@c4docs/likec4-core'
+import { ProjectId } from '@c4docs/likec4-core'
 import { join, posix, resolve, win32 } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import type { GitProvenance } from './git'

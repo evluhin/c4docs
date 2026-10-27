@@ -1,4 +1,4 @@
-import type * as c4 from '@likec4/core'
+import type * as c4 from '@c4docs/likec4-core'
 import {
   type MarkdownOrString,
   exact,
@@ -6,7 +6,7 @@ import {
   isNonEmptyArray,
   nonexhaustive,
   nonNullable,
-} from '@likec4/core'
+} from '@c4docs/likec4-core'
 import { type AstNode, type Reference, GrammarUtils, isAstNode, isNamed, UriUtils } from 'langium'
 import {
   filter,
@@ -56,7 +56,7 @@ const BASIC_ESCAPES: Record<string, string> = { b: '\b', f: '\f', n: '\n', r: '\
 
 /**
  * Mirrors langium's default string conversion, except an escaped `\/` is kept as-is,
- * so @likec4/core's view-folder splitting can tell it apart from a real separator later on.
+ * so @c4docs/likec4-core's view-folder splitting can tell it apart from a real separator later on.
  */
 function unescapeKeepingSlash(quoted: string): string {
   let result = ''

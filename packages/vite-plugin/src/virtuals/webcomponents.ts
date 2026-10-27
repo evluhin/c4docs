@@ -1,4 +1,4 @@
-import type { ProjectId } from '@likec4/core/types'
+import type { ProjectId } from '@c4docs/likec4-core/types'
 import { logGenerating } from '../logger'
 import { type ProjectVirtualModule, generateMatches } from './_shared'
 import { hardenJsonStringLiteralForEmbeddedScript } from './hardenJsonStringLiteralForEmbeddedScript'

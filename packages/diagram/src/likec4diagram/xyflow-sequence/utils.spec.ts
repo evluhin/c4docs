@@ -1,4 +1,4 @@
-import type { DiagramNode } from '@likec4/core/types'
+import type { DiagramNode } from '@c4docs/likec4-core/types'
 import { describe, expect, it } from 'vitest'
 import { buildCompounds } from './utils'
 

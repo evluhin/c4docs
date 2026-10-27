@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { DiagramRef, DocPage, DocsModel, ViewId } from '@likec4/core/types'
+import type { DiagramRef, DocPage, DocsModel, ViewId } from '@c4docs/likec4-core/types'
 import { describe, expect, it } from 'vitest'
 import { buildDocsByViewId } from './docs-backrefs'
 

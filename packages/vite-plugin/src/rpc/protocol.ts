@@ -1,5 +1,5 @@
-import type { AdhocViewPredicate } from '@likec4/core/compute-view'
-import type { LayoutedElementView, ProjectId, ViewChange, ViewId } from '@likec4/core/types'
+import type { AdhocViewPredicate } from '@c4docs/likec4-core/compute-view'
+import type { LayoutedElementView, ProjectId, ViewChange, ViewId } from '@c4docs/likec4-core/types'
 
 export interface LikeC4VitePluginRpc {
   /**

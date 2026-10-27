@@ -9,7 +9,7 @@ import type {
   RelationId,
   ViewChange,
   ViewId,
-} from '@likec4/core'
+} from '@c4docs/likec4-core'
 
 import type { NotificationType, RequestType } from 'vscode-messenger-common'
 

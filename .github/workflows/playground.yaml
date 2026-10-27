@@ -61,7 +61,7 @@ jobs:
 
       - name: ⚙️ build
         run: |
-          pnpm turbo run build --filter='@likec4/playground'
+          pnpm turbo run build --filter='@c4docs/likec4-playground'
 
       - id: cloudflare
         name: publish to cloudflare

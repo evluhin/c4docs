@@ -1,14 +1,14 @@
 /**
  * Unit test: bridge artifacts (manifest, dry-run, report) using a fixture model.
- * No workspace/fromWorkspace so @likec4/log and language-server are not loaded.
+ * No workspace/fromWorkspace so @c4docs/likec4-log and language-server are not loaded.
  */
 
-import type { BridgeModelInput } from '@likec4/leanix-bridge'
+import type { BridgeModelInput } from '@c4docs/likec4-leanix-bridge'
 import {
   buildBridgeReport,
   toBridgeManifest,
   toLeanixInventoryDryRun,
-} from '@likec4/leanix-bridge'
+} from '@c4docs/likec4-leanix-bridge'
 import { describe, expect, it } from 'vitest'
 import { buildBridgeArtifacts } from '../bridge/shared'
 

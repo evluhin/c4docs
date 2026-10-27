@@ -1,4 +1,4 @@
-import { Box } from '@likec4/styles/jsx'
+import { Box } from '@c4docs/likec4-styles/jsx'
 import { useDocumentTitle } from '@mantine/hooks'
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { pageTitle } from 'likec4:app-config'

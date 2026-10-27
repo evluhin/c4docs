@@ -8,7 +8,7 @@
 // @ts-nocheck
 
 import 'zx/globals'
-import { LikeC4 } from 'likec4'
+import { LikeC4 } from '@c4docs/likec4'
 import assert from 'node:assert'
 
 $.stdio = 'inherit'

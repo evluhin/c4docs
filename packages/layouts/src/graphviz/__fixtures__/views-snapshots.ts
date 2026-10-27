@@ -1,4 +1,4 @@
-import { type ComputedElementView, _stage, _type } from '@likec4/core/types'
+import { type ComputedElementView, _stage, _type } from '@c4docs/likec4-core/types'
 
 /**
  * @see issue-911.spec.ts from packages/language-server/src/model/__tests__

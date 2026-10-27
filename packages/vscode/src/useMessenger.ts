@@ -1,4 +1,4 @@
-import type { ProjectId, ViewId } from '@likec4/core/types'
+import type { ProjectId, ViewId } from '@c4docs/likec4-core/types'
 import {
   type OpenViewPayload,
   BroadcastAILayoutStateUpdate,
@@ -13,7 +13,7 @@ import {
   ReadLocalIcon,
   ViewChangeReq,
   WebviewMsgs,
-} from '@likec4/vscode-preview/protocol'
+} from '@c4docs/likec4-vscode-preview/protocol'
 import {
   defineService,
   useDisposable,

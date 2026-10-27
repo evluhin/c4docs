@@ -1,4 +1,4 @@
-import type { ProjectId } from '@likec4/core/types'
+import type { ProjectId } from '@c4docs/likec4-core/types'
 import { deepEqual } from 'fast-equals'
 import { type PropsWithChildren, useEffect, useState } from 'react'
 import type { JSX } from 'react/jsx-runtime'

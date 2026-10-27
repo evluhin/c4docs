@@ -86,7 +86,7 @@
     {
       "label": "build_extension",
       "type": "shell",
-      "command": "pnpm turbo run build --filter='@likec4/vscode-preview' --filter='likec4-vscode'",
+      "command": "pnpm turbo run build --filter='@c4docs/likec4-vscode-preview' --filter='@c4docs/likec4-vscode'",
       "options": {
         "env": {
           "NODE_ENV": "development",

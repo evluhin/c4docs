@@ -21,7 +21,7 @@ vi.mock('./config-webcomponent', () => ({ viteWebcomponentConfig: vi.fn() }))
 vi.mock('./utils', () => ({ mkTempPublicDir: vi.fn().mockResolvedValue('/tmp/pub') }))
 vi.mock('vite', () => ({ createServer: vi.fn(), build: vi.fn() }))
 vi.mock('is-inside-container', () => ({ default: vi.fn().mockReturnValue(false) }))
-vi.mock('@likec4/log', () => ({ loggable: vi.fn((e: unknown) => e) }))
+vi.mock('@c4docs/likec4-log', () => ({ loggable: vi.fn((e: unknown) => e) }))
 
 import { resolveHmrPort } from './vite-dev'
 

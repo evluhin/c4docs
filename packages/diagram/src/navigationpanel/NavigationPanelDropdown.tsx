@@ -3,12 +3,12 @@ import {
   type LikeC4ViewsFolder,
   normalizeViewPath,
   VIEW_FOLDERS_SEPARATOR,
-} from '@likec4/core/model'
-import type { ViewId } from '@likec4/core/types'
-import { compareNaturalHierarchically, ifilter, ifirst, nonexhaustive, toArray } from '@likec4/core/utils'
-import { css, cx } from '@likec4/styles/css'
-import { Box, HStack, VStack } from '@likec4/styles/jsx'
-import { hstack, vstack } from '@likec4/styles/patterns'
+} from '@c4docs/likec4-core/model'
+import type { ViewId } from '@c4docs/likec4-core/types'
+import { compareNaturalHierarchically, ifilter, ifirst, nonexhaustive, toArray } from '@c4docs/likec4-core/utils'
+import { css, cx } from '@c4docs/likec4-styles/css'
+import { Box, HStack, VStack } from '@c4docs/likec4-styles/jsx'
+import { hstack, vstack } from '@c4docs/likec4-styles/patterns'
 import {
   Breadcrumbs,
   Button,

@@ -18,9 +18,9 @@
     "build": {
       "dependsOn": [
         "generate",
-        "@likec4/core#build",
-        "@likec4/diagram#build",
-        "@likec4/language-server#build"
+        "@c4docs/likec4-core#build",
+        "@c4docs/likec4-diagram#build",
+        "@c4docs/likec4-language-server#build"
       ],
       "outputs": [
         ".wrangler/deploy/**",

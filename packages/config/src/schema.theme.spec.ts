@@ -1,5 +1,5 @@
-import type { LikeC4StyleDefaults } from '@likec4/core/styles'
-import { BorderStyles, ElementShapes, IconPositions, RelationshipArrowTypes, Sizes } from '@likec4/core/styles'
+import type { LikeC4StyleDefaults } from '@c4docs/likec4-core/styles'
+import { BorderStyles, ElementShapes, IconPositions, RelationshipArrowTypes, Sizes } from '@c4docs/likec4-core/styles'
 import type { ExpectStatic } from 'vitest'
 import { describe, it } from 'vitest'
 import { defineStyle, defineThemeColor } from './define-config'

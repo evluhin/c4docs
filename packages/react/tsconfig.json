@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@likec4/tsconfig/base.json",
+  "extends": "@c4docs/likec4-tsconfig/base.json",
   "compilerOptions": {
     "jsx": "react-jsx",
     "module": "esnext",
@@ -13,7 +13,7 @@
       "DOM"
     ],
     "paths": {
-      "@likec4/styles/*": [
+      "@c4docs/likec4-styles/*": [
         "./styled-system/*/index.d.mts",
         "./styled-system/*/index.mjs",
         "./styled-system/*"

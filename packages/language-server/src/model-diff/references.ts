@@ -1,4 +1,4 @@
-import type { Fqn, ProjectId } from '@likec4/core'
+import type { Fqn, ProjectId } from '@c4docs/likec4-core'
 import type { AstNode } from 'langium'
 import { AstUtils } from 'langium'
 import { uniqueBy } from 'remeda'

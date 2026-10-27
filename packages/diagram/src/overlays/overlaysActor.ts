@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { Fqn } from '@likec4/core/types'
+import type { Fqn } from '@c4docs/likec4-core/types'
 import { getHotkeyHandler } from '@mantine/hooks'
 import type { KeyboardEvent } from 'react'
 import { isString, last, reverse } from 'remeda'

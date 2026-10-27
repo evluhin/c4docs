@@ -1,4 +1,4 @@
-import { css } from '@likec4/styles/css'
+import { css } from '@c4docs/likec4-styles/css'
 import { Box, Flex, Stack, Text, Tooltip, UnstyledButton } from '@mantine/core'
 import { IconChevronDown, IconChevronRight } from '@tabler/icons-react'
 import { type ReactNode, useEffect, useRef, useState } from 'react'

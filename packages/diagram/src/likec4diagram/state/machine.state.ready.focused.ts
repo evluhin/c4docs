@@ -1,4 +1,4 @@
-import type { NodeId } from '@likec4/core'
+import type { NodeId } from '@c4docs/likec4-core'
 import { assign, raise } from 'xstate/actions'
 import { and } from 'xstate/guards'
 import {

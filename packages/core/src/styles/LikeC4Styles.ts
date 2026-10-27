@@ -1,4 +1,4 @@
-import { DefaultTagColorValues, isDefaultTagColor } from '@likec4/style-preset/defaults'
+import { DefaultTagColorValues, isDefaultTagColor } from '@c4docs/likec4-style-preset/defaults'
 import chroma from 'chroma-js'
 import { defu } from 'defu'
 import { isDeepEqual, isEmptyish, pick } from 'remeda'

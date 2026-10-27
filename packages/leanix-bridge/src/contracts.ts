@@ -16,7 +16,7 @@ const DEFAULT_BRIDGE_VERSION = '0.1.0'
 
 /**
  * Resolves bridge version from package.json so BRIDGE_VERSION stays in sync with the published package.
- * 1) @likec4/leanix-bridge package (when not bundled). 2) likec4 CLI package (when bridge is bundled into CLI; versions are kept in sync). 3) Default only when neither is readable.
+ * 1) @c4docs/likec4-leanix-bridge package (when not bundled). 2) likec4 CLI package (when bridge is bundled into CLI; versions are kept in sync). 3) Default only when neither is readable.
  */
 function readVersion(): string {
   try {

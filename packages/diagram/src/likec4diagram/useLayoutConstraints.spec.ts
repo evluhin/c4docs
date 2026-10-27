@@ -1,5 +1,5 @@
-import { BBox } from '@likec4/core/geometry'
-import type { NonEmptyArray, Point } from '@likec4/core/types'
+import { BBox } from '@c4docs/likec4-core/geometry'
+import type { NonEmptyArray, Point } from '@c4docs/likec4-core/types'
 import { describe, expect, it, vi } from 'vitest'
 import { selectLabelRoutes } from '../hooks/useEdgeTracks'
 import type { XYStoreApi } from '../hooks/useXYFlow'

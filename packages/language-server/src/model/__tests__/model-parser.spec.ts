@@ -2,7 +2,7 @@ import {
   type ViewRulePredicate,
   isViewRulePredicate,
   ModelRelationExpr,
-} from '@likec4/core'
+} from '@c4docs/likec4-core'
 import { indexBy, values } from 'remeda'
 import { describe } from 'vitest'
 import { createTestServices, testFileScope as it } from '../../test'

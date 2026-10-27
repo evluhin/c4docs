@@ -1,5 +1,5 @@
-import type { DiagramNode } from '@likec4/core/types'
-import { invariant, isAncestor, Stack } from '@likec4/core/utils'
+import type { DiagramNode } from '@c4docs/likec4-core/types'
+import { invariant, isAncestor, Stack } from '@c4docs/likec4-core/utils'
 import { groupBy, mapValues, pipe, values } from 'remeda'
 import type { Compound, ParallelRect, Rect, Spacing, Step } from './_types'
 

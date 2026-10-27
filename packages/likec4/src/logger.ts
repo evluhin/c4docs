@@ -1,4 +1,4 @@
-import { rootLogger } from '@likec4/log'
+import { rootLogger } from '@c4docs/likec4-log'
 import _boxen, { type Options as BoxenOptions } from 'boxen'
 import { hrtime } from 'node:process'
 import prettyMilliseconds from 'pretty-ms'

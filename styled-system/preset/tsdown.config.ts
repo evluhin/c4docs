@@ -1,4 +1,4 @@
-import { outputOptions } from '@likec4/devops/tsdown'
+import { outputOptions } from '@c4docs/likec4-devops/tsdown'
 import spawn from 'nano-spawn'
 import { defineConfig } from 'tsdown'
 

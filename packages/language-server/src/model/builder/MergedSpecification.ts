@@ -5,10 +5,10 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type * as c4 from '@likec4/core'
-import { assignTagColors } from '@likec4/core/styles'
-import { exact, FqnRef } from '@likec4/core/types'
-import { isNonEmptyArray, MultiMap, nameFromFqn } from '@likec4/core/utils'
+import type * as c4 from '@c4docs/likec4-core'
+import { assignTagColors } from '@c4docs/likec4-core/styles'
+import { exact, FqnRef } from '@c4docs/likec4-core/types'
+import { isNonEmptyArray, MultiMap, nameFromFqn } from '@c4docs/likec4-core/utils'
 import {
   isEmpty,
   isEmptyish,

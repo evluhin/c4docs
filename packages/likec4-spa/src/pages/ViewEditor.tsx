@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { LikeC4Diagram, LikeC4EditorProvider } from '@likec4/diagram'
+import { LikeC4Diagram, LikeC4EditorProvider } from '@c4docs/likec4-diagram'
 import { useCallbackRef } from '@mantine/hooks'
 import { useNavigate, useSearch } from '@tanstack/react-router'
 import { isDevelopment } from 'likec4:app-config'

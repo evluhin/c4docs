@@ -1,9 +1,9 @@
-import type { LayoutedProjectEdge } from '@likec4/core/compute-view'
+import type { LayoutedProjectEdge } from '@c4docs/likec4-core/compute-view'
 import type {
   DiagramNode,
   ExclusiveUnion,
   ProjectId,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import type {
   ReactFlowInstance,
   ReactFlowState,

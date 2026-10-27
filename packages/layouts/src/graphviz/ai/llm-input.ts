@@ -1,4 +1,4 @@
-import { DefaultMap } from '@likec4/core'
+import { DefaultMap } from '@c4docs/likec4-core'
 import {
   type ComputedEdge,
   type ComputedNode,
@@ -6,7 +6,7 @@ import {
   exact,
   flattenMarkdownOrString,
   NodeId,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import type * as z from 'zod/v4'
 import { logger } from './logger'
 

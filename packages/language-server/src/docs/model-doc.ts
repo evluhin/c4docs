@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { DiagramRef, DocAsset, DocFrontmatter, DocPage, Fqn, ViewId } from '@likec4/core/types'
-import { markdownToHtml, parseLikeC4ViewBlock } from '@likec4/core/utils'
+import type { DiagramRef, DocAsset, DocFrontmatter, DocPage, Fqn, ViewId } from '@c4docs/likec4-core/types'
+import { markdownToHtml, parseLikeC4ViewBlock } from '@c4docs/likec4-core/utils'
 import { parse as parseYaml } from 'yaml'
 import { docRoutePath, encodeRoutePath } from './discovery'
 

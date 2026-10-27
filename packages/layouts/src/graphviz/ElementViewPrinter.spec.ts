@@ -1,4 +1,4 @@
-import type { ComputedElementView } from '@likec4/core'
+import type { ComputedElementView } from '@c4docs/likec4-core'
 import { describe, it } from 'vitest'
 import {
   computedAmazonView,

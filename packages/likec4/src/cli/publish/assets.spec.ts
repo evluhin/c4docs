@@ -1,5 +1,5 @@
-import type { LayoutedLikeC4ModelData } from '@likec4/core'
-import { ProjectId } from '@likec4/core'
+import type { LayoutedLikeC4ModelData } from '@c4docs/likec4-core'
+import { ProjectId } from '@c4docs/likec4-core'
 import { mkdtemp, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
@@ -94,7 +94,7 @@ describe('collectFileIcons', () => {
       views: {
         index: {
           id: 'index',
-          // a view rule style override - a shape `@likec4/core` may grow more of
+          // a view rule style override - a shape `@c4docs/likec4-core` may grow more of
           rules: [{ targets: [{ wildcard: true }], style: { icon: 'file:///icons/override.svg' } }],
           nodes: [{ id: 'n1', icon: 'file:///icons/node-in-view.svg' }],
         },

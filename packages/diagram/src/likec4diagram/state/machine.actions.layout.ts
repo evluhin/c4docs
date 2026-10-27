@@ -5,11 +5,11 @@ import {
   invariant,
   isNonEmptyArray,
   nonNullable,
-} from '@likec4/core'
+} from '@c4docs/likec4-core'
 import type {
   DiagramView,
   XYPoint,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import type { Viewport } from '@xyflow/react'
 import {
   getNodesBounds,

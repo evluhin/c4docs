@@ -1,5 +1,5 @@
-import type { LayoutedView, LayoutType, ViewId } from '@likec4/core/types'
-import { useUpdateEffect } from '@likec4/diagram'
+import type { LayoutedView, LayoutType, ViewId } from '@c4docs/likec4-core/types'
+import { useUpdateEffect } from '@c4docs/likec4-diagram'
 import { useIsomorphicLayoutEffect } from '@react-hookz/web'
 import { type MakeRouteMatchUnion, useMatches, useParams } from '@tanstack/react-router'
 import { deepEqual, shallowEqual } from 'fast-equals'

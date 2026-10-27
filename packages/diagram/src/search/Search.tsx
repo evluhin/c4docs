@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { css } from '@likec4/styles/css'
-import { Box, VStack } from '@likec4/styles/jsx'
+import { css } from '@c4docs/likec4-styles/css'
+import { Box, VStack } from '@c4docs/likec4-styles/jsx'
 import { Grid, GridCol, Group, ScrollArea, Title } from '@mantine/core'
 import { useHotkeys, useMergedRef } from '@mantine/hooks'
 import { useTimeoutEffect } from '@react-hookz/web'

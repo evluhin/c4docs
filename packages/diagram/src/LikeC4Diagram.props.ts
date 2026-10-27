@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type * as t from '@likec4/core/types'
+import type * as t from '@c4docs/likec4-core/types'
 import type {
   DiagramEdge,
   DiagramNode,
@@ -13,7 +13,7 @@ import type {
   LayoutedView,
   LayoutType,
   WhereOperator,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import type { ReactFlowProps } from '@xyflow/react'
 import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react'
 import type { CamelCasedProperties, SetRequired } from 'type-fest'

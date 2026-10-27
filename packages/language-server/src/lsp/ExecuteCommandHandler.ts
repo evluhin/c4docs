@@ -1,5 +1,5 @@
-import type { ProjectId } from '@likec4/core'
-import { DiffId, Fqn, nonNullable } from '@likec4/core'
+import type { ProjectId } from '@c4docs/likec4-core'
+import { DiffId, Fqn, nonNullable } from '@c4docs/likec4-core'
 import { type ExecuteCommandAcceptor, AbstractExecuteCommandHandler } from 'langium/lsp'
 import { logger as rootLogger } from '../logger'
 import type { ApplyEditsResult, ModelEditRequest } from '../model-diff'

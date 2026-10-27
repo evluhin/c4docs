@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { fromWorkspace } from '@likec4/language-services/node'
+import { fromWorkspace } from '@c4docs/likec4-language-services/node'
 import { resolve } from 'node:path'
 import k from 'tinyrainbow'
 import type * as yargs from 'yargs'

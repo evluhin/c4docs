@@ -1,4 +1,4 @@
-import type { NonEmptyArray, Point } from '@likec4/core/types'
+import type { NonEmptyArray, Point } from '@c4docs/likec4-core/types'
 import { describe, expect, it } from 'vitest'
 import { selectLabelRoutes, selectTrackRoutes } from './useEdgeTracks'
 import type { XYStoreState } from './useXYFlow'

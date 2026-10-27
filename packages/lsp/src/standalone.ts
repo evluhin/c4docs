@@ -1,10 +1,10 @@
-import { configureLanguageServerLogger } from '@likec4/language-server'
-import { WithFileSystem, WithLikeC4ManualLayouts } from '@likec4/language-server/filesystem'
+import { configureLanguageServerLogger } from '@c4docs/likec4-language-server'
+import { WithFileSystem, WithLikeC4ManualLayouts } from '@c4docs/likec4-language-server/filesystem'
 import {
   createLanguageServices,
   WithWasmGraphviz,
-} from '@likec4/language-server/module'
-import { rootLogger } from '@likec4/log'
+} from '@c4docs/likec4-language-server/module'
+import { rootLogger } from '@c4docs/likec4-log'
 import { startLanguageServer as startLanguim } from 'langium/lsp'
 import { createConnection, ProposedFeatures } from 'vscode-languageserver/node'
 

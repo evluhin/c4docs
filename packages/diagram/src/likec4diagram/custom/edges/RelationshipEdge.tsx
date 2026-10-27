@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { EdgeId, EdgeRouting } from '@likec4/core/types'
-import { css, cx as clsx } from '@likec4/styles/css'
+import type { EdgeId, EdgeRouting } from '@c4docs/likec4-core/types'
+import { css, cx as clsx } from '@c4docs/likec4-styles/css'
 import { useRafEffect } from '@react-hookz/web'
 import type { XYPosition } from '@xyflow/react'
 import { EdgeLabelRenderer } from '@xyflow/react'

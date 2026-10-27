@@ -1,5 +1,5 @@
-import { type TagSpecification, isTagColorSpecified } from '@likec4/core'
-import { DefaultTagColors, getContrastedColorsAPCA, isValidColor, LikeC4Styles } from '@likec4/core/styles'
+import { type TagSpecification, isTagColorSpecified } from '@c4docs/likec4-core'
+import { DefaultTagColors, getContrastedColorsAPCA, isValidColor, LikeC4Styles } from '@c4docs/likec4-core/styles'
 import { useMantineStyleNonce } from '@mantine/core'
 import { type PropsWithChildren, createContext, memo, useContext } from 'react'
 import { entries, flatMap, isEmpty, join, pipe } from 'remeda'

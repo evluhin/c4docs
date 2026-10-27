@@ -1,4 +1,4 @@
-import { loggable } from '@likec4/log'
+import { loggable } from '@c4docs/likec4-log'
 import spawn from 'nano-spawn'
 import module from 'node:module'
 import { resolveCommand } from 'package-manager-detector/commands'

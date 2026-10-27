@@ -1,8 +1,8 @@
-import type { AnyLikeC4Model } from '@likec4/core/model'
+import type { AnyLikeC4Model } from '@c4docs/likec4-core/model'
 import {
   compareNatural,
   sortNaturalByFqn,
-} from '@likec4/core/utils'
+} from '@c4docs/likec4-core/utils'
 import { filter, isEmptyish, isTruthy, keys, map, pipe, sort, unique, values } from 'remeda'
 
 /**
@@ -42,7 +42,7 @@ function elementIdToUnion(elements: Record<string, { id: string }>) {
 export function generateAux(model: AnyLikeC4Model, options: { useCorePackage?: boolean } = {}) {
   const { useCorePackage = false } = options
   return `
-import type { Aux, SpecAux } from '${useCorePackage ? '@likec4/core/types' : 'likec4/model'}';
+import type { Aux, SpecAux } from '${useCorePackage ? '@c4docs/likec4-core/types' : '@c4docs/likec4/model'}';
 
 export type $Specs = SpecAux<
   // Element kinds

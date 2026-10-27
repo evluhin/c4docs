@@ -11,9 +11,9 @@ import {
   type ViewChange,
   type ViewId,
   nonNullable,
-} from '@likec4/core'
-import type { CompareViewMode } from '@likec4/core/compute-view'
-import { LikeC4Model } from '@likec4/core/model'
+} from '@c4docs/likec4-core'
+import type { CompareViewMode } from '@c4docs/likec4-core/compute-view'
+import { LikeC4Model } from '@c4docs/likec4-core/model'
 import type {
   ApplyEditsResult,
   Locate as LocateRequest,
@@ -23,8 +23,8 @@ import type {
   ModelEditResult,
   RemainingError,
   RemovalImpactReport,
-} from '@likec4/language-server/protocol'
-import { loggable, rootLogger } from '@likec4/log'
+} from '@c4docs/likec4-language-server/protocol'
+import { loggable, rootLogger } from '@c4docs/likec4-log'
 import { deepEqual, shallowEqual } from 'fast-equals'
 import { keys, prop } from 'remeda'
 import type { Location } from 'vscode-languageserver-types'

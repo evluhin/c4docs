@@ -193,7 +193,7 @@ function uniqueRuntimeImports(): Array<RuntimeImport> {
     })
 }
 
-describe('@likec4/mcp runtime package imports', () => {
+describe('@c4docs/likec4-mcp runtime package imports', () => {
   it('extracts only runtime package imports from TypeScript source', () => {
     const imports = collectRuntimeImportsFromSource(
       [
@@ -232,7 +232,7 @@ describe('@likec4/mcp runtime package imports', () => {
     ])
   })
 
-  // TODO: Check if we need to declare '@likec4/diagram' as a dependency in package.json
+  // TODO: Check if we need to declare '@c4docs/likec4-diagram' as a dependency in package.json
   it.skip('declares direct runtime package imports as dependencies', () => {
     const dependencies = new Set(Object.keys(packageJson.dependencies ?? {}))
     const devDependencies = new Set(Object.keys(packageJson.devDependencies ?? {}))

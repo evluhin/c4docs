@@ -1,4 +1,4 @@
-import { codeSplittingGroup, nodeModulesCodeSplitting } from '@likec4/devops/tsdown'
+import { codeSplittingGroup, nodeModulesCodeSplitting } from '@c4docs/likec4-devops/tsdown'
 import postcssPanda from '@pandacss/dev/postcss'
 import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
 import react from '@vitejs/plugin-react'
@@ -38,7 +38,7 @@ export default defineConfig({
     mainFields: ['module', 'main'],
     conditions: ['sources', 'module', 'import', 'default'],
     alias: {
-      '@likec4/styles': resolve('styled-system'),
+      '@c4docs/likec4-styles': resolve('styled-system'),
     },
   },
   build: {

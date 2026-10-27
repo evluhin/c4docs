@@ -1,4 +1,4 @@
-import type { LikeC4ProjectStylesConfig, LikeC4ProjectTheme, ThemeColorValues } from '@likec4/core/types'
+import type { LikeC4ProjectStylesConfig, LikeC4ProjectTheme, ThemeColorValues } from '@c4docs/likec4-core/types'
 import type { GeneratorFn, LikeC4ProjectConfig, LikeC4ProjectConfigInput } from './schema'
 import { GeneratorsSchema, LikeC4ProjectConfigSchema } from './schema'
 import type { LikeC4ConfigThemeInput, LikeC4StylesConfigInput, ThemeColorValuesInput } from './schema.theme'
@@ -74,7 +74,7 @@ export function defineThemeColor<const S extends ThemeColorValuesInput>(colors: 
  * Define reusable custom theme
  * @example
  * ```ts
- * import { defineThemeColor, defineTheme } from 'likec4/config'
+ * import { defineThemeColor, defineTheme } from '@c4docs/likec4/config'
  *
  * export default defineTheme({
  *   colors: {
@@ -97,7 +97,7 @@ export function defineTheme<const S extends LikeC4ConfigThemeInput>(theme: S): L
  * Define reusable custom style
  * @example
  * ```ts
- * import { defineStyle, defineThemeColor } from 'likec4/config'
+ * import { defineStyle, defineThemeColor } from '@c4docs/likec4/config'
  *
  * export default defineStyle({
  *   theme: {

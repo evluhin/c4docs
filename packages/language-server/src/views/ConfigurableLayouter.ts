@@ -1,5 +1,5 @@
-import { GraphvizWasmAdapter, QueueGraphvizLayoter } from '@likec4/layouts'
-import { GraphvizBinaryAdapter } from '@likec4/layouts/graphviz/binary'
+import { GraphvizWasmAdapter, QueueGraphvizLayoter } from '@c4docs/likec4-layouts'
+import { GraphvizBinaryAdapter } from '@c4docs/likec4-layouts/graphviz/binary'
 import { isEmpty } from 'remeda'
 import which from 'which'
 import { logger } from '../logger'

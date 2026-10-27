@@ -1,4 +1,4 @@
-import { type Logger, rootLogger } from '@likec4/log'
+import { type Logger, rootLogger } from '@c4docs/likec4-log'
 import { type LikeC4Langium, LikeC4 } from './LikeC4'
 import { type InitOptions, DefaultInitOptions } from './options'
 

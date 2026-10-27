@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import { invariant } from '@likec4/core'
+import { invariant } from '@c4docs/likec4-core'
 import * as z from 'zod/v4'
 import { likec4Tool } from '../utils'
 import {

@@ -1,4 +1,4 @@
-import type { Locate } from '@likec4/language-server/protocol'
+import type { Locate } from '@c4docs/likec4-language-server/protocol'
 import { toValue, useCommand } from 'reactive-vscode'
 import * as vscode from 'vscode'
 import { commands } from '../meta'

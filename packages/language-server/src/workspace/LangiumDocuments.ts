@@ -1,4 +1,4 @@
-import type { NonEmptyArray, ProjectId } from '@likec4/core'
+import type { NonEmptyArray, ProjectId } from '@c4docs/likec4-core'
 import type { LangiumDocument, Stream, URI } from 'langium'
 import { DefaultLangiumDocuments, stream } from 'langium'
 import { groupBy, map, pipe, prop } from 'remeda'

@@ -1,4 +1,4 @@
-import { FqnExpr, RelationExpr } from '@likec4/core'
+import { FqnExpr, RelationExpr } from '@c4docs/likec4-core'
 import { type ValidationCheck, AstUtils } from 'langium'
 import { ast } from '../../ast'
 import type { LikeC4Services } from '../../module'

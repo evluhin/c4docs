@@ -8,8 +8,8 @@ import {
   type WhereOperator,
   nonNullable,
   whereOperatorAsPredicate,
-} from '@likec4/core'
-import type { Point } from '@likec4/core/geometry'
+} from '@c4docs/likec4-core'
+import type { Point } from '@c4docs/likec4-core/geometry'
 import { pick } from 'remeda'
 import { ZIndexes } from '../../base/const'
 import { readableText } from '../../utils'

@@ -1,4 +1,4 @@
-import type { LikeC4Styles } from '@likec4/core/styles'
+import type { LikeC4Styles } from '@c4docs/likec4-core/styles'
 import type {
   AnyFqn,
   ComputedNode,
@@ -11,7 +11,7 @@ import type {
   NodeId,
   RelationshipColorValues,
   RelationshipLineType,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import {
   compareFqnHierarchically,
   DefaultMap,
@@ -19,9 +19,9 @@ import {
   invariant,
   nameFromFqn,
   nonNullable,
-} from '@likec4/core/utils'
-import { Graph } from '@likec4/core/utils/graphology'
-import { createLogger } from '@likec4/log'
+} from '@c4docs/likec4-core/utils'
+import { Graph } from '@c4docs/likec4-core/utils/graphology'
+import { createLogger } from '@c4docs/likec4-log'
 
 import {
   concat,

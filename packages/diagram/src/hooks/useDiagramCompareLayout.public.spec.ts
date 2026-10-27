@@ -1,4 +1,4 @@
-import type { LayoutedViewDriftReason } from '@likec4/core/types'
+import type { LayoutedViewDriftReason } from '@c4docs/likec4-core/types'
 import { describe, expect, expectTypeOf, it } from 'vitest'
 import {
   type DiagramCompareLayoutOps,

@@ -59,7 +59,7 @@ jobs:
 
       - name: 📦 pack
         run: |
-          pnpm turbo run pack --filter="likec4..."
+          pnpm turbo run pack --filter="@c4docs/likec4..."
 
       - name: 🛠️ install e2e dependencies
         working-directory: e2e

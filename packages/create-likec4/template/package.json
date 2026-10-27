@@ -1,7 +1,7 @@
 {
   "name": "likec4-starter",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
     "start": "likec4 start",
@@ -10,6 +10,6 @@
     "export:png": "likec4 export png -o ./png"
   },
   "devDependencies": {
-    "likec4": "*"
+    "@c4docs/likec4": "*"
   }
 }

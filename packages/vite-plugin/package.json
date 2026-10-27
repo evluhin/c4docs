@@ -1,5 +1,5 @@
 {
-  "name": "@likec4/vite-plugin",
+  "name": "@c4docs/likec4-vite-plugin",
   "version": "1.60.0",
   "private": true,
   "description": "LikeC4 Vite Plugin",
@@ -58,13 +58,13 @@
     "vitest:ui": "vitest --no-isolate --ui"
   },
   "dependencies": {
-    "@likec4/config": "workspace:*",
-    "@likec4/core": "workspace:*",
-    "@likec4/generators": "workspace:*",
-    "@likec4/icons": "workspace:*",
-    "@likec4/language-services": "workspace:*",
-    "@likec4/layouts": "workspace:*",
-    "@likec4/log": "workspace:*",
+    "@c4docs/likec4-config": "workspace:*",
+    "@c4docs/likec4-core": "workspace:*",
+    "@c4docs/likec4-generators": "workspace:*",
+    "@c4docs/likec4-icons": "workspace:*",
+    "@c4docs/likec4-language-services": "workspace:*",
+    "@c4docs/likec4-layouts": "workspace:*",
+    "@c4docs/likec4-log": "workspace:*",
     "defu": "catalog:utils",
     "json5": "catalog:utils",
     "langium": "catalog:langium",
@@ -82,9 +82,9 @@
     "zod": "catalog:externals"
   },
   "devDependencies": {
-    "@likec4/devops": "workspace:*",
-    "@likec4/react": "workspace:*",
-    "@likec4/tsconfig": "workspace:*",
+    "@c4docs/likec4-devops": "workspace:*",
+    "@c4docs/likec4-react": "workspace:*",
+    "@c4docs/likec4-tsconfig": "workspace:*",
     "@nanostores/react": "catalog:react",
     "@tanstack/ai": "catalog:ai",
     "@tanstack/ai-anthropic": "catalog:ai",

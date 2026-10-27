@@ -1,5 +1,5 @@
-import type { DiagramEdge, DiagramNode, LayoutedElementView } from '@likec4/core'
-import { scalar } from '@likec4/core/types'
+import type { DiagramEdge, DiagramNode, LayoutedElementView } from '@c4docs/likec4-core'
+import { scalar } from '@c4docs/likec4-core/types'
 import type { InternalNode } from '@xyflow/react'
 import { describe, expect, it } from 'vitest'
 import type { XYStoreApi } from '../../hooks'

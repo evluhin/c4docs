@@ -1,5 +1,5 @@
 {
-  "extends": "@likec4/tsconfig/react-lib.json",
+  "extends": "@c4docs/likec4-tsconfig/react-lib.json",
   "compilerOptions": {
     "customConditions": [
       "sources"
@@ -13,7 +13,7 @@
     "module": "preserve",
     "types": [
       "vite/client",
-      "@likec4/vite-plugin/modules"
+      "@c4docs/likec4-vite-plugin/modules"
     ]
   },
   "include": [

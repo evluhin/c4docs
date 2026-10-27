@@ -1,4 +1,4 @@
-import { Box } from '@likec4/styles/jsx'
+import { Box } from '@c4docs/likec4-styles/jsx'
 import { Button, Code, ScrollArea } from '@mantine/core'
 import { useAsync } from '@react-hookz/web'
 import { krokiPumlSvgUrl } from 'likec4:app-config'

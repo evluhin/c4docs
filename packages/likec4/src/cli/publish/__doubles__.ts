@@ -3,12 +3,12 @@
  *
  * The suite runs with `--no-isolate`, so every spec file in a worker shares one module
  * registry: whichever file first mocks `./git`, `../../logger` or
- * `@likec4/language-services/node` wins for all the others, and the losing file's own
+ * `@c4docs/likec4-language-services/node` wins for all the others, and the losing file's own
  * `vi.hoisted` doubles are never wired to anything. Both files therefore register the *same*
  * doubles from this module, so behaviour no longer depends on the order vitest happens to
  * pick.
  */
-import type { fromWorkspace as FromWorkspace } from '@likec4/language-services/node'
+import type { fromWorkspace as FromWorkspace } from '@c4docs/likec4-language-services/node'
 import { vi } from 'vitest'
 
 /** Lines captured from the faked `createLikeC4Logger`. */

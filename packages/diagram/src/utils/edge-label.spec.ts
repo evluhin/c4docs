@@ -1,4 +1,4 @@
-import { type Segment, BBox } from '@likec4/core/geometry'
+import { type Segment, BBox } from '@c4docs/likec4-core/geometry'
 import { describe, expect, it } from 'vitest'
 import { orthoSpline, source, spline, target } from './__fixtures__/edges'
 import { edgeLabelPosition } from './edge-label'

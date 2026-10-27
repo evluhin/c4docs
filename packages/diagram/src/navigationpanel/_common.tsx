@@ -1,8 +1,8 @@
-import { cx } from '@likec4/styles/css'
+import { cx } from '@c4docs/likec4-styles/css'
 import {
   type NavigationPanelActionIconVariant,
   navigationPanelActionIcon,
-} from '@likec4/styles/recipes'
+} from '@c4docs/likec4-styles/recipes'
 import {
   type ActionIconProps,
   ActionIcon,

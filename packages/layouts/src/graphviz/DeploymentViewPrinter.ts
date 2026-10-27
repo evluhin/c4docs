@@ -4,8 +4,8 @@ import type {
   ComputedEdge,
   ComputedNode,
   HexColor,
-} from '@likec4/core'
-import { nonNullable } from '@likec4/core/utils'
+} from '@c4docs/likec4-core'
+import { nonNullable } from '@c4docs/likec4-core/utils'
 import { first, forEach, groupBy, isNonNullish, last, map, pipe, tap, values } from 'remeda'
 import type { EdgeModel, NodeModel, RootGraphModel, SubgraphModel } from 'ts-graphviz'
 import { attribute as _ } from 'ts-graphviz'

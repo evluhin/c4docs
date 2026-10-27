@@ -1,10 +1,10 @@
-import type { LayoutedProjectsView } from '@likec4/core/compute-view'
+import type { LayoutedProjectsView } from '@c4docs/likec4-core/compute-view'
 import JSON5 from 'json5'
 import { logGenerating } from '../logger'
 import type { VirtualModule } from './_shared'
 
 const code = (view: LayoutedProjectsView) => `
-import { atom, useStore } from 'likec4/vite-plugin/internal'
+import { atom, useStore } from '@c4docs/likec4/vite-plugin/internal'
 
 export const $viewdata = atom(${JSON5.stringify(view)})
 

@@ -9,13 +9,13 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Link } from '@tanstack/react-router'
 
-import { StaticLikeC4Diagram } from '@likec4/diagram'
+import { StaticLikeC4Diagram } from '@c4docs/likec4-diagram'
 import { useEffect, useState } from 'react'
 
-import type { DiagramView } from '@likec4/core/types'
-import { RichText } from '@likec4/core/types'
-import { Markdown } from '@likec4/diagram/custom'
-import { css } from '@likec4/styles/css'
+import type { DiagramView } from '@c4docs/likec4-core/types'
+import { RichText } from '@c4docs/likec4-core/types'
+import { Markdown } from '@c4docs/likec4-diagram/custom'
+import { css } from '@c4docs/likec4-styles/css'
 import { Box, Burger, Card, Container, Group, SimpleGrid, Text } from '@mantine/core'
 import { useDocumentTitle, useInViewport } from '@mantine/hooks'
 import { pageTitle } from 'likec4:app-config'

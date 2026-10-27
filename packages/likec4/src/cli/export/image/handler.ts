@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { DiagramView, NonEmptyArray } from '@likec4/core'
-import { fromWorkspace } from '@likec4/language-services/node'
+import type { DiagramView, NonEmptyArray } from '@c4docs/likec4-core'
+import { fromWorkspace } from '@c4docs/likec4-language-services/node'
 import { mkdtemp, rename, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'

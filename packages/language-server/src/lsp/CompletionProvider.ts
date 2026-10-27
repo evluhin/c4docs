@@ -1,4 +1,4 @@
-import { BorderStyles, ElementShapes, Sizes, Sizings, ThemeColors } from '@likec4/core/styles'
+import { BorderStyles, ElementShapes, Sizes, Sizings, ThemeColors } from '@c4docs/likec4-core/styles'
 import { type MaybePromise, AstUtils, GrammarAST } from 'langium'
 import {
   type CompletionAcceptor,

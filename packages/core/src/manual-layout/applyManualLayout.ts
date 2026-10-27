@@ -10,8 +10,8 @@ import {
   _layout,
   isDynamicView,
   isElementView,
-} from '@likec4/core/types'
-import { ifilter, ihead, invariant, symmetricDifference } from '@likec4/core/utils'
+} from '@c4docs/likec4-core/types'
+import { ifilter, ihead, invariant, symmetricDifference } from '@c4docs/likec4-core/utils'
 import { type WritableDraft, castDraft, produce } from 'immer'
 import { hasAtLeast, isDeepEqual, isNullish, isNumber, isTruthy, pick, pipe } from 'remeda'
 import { buildElementNotations } from '../compute-view/utils/buildElementNotations'

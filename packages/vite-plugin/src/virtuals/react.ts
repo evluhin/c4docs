@@ -4,7 +4,7 @@ import { type ProjectVirtualModule, type VirtualModule, generateMatches } from '
 
 const projectCode = (id: string) => `
 import { jsx as _jsx } from "react/jsx-runtime";
-import { LikeC4ModelProvider as Provider, LikeC4View as GenericView, ReactLikeC4 as GenericReactLikeC4 } from 'likec4/react';
+import { LikeC4ModelProvider as Provider, LikeC4View as GenericView, ReactLikeC4 as GenericReactLikeC4 } from '@c4docs/likec4/react';
 import { IconRenderer } from 'likec4:icons/${id}'
 
 import { useLikeC4Model, useLikeC4Views, useLikeC4View } from 'likec4:model/${id}'

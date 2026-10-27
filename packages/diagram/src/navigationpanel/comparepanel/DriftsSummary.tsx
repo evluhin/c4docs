@@ -5,11 +5,11 @@ import type {
   LayoutedViewDriftReason,
   NodeId,
   NonEmptyReadonlyArray,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import { deepEqual } from 'fast-equals'
 
-import { styled, Txt } from '@likec4/styles/jsx'
-import { vstack } from '@likec4/styles/patterns'
+import { styled, Txt } from '@c4docs/likec4-styles/jsx'
+import { vstack } from '@c4docs/likec4-styles/patterns'
 import { useDebouncedCallback } from '@mantine/hooks'
 import { type Variants, AnimatePresence, m, stagger } from 'motion/react'
 import type { MouseEvent, MouseEventHandler } from 'react'

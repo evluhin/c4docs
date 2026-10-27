@@ -1,5 +1,5 @@
-import { LikeC4Styles } from '@likec4/core'
-import type { BBox } from '@likec4/core'
+import { LikeC4Styles } from '@c4docs/likec4-core'
+import type { BBox } from '@c4docs/likec4-core'
 import type {
   aux,
   DiagramNode,
@@ -9,8 +9,8 @@ import type {
   RelationshipColorValues,
   TextSize,
   ThemeColorValues,
-} from '@likec4/core/types'
-import { flattenMarkdownOrString } from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
+import { flattenMarkdownOrString } from '@c4docs/likec4-core/types'
 import pako from 'pako'
 import { isEmptyish, isNullish as isNil } from 'remeda'
 import {

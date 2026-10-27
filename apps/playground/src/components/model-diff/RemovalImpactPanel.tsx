@@ -1,5 +1,5 @@
 import { usePlayground, usePlaygroundContext } from '$/hooks/usePlayground'
-import type { ReferenceKind, RemovalImpactReference, SafeDeleteOptions } from '@likec4/language-server/protocol'
+import type { ReferenceKind, RemovalImpactReference, SafeDeleteOptions } from '@c4docs/likec4-language-server/protocol'
 import {
   ActionIcon,
   Alert,

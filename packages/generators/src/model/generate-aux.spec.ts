@@ -1,4 +1,4 @@
-import { Builder } from '@likec4/core/builder'
+import { Builder } from '@c4docs/likec4-core/builder'
 import { describe, it } from 'vitest'
 import { generateAux } from './generate-aux'
 

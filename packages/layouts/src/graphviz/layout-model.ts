@@ -1,7 +1,7 @@
-import { LikeC4Model } from '@likec4/core/model'
-import type { Any } from '@likec4/core/types'
-import { _stage } from '@likec4/core/types'
-import { invariant } from '@likec4/core/utils'
+import { LikeC4Model } from '@c4docs/likec4-core/model'
+import type { Any } from '@c4docs/likec4-core/types'
+import { _stage } from '@c4docs/likec4-core/types'
+import { invariant } from '@c4docs/likec4-core/utils'
 import { mapToObj } from 'remeda'
 import { QueueGraphvizLayoter } from './QueueGraphvizLayoter'
 

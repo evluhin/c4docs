@@ -1,5 +1,5 @@
-import type { Fqn, IterableContainer, ReorderedArray } from '@likec4/core/types'
-import { isString } from '@likec4/core/types'
+import type { Fqn, IterableContainer, ReorderedArray } from '@c4docs/likec4-core/types'
+import { isString } from '@c4docs/likec4-core/types'
 import { hasAtLeast } from 'remeda'
 import { compareNatural } from './compare-natural'
 

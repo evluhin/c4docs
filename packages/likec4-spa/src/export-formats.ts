@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import { type WebappExportFormat, WebappExportFormats } from '@likec4/config/webapp-export-formats'
+import { type WebappExportFormat, WebappExportFormats } from '@c4docs/likec4-config/webapp-export-formats'
 
 type ProjectExportCapabilities = {
   exportFormats?: readonly WebappExportFormat[] | undefined

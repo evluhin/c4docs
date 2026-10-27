@@ -1,7 +1,7 @@
-import { type Fqn, nonexhaustive } from '@likec4/core'
-import { useDiagram } from '@likec4/diagram'
-import type { Types, XYStoreState } from '@likec4/diagram/custom'
-import { type NodeData, navigateToDef, readUiStateDef, updateUiStateDef } from '@likec4/vite-plugin/ai/tools'
+import { type Fqn, nonexhaustive } from '@c4docs/likec4-core'
+import { useDiagram } from '@c4docs/likec4-diagram'
+import type { Types, XYStoreState } from '@c4docs/likec4-diagram/custom'
+import { type NodeData, navigateToDef, readUiStateDef, updateUiStateDef } from '@c4docs/likec4-vite-plugin/ai/tools'
 import {
   type UIMessage,
   clientTools,

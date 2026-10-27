@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import type { LikeC4ProjectConfig } from '@likec4/config'
+import type { LikeC4ProjectConfig } from '@c4docs/likec4-config'
 import { describe, it } from 'vitest'
 import {
   effectiveWebappExportFormats,

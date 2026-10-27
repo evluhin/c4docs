@@ -5,14 +5,14 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { invariant, nonNullable } from '@likec4/core'
-import { type NonEmptyArray, type ProjectId, Fqn, isAnyOf } from '@likec4/core/types'
+import { invariant, nonNullable } from '@c4docs/likec4-core'
+import { type NonEmptyArray, type ProjectId, Fqn, isAnyOf } from '@c4docs/likec4-core/types'
 import {
   ancestorsFqn,
   compareNatural,
   MultiMap,
   sortNaturalByFqn,
-} from '@likec4/core/utils'
+} from '@c4docs/likec4-core/utils'
 import {
   type LangiumDocument,
   type Stream,

@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { NodeId } from '@likec4/core'
+import type { NodeId } from '@c4docs/likec4-core'
 import { CompoundActionButton } from '../../../base-primitives'
 import { useEnabledFeatures } from '../../../context/DiagramFeatures'
 import { useDiagram } from '../../../hooks/useDiagram'

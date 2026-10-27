@@ -1,4 +1,4 @@
-import type { DeploymentFqn, Fqn, ThemeColor } from '@likec4/core'
+import type { DeploymentFqn, Fqn, ThemeColor } from '@c4docs/likec4-core'
 import { useState } from 'react'
 import { useCallbackRef } from '../../../../hooks/useCallbackRef'
 import { useDiagram } from '../../../../hooks/useDiagram'

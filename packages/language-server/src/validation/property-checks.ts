@@ -1,4 +1,4 @@
-import { nonexhaustive } from '@likec4/core'
+import { nonexhaustive } from '@c4docs/likec4-core'
 import { type AstNode, type ValidationCheck, AstUtils } from 'langium'
 import { isNumber, isString } from 'remeda'
 import { ast } from '../ast'

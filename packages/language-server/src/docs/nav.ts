@@ -14,7 +14,7 @@
  * be unit-tested without touching disk; the service wires it into `buildDocsModel`.
  */
 
-import type { DocPage, DocsModel, DocTreeNode } from '@likec4/core/types'
+import type { DocPage, DocsModel, DocTreeNode } from '@c4docs/likec4-core/types'
 import { parse as parseYaml } from 'yaml'
 import { humanizeTitle } from './model-doc'
 

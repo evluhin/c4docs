@@ -14,9 +14,9 @@ import {
   isDynamicView,
   nonexhaustive,
   nonNullable,
-} from '@likec4/core'
-import { BBox } from '@likec4/core/geometry'
-import { getViewFolderPath } from '@likec4/core/model'
+} from '@c4docs/likec4-core'
+import { BBox } from '@c4docs/likec4-core/geometry'
+import { getViewFolderPath } from '@c4docs/likec4-core/model'
 import type {
   DiagramNode,
   DiagramView,
@@ -26,8 +26,8 @@ import type {
   StepPath,
   ViewChange,
   ViewId,
-} from '@likec4/core/types'
-import { difference, isString } from '@likec4/core/utils'
+} from '@c4docs/likec4-core/types'
+import { difference, isString } from '@c4docs/likec4-core/utils'
 import { type Rect, nodeToRect } from '@xyflow/system'
 import { produce } from 'immer'
 import { hasAtLeast, isTruthy, mapToObj, omit } from 'remeda'

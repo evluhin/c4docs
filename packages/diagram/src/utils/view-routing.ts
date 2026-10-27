@@ -1,4 +1,4 @@
-import type { EdgeRouting } from '@likec4/core/types'
+import type { EdgeRouting } from '@c4docs/likec4-core/types'
 
 /**
  * Returns a view's resolved routing mode, defaulting to `spline` when omitted.

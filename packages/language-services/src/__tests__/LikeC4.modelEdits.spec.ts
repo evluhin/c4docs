@@ -1,4 +1,4 @@
-import { DiffId } from '@likec4/core/types'
+import { DiffId } from '@c4docs/likec4-core/types'
 import { describe, it } from 'vitest'
 import { fromSource } from '../node/index'
 

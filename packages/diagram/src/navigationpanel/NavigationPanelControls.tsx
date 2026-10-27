@@ -1,6 +1,6 @@
-import { extractViewTitleFromPath } from '@likec4/core/model'
-import { css, cx } from '@likec4/styles/css'
-import { hstack } from '@likec4/styles/patterns'
+import { extractViewTitleFromPath } from '@c4docs/likec4-core/model'
+import { css, cx } from '@c4docs/likec4-styles/css'
+import { hstack } from '@c4docs/likec4-styles/patterns'
 import {
   UnstyledButton,
 } from '@mantine/core'

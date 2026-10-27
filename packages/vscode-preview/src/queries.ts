@@ -1,4 +1,4 @@
-import type { LayoutType, ProjectId, ViewId } from '@likec4/core/types'
+import type { LayoutType, ProjectId, ViewId } from '@c4docs/likec4-core/types'
 import { keepPreviousData, QueryClient, queryOptions } from '@tanstack/react-query'
 import { ExtensionApi } from './vscode'
 

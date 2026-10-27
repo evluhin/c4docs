@@ -1,5 +1,5 @@
 {
-  "name": "@likec4/icons",
+  "name": "@c4docs/likec4-icons",
   "version": "1.46.4",
   "license": "MIT",
   "homepage": "https://likec4.dev",
@@ -83,7 +83,7 @@
   "devDependencies": {
     "@types/react": "catalog:react",
     "@types/react-dom": "catalog:react",
-    "@likec4/devops": "workspace:*",
+    "@c4docs/likec4-devops": "workspace:*",
     "esbuild": "catalog:esbuild",
     "fdir": "catalog:externals",
     "picomatch": "catalog:externals",

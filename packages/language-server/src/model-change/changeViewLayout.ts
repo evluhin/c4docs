@@ -1,5 +1,5 @@
-import { type ViewChange, invariant } from '@likec4/core'
-import { ops, print } from '@likec4/generators/likec4'
+import { type ViewChange, invariant } from '@c4docs/likec4-core'
+import { ops, print } from '@c4docs/likec4-generators/likec4'
 import { GrammarUtils } from 'langium'
 import { findLast } from 'remeda'
 import { TextEdit } from 'vscode-languageserver-types'

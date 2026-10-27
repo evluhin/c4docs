@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import type { RelationshipBrowserScope } from '@likec4/config'
+import type { RelationshipBrowserScope } from '@c4docs/likec4-config'
 import type { Project } from 'likec4:projects'
 import { useCallback, useEffect, useState } from 'react'
 

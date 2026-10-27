@@ -5,11 +5,11 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { ComputedNodeStyle, ElementShape, MarkdownOrString, NodeId } from '@likec4/core'
-import type { ColorLiteral, LikeC4Styles } from '@likec4/core/styles'
-import { type Color, RichText } from '@likec4/core/types'
-import { cx } from '@likec4/styles/css'
-import { elementNodeData } from '@likec4/styles/recipes'
+import type { ComputedNodeStyle, ElementShape, MarkdownOrString, NodeId } from '@c4docs/likec4-core'
+import type { ColorLiteral, LikeC4Styles } from '@c4docs/likec4-core/styles'
+import { type Color, RichText } from '@c4docs/likec4-core/types'
+import { cx } from '@c4docs/likec4-styles/css'
+import { elementNodeData } from '@c4docs/likec4-styles/recipes'
 import {
   type CSSProperties,
   type DetailedHTMLProps,

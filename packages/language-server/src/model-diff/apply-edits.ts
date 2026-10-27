@@ -1,4 +1,4 @@
-import { DiffId } from '@likec4/core'
+import { DiffId } from '@c4docs/likec4-core'
 import type { LangiumDocument } from 'langium'
 import { AstUtils, CstUtils, DocumentState, URI, UriUtils } from 'langium'
 import { isPlainObject } from 'remeda'

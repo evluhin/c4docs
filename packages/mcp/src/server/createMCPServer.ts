@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { LikeC4LanguageServices } from '@likec4/language-server'
-import { loggable, logger } from '@likec4/log'
+import type { LikeC4LanguageServices } from '@c4docs/likec4-language-server'
+import { loggable, logger } from '@c4docs/likec4-log'
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { pipe, piped } from 'remeda'
 import packageJson from '../../package.json' with { type: 'json' }

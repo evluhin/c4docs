@@ -1,4 +1,4 @@
-import { LikeC4Styles } from '@likec4/core/styles'
+import { LikeC4Styles } from '@c4docs/likec4-core/styles'
 import { useOptionalLikeC4Model } from '../context/LikeC4ModelContext'
 
 export function useLikeC4Styles(): LikeC4Styles {

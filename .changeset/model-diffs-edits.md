@@ -1,9 +1,9 @@
 ---
-'@likec4/core': patch
-'@likec4/language-server': patch
-'@likec4/language-services': patch
-'@likec4/mcp': patch
-'likec4': patch
+'@c4docs/likec4-core': patch
+'@c4docs/likec4-language-server': patch
+'@c4docs/likec4-language-services': patch
+'@c4docs/likec4-mcp': patch
+'@c4docs/likec4': patch
 ---
 
 Model diffs: apply, discard and safe delete, see [discussion #1192](https://github.com/likec4/likec4/discussions/1192):

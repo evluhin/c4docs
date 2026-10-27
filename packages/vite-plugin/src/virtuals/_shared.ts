@@ -5,9 +5,9 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { LikeC4ProjectConfig, WebappExportFormat } from '@likec4/config'
-import type { LikeC4Project, NonEmptyArray, ProjectId } from '@likec4/core'
-import type { LikeC4LanguageServices } from '@likec4/language-services'
+import type { LikeC4ProjectConfig, WebappExportFormat } from '@c4docs/likec4-config'
+import type { LikeC4Project, NonEmptyArray, ProjectId } from '@c4docs/likec4-core'
+import type { LikeC4LanguageServices } from '@c4docs/likec4-language-services'
 import type { URI } from 'langium'
 import k from 'tinyrainbow'
 import { joinURL } from 'ufo'

@@ -8,10 +8,10 @@ import {
   isDynamicView,
   isElementView,
   LikeC4Styles,
-} from '@likec4/core'
-import type { ComputedProjectsView, LayoutedProjectsView } from '@likec4/core/compute-view'
-import { nonexhaustive } from '@likec4/core/utils'
-import { loggable, rootLogger as mainLogger, wrapError } from '@likec4/log'
+} from '@c4docs/likec4-core'
+import type { ComputedProjectsView, LayoutedProjectsView } from '@c4docs/likec4-core/compute-view'
+import { nonexhaustive } from '@c4docs/likec4-core/utils'
+import { loggable, rootLogger as mainLogger, wrapError } from '@c4docs/likec4-log'
 import { randomString } from 'remeda'
 import { calcSequenceLayout } from '../sequence'
 import type { AILayoutHints } from './ai/types'

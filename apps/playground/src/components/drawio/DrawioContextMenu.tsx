@@ -1,5 +1,5 @@
-import type { LikeC4Model } from '@likec4/core/model'
-import type { DiagramView } from '@likec4/core/types'
+import type { LikeC4Model } from '@c4docs/likec4-core/model'
+import type { DiagramView } from '@c4docs/likec4-core/types'
 import { DrawioContextMenuDropdown } from './DrawioContextMenuDropdown'
 import { useDrawioContextMenuActions } from './useDrawioContextMenuActions'
 

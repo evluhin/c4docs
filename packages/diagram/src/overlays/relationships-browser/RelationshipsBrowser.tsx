@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { cx } from '@likec4/styles/css'
+import { cx } from '@c4docs/likec4-styles/css'
 import { ActionIcon, Group, Tooltip as MantineTooltip } from '@mantine/core'
 import { useClipboard, useStateHistory } from '@mantine/hooks'
 import { IconAlertTriangle, IconCheck, IconChevronLeft, IconChevronRight, IconLink, IconX } from '@tabler/icons-react'

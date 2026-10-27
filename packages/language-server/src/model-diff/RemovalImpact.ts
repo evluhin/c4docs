@@ -1,11 +1,11 @@
-import { type DiagramView, type ProjectId, ViewId } from '@likec4/core'
+import { type DiagramView, type ProjectId, ViewId } from '@c4docs/likec4-core'
 import {
   type RemovalImpact,
   computeAdhocView,
   computeRemovalImpact,
   markRemovalImpact,
   removalImpactViewPredicates,
-} from '@likec4/core/compute-view'
+} from '@c4docs/likec4-core/compute-view'
 import { type AstNode, AstUtils } from 'langium'
 import { uniqueBy } from 'remeda'
 import type { Location } from 'vscode-languageserver-types'

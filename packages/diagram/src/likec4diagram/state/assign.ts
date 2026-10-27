@@ -1,5 +1,5 @@
-import { type LayoutedView, type NodeId, type XYPoint, nonNullable } from '@likec4/core'
-import { type VectorValue, vector } from '@likec4/core/geometry'
+import { type LayoutedView, type NodeId, type XYPoint, nonNullable } from '@c4docs/likec4-core'
+import { type VectorValue, vector } from '@c4docs/likec4-core/geometry'
 import type { InternalNode } from '@xyflow/react'
 import { type NodeLookup, getNodeDimensions } from '@xyflow/system'
 import { deepEqual as eq } from 'fast-equals'

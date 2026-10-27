@@ -1,4 +1,4 @@
-import type * as t from '@likec4/core/types'
+import type * as t from '@c4docs/likec4-core/types'
 
 /**
  * Result of applying a change from the LikeC4 Editor.

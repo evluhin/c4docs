@@ -129,7 +129,7 @@ void describe('check-agent-instructions', () => {
     expectFail(
       createFixture({
         'packages/diagram/src/likec4diagram/xyflow-sequence/CLAUDE.md':
-          '# Sequence Layouter\n\nThis directory is a development copy of the sequence layouter from `@likec4/layouts`.\n',
+          '# Sequence Layouter\n\nThis directory is a development copy of the sequence layouter from `@c4docs/likec4-layouts`.\n',
       }),
       /must import AGENTS\.md and contain only the approved local pointer/,
     )

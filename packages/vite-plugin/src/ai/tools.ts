@@ -1,4 +1,4 @@
-import { ElementShapes } from '@likec4/core/styles'
+import { ElementShapes } from '@c4docs/likec4-core/styles'
 import { toolDefinition } from '@tanstack/ai'
 import { z } from 'zod'
 

@@ -1,4 +1,4 @@
-import { Box } from '@likec4/styles/jsx'
+import { Box } from '@c4docs/likec4-styles/jsx'
 import type { Types } from '../../types'
 
 export type NodeDriftsProps = {

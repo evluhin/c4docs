@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { css } from '@likec4/styles/css'
+import { css } from '@c4docs/likec4-styles/css'
 import { Box, NavLink } from '@mantine/core'
 import { Link } from '@tanstack/react-router'
 import type { DocTreeNode } from 'likec4:docs'

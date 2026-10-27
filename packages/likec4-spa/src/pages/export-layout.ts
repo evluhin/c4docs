@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import type { BBox } from '@likec4/core/types'
+import type { BBox } from '@c4docs/likec4-core/types'
 
 export const EXPORT_EXTRA_PADDING = 16
 export const EXPORT_DESCRIPTION_GAP = 16

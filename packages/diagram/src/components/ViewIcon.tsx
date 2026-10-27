@@ -1,5 +1,5 @@
-import { nonexhaustive } from '@likec4/core'
-import { css, cx } from '@likec4/styles/css'
+import { nonexhaustive } from '@c4docs/likec4-core'
+import { css, cx } from '@c4docs/likec4-styles/css'
 import { type IconProps, IconDirectionSignFilled, IconStack2, IconStarFilled, IconZoomScan } from '@tabler/icons-react'
 import type { JSX } from 'react/jsx-runtime'
 

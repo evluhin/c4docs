@@ -1,4 +1,4 @@
-import type { ProjectId } from '@likec4/core'
+import type { ProjectId } from '@c4docs/likec4-core'
 import { describe, expect } from 'vitest'
 import { createMultiProjectTestServices, test } from '../test'
 

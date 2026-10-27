@@ -1,4 +1,4 @@
-import type { ProjectId } from '@likec4/core/types'
+import type { ProjectId } from '@c4docs/likec4-core/types'
 import { Button, Container, Stack, Title } from '@mantine/core'
 import { createFileRoute, Link, notFound, Outlet, redirect } from '@tanstack/react-router'
 import { loadDiffs } from 'likec4:diffs'

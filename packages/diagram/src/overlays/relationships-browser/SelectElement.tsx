@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { type Fqn, ancestorsFqn } from '@likec4/core'
+import { type Fqn, ancestorsFqn } from '@c4docs/likec4-core'
 import {
   ActionIcon,
   Box,

@@ -1,4 +1,4 @@
-import { invariant } from '@likec4/core'
+import { invariant } from '@c4docs/likec4-core'
 import { URI } from 'vscode-uri'
 import * as z from 'zod/v4'
 import { likec4Tool } from '../utils'

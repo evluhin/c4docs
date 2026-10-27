@@ -2,8 +2,8 @@
 //
 // Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import type { LayoutedElementView } from '@likec4/core/types'
-import { scalar } from '@likec4/core/types'
+import type { LayoutedElementView } from '@c4docs/likec4-core/types'
+import { scalar } from '@c4docs/likec4-core/types'
 import type { ReactFlowInstance, ReactFlowState } from '@xyflow/react'
 import { describe, expect, it } from 'vitest'
 import { createActor, fromCallback } from 'xstate'

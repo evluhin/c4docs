@@ -1,5 +1,5 @@
 /**
- * @likec4/leanix-bridge
+ * @c4docs/likec4-leanix-bridge
  *
  * Bridge from LikeC4 semantic model to LeanIX-shaped inventory artifacts.
  * Supports dry-run artifacts, optional LeanIX API sync (LeanixApiClient, syncToLeanix),

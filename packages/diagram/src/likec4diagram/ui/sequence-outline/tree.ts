@@ -1,4 +1,4 @@
-import type { DynamicViewFlow, StepPath } from '@likec4/core/types'
+import type { DynamicViewFlow, StepPath } from '@c4docs/likec4-core/types'
 import { useMemo } from 'react'
 import { type OutlineTreeNodeData, type OutlineTreeNodeFlow, type OutlineTreeNodes, isOutlineFlowNode } from './types'
 

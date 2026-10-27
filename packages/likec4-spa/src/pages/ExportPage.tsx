@@ -5,10 +5,10 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { type LayoutedView, type NodeNotation, type RichTextOrEmpty, RichText } from '@likec4/core'
-import { LikeC4Diagram, pickViewBounds, useLikeC4Styles } from '@likec4/diagram'
-import { ElementShape, Markdown } from '@likec4/diagram/custom'
-import { Box } from '@likec4/styles/jsx'
+import { type LayoutedView, type NodeNotation, type RichTextOrEmpty, RichText } from '@c4docs/likec4-core'
+import { LikeC4Diagram, pickViewBounds, useLikeC4Styles } from '@c4docs/likec4-diagram'
+import { ElementShape, Markdown } from '@c4docs/likec4-diagram/custom'
+import { Box } from '@c4docs/likec4-styles/jsx'
 import { LoadingOverlay } from '@mantine/core'
 import { useSearch } from '@tanstack/react-router'
 import type { CSSProperties } from 'react'

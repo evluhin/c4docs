@@ -1,5 +1,5 @@
-import * as c4 from '@likec4/core'
-import { invariant, isNonEmptyArray, nonexhaustive } from '@likec4/core'
+import * as c4 from '@c4docs/likec4-core'
+import { invariant, isNonEmptyArray, nonexhaustive } from '@c4docs/likec4-core'
 import { filter, isNonNullish, mapToObj, pipe } from 'remeda'
 import { type ParsedAstDeploymentView, ast, parseMarkdownAsString, toAutoLayout, ViewOps } from '../../ast'
 import { logWarnError } from '../../logger'

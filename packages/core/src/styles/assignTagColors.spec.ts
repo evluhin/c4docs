@@ -1,4 +1,4 @@
-import type { ColorLiteral, Tag, TagSpecification } from '@likec4/core/types'
+import type { ColorLiteral, Tag, TagSpecification } from '@c4docs/likec4-core/types'
 import { describe, expect, it } from 'vitest'
 import { assignTagColors, DefaultTagColors } from './assignTagColors'
 

@@ -1,4 +1,4 @@
-import type { LikeC4Model } from '@likec4/core/model'
+import type { LikeC4Model } from '@c4docs/likec4-core/model'
 import type { PropsWithChildren } from 'react'
 import type { JSX } from 'react/jsx-runtime'
 import { LikeC4ModelContextProvider } from './context/LikeC4ModelContext'

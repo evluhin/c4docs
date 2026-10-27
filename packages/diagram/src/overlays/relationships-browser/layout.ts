@@ -2,7 +2,7 @@ import {
   type RelationshipsViewData,
   computeRelationshipsView,
   treeFromElements,
-} from '@likec4/core/compute-view'
+} from '@c4docs/likec4-core/compute-view'
 import type {
   DiagramEdge,
   DiagramNode,
@@ -16,19 +16,19 @@ import type {
   NonEmptyArray,
   Point,
   ViewId,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import { useMemo } from 'react'
 
-import dagre, { type EdgeConfig, type GraphLabel } from '@dagrejs/dagre'
-import type { ElementModel, LikeC4ViewModel, RelationshipModel } from '@likec4/core/model'
-import { exact, preferSummary } from '@likec4/core/types'
+import type { ElementModel, LikeC4ViewModel, RelationshipModel } from '@c4docs/likec4-core/model'
+import { exact, preferSummary } from '@c4docs/likec4-core/types'
 import {
   DefaultMap,
   ifind,
   invariant,
   nonNullable,
   toArray,
-} from '@likec4/core/utils'
+} from '@c4docs/likec4-core/utils'
+import dagre, { type EdgeConfig, type GraphLabel } from '@dagrejs/dagre'
 import {
   concat,
   filter,

@@ -12,12 +12,12 @@ import {
   _type,
   GlobalFqn,
   ProjectId,
-} from '@likec4/core'
-import { computeView, withoutDiffOnlyReferences } from '@likec4/core/compute-view'
-import { LikeC4Model } from '@likec4/core/model'
-import * as c4 from '@likec4/core/types'
-import { LRUMap, objectHash, stringHash } from '@likec4/core/utils'
-import { type Logger, loggable } from '@likec4/log'
+} from '@c4docs/likec4-core'
+import { computeView, withoutDiffOnlyReferences } from '@c4docs/likec4-core/compute-view'
+import { LikeC4Model } from '@c4docs/likec4-core/model'
+import * as c4 from '@c4docs/likec4-core/types'
+import { LRUMap, objectHash, stringHash } from '@c4docs/likec4-core/utils'
+import { type Logger, loggable } from '@c4docs/likec4-log'
 import {
   type Cancellation,
   type LangiumDocument,

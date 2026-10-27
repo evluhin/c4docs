@@ -10,7 +10,7 @@ import {
   getAllDiagrams,
   parseDrawioToLikeC4,
   parseDrawioToLikeC4Multi,
-} from '@likec4/generators'
+} from '@c4docs/likec4-generators'
 import { describe, expect, it } from 'vitest'
 import { expectDrawioXmlLoadableInDrawio } from './drawio-test-utils'
 import { LikeC4 } from './LikeC4'

@@ -1,4 +1,4 @@
-import { css, cx } from '@likec4/styles/css'
+import { css, cx } from '@c4docs/likec4-styles/css'
 
 export { emptyBoX, focusable } from './_shared.css'
 

@@ -1,4 +1,4 @@
-import type * as t from '@likec4/core/types'
+import type * as t from '@c4docs/likec4-core/types'
 import { filter, isNot, omit } from 'remeda'
 import { type ActorSystem, assertEvent } from 'xstate'
 import { createViewChange } from '../../likec4diagram/state/createViewChange'

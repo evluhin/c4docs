@@ -1,7 +1,7 @@
 import {
   invariant,
   nonNullable,
-} from '@likec4/core'
+} from '@c4docs/likec4-core'
 import {
   type DynamicViewFlow,
   type Predicate,
@@ -12,7 +12,7 @@ import {
   isDynamicViewWithFlow,
   isStepPath,
   parentFlow,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import { clamp, find, firstBy, isNumber, map } from 'remeda'
 import { assertEvent, enqueueActions } from 'xstate'
 import { assign, raise } from 'xstate/actions'

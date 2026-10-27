@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { cx } from '@likec4/styles/css'
-import { edgeActionBtn } from '@likec4/styles/recipes'
+import { cx } from '@c4docs/likec4-styles/css'
+import { edgeActionBtn } from '@c4docs/likec4-styles/recipes'
 import { ActionIcon } from '@mantine/core'
 import { IconZoomScan } from '@tabler/icons-react'
 import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react'

@@ -1,4 +1,4 @@
-import { loggable, wrapError } from '@likec4/log'
+import { loggable, wrapError } from '@c4docs/likec4-log'
 import {
   extensionContext,
   toValue,

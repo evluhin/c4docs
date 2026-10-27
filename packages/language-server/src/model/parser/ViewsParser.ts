@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import * as c4 from '@likec4/core'
-import { type ModelFqnExpr, invariant, isNonEmptyArray, nonexhaustive } from '@likec4/core'
+import * as c4 from '@c4docs/likec4-core'
+import { type ModelFqnExpr, invariant, isNonEmptyArray, nonexhaustive } from '@c4docs/likec4-core'
 import { filter, find, isDefined, isEmpty, isNumber, isTruthy, last, mapToObj, pipe } from 'remeda'
 import type { Except, Writable } from 'type-fest'
 import {

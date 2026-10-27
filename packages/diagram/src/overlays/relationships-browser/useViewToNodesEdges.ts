@@ -4,7 +4,7 @@ import {
   invariant,
   nonNullable,
   Queue,
-} from '@likec4/core'
+} from '@c4docs/likec4-core'
 import { useDeepCompareMemo } from '@react-hookz/web'
 import { hasAtLeast } from 'remeda'
 import { ZIndexes } from '../../base/const'

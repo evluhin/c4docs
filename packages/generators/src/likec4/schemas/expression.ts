@@ -1,4 +1,4 @@
-import type { scalar } from '@likec4/core'
+import type { scalar } from '@c4docs/likec4-core'
 import { isNonNullish, pickBy } from 'remeda'
 import type { Simplify } from 'type-fest'
 import * as z from 'zod/v4'

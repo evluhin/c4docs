@@ -1,6 +1,6 @@
-import { type EdgeRouting, type NonEmptyArray, DefaultMap, nonNullable } from '@likec4/core'
-import { type Dimensions, type XYPoint, BBox, placeLabelsAlongRoutes } from '@likec4/core/geometry'
-import { invariant, isome } from '@likec4/core/utils'
+import { type EdgeRouting, type NonEmptyArray, DefaultMap, nonNullable } from '@c4docs/likec4-core'
+import { type Dimensions, type XYPoint, BBox, placeLabelsAlongRoutes } from '@c4docs/likec4-core/geometry'
+import { invariant, isome } from '@c4docs/likec4-core/utils'
 import type {
   EdgeReplaceChange,
   InternalNode as RFInternalNode,

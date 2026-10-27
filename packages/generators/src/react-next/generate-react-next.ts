@@ -1,4 +1,4 @@
-import type { DiagramView } from '@likec4/core'
+import type { DiagramView } from '@c4docs/likec4-core'
 import { CompositeGeneratorNode, toString } from 'langium/generate'
 import { generateViewsDataDTs, generateViewsDataJs } from '../views-data-ts/generate-views-data'
 
@@ -29,7 +29,7 @@ function generateComponents() {
     /* prettier-ignore-start */
     /* eslint-disable */
     import { createElement } from "react";
-    import { LikeC4Diagram, EmbeddedLikeC4Diagram } from "@likec4/diagram";
+    import { LikeC4Diagram, EmbeddedLikeC4Diagram } from "@c4docs/likec4-diagram";
     import { LikeC4Views } from "./likec4-views-data";
     export function LikeC4View({ viewId, ...props }) {
         const view = LikeC4Views[viewId];
@@ -53,7 +53,7 @@ function generateComponents() {
     /* prettier-ignore-start */
     /* eslint-disable */
 
-    import type { LikeC4DiagramProps, EmbeddedLikeC4DiagramProps } from "@likec4/diagram";
+    import type { LikeC4DiagramProps, EmbeddedLikeC4DiagramProps } from "@c4docs/likec4-diagram";
     import type { LikeC4ViewId } from "./likec4-views-data";
 
     export type LikeC4ViewProps = {
@@ -83,7 +83,7 @@ function generateIndex() {
     // You are safe to edit/move these style imports,
     // but they are required
     import "@mantine/core/styles.css";
-    import "@likec4/diagram/style.css";
+    import "@c4docs/likec4-diagram/style.css";
 
     export * from "./likec4-components";
 

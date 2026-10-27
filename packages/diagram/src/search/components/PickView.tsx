@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { LikeC4ViewModel } from '@likec4/core/model'
-import type { Fqn } from '@likec4/core/types'
+import type { LikeC4ViewModel } from '@c4docs/likec4-core/model'
+import type { Fqn } from '@c4docs/likec4-core/types'
 import { ActionIcon, FocusTrap, Group, ScrollAreaAutosize, Stack, Title } from '@mantine/core'
 import { useCallbackRef, useWindowEvent } from '@mantine/hooks'
 import { IconX } from '@tabler/icons-react'

@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { parseLikeC4ViewBlock } from '@likec4/core/utils'
+import { parseLikeC4ViewBlock } from '@c4docs/likec4-core/utils'
 import { manifestKey } from '../image/manifest'
 
 /**

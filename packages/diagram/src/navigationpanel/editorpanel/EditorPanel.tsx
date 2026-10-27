@@ -1,4 +1,4 @@
-import { vstack } from '@likec4/styles/patterns'
+import { vstack } from '@c4docs/likec4-styles/patterns'
 import { TooltipGroup } from '@mantine/core'
 import { type Variants, AnimatePresence } from 'motion/react'
 import * as m from 'motion/react-m'

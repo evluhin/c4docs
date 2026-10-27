@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { DiagramRef } from '@likec4/core'
-import type { Fqn, ViewId } from '@likec4/core'
+import type { DiagramRef } from '@c4docs/likec4-core'
+import type { Fqn, ViewId } from '@c4docs/likec4-core'
 import { describe, expect, it } from 'vitest'
 import { resolveEmbed } from './embed'
 

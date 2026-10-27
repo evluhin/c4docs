@@ -3,7 +3,7 @@ import type { SharedVirtualModuleOptions, VirtualModule } from './_shared'
 
 const code = ({ isAIAvailable, ai, rpcEnabled }: SharedVirtualModuleOptions) =>
   ` 
-import { createRpc } from 'likec4/vite-plugin/internal'
+import { createRpc } from '@c4docs/likec4/vite-plugin/internal'
 
 export const isRpcAvailable = !!import.meta.hot && ${rpcEnabled}
 export const isAIAvailable = isRpcAvailable && ${isAIAvailable}

@@ -1,5 +1,5 @@
 import useTelemetry from '#useTelemetry'
-import { ConfigFilenames } from '@likec4/config'
+import { ConfigFilenames } from '@c4docs/likec4-config'
 import {
   onDeactivate,
   toRef,

@@ -1,4 +1,4 @@
-import type { LikeC4LanguageServices } from '@likec4/language-server'
+import type { LikeC4LanguageServices } from '@c4docs/likec4-language-server'
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { createContext } from 'unctx'
 

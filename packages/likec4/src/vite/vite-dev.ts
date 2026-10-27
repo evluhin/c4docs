@@ -1,4 +1,4 @@
-import { loggable } from '@likec4/log'
+import { loggable } from '@c4docs/likec4-log'
 import react from '@vitejs/plugin-react'
 import getPort, { portNumbers } from 'get-port'
 import isInsideContainer from 'is-inside-container'
@@ -151,13 +151,13 @@ export async function viteDev({
         'react/jsx-runtime',
         'react-dom/client',
         'likec4/vite-plugin/internal',
-        '@likec4/core/styles',
-        '@likec4/core/geometry',
-        '@likec4/core/utils',
-        '@likec4/core/compute-view',
-        '@likec4/core/types',
-        '@likec4/core/model',
-        '@likec4/core',
+        '@c4docs/likec4-core/styles',
+        '@c4docs/likec4-core/geometry',
+        '@c4docs/likec4-core/utils',
+        '@c4docs/likec4-core/compute-view',
+        '@c4docs/likec4-core/types',
+        '@c4docs/likec4-core/model',
+        '@c4docs/likec4-core',
         'likec4/react',
         'likec4/model',
       ],

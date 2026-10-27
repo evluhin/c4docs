@@ -1,5 +1,5 @@
-import { nonexhaustive } from '@likec4/core'
-import type { RelationshipArrowType } from '@likec4/core/types'
+import { nonexhaustive } from '@c4docs/likec4-core'
+import type { RelationshipArrowType } from '@c4docs/likec4-core/types'
 import type { SVGProps } from 'react'
 
 const Open = (props: SVGProps<SVGMarkerElement>) => (

@@ -1,5 +1,5 @@
 {
-  "name": "@likec4/vscode-preview",
+  "name": "@c4docs/likec4-vscode-preview",
   "version": "1.60.0",
   "private": true,
   "sideEffects": false,
@@ -19,12 +19,12 @@
     "clean": "likec4ops clean"
   },
   "devDependencies": {
+    "@c4docs/likec4-core": "workspace:*",
+    "@c4docs/likec4-devops": "workspace:*",
+    "@c4docs/likec4-diagram": "workspace:*",
+    "@c4docs/likec4-styles": "workspace:*",
+    "@c4docs/likec4-tsconfig": "workspace:*",
     "@fontsource-variable/ibm-plex-sans": "catalog:",
-    "@likec4/core": "workspace:*",
-    "@likec4/devops": "workspace:*",
-    "@likec4/diagram": "workspace:*",
-    "@likec4/styles": "workspace:*",
-    "@likec4/tsconfig": "workspace:*",
     "@mantine/core": "catalog:mantine",
     "@mantine/hooks": "catalog:mantine",
     "@nanostores/react": "catalog:react",

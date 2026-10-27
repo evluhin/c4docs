@@ -1,6 +1,6 @@
-import { isLikeC4Config } from '@likec4/config'
-import { delay, promiseNextTick } from '@likec4/core/utils'
-import { loggable } from '@likec4/log'
+import { isLikeC4Config } from '@c4docs/likec4-config'
+import { delay, promiseNextTick } from '@c4docs/likec4-core/utils'
+import { loggable } from '@c4docs/likec4-log'
 import PQueue from 'p-queue'
 import {
   defineExtension,

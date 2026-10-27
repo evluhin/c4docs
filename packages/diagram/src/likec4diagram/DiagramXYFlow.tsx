@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { type EdgeId, type NodeId, nonNullable } from '@likec4/core'
-import { cx } from '@likec4/styles/css'
+import { type EdgeId, type NodeId, nonNullable } from '@c4docs/likec4-core'
+import { cx } from '@c4docs/likec4-styles/css'
 import { useDebouncedCallback, useTimeout } from '@mantine/hooks'
 import { useCustomCompareMemo } from '@react-hookz/web'
 import { Controls as XYFlowControls } from '@xyflow/react'

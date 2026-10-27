@@ -1,4 +1,4 @@
-import type * as c4 from '@likec4/core'
+import type * as c4 from '@c4docs/likec4-core'
 import {
   exact,
   FqnRef,
@@ -7,7 +7,7 @@ import {
   nameFromFqn,
   nonexhaustive,
   nonNullable,
-} from '@likec4/core'
+} from '@c4docs/likec4-core'
 
 import { filter, first, isDefined, isEmpty, isTruthy, mapToObj, pipe } from 'remeda'
 import {

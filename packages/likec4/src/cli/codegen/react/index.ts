@@ -1,5 +1,5 @@
-import { generateReactTypes } from '@likec4/generators'
-import { fromWorkspace } from '@likec4/language-services/node'
+import { generateReactTypes } from '@c4docs/likec4-generators'
+import { fromWorkspace } from '@c4docs/likec4-language-services/node'
 import { existsSync } from 'node:fs'
 import { stat, writeFile } from 'node:fs/promises'
 import { basename, dirname, extname, isAbsolute, relative, resolve } from 'node:path'
@@ -20,7 +20,7 @@ type HandlerParams = {
   path: string
   useDotBin: boolean
   /**
-   * Whether to use `@likec4/core` package in types
+   * Whether to use `@c4docs/likec4-core` package in types
    * @default false
    */
   useCorePackage: boolean

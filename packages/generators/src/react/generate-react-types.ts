@@ -1,5 +1,5 @@
-import type { AnyLikeC4Model } from '@likec4/core/model'
-import { invariant } from '@likec4/core/utils'
+import type { AnyLikeC4Model } from '@c4docs/likec4-core/model'
+import { invariant } from '@c4docs/likec4-core/utils'
 import { generateAux } from '../model/generate-aux'
 
 export function generateReactTypes(model: AnyLikeC4Model, options: { useCorePackage?: boolean } = {}) {
@@ -18,12 +18,12 @@ export function generateReactTypes(model: AnyLikeC4Model, options: { useCorePack
 
 import type { PropsWithChildren } from 'react'
 import type { JSX } from 'react/jsx-runtime'
-import type { LikeC4Model } from '${useCorePackage ? '@likec4/core' : 'likec4'}/model'
-import type { LayoutedView } from '${useCorePackage ? '@likec4/core/types' : 'likec4/model'}'
+import type { LikeC4Model } from '${useCorePackage ? '@c4docs/likec4-core' : '@c4docs/likec4'}/model'
+import type { LayoutedView } from '${useCorePackage ? '@c4docs/likec4-core/types' : '@c4docs/likec4/model'}'
 import type {
   LikeC4ViewProps as GenericLikeC4ViewProps,
   ReactLikeC4Props as GenericReactLikeC4Props
-} from 'likec4/react'
+} from '@c4docs/likec4/react'
 
 ${aux}
 

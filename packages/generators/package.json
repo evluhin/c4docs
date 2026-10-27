@@ -1,5 +1,5 @@
 {
-  "name": "@likec4/generators",
+  "name": "@c4docs/likec4-generators",
   "version": "1.60.0",
   "description": "Converts LikeC4 Model to other formats, like Mermaid, PlantUML, SVG, etc. Also generates typings for Model API and React",
   "homepage": "https://likec4.dev",
@@ -52,9 +52,9 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@likec4/config": "workspace:*",
-    "@likec4/core": "workspace:*",
-    "@likec4/log": "workspace:*",
+    "@c4docs/likec4-config": "workspace:*",
+    "@c4docs/likec4-core": "workspace:*",
+    "@c4docs/likec4-log": "workspace:*",
     "immer": "catalog:utils",
     "indent-string": "catalog:utils",
     "json5": "catalog:utils",
@@ -66,8 +66,8 @@
     "zod": "catalog:externals"
   },
   "devDependencies": {
-    "@likec4/devops": "workspace:*",
-    "@likec4/tsconfig": "workspace:*",
+    "@c4docs/likec4-devops": "workspace:*",
+    "@c4docs/likec4-tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "@types/pako": "catalog:",
     "tsdown": "catalog:tsdown",

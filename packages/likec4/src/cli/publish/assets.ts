@@ -19,7 +19,7 @@ import type { PublishAsset, PublishProject } from './payload'
  * Rewriting **by key name** rather than by type is the load-bearing decision of ADR-0010: the
  * icon-carrying fields are already spread over specification element/tag/deployment-kind styles,
  * view rule style overrides, `elements`, `deployments.elements`, `views[].nodes` and
- * `manualLayouts[].nodes`, and mirroring that list here would drift silently as `@likec4/core`
+ * `manualLayouts[].nodes`, and mirroring that list here would drift silently as `@c4docs/likec4-core`
  * evolves - leaving dead `file:///home/runner/…` paths in a published model.
  *
  * Only the *immediate* string value of the key is considered, which is what keeps

@@ -1,5 +1,5 @@
-import { invariant } from '@likec4/core'
-import { logger, wrapError } from '@likec4/log'
+import { invariant } from '@c4docs/likec4-core'
+import { logger, wrapError } from '@c4docs/likec4-log'
 import { bundleRequire } from 'bundle-require'
 import { defu } from 'defu'
 import { formatMessagesSync } from 'esbuild'
@@ -105,7 +105,7 @@ export async function loadConfig(filepath: VscodeURI | string): Promise<LikeC4Pr
         name: 'likec4-config',
         setup(build) {
           /**
-           * Intercept @likec4/config and likec4/config imports
+           * Intercept @c4docs/likec4-config and likec4/config imports
            */
           build.onResolve({ filter: /^@?likec4\/config$/ }, (args) => ({
             path: args.path,
@@ -118,12 +118,12 @@ export async function loadConfig(filepath: VscodeURI | string): Promise<LikeC4Pr
             }
           })
           /**
-           * Mock implementation, this allows to skip redundant bundling @likec4/config
+           * Mock implementation, this allows to skip redundant bundling @c4docs/likec4-config
            */
           build.onLoad({ filter: /.*/, namespace: 'likec4-config' }, (_args) => {
             return {
               contents: `
-// Mock implementation to allow loading config files without bundling @likec4/config
+// Mock implementation to allow loading config files without bundling @c4docs/likec4-config
 function mock(x) { return x }
 export {
   mock as defineConfig,

@@ -12,11 +12,11 @@ import type {
   LikeC4Model,
   LikeC4ViewModel,
   RelationshipModel,
-} from '@likec4/core/model'
+} from '@c4docs/likec4-core/model'
 import type {
   aux,
   ProjectId,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import JSON5 from 'json5'
 import z from 'zod/v4'
 import { ImageAliasesSchema } from './schema.image-alias'

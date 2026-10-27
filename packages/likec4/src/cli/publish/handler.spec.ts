@@ -49,8 +49,8 @@ function modelWithNodes(id: string, nodeCount: number): MockModelData {
 
 // The doubles live in `./__doubles__` because this suite runs with `--no-isolate` and shares
 // its module registry with `handler.integration.spec.ts` - see that module's header.
-vi.mock('@likec4/language-services/node', async importOriginal => {
-  const actual = await importOriginal<typeof import('@likec4/language-services/node')>()
+vi.mock('@c4docs/likec4-language-services/node', async importOriginal => {
+  const actual = await importOriginal<typeof import('@c4docs/likec4-language-services/node')>()
   const doubles = await import('./__doubles__')
   doubles.rememberRealWorkspace(actual.fromWorkspace)
   return { ...actual, fromWorkspace: doubles.fromWorkspace }

@@ -9,7 +9,7 @@ import {
   Sizes,
   Sizings,
   ThemeColors,
-} from '@likec4/core/styles'
+} from '@c4docs/likec4-core/styles'
 import {
   type BorderStyle,
   type Color,
@@ -26,7 +26,7 @@ import {
   type TextSize,
   type ThemeColor,
   exact,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import { isNonNullish, pickBy } from 'remeda'
 import * as z from 'zod/v4'
 

@@ -9,7 +9,7 @@ import type {
   RelationshipArrowType,
   RelationshipLineType,
   ViewId,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import type { FunctionComponent } from 'react'
 import type { Simplify } from 'type-fest'
 import type {

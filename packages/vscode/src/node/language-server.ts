@@ -1,5 +1,5 @@
-import { configureLanguageServerLogger, startLanguageServer } from '@likec4/language-server'
-import { rootLogger } from '@likec4/log'
+import { configureLanguageServerLogger, startLanguageServer } from '@c4docs/likec4-language-server'
+import { rootLogger } from '@c4docs/likec4-log'
 import { isDevelopment } from 'std-env'
 import { createConnection, ProposedFeatures } from 'vscode-languageserver/node'
 

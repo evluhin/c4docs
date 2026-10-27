@@ -1,5 +1,5 @@
-import type { LogRecord } from '@likec4/log'
-import { configureLogger } from '@likec4/log'
+import type { LogRecord } from '@c4docs/likec4-log'
+import { configureLogger } from '@c4docs/likec4-log'
 import { afterEach, describe, it, vi } from 'vitest'
 import { URI } from 'vscode-uri'
 import { createLanguageServices } from '../module'

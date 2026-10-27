@@ -1,4 +1,4 @@
-import { token } from '@likec4/styles/tokens'
+import { token } from '@c4docs/likec4-styles/tokens'
 import { Box, Group, Text } from '@mantine/core'
 
 const items = [

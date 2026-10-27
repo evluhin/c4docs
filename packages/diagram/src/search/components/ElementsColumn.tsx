@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { LikeC4Model } from '@likec4/core/model'
-import type { Fqn, NonEmptyArray } from '@likec4/core/types'
+import type { LikeC4Model } from '@c4docs/likec4-core/model'
+import type { Fqn, NonEmptyArray } from '@c4docs/likec4-core/types'
 import {
   ifilter,
   imap,
@@ -14,9 +14,9 @@ import {
   nameFromFqn,
   stringHash,
   toArray,
-} from '@likec4/core/utils'
-import { cx, cx as clsx } from '@likec4/styles/css'
-import { Txt } from '@likec4/styles/jsx'
+} from '@c4docs/likec4-core/utils'
+import { cx, cx as clsx } from '@c4docs/likec4-styles/css'
+import { Txt } from '@c4docs/likec4-styles/jsx'
 import {
   type RenderTreeNodePayload,
   ActionIcon,

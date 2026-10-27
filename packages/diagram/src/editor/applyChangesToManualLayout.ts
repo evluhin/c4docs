@@ -1,6 +1,6 @@
-import { invariant, nonNullable } from '@likec4/core'
-import { type VectorValue, BBox, convertPoint, vector } from '@likec4/core/geometry'
-import * as t from '@likec4/core/types'
+import { invariant, nonNullable } from '@c4docs/likec4-core'
+import { type VectorValue, BBox, convertPoint, vector } from '@c4docs/likec4-core/geometry'
+import * as t from '@c4docs/likec4-core/types'
 import { castDraft, produce, setAutoFreeze } from 'immer'
 import { isNullish, map } from 'remeda'
 

@@ -1,4 +1,4 @@
-import type { ViewId } from '@likec4/core'
+import type { ViewId } from '@c4docs/likec4-core'
 import { useMemo } from 'react'
 import { createSafeContextForActor } from '../hooks/safeContext'
 import type { NavigationPanelActorEvent, NavigationPanelActorRef } from './actor'

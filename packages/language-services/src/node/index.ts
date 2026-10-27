@@ -1,4 +1,4 @@
-import { rootLogger } from '@likec4/log'
+import { rootLogger } from '@c4docs/likec4-log'
 import defu from 'defu'
 import { URI } from 'langium'
 import { writeFile } from 'node:fs/promises'

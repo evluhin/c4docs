@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import { invariant, isDynamicView, isElementView, ProjectId, stepGuards, ViewId } from '@likec4/core'
+import { invariant, isDynamicView, isElementView, ProjectId, stepGuards, ViewId } from '@c4docs/likec4-core'
 import { describe, it } from 'vitest'
 import { createMultiProjectTestServices } from '../../test'
 

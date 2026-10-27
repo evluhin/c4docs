@@ -1,4 +1,4 @@
-import { fromWorkspace } from '@likec4/language-services/node'
+import { fromWorkspace } from '@c4docs/likec4-language-services/node'
 import { readFile, writeFile } from 'node:fs/promises'
 import { relative, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'

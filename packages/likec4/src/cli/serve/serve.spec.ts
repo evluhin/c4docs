@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 // Mock heavy dependencies to isolate handler wiring logic
-vi.mock('@likec4/language-services/node', () => ({
+vi.mock('@c4docs/likec4-language-services/node', () => ({
   fromWorkspace: vi.fn().mockResolvedValue({
     workspace: '/tmp/test-workspace',
     dispose: vi.fn(),

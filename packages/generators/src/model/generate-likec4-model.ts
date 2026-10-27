@@ -1,4 +1,4 @@
-import type { LikeC4Model } from '@likec4/core/model'
+import type { LikeC4Model } from '@c4docs/likec4-core/model'
 import JSON5 from 'json5'
 import { generateAux } from './generate-aux'
 
@@ -15,7 +15,7 @@ export function generateLikeC4Model(model: LikeC4Model<any>, options: { useCoreP
  * DO NOT EDIT MANUALLY!
  ******************************************************************************/
 
-import { LikeC4Model } from '${useCorePackage ? '@likec4/core' : 'likec4'}/model'
+import { LikeC4Model } from '${useCorePackage ? '@c4docs/likec4-core' : '@c4docs/likec4'}/model'
 ${aux}
 
 export const likec4model: LikeC4Model<$Aux> = new LikeC4Model(${

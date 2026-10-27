@@ -1,4 +1,4 @@
-import type { Tag } from '@likec4/core/types'
+import type { Tag } from '@c4docs/likec4-core/types'
 import { describe, expect, it } from 'vitest'
 import type { schemas } from '../schemas'
 import { fresh, materialize } from './base'

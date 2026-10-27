@@ -2,8 +2,8 @@
 //
 // Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-import { searchBodyCss, SearchControl, searchDialogCss, SearchPanelContent } from '@likec4/diagram'
-import { FramerMotionConfig, Overlay } from '@likec4/diagram/custom'
+import { searchBodyCss, SearchControl, searchDialogCss, SearchPanelContent } from '@c4docs/likec4-diagram'
+import { FramerMotionConfig, Overlay } from '@c4docs/likec4-diagram/custom'
 import { useHotkeys } from '@mantine/hooks'
 import { AnimatePresence } from 'motion/react'
 import { memo, useCallback, useRef, useState } from 'react'

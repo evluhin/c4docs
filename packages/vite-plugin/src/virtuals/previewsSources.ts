@@ -1,4 +1,4 @@
-import type { ComputedView } from '@likec4/core/types'
+import type { ComputedView } from '@c4docs/likec4-core/types'
 import { hardenJsonStringLiteralForEmbeddedScript } from './hardenJsonStringLiteralForEmbeddedScript'
 
 export function diagramPreviewsSources(views: ComputedView[], assetsDir: string) {
@@ -8,7 +8,7 @@ export function diagramPreviewsSources(views: ComputedView[], assetsDir: string)
   } = views.reduce((acc, { id }, i) => {
     const Component = 'Png' + i.toString().padStart(2, '0')
 
-    acc.imports.push(`import ${Component} from 'likec4/previews/${id}.png'`)
+    acc.imports.push(`import ${Component} from '@c4docs/likec4/previews/${id}.png'`)
     acc.cases.push(`  ${hardenJsonStringLiteralForEmbeddedScript(JSON.stringify(id))}: ${Component}`)
     return acc
   }, {
@@ -16,7 +16,7 @@ export function diagramPreviewsSources(views: ComputedView[], assetsDir: string)
     cases: [] as string[],
   })
   return `
-import { atom, useStore } from 'likec4/vite-plugin/internal'
+import { atom, useStore } from '@c4docs/likec4/vite-plugin/internal'
 // assets dir: ${assetsDir}
 
 ${imports.join('\n')}

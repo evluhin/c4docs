@@ -1,4 +1,4 @@
-import { defineConfig } from '@likec4/devops/tsdown'
+import { defineConfig } from '@c4docs/likec4-devops/tsdown'
 import { createRequire } from 'node:module'
 
 const require = createRequire(import.meta.url)
@@ -19,10 +19,10 @@ export default defineConfig([
   },
   {
     // Browser bundle for the render-view MCP App UI, see src/app-ui/render-view.client.tsx.
-    // Bundled as a single IIFE (React + @likec4/diagram included) so it can be
+    // Bundled as a single IIFE (React + @c4docs/likec4-diagram included) so it can be
     // inlined into a plain <script> tag inside the resource HTML returned by
     // src/resource/render-view.ts. The paired CSS is copied (not bundled) from
-    // @likec4/diagram's pre-built stylesheet, then inlined as a <style> tag.
+    // @c4docs/likec4-diagram's pre-built stylesheet, then inlined as a <style> tag.
     entry: {
       'app/render-view-client': 'src/app-ui/render-view.client.tsx',
     },
@@ -49,7 +49,7 @@ export default defineConfig([
     },
     copy: [
       {
-        from: require.resolve('@likec4/diagram/styles.css'),
+        from: require.resolve('@c4docs/likec4-diagram/styles.css'),
         to: 'dist/app',
         rename: 'render-view-client.css',
       },

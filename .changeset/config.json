@@ -4,14 +4,14 @@
   "commit": false,
   "fixed": [
     [
-      "likec4",
-      "likec4-vscode",
-      "@likec4/*",
-      "!@likec4/icons"
+      "@c4docs/likec4",
+      "@c4docs/likec4-vscode",
+      "@c4docs/likec4-*",
+      "!@c4docs/likec4-icons"
     ]
   ],
   "ignore": [
-    "@likec4/devops"
+    "@c4docs/likec4-devops"
   ],
   "linked": [],
   "access": "public",

@@ -1,5 +1,5 @@
-import type { AutoLayoutDirection } from '@likec4/core'
-import type { EdgeRouting } from '@likec4/core/types'
+import type { AutoLayoutDirection } from '@c4docs/likec4-core'
+import type { EdgeRouting } from '@c4docs/likec4-core/types'
 import {
   Box,
   Flex,

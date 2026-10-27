@@ -1,5 +1,5 @@
-import { css } from '@likec4/styles/css'
-import { HStack, styled } from '@likec4/styles/jsx'
+import { css } from '@c4docs/likec4-styles/css'
+import { HStack, styled } from '@c4docs/likec4-styles/jsx'
 import { Button, ScrollArea } from '@mantine/core'
 import { IconPlayerSkipBackFilled, IconPlayerSkipForwardFilled } from '@tabler/icons-react'
 import { pick } from 'remeda'

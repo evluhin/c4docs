@@ -1,5 +1,5 @@
-import { type AILayoutProvider, type AILayoutRequest, enhanceLayoutWithAI } from '@likec4/layouts/ai'
-import { loggable } from '@likec4/log'
+import { type AILayoutProvider, type AILayoutRequest, enhanceLayoutWithAI } from '@c4docs/likec4-layouts/ai'
+import { loggable } from '@c4docs/likec4-log'
 import { defineLogger, ref, toValue, useCommand } from 'reactive-vscode'
 import { hasAtLeast, once } from 'remeda'
 import * as vscode from 'vscode'

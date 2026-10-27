@@ -1,4 +1,4 @@
-import { Txt } from '@likec4/styles/jsx'
+import { Txt } from '@c4docs/likec4-styles/jsx'
 import { Modal, Title } from '@mantine/core'
 import { closeSemanticLayoutLog, useSemanticLayoutLog } from './semantic-layout-log-state'
 

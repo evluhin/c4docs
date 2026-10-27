@@ -1,4 +1,4 @@
-import { likec4preset } from '@likec4/style-preset/src'
+import { likec4preset } from '@c4docs/likec4-style-preset/src'
 import { defineConfig as pandaDefineConfig } from '@pandacss/dev'
 
 /**
@@ -8,7 +8,7 @@ import { defineConfig as pandaDefineConfig } from '@pandacss/dev'
 export function defineConfig(config) {
   return pandaDefineConfig({
     // preflight: true,
-    importMap: '@likec4/styles',
+    importMap: '@c4docs/likec4-styles',
     presets: [
       likec4preset,
     ],

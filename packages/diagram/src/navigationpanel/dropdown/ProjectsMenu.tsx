@@ -1,5 +1,5 @@
-import { css } from '@likec4/styles/css'
-import { Box, HStack } from '@likec4/styles/jsx'
+import { css } from '@c4docs/likec4-styles/css'
+import { Box, HStack } from '@c4docs/likec4-styles/jsx'
 import { Button, Menu, MenuDropdown, MenuItem, MenuTarget, ScrollArea } from '@mantine/core'
 import { IconChevronDown } from '@tabler/icons-react'
 import { memo } from 'react'

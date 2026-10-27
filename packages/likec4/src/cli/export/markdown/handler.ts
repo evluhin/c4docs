@@ -1,5 +1,5 @@
-import { generateMarkdown } from '@likec4/generators'
-import { fromWorkspace } from '@likec4/language-services/node'
+import { generateMarkdown } from '@c4docs/likec4-generators'
+import { fromWorkspace } from '@c4docs/likec4-language-services/node'
 import { readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import k from 'tinyrainbow'

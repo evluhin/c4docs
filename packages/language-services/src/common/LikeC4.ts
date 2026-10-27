@@ -1,8 +1,8 @@
-import { assertSpecificationCompatible, Builder } from '@likec4/core/builder'
-import type { AnyTypes, BuilderMode, BuilderSpecification, Types } from '@likec4/core/builder'
-import type { LikeC4Model } from '@likec4/core/model'
-import type { DocsModel, LayoutedView, NonEmptyArray, ProjectId } from '@likec4/core/types'
-import { generate as generateLikeC4Source } from '@likec4/generators/likec4'
+import { assertSpecificationCompatible, Builder } from '@c4docs/likec4-core/builder'
+import type { AnyTypes, BuilderMode, BuilderSpecification, Types } from '@c4docs/likec4-core/builder'
+import type { LikeC4Model } from '@c4docs/likec4-core/model'
+import type { DocsModel, LayoutedView, NonEmptyArray, ProjectId } from '@c4docs/likec4-core/types'
+import { generate as generateLikeC4Source } from '@c4docs/likec4-generators/likec4'
 import type {
   FormatOptions,
   LikeC4LanguageServices,
@@ -14,8 +14,8 @@ import type {
   LikeC4SharedServices,
   LikeC4Views,
   ProjectsManager,
-} from '@likec4/language-server'
-import { type Logger, rootLogger } from '@likec4/log'
+} from '@c4docs/likec4-language-server'
+import { type Logger, rootLogger } from '@c4docs/likec4-log'
 import { flatMap, hasAtLeast, join, map, pipe, prop } from 'remeda'
 import k from 'tinyrainbow'
 import type { URI } from 'vscode-uri'
@@ -276,7 +276,7 @@ Please specify a project folder`)
    * regenerated wholesale.
    *
    * To write the output to disk, use the `writeDSL` helper from
-   * `@likec4/language-services/node`.
+   * `@c4docs/likec4-language-services/node`.
    */
   async toDSL(project?: string | undefined): Promise<string> {
     const parsed = await this.parsedModel(project)

@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { RelationshipBrowserScope } from '@likec4/config'
-import type { Fqn } from '@likec4/core'
+import type { RelationshipBrowserScope } from '@c4docs/likec4-config'
+import type { Fqn } from '@c4docs/likec4-core'
 import {
   LikeC4Diagram,
   selectDiagramContext,
@@ -15,7 +15,7 @@ import {
   useLikeC4Model,
   useOnDiagramEvent,
   useUpdateEffect,
-} from '@likec4/diagram'
+} from '@c4docs/likec4-diagram'
 import { useCallbackRef, useDocumentTitle } from '@mantine/hooks'
 import { useIsMounted, useUnmountEffect } from '@react-hookz/web'
 import { useNavigate, useRouter, useSearch } from '@tanstack/react-router'

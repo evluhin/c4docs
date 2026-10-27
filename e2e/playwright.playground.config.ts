@@ -31,7 +31,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'pnpm --filter @likec4/playground dev -- --port 5174',
+    command: 'pnpm --filter @c4docs/likec4-playground dev -- --port 5174',
     port: 5174,
     stdout: 'pipe',
     timeout: 60 * 1000,

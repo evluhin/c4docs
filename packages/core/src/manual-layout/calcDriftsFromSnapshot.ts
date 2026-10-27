@@ -5,8 +5,8 @@ import {
   type LayoutedViewDriftReason,
   type ViewManualLayoutSnapshot,
   _layout,
-} from '@likec4/core/types'
-import { ifilter, ihead } from '@likec4/core/utils'
+} from '@c4docs/likec4-core/types'
+import { ifilter, ihead } from '@c4docs/likec4-core/utils'
 import { castDraft, produce } from 'immer'
 import { hasAtLeast, pipe } from 'remeda'
 import { applyManualLayout } from './applyManualLayout'

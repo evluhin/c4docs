@@ -6,7 +6,7 @@
   "tasks": {
     "generate": {
       "dependsOn": [
-        "@likec4/icons#generate"
+        "@c4docs/likec4-icons#generate"
       ],
       "inputs": [
         "langium-config.json",

@@ -1,5 +1,5 @@
-import type { LikeC4ProjectConfig } from '@likec4/config'
-import type { LayoutedView } from '@likec4/core'
+import type { LikeC4ProjectConfig } from '@c4docs/likec4-config'
+import type { LayoutedView } from '@c4docs/likec4-core'
 import type { Disposable, FileSystemNode, URI } from 'langium'
 import { LibIcons } from '../generated/icons'
 import { isLikeC4Builtin } from '../likec4lib'

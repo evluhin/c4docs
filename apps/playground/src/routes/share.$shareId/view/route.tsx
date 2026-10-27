@@ -1,6 +1,6 @@
 import { api } from '$/api'
-import { LikeC4Model } from '@likec4/core/model'
-import { LikeC4ModelProvider } from '@likec4/diagram'
+import { LikeC4Model } from '@c4docs/likec4-core/model'
+import { LikeC4ModelProvider } from '@c4docs/likec4-diagram'
 import { createFileRoute, Navigate, Outlet } from '@tanstack/react-router'
 import { useMemo } from 'react'
 

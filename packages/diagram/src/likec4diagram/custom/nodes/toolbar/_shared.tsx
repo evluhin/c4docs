@@ -1,4 +1,4 @@
-import type { BorderStyle, DeploymentFqn, Fqn } from '@likec4/core/types'
+import type { BorderStyle, DeploymentFqn, Fqn } from '@c4docs/likec4-core/types'
 import { ActionIcon, SegmentedControl, Tooltip as MantineTooltip } from '@mantine/core'
 import { IconFileSymlink, IconTransform } from '@tabler/icons-react'
 import { useEffect, useState } from 'react'

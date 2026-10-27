@@ -1,4 +1,4 @@
-import type { EdgeRouting, LayoutedView, ViewId } from '@likec4/core/types'
+import type { EdgeRouting, LayoutedView, ViewId } from '@c4docs/likec4-core/types'
 import { viewRouting } from '../utils/view-routing'
 import { selectDiagramContext, useDiagramSelector } from './useDiagram'
 

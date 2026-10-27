@@ -5,13 +5,13 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { Element, ViewId } from '@likec4/core'
+import type { Element, ViewId } from '@c4docs/likec4-core'
 import {
   type ViewRulePredicate,
   isViewRulePredicate,
   ModelRelationExpr,
-} from '@likec4/core'
-import { viewsWithReadableEdges, withReadableEdges } from '@likec4/core/compute-view'
+} from '@c4docs/likec4-core'
+import { viewsWithReadableEdges, withReadableEdges } from '@c4docs/likec4-core/compute-view'
 import { keys, values } from 'remeda'
 import { describe } from 'vitest'
 import { createTestServices, test } from '../../test'

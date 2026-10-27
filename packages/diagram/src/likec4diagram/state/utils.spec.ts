@@ -1,4 +1,4 @@
-import type { Fqn } from '@likec4/core/types'
+import type { Fqn } from '@c4docs/likec4-core/types'
 import { describe, expect, it } from 'vitest'
 import { findNodeByModelFqn } from './utils'
 

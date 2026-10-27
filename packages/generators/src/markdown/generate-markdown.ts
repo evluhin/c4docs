@@ -1,5 +1,5 @@
-import type { LikeC4Model, LikeC4ViewModel } from '@likec4/core/model'
-import type { aux } from '@likec4/core/types'
+import type { LikeC4Model, LikeC4ViewModel } from '@c4docs/likec4-core/model'
+import type { aux } from '@c4docs/likec4-core/types'
 import { CompositeGeneratorNode } from 'langium/generate'
 import { generateMermaid } from '../mmd/generate-mmd'
 import { NL, toStringLF } from '../newline'

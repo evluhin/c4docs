@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-import type { ConfigureLanguageServerLoggerOptions } from '@likec4/language-server'
+import type { ConfigureLanguageServerLoggerOptions } from '@c4docs/likec4-language-server'
 import {
   configureLogger,
   getAnsiColorFormatter,
   getConsoleFormatter,
   getConsoleSink,
   loggable,
-} from '@likec4/log'
+} from '@c4docs/likec4-log'
 import { argv, exit, stdout } from 'node:process'
 import { clamp, pipe } from 'remeda'
 import { isDevelopment } from 'std-env'

@@ -1,4 +1,4 @@
-import type { LikeC4ProjectJsonConfig } from '@likec4/config'
+import type { LikeC4ProjectJsonConfig } from '@c4docs/likec4-config'
 import type {
   ColorLiteral,
   ComputedLikeC4ModelData,
@@ -14,8 +14,8 @@ import type {
   RelationId,
   ViewChange,
   ViewId,
-} from '@likec4/core'
-import type { AILayoutHints } from '@likec4/layouts/ai'
+} from '@c4docs/likec4-core'
+import type { AILayoutHints } from '@c4docs/likec4-layouts/ai'
 import { NotificationType, NotificationType0, RequestType, RequestType0 } from 'vscode-jsonrpc'
 import type { DiagnosticSeverity, DocumentUri, Location, Position, Range, URI } from 'vscode-languageserver-types'
 import type {

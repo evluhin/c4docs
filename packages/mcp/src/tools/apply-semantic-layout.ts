@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { ProjectId } from '@likec4/core'
-import { enhanceLayoutWithAI } from '@likec4/layouts/ai'
+import type { ProjectId } from '@c4docs/likec4-core'
+import { enhanceLayoutWithAI } from '@c4docs/likec4-layouts/ai'
 import { completable } from '@modelcontextprotocol/sdk/server/completable.js'
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { prop } from 'remeda'

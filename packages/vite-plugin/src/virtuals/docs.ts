@@ -5,13 +5,13 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { DocsModel } from '@likec4/core/types'
+import type { DocsModel } from '@c4docs/likec4-core/types'
 import JSON5 from 'json5'
 import { logGenerating } from '../logger'
 import { type ProjectVirtualModule, generateCombinedProjects, generateMatches } from './_shared'
 
 const projectDocsCode = (docs: DocsModel) => `
-import { atom } from 'likec4/vite-plugin/internal'
+import { atom } from '@c4docs/likec4/vite-plugin/internal'
 
 export let $docs = atom(${JSON5.stringify(docs)})
 

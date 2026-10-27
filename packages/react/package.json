@@ -1,5 +1,5 @@
 {
-  "name": "@likec4/react",
+  "name": "@c4docs/likec4-react",
   "version": "1.60.0",
   "private": true,
   "description": "LikeC4 React bundle",
@@ -37,7 +37,7 @@
     "clean": "likec4ops clean"
   },
   "dependencies": {
-    "@likec4/core": "workspace:*",
+    "@c4docs/likec4-core": "workspace:*",
     "immer": "catalog:utils",
     "react": "catalog:react",
     "react-dom": "catalog:react",
@@ -45,13 +45,13 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:react",
+    "@c4docs/likec4-core": "workspace:*",
+    "@c4docs/likec4-devops": "workspace:*",
+    "@c4docs/likec4-diagram": "workspace:*",
+    "@c4docs/likec4-styles": "workspace:*",
+    "@c4docs/likec4-tsconfig": "workspace:*",
     "@dagrejs/dagre": "catalog:",
     "@floating-ui/dom": "catalog:react",
-    "@likec4/core": "workspace:*",
-    "@likec4/devops": "workspace:*",
-    "@likec4/diagram": "workspace:*",
-    "@likec4/styles": "workspace:*",
-    "@likec4/tsconfig": "workspace:*",
     "@lume/kiwi": "catalog:utils",
     "@mantine/core": "catalog:mantine",
     "@mantine/hooks": "catalog:mantine",

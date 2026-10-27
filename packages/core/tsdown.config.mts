@@ -1,4 +1,4 @@
-import { codeSplittingGroup, defineConfig, outputOptions } from '@likec4/devops/tsdown'
+import { codeSplittingGroup, defineConfig, outputOptions } from '@c4docs/likec4-devops/tsdown'
 import nodePolyfills from '@rolldown/plugin-node-polyfills'
 
 export default defineConfig({

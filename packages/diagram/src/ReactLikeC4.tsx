@@ -1,5 +1,5 @@
-import type * as t from '@likec4/core/types'
-import { cx } from '@likec4/styles/css'
+import type * as t from '@c4docs/likec4-core/types'
+import { cx } from '@c4docs/likec4-styles/css'
 import type { CSSProperties, ReactNode } from 'react'
 import type { JSX } from 'react/jsx-runtime'
 import { ErrorMessage, ViewNotFound } from './components/ViewNotFound'

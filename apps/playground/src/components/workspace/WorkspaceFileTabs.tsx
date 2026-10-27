@@ -1,6 +1,6 @@
 import { usePlayground, usePlaygroundContext, usePlaygroundWorkspace } from '$hooks/usePlayground'
-import { css } from '@likec4/styles/css'
-import { HStack, VStack } from '@likec4/styles/jsx'
+import { css } from '@c4docs/likec4-styles/css'
+import { HStack, VStack } from '@c4docs/likec4-styles/jsx'
 import { HoverCard, Tabs, TabsList, Text, ThemeIcon } from '@mantine/core'
 import { IconAlertTriangle } from '@tabler/icons-react'
 

@@ -1,4 +1,4 @@
-import { type ViewChange, invariant, nonNullable } from '@likec4/core'
+import { type ViewChange, invariant, nonNullable } from '@c4docs/likec4-core'
 import { GrammarUtils } from 'langium'
 import { findLast } from 'remeda'
 import { TextEdit } from 'vscode-languageserver-types'

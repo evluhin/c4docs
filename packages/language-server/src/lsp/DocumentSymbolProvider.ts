@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { nonexhaustive } from '@likec4/core'
-import { loggable } from '@likec4/log'
+import { nonexhaustive } from '@c4docs/likec4-core'
+import { loggable } from '@c4docs/likec4-log'
 import { type AstNode, type LangiumDocument, AstUtils, GrammarUtils, interruptAndCheck } from 'langium'
 import type { DocumentSymbolProvider, NodeKindProvider } from 'langium/lsp'
 import { filter, isEmpty, isTruthy, map, pipe } from 'remeda'

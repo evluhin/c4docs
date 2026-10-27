@@ -1,5 +1,5 @@
-import type { LikeC4Theme, ThemeColor } from '@likec4/core'
-import { Flex } from '@likec4/styles/jsx'
+import type { LikeC4Theme, ThemeColor } from '@c4docs/likec4-core'
+import { Flex } from '@c4docs/likec4-styles/jsx'
 import {
   type PopoverProps,
   Button,

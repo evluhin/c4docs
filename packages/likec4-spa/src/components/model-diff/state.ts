@@ -1,5 +1,5 @@
-import type { CompareViewMode } from '@likec4/core/compute-view'
-import type { DiffId } from '@likec4/core/types'
+import type { CompareViewMode } from '@c4docs/likec4-core/compute-view'
+import type { DiffId } from '@c4docs/likec4-core/types'
 import { useStore } from '@nanostores/react'
 import { atom } from 'nanostores'
 import { useModelDiffs } from '../../context/ModelDiffsContext'

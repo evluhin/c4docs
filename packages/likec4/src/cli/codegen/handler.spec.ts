@@ -39,14 +39,14 @@ type MockLanguageServices = {
 
 const fromWorkspace = vi.hoisted(() => vi.fn<() => Promise<MockLanguageServices>>())
 
-vi.mock('@likec4/generators', () => ({
+vi.mock('@c4docs/likec4-generators', () => ({
   generateD2: (vm: MockViewModel) => `d2 ${vm.$view.id}`,
   generateMermaid: (vm: MockViewModel) => `mermaid ${vm.$view.id}`,
   generatePuml: (vm: MockViewModel) => `plantuml ${vm.$view.id}`,
   generateViewsDataTs: () => 'views',
 }))
 
-vi.mock('@likec4/language-services/node', () => ({
+vi.mock('@c4docs/likec4-language-services/node', () => ({
   fromWorkspace,
 }))
 

@@ -1,4 +1,4 @@
-import { type Fqn, type ProjectId, nonNullable } from '@likec4/core'
+import { type Fqn, type ProjectId, nonNullable } from '@c4docs/likec4-core'
 import type { ast } from '../../ast'
 import type { Base } from './Base'
 

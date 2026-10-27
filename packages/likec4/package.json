@@ -1,5 +1,5 @@
 {
-  "name": "likec4",
+  "name": "@c4docs/likec4",
   "version": "1.60.0",
   "description": "Toolchain for your architecture diagrams",
   "keywords": [
@@ -86,7 +86,9 @@
     },
     "./package.json": "./package.json"
   },
-  "bin": "./bin/likec4.mjs",
+  "bin": {
+    "likec4": "./bin/likec4.mjs"
+  },
   "scripts": {
     "typecheck": "tsc --build --verbose",
     "build": "tsdown",
@@ -117,9 +119,9 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@c4docs/likec4-core": "workspace:*",
+    "@c4docs/likec4-icons": "workspace:*",
     "@hpcc-js/wasm-graphviz": "catalog:externals",
-    "@likec4/core": "workspace:*",
-    "@likec4/icons": "workspace:*",
     "@vitejs/plugin-react": "catalog:vite",
     "bundle-require": "catalog:externals",
     "chokidar": "catalog:externals",
@@ -138,24 +140,24 @@
     "zod": "catalog:externals"
   },
   "devDependencies": {
+    "@c4docs/likec4-config": "workspace:*",
+    "@c4docs/likec4-devops": "workspace:*",
+    "@c4docs/likec4-diagram": "workspace:*",
+    "@c4docs/likec4-generators": "workspace:*",
+    "@c4docs/likec4-language-server": "workspace:*",
+    "@c4docs/likec4-language-services": "workspace:*",
+    "@c4docs/likec4-layouts": "workspace:*",
+    "@c4docs/likec4-leanix-bridge": "workspace:*",
+    "@c4docs/likec4-log": "workspace:*",
+    "@c4docs/likec4-mcp": "workspace:*",
+    "@c4docs/likec4-react": "workspace:*",
+    "@c4docs/likec4-spa": "workspace:*",
+    "@c4docs/likec4-style-preset": "workspace:*",
+    "@c4docs/likec4-styles": "workspace:*",
+    "@c4docs/likec4-tsconfig": "workspace:*",
+    "@c4docs/likec4-vite-plugin": "workspace:*",
     "@dagrejs/dagre": "catalog:",
     "@fontsource-variable/ibm-plex-sans": "catalog:",
-    "@likec4/config": "workspace:*",
-    "@likec4/devops": "workspace:*",
-    "@likec4/diagram": "workspace:*",
-    "@likec4/generators": "workspace:*",
-    "@likec4/language-server": "workspace:*",
-    "@likec4/language-services": "workspace:*",
-    "@likec4/layouts": "workspace:*",
-    "@likec4/leanix-bridge": "workspace:*",
-    "@likec4/log": "workspace:*",
-    "@likec4/mcp": "workspace:*",
-    "@likec4/react": "workspace:*",
-    "@likec4/spa": "workspace:*",
-    "@likec4/style-preset": "workspace:*",
-    "@likec4/styles": "workspace:*",
-    "@likec4/tsconfig": "workspace:*",
-    "@likec4/vite-plugin": "workspace:*",
     "@nanostores/react": "catalog:react",
     "@pandacss/dev": "catalog:css",
     "@tanstack/ai": "catalog:ai",

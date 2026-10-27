@@ -5,9 +5,9 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { nonexhaustive } from '@likec4/core'
-import type { ComputedNodeStyle, ElementShape, ShapeSize } from '@likec4/core/types'
-import { elementShapeRecipe } from '@likec4/styles/recipes'
+import { nonexhaustive } from '@c4docs/likec4-core'
+import type { ComputedNodeStyle, ElementShape, ShapeSize } from '@c4docs/likec4-core/types'
+import { elementShapeRecipe } from '@c4docs/likec4-styles/recipes'
 import { roundDpr } from '../../utils'
 
 function cylinderSVGPath(diameter: number, height: number, tilt = 0.07) {

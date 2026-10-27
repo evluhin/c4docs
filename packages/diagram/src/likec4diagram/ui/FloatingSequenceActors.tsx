@@ -1,7 +1,7 @@
-import { ensureSizes } from '@likec4/core'
-import { ifilter, imap, invariant, toArray } from '@likec4/core/utils'
-import { css, cx } from '@likec4/styles/css'
-import { elementNode } from '@likec4/styles/recipes'
+import { ensureSizes } from '@c4docs/likec4-core'
+import { ifilter, imap, invariant, toArray } from '@c4docs/likec4-core/utils'
+import { css, cx } from '@c4docs/likec4-styles/css'
+import { elementNode } from '@c4docs/likec4-styles/recipes'
 import { useNodesData } from '@xyflow/react'
 import { getNodeDimensions } from '@xyflow/system'
 import {

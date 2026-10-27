@@ -1,4 +1,4 @@
-import type { Fqn, NodeId, ViewId } from '@likec4/core/types'
+import type { Fqn, NodeId, ViewId } from '@c4docs/likec4-core/types'
 import {
   type ActorRef,
   type SnapshotFrom,

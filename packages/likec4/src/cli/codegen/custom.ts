@@ -1,5 +1,5 @@
-import type { GeneratorFn } from '@likec4/config'
-import { nonexhaustive } from '@likec4/core'
+import type { GeneratorFn } from '@c4docs/likec4-config'
+import { nonexhaustive } from '@c4docs/likec4-core'
 import {
   type AnyLikeC4Model,
   isDeploymentElementModel,
@@ -7,10 +7,10 @@ import {
   isElementModel,
   isLikeC4ViewModel,
   isRelationModel,
-} from '@likec4/core/model'
-import type { Locate } from '@likec4/language-server/protocol'
-import { fromWorkspace } from '@likec4/language-services/node'
-import type { Logger } from '@likec4/log'
+} from '@c4docs/likec4-core/model'
+import type { Locate } from '@c4docs/likec4-language-server/protocol'
+import { fromWorkspace } from '@c4docs/likec4-language-services/node'
+import type { Logger } from '@c4docs/likec4-log'
 import { UriUtils } from 'langium'
 import { existsSync } from 'node:fs'
 import { mkdir, writeFile } from 'node:fs/promises'

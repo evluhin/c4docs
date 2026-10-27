@@ -1,8 +1,8 @@
 /**
  * This module is used by the Vite plugin to generate the virtual modules
  */
-import { LikeC4Model } from '@likec4/core/model'
-import type { LayoutedLikeC4ModelData, LayoutedView } from '@likec4/core/types'
+import { LikeC4Model } from '@c4docs/likec4-core/model'
+import type { LayoutedLikeC4ModelData, LayoutedView } from '@c4docs/likec4-core/types'
 import { useStore } from '@nanostores/react'
 import { createBirpc } from 'birpc'
 import { deepEqual, shallowEqual } from 'fast-equals'

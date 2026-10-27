@@ -6,8 +6,8 @@
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
 declare module 'likec4:projects' {
-  import type { RelationshipBrowserScope, WebappExportFormat } from 'likec4/config'
-  import type { ProjectId } from 'likec4/model'
+  import type { RelationshipBrowserScope, WebappExportFormat } from '@c4docs/likec4/config'
+  import type { ProjectId } from '@c4docs/likec4/model'
   type LandingPageConfig =
     | { redirect: true }
     | { include: string[] }
@@ -28,7 +28,7 @@ declare module 'likec4:projects' {
 }
 
 declare module 'likec4:projects-overview' {
-  import type { LayoutedProjectEdge, LayoutedProjectNode, LayoutedProjectsView } from 'likec4/model'
+  import type { LayoutedProjectEdge, LayoutedProjectNode, LayoutedProjectsView } from '@c4docs/likec4/model'
   export type { LayoutedProjectEdge, LayoutedProjectNode, LayoutedProjectsView }
 
   export function useLikeC4ProjectsOverview(): LayoutedProjectsView
@@ -50,8 +50,8 @@ declare module 'likec4:icons' {
 }
 
 declare module 'likec4:model' {
-  import type { DiagramView, LayoutedLikeC4ModelData, LikeC4Model, UnknownLayouted } from 'likec4/model'
-  import type { Atom } from 'likec4/vite-plugin/internal'
+  import type { DiagramView, LayoutedLikeC4ModelData, LikeC4Model, UnknownLayouted } from '@c4docs/likec4/model'
+  import type { Atom } from '@c4docs/likec4/vite-plugin/internal'
 
   export type { Atom, DiagramView, LayoutedLikeC4ModelData, LikeC4Model, UnknownLayouted }
 
@@ -65,8 +65,8 @@ declare module 'likec4:model' {
 }
 
 declare module 'likec4:docs' {
-  import type { DocPage, DocsModel, DocTreeNode } from 'likec4/model'
-  import type { Atom } from 'likec4/vite-plugin/internal'
+  import type { DocPage, DocsModel, DocTreeNode } from '@c4docs/likec4/model'
+  import type { Atom } from '@c4docs/likec4/vite-plugin/internal'
 
   export type { Atom, DocPage, DocsModel, DocTreeNode }
 
@@ -76,8 +76,8 @@ declare module 'likec4:docs' {
 }
 
 declare module 'likec4:docs/*' {
-  import type { DocsModel } from 'likec4/model'
-  import type { Atom } from 'likec4/vite-plugin/internal'
+  import type { DocsModel } from '@c4docs/likec4/model'
+  import type { Atom } from '@c4docs/likec4/vite-plugin/internal'
 
   export const $docs: Atom<DocsModel>
 }
@@ -89,8 +89,8 @@ declare module 'likec4:single-project' {
     LikeC4Model,
     types,
     UnknownLayouted,
-  } from 'likec4/model'
-  import type { Atom } from 'likec4/vite-plugin/internal'
+  } from '@c4docs/likec4/model'
+  import type { Atom } from '@c4docs/likec4/vite-plugin/internal'
   import type { ElementIconRenderer } from 'likec4:icons'
 
   export const $likec4data: Atom<LayoutedLikeC4ModelData>
@@ -105,8 +105,8 @@ declare module 'likec4:single-project' {
 }
 
 declare module 'likec4:react' {
-  import type { aux, DiagramView, LikeC4Model, UnknownLayouted } from 'likec4/model'
-  import type { LikeC4ViewProps, ReactLikeC4Props } from 'likec4/react'
+  import type { aux, DiagramView, LikeC4Model, UnknownLayouted } from '@c4docs/likec4/model'
+  import type { LikeC4ViewProps, ReactLikeC4Props } from '@c4docs/likec4/react'
   import type { JSX, PropsWithChildren } from 'react'
 
   // This will be used later for augmenting the types
@@ -151,8 +151,8 @@ declare module 'likec4:drawio' {
   }>
 }
 declare module 'likec4:diffs' {
-  import type { DiffSummary, LayoutedView } from 'likec4/model'
-  import type { Atom } from 'likec4/vite-plugin/internal'
+  import type { DiffSummary, LayoutedView } from '@c4docs/likec4/model'
+  import type { Atom } from '@c4docs/likec4/vite-plugin/internal'
 
   /**
    * Diffs of the project, with the compare views of the views they change (by diff id, then by view id)
@@ -171,13 +171,13 @@ declare module 'likec4:diffs' {
 
 declare module 'likec4:diffs/*' {
   import type { ProjectDiffs } from 'likec4:diffs'
-  import type { Atom } from 'likec4/vite-plugin/internal'
+  import type { Atom } from '@c4docs/likec4/vite-plugin/internal'
 
   export const $diffs: Atom<ProjectDiffs>
 }
 
 declare module 'likec4:model/*' {
-  import type { aux, DiagramView, LayoutedLikeC4ModelData, LikeC4Model, UnknownLayouted } from 'likec4/model'
+  import type { aux, DiagramView, LayoutedLikeC4ModelData, LikeC4Model, UnknownLayouted } from '@c4docs/likec4/model'
   import type { Atom } from 'likec4:model'
 
   // This will be used later for augmenting the types
@@ -206,8 +206,8 @@ declare module 'likec4:icons/*' {
 }
 
 declare module 'likec4:react/*' {
-  import type { aux, DiagramView, LikeC4Model, UnknownLayouted } from 'likec4/model'
-  import type { LikeC4ViewProps, ReactLikeC4Props } from 'likec4/react'
+  import type { aux, DiagramView, LikeC4Model, UnknownLayouted } from '@c4docs/likec4/model'
+  import type { LikeC4ViewProps, ReactLikeC4Props } from '@c4docs/likec4/react'
   import type { JSX, PropsWithChildren } from 'react'
 
   // This will be used later for augmenting the types
@@ -235,7 +235,7 @@ declare module 'likec4:webcomponents/*' {
 }
 
 declare module 'likec4:rpc' {
-  import type { LikeC4VitePluginRpc } from 'likec4/vite-plugin/internal'
+  import type { LikeC4VitePluginRpc } from '@c4docs/likec4/vite-plugin/internal'
 
   export type { LikeC4VitePluginRpc }
   export const likec4rpc: LikeC4VitePluginRpc

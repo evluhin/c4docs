@@ -2,7 +2,7 @@ import {
   hasProp,
   invariant,
   nonexhaustive,
-} from '@likec4/core'
+} from '@c4docs/likec4-core'
 import { CompositeGeneratorNode } from 'langium/generate'
 import { hasAtLeast, values } from 'remeda'
 import { NL } from '../../newline'

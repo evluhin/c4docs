@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { modelConnection } from '@likec4/core/model'
-import { invariant, isSameHierarchy } from '@likec4/core/utils'
+import { modelConnection } from '@c4docs/likec4-core/model'
+import { invariant, isSameHierarchy } from '@c4docs/likec4-core/utils'
 import * as z from 'zod/v4'
 import { likec4Tool } from '../utils'
 import { includedInViews, includedInViewsSchema, locationSchema, mkLocate, projectIdSchema } from './_common'

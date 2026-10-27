@@ -5,9 +5,9 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { Fqn } from '@likec4/core/types'
-import { css } from '@likec4/styles/css'
-import { Box } from '@likec4/styles/jsx'
+import type { Fqn } from '@c4docs/likec4-core/types'
+import { css } from '@c4docs/likec4-styles/css'
+import { Box } from '@c4docs/likec4-styles/jsx'
 import { Handle, Position } from '@xyflow/react'
 import { m } from 'motion/react'
 import { isTruthy } from 'remeda'

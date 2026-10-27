@@ -1,4 +1,4 @@
-import { nonNullable } from '@likec4/core'
+import { nonNullable } from '@c4docs/likec4-core'
 import {
   type BBox,
   type DiagramEdge,
@@ -11,7 +11,7 @@ import {
   dynamicViewFlow,
   hasProp,
   NodeId,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import {
   entries,
   filter,

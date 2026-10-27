@@ -1,8 +1,8 @@
-import type { RichTextOrEmpty as RichTextType } from '@likec4/core/types'
-import { cx } from '@likec4/styles/css'
-import { Box } from '@likec4/styles/jsx'
-import { markdownBlock } from '@likec4/styles/recipes'
-import type { Tokens } from '@likec4/styles/tokens'
+import type { RichTextOrEmpty as RichTextType } from '@c4docs/likec4-core/types'
+import { cx } from '@c4docs/likec4-styles/css'
+import { Box } from '@c4docs/likec4-styles/jsx'
+import { markdownBlock } from '@c4docs/likec4-styles/recipes'
+import type { Tokens } from '@c4docs/likec4-styles/tokens'
 import { Text } from '@mantine/core'
 import { type ComponentPropsWithoutRef, forwardRef } from 'react'
 

@@ -1,5 +1,5 @@
-import type { LikeC4ViewModel } from '@likec4/core/model'
-import type { aux, ComputedNode, NodeId, ProcessedView as AnyView } from '@likec4/core/types'
+import type { LikeC4ViewModel } from '@c4docs/likec4-core/model'
+import type { aux, ComputedNode, NodeId, ProcessedView as AnyView } from '@c4docs/likec4-core/types'
 import { CompositeGeneratorNode, joinToNode } from 'langium/generate'
 import { isNullish as isNil } from 'remeda'
 import { NL, toStringLF } from '../newline'

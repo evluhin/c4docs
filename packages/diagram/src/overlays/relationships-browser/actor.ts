@@ -1,5 +1,5 @@
-import type { BBox, Fqn, ViewId } from '@likec4/core'
-import { delay, invariant, nonNullable } from '@likec4/core/utils'
+import type { BBox, Fqn, ViewId } from '@c4docs/likec4-core'
+import { delay, invariant, nonNullable } from '@c4docs/likec4-core/utils'
 import {
   type EdgeChange,
   type NodeChange,

@@ -1,5 +1,5 @@
-import { type ElementShape, ElementShapes } from '@likec4/core/styles'
-import type { Fqn } from '@likec4/core/types'
+import { type ElementShape, ElementShapes } from '@c4docs/likec4-core/styles'
+import type { Fqn } from '@c4docs/likec4-core/types'
 import { Button, Menu, MenuDropdown, MenuItem, MenuTarget } from '@mantine/core'
 import { IconCheck, IconSelector } from '@tabler/icons-react'
 import { useEnabledFeatures } from '../../../../context/DiagramFeatures'

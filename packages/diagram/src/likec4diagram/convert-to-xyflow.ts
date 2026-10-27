@@ -1,4 +1,4 @@
-import type { LayoutedView, ViewId } from '@likec4/core/types'
+import type { LayoutedView, ViewId } from '@c4docs/likec4-core/types'
 import type { DiagramContext } from './state/types'
 import type { Types } from './types'
 import { diagramToXY } from './xyflow-diagram/diagram-view'

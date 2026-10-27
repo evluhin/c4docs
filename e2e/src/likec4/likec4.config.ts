@@ -1,4 +1,4 @@
-import { defineConfig } from 'likec4/config'
+import { defineConfig } from '@c4docs/likec4/config'
 
 export default defineConfig({
   name: 'e2e',

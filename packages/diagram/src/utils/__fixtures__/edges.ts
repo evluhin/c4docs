@@ -1,4 +1,4 @@
-import type { NonEmptyArray, Point } from '@likec4/core/types'
+import type { NonEmptyArray, Point } from '@c4docs/likec4-core/types'
 
 // cubic segments of a real layouted edge, as Graphviz reports them
 // (taken from the saved layout of the dev workspace's amazon view)

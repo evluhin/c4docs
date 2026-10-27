@@ -6,7 +6,7 @@
   "tasks": {
     "sources": {
       "dependsOn": [
-        "@likec4/style-preset#sources"
+        "@c4docs/likec4-style-preset#sources"
       ],
       "outputs": [
         "dist/**"

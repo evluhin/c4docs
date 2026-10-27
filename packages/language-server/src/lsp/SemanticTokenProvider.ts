@@ -1,5 +1,5 @@
-import { isAnyOf } from '@likec4/core/types'
-import { nonNullable } from '@likec4/core/utils'
+import { isAnyOf } from '@c4docs/likec4-core/types'
+import { nonNullable } from '@c4docs/likec4-core/utils'
 import type { AstNode, CstNode, Properties } from 'langium'
 import {
   type SemanticTokenAcceptor,

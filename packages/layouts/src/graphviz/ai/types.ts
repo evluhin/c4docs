@@ -6,7 +6,7 @@ import type {
   NodeId,
   NonEmptyArray,
   NonEmptyReadonlyArray,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 
 /**
  * Abstract interface for AI layout hint generation.

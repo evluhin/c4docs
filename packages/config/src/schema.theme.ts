@@ -3,7 +3,7 @@ import type {
   ElementColorValues,
   RelationshipColorValues,
   ThemeColorValues,
-} from '@likec4/core/styles'
+} from '@c4docs/likec4-core/styles'
 import {
   BorderStyles,
   computeColorValues,
@@ -12,7 +12,7 @@ import {
   RelationshipArrowTypes,
   Sizes,
   ThemeColors,
-} from '@likec4/core/styles'
+} from '@c4docs/likec4-core/styles'
 import type {
   ColorLiteral,
   CustomColor,
@@ -21,8 +21,8 @@ import type {
   LikeC4ProjectStylesCustomStylesheets,
   LikeC4ProjectTheme,
   ThemeColor,
-} from '@likec4/core/types'
-import { exact } from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
+import { exact } from '@c4docs/likec4-core/types'
 import { isPlainObject } from 'remeda'
 import z from 'zod/v4'
 

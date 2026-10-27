@@ -1,4 +1,4 @@
-import { compareNaturalHierarchically } from '@likec4/core/utils'
+import { compareNaturalHierarchically } from '@c4docs/likec4-core/utils'
 import { withoutTrailingSlash } from 'ufo'
 import type { URI } from 'vscode-uri'
 

@@ -5,9 +5,9 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { css, cx } from '@likec4/styles/css'
-import { Box } from '@likec4/styles/jsx'
-import { actionBtn } from '@likec4/styles/recipes'
+import { css, cx } from '@c4docs/likec4-styles/css'
+import { Box } from '@c4docs/likec4-styles/jsx'
+import { actionBtn } from '@c4docs/likec4-styles/recipes'
 import { ActionIcon } from '@mantine/core'
 import { IconId } from '@tabler/icons-react'
 import * as m from 'motion/react-m'

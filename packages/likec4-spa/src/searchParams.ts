@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { Fqn } from '@likec4/core/types'
+import type { Fqn } from '@c4docs/likec4-core/types'
 import { z } from 'zod'
 
 export const searchParamsSchema = z.object({

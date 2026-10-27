@@ -1,5 +1,5 @@
-import { css } from '@likec4/styles/css'
-import { HStack, Txt, VStack } from '@likec4/styles/jsx'
+import { css } from '@c4docs/likec4-styles/css'
+import { HStack, Txt, VStack } from '@c4docs/likec4-styles/jsx'
 import {
   ActionIcon,
   Badge,

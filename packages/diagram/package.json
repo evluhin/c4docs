@@ -1,5 +1,5 @@
 {
-  "name": "@likec4/diagram",
+  "name": "@c4docs/likec4-diagram",
   "version": "1.60.0",
   "description": "A React component library for rendering software architecture diagrams",
   "homepage": "https://likec4.dev",
@@ -59,10 +59,10 @@
     "lint:package": "pnpx publint ./package.tgz"
   },
   "dependencies": {
+    "@c4docs/likec4-core": "workspace:*",
+    "@c4docs/likec4-styles": "workspace:*",
     "@dagrejs/dagre": "catalog:",
     "@floating-ui/dom": "catalog:react",
-    "@likec4/core": "workspace:*",
-    "@likec4/styles": "workspace:*",
     "@lume/kiwi": "catalog:utils",
     "@mantine/core": "catalog:mantine",
     "@mantine/hooks": "catalog:mantine",
@@ -90,8 +90,8 @@
     "xstate": "catalog:xstate"
   },
   "devDependencies": {
-    "@likec4/devops": "workspace:*",
-    "@likec4/tsconfig": "workspace:*",
+    "@c4docs/likec4-devops": "workspace:*",
+    "@c4docs/likec4-tsconfig": "workspace:*",
     "@pandacss/dev": "catalog:css",
     "@statelyai/inspect": "^0.7.2",
     "@tabler/icons-react": "catalog:react",

@@ -1,5 +1,5 @@
-import { Builder } from '@likec4/core/builder'
-import { type ElementShape, ElementShapes } from '@likec4/core/styles'
+import { Builder } from '@c4docs/likec4-core/builder'
+import { type ElementShape, ElementShapes } from '@c4docs/likec4-core/styles'
 import { describe, it } from 'vitest'
 import { GraphvizLayouter } from '../GraphvizLayoter'
 import { GraphvizWasmAdapter } from './GraphvizWasmAdapter'

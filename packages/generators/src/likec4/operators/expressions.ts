@@ -1,4 +1,4 @@
-import { type PredicateSelector, nonexhaustive } from '@likec4/core'
+import { type PredicateSelector, nonexhaustive } from '@c4docs/likec4-core'
 import { joinToNode } from 'langium/generate'
 import { map } from 'remeda'
 import * as schemas from '../schemas/expression'

@@ -1,4 +1,4 @@
-import type { LikeC4ProjectConfig } from '@likec4/config'
+import type { LikeC4ProjectConfig } from '@c4docs/likec4-config'
 import {
   type DocsModel,
   type LayoutedView,
@@ -7,10 +7,10 @@ import {
   type UnknownComputed,
   type UnknownLayouted,
   nonexhaustive,
-} from '@likec4/core'
-import { type LayoutedProjectsView, computeProjectsView } from '@likec4/core/compute-view'
-import { LikeC4Model } from '@likec4/core/model'
-import { loggable } from '@likec4/log'
+} from '@c4docs/likec4-core'
+import { type LayoutedProjectsView, computeProjectsView } from '@c4docs/likec4-core/compute-view'
+import { LikeC4Model } from '@c4docs/likec4-core/model'
+import { loggable } from '@c4docs/likec4-log'
 import { type Disposable, TextDocument, URI } from 'langium'
 import { entries, filter, flatMap, hasAtLeast, indexBy, map, pipe, prop } from 'remeda'
 import type { CancellationToken } from 'vscode-jsonrpc'

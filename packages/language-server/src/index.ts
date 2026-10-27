@@ -1,5 +1,5 @@
-import { GraphvizWasmAdapter } from '@likec4/layouts'
-import { GraphvizBinaryAdapter } from '@likec4/layouts/graphviz/binary'
+import { GraphvizWasmAdapter } from '@c4docs/likec4-layouts'
+import { GraphvizBinaryAdapter } from '@c4docs/likec4-layouts/graphviz/binary'
 import { defu } from 'defu'
 import { startLanguageServer as startLanguim } from 'langium/lsp'
 import type { Connection } from 'vscode-languageserver'

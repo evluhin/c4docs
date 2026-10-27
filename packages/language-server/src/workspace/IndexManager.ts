@@ -1,4 +1,4 @@
-import type { ProjectId } from '@likec4/core'
+import type { ProjectId } from '@c4docs/likec4-core'
 import { type AstNodeDescription, type LangiumDocument, type Stream, DefaultIndexManager, stream } from 'langium'
 import type { CancellationToken } from 'vscode-languageserver'
 import type { LikeC4SharedServices } from '../module'

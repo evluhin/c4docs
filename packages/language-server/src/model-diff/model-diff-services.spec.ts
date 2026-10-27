@@ -1,5 +1,5 @@
-import type { DiffId, ParsedLikeC4ModelData, ProjectId } from '@likec4/core'
-import { applyModelDiff } from '@likec4/core/compute-view'
+import type { DiffId, ParsedLikeC4ModelData, ProjectId } from '@c4docs/likec4-core'
+import { applyModelDiff } from '@c4docs/likec4-core/compute-view'
 import type { LangiumDocument } from 'langium'
 import { mapValues, values } from 'remeda'
 import { describe, it, vi } from 'vitest'

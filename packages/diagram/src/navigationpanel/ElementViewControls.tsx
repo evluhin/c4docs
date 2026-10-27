@@ -1,5 +1,5 @@
-import { invariant } from '@likec4/core'
-import { css } from '@likec4/styles/css'
+import { invariant } from '@c4docs/likec4-core'
+import { css } from '@c4docs/likec4-styles/css'
 import { SegmentedControl } from '@mantine/core'
 import * as m from 'motion/react-m'
 import { forwardRef } from 'react'

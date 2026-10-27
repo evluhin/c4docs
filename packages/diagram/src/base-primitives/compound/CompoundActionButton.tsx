@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { cx } from '@likec4/styles/css'
-import { actionBtn } from '@likec4/styles/recipes'
+import { cx } from '@c4docs/likec4-styles/css'
+import { actionBtn } from '@c4docs/likec4-styles/recipes'
 import { ActionIcon } from '@mantine/core'
 import { useDebouncedValue } from '@mantine/hooks'
 import { IconZoomScan } from '@tabler/icons-react'

@@ -1,5 +1,5 @@
-import type { LikeC4ViewModel } from '@likec4/core/model'
-import type { aux, ProcessedView } from '@likec4/core/types'
+import type { LikeC4ViewModel } from '@c4docs/likec4-core/model'
+import type { aux, ProcessedView } from '@c4docs/likec4-core/types'
 import { test, vi } from 'vitest'
 import {
   fakeComputedView3Levels,

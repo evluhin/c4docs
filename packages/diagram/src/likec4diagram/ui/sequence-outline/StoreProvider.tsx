@@ -16,8 +16,8 @@ import {
   flowAncestors,
   invariant,
   isDynamicViewWithFlow,
-} from '@likec4/core'
-import { extractViewTitleFromPath } from '@likec4/core/model'
+} from '@c4docs/likec4-core'
+import { extractViewTitleFromPath } from '@c4docs/likec4-core/model'
 import { selectDiagramContext, useDiagramSelector } from '../../../hooks/safeContext'
 import { roundDpr } from '../../../utils'
 import { buildTree } from './tree'

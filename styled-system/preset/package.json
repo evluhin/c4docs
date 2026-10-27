@@ -1,5 +1,5 @@
 {
-  "name": "@likec4/style-preset",
+  "name": "@c4docs/likec4-style-preset",
   "version": "1.60.0",
   "description": "Shared PandaCSS preset used in LikeC4",
   "homepage": "https://likec4.dev",
@@ -48,8 +48,8 @@
     "@radix-ui/colors": "catalog:css"
   },
   "devDependencies": {
-    "@likec4/devops": "workspace:*",
-    "@likec4/tsconfig": "workspace:*",
+    "@c4docs/likec4-devops": "workspace:*",
+    "@c4docs/likec4-tsconfig": "workspace:*",
     "@mantine/core": "catalog:mantine",
     "@mantine/vanilla-extract": "catalog:mantine",
     "@pandacss/dev": "catalog:css",

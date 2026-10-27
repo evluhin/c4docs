@@ -1,6 +1,6 @@
-import { Builder } from '@likec4/core/builder'
-import { computeParsedModelData, viewsWithReadableEdges } from '@likec4/core/compute-view'
-import { LikeC4Model } from '@likec4/core/model'
+import { Builder } from '@c4docs/likec4-core/builder'
+import { computeParsedModelData, viewsWithReadableEdges } from '@c4docs/likec4-core/compute-view'
+import { LikeC4Model } from '@c4docs/likec4-core/model'
 import { describe, it } from 'vitest'
 import { generateLikeC4Model } from './generate-likec4-model'
 

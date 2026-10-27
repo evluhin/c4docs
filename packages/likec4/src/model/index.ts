@@ -1,5 +1,5 @@
-import { LikeC4Model } from '@likec4/core/model'
-import type * as types from '@likec4/core/types'
+import { LikeC4Model } from '@c4docs/likec4-core/model'
+import type * as types from '@c4docs/likec4-core/types'
 
 export type UnknownLayouted = types.UnknownLayouted
 
@@ -50,12 +50,12 @@ export {
   RelationshipModel,
   sortConnectionsByBoundaryHierarchy,
   sortDeepestFirst,
-} from '@likec4/core/model'
+} from '@c4docs/likec4-core/model'
 
 export type {
   DeploymentElementModel,
   DeploymentRelationEndpoint,
-} from '@likec4/core/model'
+} from '@c4docs/likec4-core/model'
 
 export type {
   ComputedProjectEdge,
@@ -64,16 +64,16 @@ export type {
   LayoutedProjectEdge,
   LayoutedProjectNode,
   LayoutedProjectsView,
-} from '@likec4/core/compute-view'
+} from '@c4docs/likec4-core/compute-view'
 
-export type * from '@likec4/core/types'
+export type * from '@c4docs/likec4-core/types'
 
-export type * as types from '@likec4/core/types'
+export type * as types from '@c4docs/likec4-core/types'
 
 export type {
   SequenceViewLayout,
-} from '@likec4/layouts/sequence'
+} from '@c4docs/likec4-layouts/sequence'
 
 export {
   calcSequenceLayout,
-} from '@likec4/layouts/sequence'
+} from '@c4docs/likec4-layouts/sequence'

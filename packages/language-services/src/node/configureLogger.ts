@@ -1,4 +1,4 @@
-import { configureLanguageServerLogger } from '@likec4/language-server'
+import { configureLanguageServerLogger } from '@c4docs/likec4-language-server'
 import { isColorSupported } from 'std-env'
 import type { InitOptions } from '../common/options'
 

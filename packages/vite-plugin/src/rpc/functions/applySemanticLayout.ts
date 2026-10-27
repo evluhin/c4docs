@@ -1,5 +1,5 @@
-import { invariant } from '@likec4/core'
-import { enhanceLayoutWithAI } from '@likec4/layouts/ai'
+import { invariant } from '@c4docs/likec4-core'
+import { enhanceLayoutWithAI } from '@c4docs/likec4-layouts/ai'
 import k from 'tinyrainbow'
 import type { LikeC4VitePluginRpc } from '../protocol'
 import type { PluginRPCParams } from '../rpc'

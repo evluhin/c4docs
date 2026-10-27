@@ -1,5 +1,5 @@
 {
-  "name": "@likec4/mcp",
+  "name": "@c4docs/likec4-mcp",
   "version": "1.60.0",
   "description": "Model Context Protocol server for LikeC4",
   "keywords": [
@@ -66,15 +66,15 @@
     "zod": "catalog:externals"
   },
   "devDependencies": {
-    "@likec4/config": "workspace:*",
-    "@likec4/core": "workspace:*",
-    "@likec4/devops": "workspace:*",
-    "@likec4/diagram": "workspace:*",
-    "@likec4/language-server": "workspace:*",
-    "@likec4/language-services": "workspace:*",
-    "@likec4/layouts": "workspace:*",
-    "@likec4/log": "workspace:*",
-    "@likec4/tsconfig": "workspace:*",
+    "@c4docs/likec4-config": "workspace:*",
+    "@c4docs/likec4-core": "workspace:*",
+    "@c4docs/likec4-devops": "workspace:*",
+    "@c4docs/likec4-diagram": "workspace:*",
+    "@c4docs/likec4-language-server": "workspace:*",
+    "@c4docs/likec4-language-services": "workspace:*",
+    "@c4docs/likec4-layouts": "workspace:*",
+    "@c4docs/likec4-log": "workspace:*",
+    "@c4docs/likec4-tsconfig": "workspace:*",
     "@mantine/core": "catalog:mantine",
     "@types/node": "catalog:",
     "@types/react": "catalog:react",

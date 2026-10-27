@@ -1,5 +1,5 @@
-import { nonexhaustive } from '@likec4/core'
-import type { AutoLayoutDirection } from '@likec4/core/types'
+import { nonexhaustive } from '@c4docs/likec4-core'
+import type { AutoLayoutDirection } from '@c4docs/likec4-core/types'
 import { Handle, Position } from '@xyflow/react'
 /**
  * XYFlow requires handles to be defined on nodes.

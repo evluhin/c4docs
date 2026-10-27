@@ -1,3 +1,5 @@
+> **Fork notice:** This is a fork of [LikeC4](https://likec4.dev), MIT-licensed. It is published under the `@c4docs` npm scope and is **not affiliated with, nor endorsed by**, the upstream LikeC4 project. All original LikeC4 credits and attribution below are preserved.
+
 # Architecture as a code
 
 [Português (Brasil)](./README.pt-BR.md) | [简体中文](./README.zh-CN.md) | [日本語](./README.ja.md)

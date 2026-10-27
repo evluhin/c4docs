@@ -1,5 +1,5 @@
-import { ancestorsFqn, Fqn, isAnyOf } from '@likec4/core'
-import { MultiMap } from '@likec4/core/utils'
+import { ancestorsFqn, Fqn, isAnyOf } from '@c4docs/likec4-core'
+import { MultiMap } from '@c4docs/likec4-core/utils'
 import { UriUtils } from 'langium'
 import { filter, flatMap, hasAtLeast, isTruthy, pipe } from 'remeda'
 import {

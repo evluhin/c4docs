@@ -1,6 +1,6 @@
-import { cx } from '@likec4/styles/css'
-import { Box, HStack } from '@likec4/styles/jsx'
-import { hstack } from '@likec4/styles/patterns'
+import { cx } from '@c4docs/likec4-styles/css'
+import { Box, HStack } from '@c4docs/likec4-styles/jsx'
+import { hstack } from '@c4docs/likec4-styles/patterns'
 import {
   UnstyledButton,
 } from '@mantine/core'

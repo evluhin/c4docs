@@ -1,5 +1,5 @@
-import type { ComputedNode, NodeNotation as ElementNotationData } from '@likec4/core'
-import { cx, cx as clsx } from '@likec4/styles/css'
+import type { ComputedNode, NodeNotation as ElementNotationData } from '@c4docs/likec4-core'
+import { cx, cx as clsx } from '@c4docs/likec4-styles/css'
 import {
   ActionIcon,
   Badge,

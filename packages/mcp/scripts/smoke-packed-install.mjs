@@ -60,7 +60,9 @@ function run(command, args, options = {}) {
 
 /** @returns {Array<WorkspacePackage>} */
 export function workspacePackages() {
-  const result = run('pnpm', ['--filter', '@likec4/mcp...', 'list', '--depth', '-1', '--json'], { capture: true })
+  const result = run('pnpm', ['--filter', '@c4docs/likec4-mcp...', 'list', '--depth', '-1', '--json'], {
+    capture: true,
+  })
   if (result.status !== 0) {
     process.stdout.write(result.stdout ?? '')
     process.stderr.write(result.stderr ?? '')
@@ -146,7 +148,7 @@ export function main() {
     console.log(`Smoke workspace: ${tempRoot}`)
     const packages = workspacePackages()
     removePackedTarballs(packages)
-    run('pnpm', ['turbo', 'run', 'pack', '--filter=@likec4/mcp...'])
+    run('pnpm', ['turbo', 'run', 'pack', '--filter=@c4docs/likec4-mcp...'])
 
     const tarballs = expectedPackedTarballs(packages)
     const mcpTarball = join(packageDir, 'package.tgz')

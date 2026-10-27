@@ -1,4 +1,4 @@
-import { BBox } from '@likec4/core/geometry'
+import { BBox } from '@c4docs/likec4-core/geometry'
 import {
   type DeploymentFqn,
   type DiagramEdge,
@@ -6,8 +6,8 @@ import {
   type DiagramView,
   type Fqn,
   isDynamicView,
-} from '@likec4/core/types'
-import { invariant, nonexhaustive, nonNullable } from '@likec4/core/utils'
+} from '@c4docs/likec4-core/types'
+import { invariant, nonexhaustive, nonNullable } from '@c4docs/likec4-core/utils'
 import { type Viewport, getEdgePosition, getNodesBounds, getViewportForBounds } from '@xyflow/system'
 import type { ActorSystem } from 'xstate'
 import type { EditorActorRef } from '../../editor/actor/machine'

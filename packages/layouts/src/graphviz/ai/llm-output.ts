@@ -1,5 +1,5 @@
-import { type ComputedView, type EdgeId, type NonEmptyArray, exact } from '@likec4/core'
-import type { NodeId } from '@likec4/core/types'
+import { type ComputedView, type EdgeId, type NonEmptyArray, exact } from '@c4docs/likec4-core'
+import type { NodeId } from '@c4docs/likec4-core/types'
 import json5 from 'json5'
 import {
   entries,

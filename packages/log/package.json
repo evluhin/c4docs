@@ -1,5 +1,5 @@
 {
-  "name": "@likec4/log",
+  "name": "@c4docs/likec4-log",
   "version": "1.60.0",
   "description": "Shared interface for logging",
   "homepage": "https://likec4.dev",
@@ -39,8 +39,8 @@
     "@logtape/logtape": "catalog:utils"
   },
   "devDependencies": {
-    "@likec4/devops": "workspace:*",
-    "@likec4/tsconfig": "workspace:*",
+    "@c4docs/likec4-devops": "workspace:*",
+    "@c4docs/likec4-tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "merge-error-cause": "^5.0.2",
     "safe-stringify": "catalog:utils",

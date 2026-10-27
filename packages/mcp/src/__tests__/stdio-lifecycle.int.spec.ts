@@ -1,4 +1,4 @@
-import { LikeC4 } from '@likec4/language-services/node'
+import { LikeC4 } from '@c4docs/likec4-language-services/node'
 import { mkdtemp, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import path from 'node:path'

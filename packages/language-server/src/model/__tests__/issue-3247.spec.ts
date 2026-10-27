@@ -1,4 +1,4 @@
-import { invariant, isElementView, ViewId } from '@likec4/core'
+import { invariant, isElementView, ViewId } from '@c4docs/likec4-core'
 import { describe, it } from 'vitest'
 import { createMultiProjectTestServices } from '../../test'
 

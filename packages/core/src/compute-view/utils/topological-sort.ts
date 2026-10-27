@@ -1,6 +1,6 @@
-import type { AnyAux, ComputedEdge, ComputedNode, NodeId } from '@likec4/core/types'
-import { invariant, nonNullable } from '@likec4/core/utils'
-import { Graph, topologicalSort as topsort, willCreateCycle } from '@likec4/core/utils/graphology'
+import type { AnyAux, ComputedEdge, ComputedNode, NodeId } from '@c4docs/likec4-core/types'
+import { invariant, nonNullable } from '@c4docs/likec4-core/utils'
+import { Graph, topologicalSort as topsort, willCreateCycle } from '@c4docs/likec4-core/utils/graphology'
 import { forEach, map, partition, pipe, takeWhile } from 'remeda'
 import { ancestorsOfNode } from './ancestorsOfNode'
 

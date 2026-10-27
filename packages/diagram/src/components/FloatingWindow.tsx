@@ -1,6 +1,6 @@
-import { cx } from '@likec4/styles/css'
-import { Box } from '@likec4/styles/jsx'
-import { floatingWindow } from '@likec4/styles/recipes'
+import { cx } from '@c4docs/likec4-styles/css'
+import { Box } from '@c4docs/likec4-styles/jsx'
+import { floatingWindow } from '@c4docs/likec4-styles/recipes'
 import {
   type FloatingWindowProps as MantineFloatingWindowProps,
   CloseButton,

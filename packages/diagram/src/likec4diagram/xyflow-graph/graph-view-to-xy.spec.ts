@@ -1,4 +1,4 @@
-import { type DiagramEdge, type DiagramNode, type DiagramView, scalar } from '@likec4/core'
+import { type DiagramEdge, type DiagramNode, type DiagramView, scalar } from '@c4docs/likec4-core'
 import { describe, expect, it } from 'vitest'
 import { graphViewToXY } from './graph-view-to-xy'
 

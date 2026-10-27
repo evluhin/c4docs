@@ -1,4 +1,4 @@
-import type { ThemeColor, ViewChange } from '@likec4/core/types'
+import type { ThemeColor, ViewChange } from '@c4docs/likec4-core/types'
 
 export const SemanticColors = [
   'primary',

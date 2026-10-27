@@ -1,5 +1,5 @@
-import { invariant } from '@likec4/core'
-import { DiffId, FqnRef } from '@likec4/core/types'
+import { invariant } from '@c4docs/likec4-core'
+import { DiffId, FqnRef } from '@c4docs/likec4-core/types'
 import { filter, mapToObj, partition, pipe } from 'remeda'
 import {
   type ParsedAstDiff,

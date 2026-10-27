@@ -1,4 +1,4 @@
-import { type Fqn, type ProjectId, FqnRef } from '@likec4/core'
+import { type Fqn, type ProjectId, FqnRef } from '@c4docs/likec4-core'
 import { type AstNode, AstUtils, DocumentState, JSDocDocumentationProvider } from 'langium'
 import { ast } from '../ast'
 import { logger } from '../logger'

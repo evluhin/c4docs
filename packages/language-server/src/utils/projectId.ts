@@ -1,4 +1,4 @@
-import { type ProjectId, invariant } from '@likec4/core'
+import { type ProjectId, invariant } from '@c4docs/likec4-core'
 import { type AstNode, type LangiumDocument, AstUtils, isAstNode } from 'langium'
 import { ast } from '../ast'
 import { logger } from '../logger'

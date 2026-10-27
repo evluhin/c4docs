@@ -1,12 +1,12 @@
-import { Builder } from '@likec4/core/builder'
-import type { aux, ProcessedView } from '@likec4/core/types'
-import type { DrawioViewModelLike } from '@likec4/generators'
+import { Builder } from '@c4docs/likec4-core/builder'
+import type { aux, ProcessedView } from '@c4docs/likec4-core/types'
+import type { DrawioViewModelLike } from '@c4docs/likec4-generators'
 import {
   generateDrawio,
   generateDrawioMulti,
   getAllDiagrams,
   parseDrawioToLikeC4,
-} from '@likec4/generators'
+} from '@c4docs/likec4-generators'
 import { describe, expect, test } from 'vitest'
 import { fakeComputedView3Levels, fakeDiagram, fakeDiagram2 } from '../__mocks__/data'
 
@@ -77,7 +77,7 @@ function mockViewModel($view: ProcessedView<aux.Unknown>): DrawioViewModelLike {
   return { $view }
 }
 
-/** Minimal view with two actor nodes (kind=actor, shape=person) for DrawIO actor tests. Inlined so this spec works with package import (@likec4/generators) without fixture resolution issues. */
+/** Minimal view with two actor nodes (kind=actor, shape=person) for DrawIO actor tests. Inlined so this spec works with package import (@c4docs/likec4-generators) without fixture resolution issues. */
 const fakeActorView: ProcessedView<aux.Unknown> = {
   edges: [
     {
@@ -343,7 +343,7 @@ describe('DrawIO output structure (validates XML shape and key features)', () =>
 })
 
 describe('DrawIO export profile leanix (bridge-managed metadata)', () => {
-  // Skip: when vitest resolves @likec4/generators to dist, options may not be passed; profile leanix is covered by CLI/e2e
+  // Skip: when vitest resolves @c4docs/likec4-generators to dist, options may not be passed; profile leanix is covered by CLI/e2e
   test.skip('profile leanix adds bridgeManaged, likec4Id, likec4Kind, likec4ViewId on vertices and root', () => {
     const xml = generateDrawio(mockViewModel(fakeDiagram), {
       compressed: false,

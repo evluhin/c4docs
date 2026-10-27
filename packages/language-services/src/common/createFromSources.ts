@@ -1,5 +1,5 @@
-import { isLikeC4JsonConfig, LikeC4ProjectConfigOps } from '@likec4/config'
-import { type Logger, loggable } from '@likec4/log'
+import { isLikeC4JsonConfig, LikeC4ProjectConfigOps } from '@c4docs/likec4-config'
+import { type Logger, loggable } from '@c4docs/likec4-log'
 import { URI, UriUtils } from 'langium'
 import { extname } from 'pathe'
 import { entries, map, partition, pipe } from 'remeda'

@@ -1,5 +1,5 @@
-import type { LikeC4Model } from '@likec4/core/model'
-import { LikeC4ModelProvider } from '@likec4/diagram'
+import type { LikeC4Model } from '@c4docs/likec4-core/model'
+import { LikeC4ModelProvider } from '@c4docs/likec4-diagram'
 import { useStore } from '@nanostores/react'
 import type { ReadableAtom } from 'nanostores'
 import type { PropsWithChildren } from 'react'

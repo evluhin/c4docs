@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-export { Vector, vector } from '@likec4/core/geometry'
-export type { VectorValue } from '@likec4/core/geometry'
+export { Vector, vector } from '@c4docs/likec4-core/geometry'
+export type { VectorValue } from '@c4docs/likec4-core/geometry'
 export {
   bezierControlPoints,
   bezierPath,

@@ -1,40 +1,40 @@
 {
   "name": "create-likec4",
   "version": "1.47.0",
-  "license": "MIT",
   "private": true,
   "homepage": "https://likec4.dev",
-  "author": "Denis Davydkov <denis@davydkov.com>",
+  "bugs": "https://github.com/likec4/likec4/issues",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/likec4/likec4.git",
     "directory": "packages/create-likec4"
   },
+  "license": "MIT",
+  "author": "Denis Davydkov <denis@davydkov.com>",
+  "type": "module",
   "bin": "index.js",
   "files": [
     "index.js",
     "dist",
     "template"
   ],
-  "engines": {
-    "node": ">=22.21.1"
-  },
-  "bugs": "https://github.com/likec4/likec4/issues",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org",
-    "access": "public"
-  },
-  "type": "module",
   "scripts": {
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@likec4/tsconfig": "workspace:*",
+    "@c4docs/likec4-tsconfig": "workspace:*",
     "@types/node": "^20.17.30",
     "@types/prompts": "^2.4.8",
     "execa": "^9.5.3",
     "prompts": "^2.4.2",
     "tsx": "catalog:",
     "typescript": "catalog:"
+  },
+  "engines": {
+    "node": ">=22.21.1"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   }
 }

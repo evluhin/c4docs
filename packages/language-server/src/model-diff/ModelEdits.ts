@@ -1,5 +1,5 @@
-import type { DiffId, ProjectId } from '@likec4/core'
-import { stringHash } from '@likec4/core/utils'
+import type { DiffId, ProjectId } from '@c4docs/likec4-core'
+import { stringHash } from '@c4docs/likec4-core/utils'
 import { URI, UriUtils } from 'langium'
 import type { LikeC4Services } from '../module'
 import { type ApplyEditsResult, applyDocumentEdits } from './apply-edits'

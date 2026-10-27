@@ -47,11 +47,11 @@ export async function viteReactConfig({
       },
       rolldownOptions: {
         external: [
-          'likec4/react',
-          'likec4/model',
+          '@c4docs/likec4/react',
+          '@c4docs/likec4/model',
           /^react(\/.*)?$/,
           /^react-dom(\/.*)?$/,
-          /@likec4\/core.*/,
+          /@c4docs\/likec4-core.*/,
         ],
       },
     },

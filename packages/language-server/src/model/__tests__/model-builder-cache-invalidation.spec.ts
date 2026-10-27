@@ -1,5 +1,5 @@
-import type { LayoutedView, ProjectId, ViewId } from '@likec4/core'
-import type { LikeC4Model } from '@likec4/core/model'
+import type { LayoutedView, ProjectId, ViewId } from '@c4docs/likec4-core'
+import type { LikeC4Model } from '@c4docs/likec4-core/model'
 import { DocumentState } from 'langium'
 import { describe } from 'vitest'
 import { NoopLikeC4ManualLayouts } from '../../filesystem/noop'

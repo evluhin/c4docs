@@ -1,5 +1,5 @@
-import type { DynamicViewDisplayVariant } from '@likec4/core/types'
-import { css } from '@likec4/styles/css'
+import type { DynamicViewDisplayVariant } from '@c4docs/likec4-core/types'
+import { css } from '@c4docs/likec4-styles/css'
 import { type ButtonProps, Button } from '@mantine/core'
 import {
   IconPlayerPlayFilled,

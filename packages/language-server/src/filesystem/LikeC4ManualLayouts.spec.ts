@@ -1,4 +1,4 @@
-import type { DiagramNode, Fqn, LayoutedView, NodeId, ViewId } from '@likec4/core'
+import type { DiagramNode, Fqn, LayoutedView, NodeId, ViewId } from '@c4docs/likec4-core'
 import { defu } from 'defu'
 import type { OverrideProperties, Writable } from 'type-fest'
 import { describe, it, vi } from 'vitest'

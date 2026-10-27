@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { compareNatural } from '@likec4/core/utils'
+import { compareNatural } from '@c4docs/likec4-core/utils'
 import { filter, isTruthy, map, pipe, sort, unique, values } from 'remeda'
 import k from 'tinyrainbow'
 import { joinURL } from 'ufo'

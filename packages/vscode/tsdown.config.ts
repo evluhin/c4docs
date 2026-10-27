@@ -21,7 +21,7 @@ const shared = {
   deps: {
     neverBundle: ['vscode'],
     alwaysBundle: [
-      /@likec4/,
+      /@c4docs\/likec4-/,
     ],
   },
 }
@@ -100,7 +100,7 @@ export default defineConfig([
 ])
 
 async function copySchema() {
-  const schema = fileURLToPath(import.meta.resolve('@likec4/config/schema.json', import.meta.url))
+  const schema = fileURLToPath(import.meta.resolve('@c4docs/likec4-config/schema.json', import.meta.url))
   if (!existsSync(schema)) {
     throw new Error(`config schema not found: ${schema}`)
   }

@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { DocsModel, DocTreeNode } from '@likec4/core'
-import { fromWorkspace } from '@likec4/language-services/node'
+import type { DocsModel, DocTreeNode } from '@c4docs/likec4-core'
+import { fromWorkspace } from '@c4docs/likec4-language-services/node'
 import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
 import k from 'tinyrainbow'

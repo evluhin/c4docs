@@ -1,5 +1,5 @@
-import { cx as clsx } from '@likec4/styles/css'
-import { Box, HStack, VStack } from '@likec4/styles/jsx'
+import { cx as clsx } from '@c4docs/likec4-styles/css'
+import { Box, HStack, VStack } from '@c4docs/likec4-styles/jsx'
 import { Paper, Text } from '@mantine/core'
 import { useDebouncedValue } from '@mantine/hooks'
 import { type NodeToolbarProps, NodeToolbar } from '@xyflow/react'

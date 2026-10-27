@@ -1,5 +1,5 @@
-import type { LikeC4ProjectConfig } from '@likec4/config'
-import { isLikeC4Config, loadConfig } from '@likec4/config/node'
+import type { LikeC4ProjectConfig } from '@c4docs/likec4-config'
+import { isLikeC4Config, loadConfig } from '@c4docs/likec4-config/node'
 import { fdir } from 'fdir'
 import { URI } from 'langium'
 import { NodeFileSystemProvider } from 'langium/node'

@@ -1,4 +1,4 @@
-import { styled } from '@likec4/styles/jsx'
+import { styled } from '@c4docs/likec4-styles/jsx'
 
 export const ViewOutlet = styled('div', {
   base: {

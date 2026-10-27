@@ -1,5 +1,5 @@
-import type { DynamicViewFlow } from '@likec4/core'
-import { css } from '@likec4/styles/css'
+import type { DynamicViewFlow } from '@c4docs/likec4-core'
+import { css } from '@c4docs/likec4-styles/css'
 import {
   IconAlertTriangle,
   IconArrowFork,

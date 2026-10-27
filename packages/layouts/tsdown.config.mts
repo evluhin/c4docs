@@ -1,4 +1,4 @@
-import { defineConfig } from '@likec4/devops/tsdown'
+import { defineConfig } from '@c4docs/likec4-devops/tsdown'
 import { execSync } from 'node:child_process'
 
 export default defineConfig({

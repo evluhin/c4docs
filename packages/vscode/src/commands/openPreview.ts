@@ -1,4 +1,4 @@
-import type { ProjectId, ViewId } from '@likec4/core'
+import type { ProjectId, ViewId } from '@c4docs/likec4-core'
 import { useCommand } from 'reactive-vscode'
 import { countBy, keys } from 'remeda'
 import * as vscode from 'vscode'

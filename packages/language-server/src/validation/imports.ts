@@ -1,4 +1,4 @@
-import type { ProjectId } from '@likec4/core'
+import type { ProjectId } from '@c4docs/likec4-core'
 import { type ValidationCheck, AstUtils } from 'langium'
 import type { ast } from '../ast'
 import type { LikeC4Services } from '../module'

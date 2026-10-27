@@ -15,6 +15,6 @@ export {
   isLikeC4JsonConfig,
   isLikeC4NonJsonConfig,
   LikeC4ProjectConfigOps,
-} from '@likec4/config'
+} from '@c4docs/likec4-config'
 
-export type * from '@likec4/config'
+export type * from '@c4docs/likec4-config'

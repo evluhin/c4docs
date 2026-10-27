@@ -4,8 +4,8 @@ import { findPkgRoot } from './utils'
 export function viteAliases() {
   const pkg = findPkgRoot()
   return {
-    'likec4/react': resolve(pkg, 'react/index.mjs'),
-    'likec4/model': resolve(pkg, 'dist/model/index.mjs'),
-    'likec4/vite-plugin/internal': resolve(pkg, 'dist/vite-plugin/internal/index.mjs'),
+    '@c4docs/likec4/react': resolve(pkg, 'react/index.mjs'),
+    '@c4docs/likec4/model': resolve(pkg, 'dist/model/index.mjs'),
+    '@c4docs/likec4/vite-plugin/internal': resolve(pkg, 'dist/vite-plugin/internal/index.mjs'),
   }
 }

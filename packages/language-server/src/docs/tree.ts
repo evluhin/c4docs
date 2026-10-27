@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { DocPage, DocsModel, DocTreeNode } from '@likec4/core/types'
+import type { DocPage, DocsModel, DocTreeNode } from '@c4docs/likec4-core/types'
 import { humanizeTitle } from './model-doc'
 
 export interface AssembleTreeOptions {

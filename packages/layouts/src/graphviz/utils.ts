@@ -1,5 +1,5 @@
-import type { ComputedNode, Point, RelationshipArrowType } from '@likec4/core'
-import { invariant } from '@likec4/core/utils'
+import type { ComputedNode, Point, RelationshipArrowType } from '@c4docs/likec4-core'
+import { invariant } from '@c4docs/likec4-core/utils'
 import { scale, toHex, transparentize } from 'khroma'
 import type { ArrowType, Color } from 'ts-graphviz'
 

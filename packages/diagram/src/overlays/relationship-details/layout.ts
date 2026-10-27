@@ -5,7 +5,7 @@
 //
 import {
   treeFromElements,
-} from '@likec4/core/compute-view'
+} from '@c4docs/likec4-core/compute-view'
 import type {
   AnyAux,
   DiagramEdge,
@@ -19,16 +19,16 @@ import type {
   NonEmptyArray,
   Point,
   RelationId,
-} from '@likec4/core/types'
-import { exact, preferSummary } from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
+import { exact, preferSummary } from '@c4docs/likec4-core/types'
 
-import dagre, { type EdgeConfig, type GraphLabel } from '@dagrejs/dagre'
-import type { ElementModel, LikeC4ViewModel, RelationshipModel } from '@likec4/core/model'
+import type { ElementModel, LikeC4ViewModel, RelationshipModel } from '@c4docs/likec4-core/model'
 import {
   DefaultMap,
   ifind,
   invariant,
-} from '@likec4/core/utils'
+} from '@c4docs/likec4-core/utils'
+import dagre, { type EdgeConfig, type GraphLabel } from '@dagrejs/dagre'
 import {
   filter,
   find,

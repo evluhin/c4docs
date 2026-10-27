@@ -1,4 +1,4 @@
-import { getOrCreate } from '@likec4/core/utils'
+import { getOrCreate } from '@c4docs/likec4-core/utils'
 import type { AstNode, CstNode, LangiumDocument } from 'langium'
 import { AstUtils } from 'langium'
 import { TextDocument } from 'vscode-languageserver-textdocument'

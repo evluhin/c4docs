@@ -1,5 +1,5 @@
-import { type DiagramEdge, type DiagramView, invariant, isAncestor, nonNullable } from '@likec4/core'
-import { cx } from '@likec4/styles/css'
+import { type DiagramEdge, type DiagramView, invariant, isAncestor, nonNullable } from '@c4docs/likec4-core'
+import { cx } from '@c4docs/likec4-styles/css'
 import { ActionIcon, Group } from '@mantine/core'
 import { useCallbackRef, useStateHistory } from '@mantine/hooks'
 import { IconChevronLeft, IconChevronRight, IconX } from '@tabler/icons-react'

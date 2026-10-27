@@ -1,5 +1,5 @@
-import type { Fqn } from '@likec4/core/types'
-import { invariant, nameFromFqn, parentFqn, sortParentsFirst } from '@likec4/core/utils'
+import type { Fqn } from '@c4docs/likec4-core/types'
+import { invariant, nameFromFqn, parentFqn, sortParentsFirst } from '@c4docs/likec4-core/utils'
 import { isEmptyish, pipe, values } from 'remeda'
 
 import { schemas } from '../schemas'

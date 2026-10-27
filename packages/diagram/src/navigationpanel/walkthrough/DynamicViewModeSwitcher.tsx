@@ -1,5 +1,5 @@
-import type { DynamicViewDisplayVariant } from '@likec4/core'
-import { css } from '@likec4/styles/css'
+import type { DynamicViewDisplayVariant } from '@c4docs/likec4-core'
+import { css } from '@c4docs/likec4-styles/css'
 import { type SegmentedControlItem, SegmentedControl } from '@mantine/core'
 import { m } from 'motion/react'
 import { useRef } from 'react'

@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { type DiagramView, type NonEmptyArray, invariant } from '@likec4/core'
-import { fromWorkspace } from '@likec4/language-services/node'
+import { type DiagramView, type NonEmptyArray, invariant } from '@c4docs/likec4-core'
+import { fromWorkspace } from '@c4docs/likec4-language-services/node'
 import { resolve } from 'node:path'
 import { hrtime } from 'node:process'
 import picomatch from 'picomatch'

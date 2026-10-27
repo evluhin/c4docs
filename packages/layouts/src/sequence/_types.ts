@@ -1,4 +1,4 @@
-import type { BBox, DiagramEdge, DiagramNode, NodeId, StepPath, ViewId } from '@likec4/core/types'
+import type { BBox, DiagramEdge, DiagramNode, NodeId, StepPath, ViewId } from '@c4docs/likec4-core/types'
 
 export type Spacing =
   | number

@@ -1,4 +1,4 @@
-import type { DiagramView } from '@likec4/core'
+import type { DiagramView } from '@c4docs/likec4-core'
 import {
   type MantineColorScheme,
   ActionIcon,

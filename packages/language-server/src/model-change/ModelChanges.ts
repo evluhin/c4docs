@@ -1,5 +1,5 @@
-import { type ProjectId, type ViewChange, invariant, nonexhaustive } from '@likec4/core'
-import { loggable, wrapError } from '@likec4/log'
+import { type ProjectId, type ViewChange, invariant, nonexhaustive } from '@c4docs/likec4-core'
+import { loggable, wrapError } from '@c4docs/likec4-log'
 import { TextDocument } from 'langium'
 import { Range, TextEdit } from 'vscode-languageserver-types'
 import type { ParsedLikeC4LangiumDocument } from '../ast'

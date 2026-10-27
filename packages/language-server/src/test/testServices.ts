@@ -1,5 +1,5 @@
-import type { LikeC4ProjectJsonConfig } from '@likec4/config'
-import type { ComputedLikeC4ModelData, ProjectId } from '@likec4/core'
+import type { LikeC4ProjectJsonConfig } from '@c4docs/likec4-config'
+import type { ComputedLikeC4ModelData, ProjectId } from '@c4docs/likec4-core'
 import { type LangiumDocument, DocumentState, TextDocument, UriUtils } from 'langium'
 import * as assert from 'node:assert'
 import { entries, flatMap, join, once, pipe } from 'remeda'

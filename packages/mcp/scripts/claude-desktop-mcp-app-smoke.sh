@@ -364,7 +364,7 @@ done
 [[ -n "$display_name" ]] || fail 'DISPLAY is empty; use --display for an X11 session'
 [[ "$view_id" =~ ^[A-Za-z0-9_.-]+$ ]] || fail '--view-id contains unsupported characters'
 [[ -d "$workspace" ]] || fail "Workspace is not a directory: $workspace"
-[[ -f "$mcp_cli" ]] || fail "Built MCP CLI is missing: $mcp_cli (run pnpm --filter @likec4/mcp build)"
+[[ -f "$mcp_cli" ]] || fail "Built MCP CLI is missing: $mcp_cli (run pnpm --filter @c4docs/likec4-mcp build)"
 [[ -f "$config_file" ]] || fail "Claude Desktop config is missing: $config_file"
 [[ ! -L "$config_file" ]] || fail "Claude Desktop config must not be a symbolic link: $config_file"
 [[ -r "$config_file" && -w "$config_file" ]] || fail "Claude Desktop config must be readable and writable"

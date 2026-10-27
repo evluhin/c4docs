@@ -1,4 +1,4 @@
-import { fromWorkspace } from '@likec4/language-services/node'
+import { fromWorkspace } from '@c4docs/likec4-language-services/node'
 import { existsSync } from 'node:fs'
 import { copyFile, mkdir, rm, stat } from 'node:fs/promises'
 import { basename, dirname, extname, isAbsolute, relative, resolve } from 'node:path'

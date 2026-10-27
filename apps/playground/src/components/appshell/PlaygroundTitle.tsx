@@ -1,5 +1,5 @@
 import { usePlaygroundWorkspace } from '$hooks/usePlayground'
-import { css } from '@likec4/styles/css'
+import { css } from '@c4docs/likec4-styles/css'
 import {
   Box,
   UnstyledButton,

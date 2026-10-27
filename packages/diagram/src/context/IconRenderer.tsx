@@ -5,8 +5,8 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { ElementShape } from '@likec4/core'
-import { cx as clsx } from '@likec4/styles/css'
+import type { ElementShape } from '@c4docs/likec4-core'
+import { cx as clsx } from '@c4docs/likec4-styles/css'
 import {
   type IconProps,
   IconBrowser,

@@ -1,4 +1,4 @@
-import { hstack } from '@likec4/styles/patterns'
+import { hstack } from '@c4docs/likec4-styles/patterns'
 import { Anchor } from '@mantine/core'
 import { IconExternalLink } from '@tabler/icons-react'
 

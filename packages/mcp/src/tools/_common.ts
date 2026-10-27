@@ -5,9 +5,9 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { LikeC4ProjectConfig } from '@likec4/config'
-import { FqnRef, GlobalFqn, invariant } from '@likec4/core'
-import type { LayoutedView } from '@likec4/core'
+import type { LikeC4ProjectConfig } from '@c4docs/likec4-config'
+import { FqnRef, GlobalFqn, invariant } from '@c4docs/likec4-core'
+import type { LayoutedView } from '@c4docs/likec4-core'
 import type {
   DeploymentElementModel,
   ElementModel,
@@ -15,10 +15,10 @@ import type {
   LikeC4Model,
   LikeC4ViewModel,
   OutgoingFilter,
-} from '@likec4/core/model'
-import type { AnyAux, ProjectId } from '@likec4/core/types'
-import type { LikeC4LanguageServices } from '@likec4/language-server'
-import type { Locate } from '@likec4/language-server/protocol'
+} from '@c4docs/likec4-core/model'
+import type { AnyAux, ProjectId } from '@c4docs/likec4-core/types'
+import type { LikeC4LanguageServices } from '@c4docs/likec4-language-server'
+import type { Locate } from '@c4docs/likec4-language-server/protocol'
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types'
 import { readFileSync } from 'node:fs'
 import { URI } from 'vscode-uri'

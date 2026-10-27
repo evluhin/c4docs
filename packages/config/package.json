@@ -1,5 +1,5 @@
 {
-  "name": "@likec4/config",
+  "name": "@c4docs/likec4-config",
   "version": "1.60.0",
   "description": "A configuration package for LikeC4.",
   "homepage": "https://likec4.dev",
@@ -66,15 +66,15 @@
     "postpack": "likec4ops postpack"
   },
   "dependencies": {
-    "@likec4/core": "workspace:*",
-    "@likec4/log": "workspace:*",
+    "@c4docs/likec4-core": "workspace:*",
+    "@c4docs/likec4-log": "workspace:*",
     "json5": "catalog:utils",
     "type-fest": "catalog:externals",
     "zod": "catalog:externals"
   },
   "devDependencies": {
-    "@likec4/devops": "workspace:*",
-    "@likec4/tsconfig": "workspace:*",
+    "@c4docs/likec4-devops": "workspace:*",
+    "@c4docs/likec4-tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "defu": "catalog:utils",
     "nano-spawn": "catalog:externals",

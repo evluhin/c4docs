@@ -5,13 +5,13 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type * as t from '@likec4/core/types'
+import type * as t from '@c4docs/likec4-core/types'
 import type {
   DynamicViewDisplayVariant,
   NodeNotation as ElementNotation,
   ViewChange,
-} from '@likec4/core/types'
-import { invariant, LRUMap, nonNullable } from '@likec4/core/utils'
+} from '@c4docs/likec4-core/types'
+import { invariant, LRUMap, nonNullable } from '@c4docs/likec4-core/utils'
 import type { PartialDeep } from 'type-fest'
 import type { TogglableFeature } from '../../context/DiagramFeatures'
 import type { EditorActorRef } from '../../editor/actor/machine'

@@ -1,12 +1,12 @@
-import { type scalar, type ViewChange, type ViewId, nonNullable } from '@likec4/core'
-import { splitViewFolderPath, VIEW_FOLDERS_SEPARATOR } from '@likec4/core/model'
+import { type scalar, type ViewChange, type ViewId, nonNullable } from '@c4docs/likec4-core'
+import { splitViewFolderPath, VIEW_FOLDERS_SEPARATOR } from '@c4docs/likec4-core/model'
 import {
   type AnyOp,
   indent,
   ops,
   print,
   withctx,
-} from '@likec4/generators/likec4'
+} from '@c4docs/likec4-generators/likec4'
 import type { CstNode } from 'langium'
 import { filter, hasAtLeast, isTruthy, last, map, pipe, piped } from 'remeda'
 import { Position, TextEdit } from 'vscode-languageserver-protocol'

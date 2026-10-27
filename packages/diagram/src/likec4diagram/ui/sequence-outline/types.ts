@@ -1,4 +1,4 @@
-import type { DiagramEdge, DynamicViewFlow, scalar, StepPath } from '@likec4/core/types'
+import type { DiagramEdge, DynamicViewFlow, scalar, StepPath } from '@c4docs/likec4-core/types'
 import type { TreeNodeData } from '@mantine/core'
 import type { DiagramContext } from '../../state/types'
 

@@ -1,5 +1,5 @@
-import type { RemovalImpactReport } from '@likec4/language-server'
-import { fromWorkspace } from '@likec4/language-services/node'
+import type { RemovalImpactReport } from '@c4docs/likec4-language-server'
+import { fromWorkspace } from '@c4docs/likec4-language-services/node'
 import { entries } from 'remeda'
 import k from 'tinyrainbow'
 import type * as yargs from 'yargs'

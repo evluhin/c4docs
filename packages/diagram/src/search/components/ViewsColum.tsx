@@ -5,11 +5,11 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import type { LikeC4Model } from '@likec4/core/model'
-import { type Fqn, preferSummary } from '@likec4/core/types'
-import { cx } from '@likec4/styles/css'
-import { Box } from '@likec4/styles/jsx'
-import { vstack } from '@likec4/styles/patterns'
+import type { LikeC4Model } from '@c4docs/likec4-core/model'
+import { type Fqn, preferSummary } from '@c4docs/likec4-core/types'
+import { cx } from '@c4docs/likec4-styles/css'
+import { Box } from '@c4docs/likec4-styles/jsx'
+import { vstack } from '@c4docs/likec4-styles/patterns'
 import {
   type ElementProps,
   type UnstyledButtonProps,

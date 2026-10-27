@@ -1,5 +1,5 @@
-import type { ViewId } from '@likec4/core'
-import { LikeC4ProjectsOverview } from '@likec4/diagram'
+import type { ViewId } from '@c4docs/likec4-core'
+import { LikeC4ProjectsOverview } from '@c4docs/likec4-diagram'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { likec4Container } from '../App.css'

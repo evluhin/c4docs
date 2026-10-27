@@ -1,4 +1,4 @@
-import { isLikeC4Config } from '@likec4/config/node'
+import { isLikeC4Config } from '@c4docs/likec4-config/node'
 import type { FSWatcher } from 'chokidar'
 import chokidar from 'chokidar'
 import { URI } from 'langium'

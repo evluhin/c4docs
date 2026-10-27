@@ -1,5 +1,5 @@
-import { type NodeId, type ProjectId, BBox, invariant, nonexhaustive, nonNullable } from '@likec4/core'
-import type { LayoutedProjectsView } from '@likec4/core/compute-view'
+import { type NodeId, type ProjectId, BBox, invariant, nonexhaustive, nonNullable } from '@c4docs/likec4-core'
+import type { LayoutedProjectsView } from '@c4docs/likec4-core/compute-view'
 import {
   applyEdgeChanges,
   applyNodeChanges,

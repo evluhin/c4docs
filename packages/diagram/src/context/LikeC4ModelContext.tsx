@@ -1,6 +1,6 @@
-import type { LikeC4Model, LikeC4ViewModel } from '@likec4/core/model'
-import type * as t from '@likec4/core/types'
-import type { LayoutedView } from '@likec4/core/types'
+import type { LikeC4Model, LikeC4ViewModel } from '@c4docs/likec4-core/model'
+import type * as t from '@c4docs/likec4-core/types'
+import type { LayoutedView } from '@c4docs/likec4-core/types'
 import { type PropsWithChildren, createContext, useContext } from 'react'
 
 type UnknownLayouted = t.aux.UnknownLayouted

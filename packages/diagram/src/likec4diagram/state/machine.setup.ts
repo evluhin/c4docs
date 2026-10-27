@@ -9,8 +9,8 @@ import {
   hasProp,
   isDynamicView,
   nonexhaustive,
-} from '@likec4/core'
-import { BBox } from '@likec4/core/geometry'
+} from '@c4docs/likec4-core'
+import { BBox } from '@c4docs/likec4-core/geometry'
 import type {
   DiagramEdge,
   DiagramNode,
@@ -26,7 +26,7 @@ import type {
   ViewChange,
   ViewId,
   WhereOperator,
-} from '@likec4/core/types'
+} from '@c4docs/likec4-core/types'
 import type { EdgeChange, NodeChange, Rect, Viewport } from '@xyflow/system'
 import type { MouseEvent } from 'react'
 import { isTruthy, mapValues } from 'remeda'

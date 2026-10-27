@@ -5,7 +5,7 @@
 //
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
-import { invariant } from '@likec4/core'
+import { invariant } from '@c4docs/likec4-core'
 import { resolve } from 'node:path'
 import k from 'tinyrainbow'
 import type { Argv } from 'yargs'

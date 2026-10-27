@@ -4,8 +4,8 @@ import type {
   PlaygroundActorSnapshot,
   PlaygroundContext,
 } from '$state/types'
-import { type ViewChange, type ViewId, nonNullable } from '@likec4/core'
-import type { Locate as LocateRequest } from '@likec4/language-server/protocol'
+import { type ViewChange, type ViewId, nonNullable } from '@c4docs/likec4-core'
+import type { Locate as LocateRequest } from '@c4docs/likec4-language-server/protocol'
 import { useSelector } from '@xstate/react'
 import { deepEqual, shallowEqual } from 'fast-equals'
 import { type DependencyList, useCallback, useMemo } from 'react'

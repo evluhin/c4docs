@@ -21,7 +21,7 @@ import {
   nonNullable,
   Queue,
   whereOperatorAsPredicate,
-} from '@likec4/core'
+} from '@c4docs/likec4-core'
 import { hasAtLeast, pick } from 'remeda'
 import { ZIndexes } from '../../base/const'
 import { readableText } from '../../utils'

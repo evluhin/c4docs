@@ -4,7 +4,7 @@ import {
   getConsoleSink,
   getConsoleStderrSink,
   getTextFormatter,
-} from '@likec4/log'
+} from '@c4docs/likec4-log'
 import { isColorSupported, isDevelopment } from 'std-env'
 import type { Connection } from 'vscode-languageserver'
 import { getTelemetrySink, serverLogger } from './logger'

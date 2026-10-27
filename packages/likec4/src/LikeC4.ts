@@ -1,9 +1,9 @@
-import { exact } from '@likec4/core'
+import { exact } from '@c4docs/likec4-core'
 import {
   fromSource as fromSourceImpl,
   fromWorkspace as fromWorkspaceImpl,
   LikeC4 as AbstractLikeC4,
-} from '@likec4/language-services/node'
+} from '@c4docs/likec4-language-services/node'
 import defu from 'defu'
 
 export type LikeC4Options = {

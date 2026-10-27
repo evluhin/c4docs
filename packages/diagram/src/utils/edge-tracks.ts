@@ -1,5 +1,5 @@
-import { type BBox, type XYPoint, nearlyEqual } from '@likec4/core/geometry'
-import type { EdgeRouting } from '@likec4/core/types'
+import { type BBox, type XYPoint, nearlyEqual } from '@c4docs/likec4-core/geometry'
+import type { EdgeRouting } from '@c4docs/likec4-core/types'
 import type { XYPosition } from '@xyflow/react'
 import {
   type Axis,

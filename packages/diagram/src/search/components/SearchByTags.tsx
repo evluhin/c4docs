@@ -1,5 +1,5 @@
-import { css } from '@likec4/styles/css'
-import { HStack } from '@likec4/styles/jsx'
+import { css } from '@c4docs/likec4-styles/css'
+import { HStack } from '@c4docs/likec4-styles/jsx'
 import { Button } from '@mantine/core'
 import { IconX } from '@tabler/icons-react'
 import { useRef } from 'react'

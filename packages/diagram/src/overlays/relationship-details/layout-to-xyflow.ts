@@ -2,7 +2,7 @@ import {
   type Fqn,
   nonNullable,
   Queue,
-} from '@likec4/core'
+} from '@c4docs/likec4-core'
 import { hasAtLeast } from 'remeda'
 import { ZIndexes } from '../../base/const'
 import type { RelationshipDetailsTypes } from './_types'

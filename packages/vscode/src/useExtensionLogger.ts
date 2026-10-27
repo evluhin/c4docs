@@ -1,4 +1,4 @@
-import { nonexhaustive } from '@likec4/core'
+import { nonexhaustive } from '@c4docs/likec4-core'
 import {
   type Sink,
   type TextFormatter,
@@ -10,7 +10,7 @@ import {
   getTextFormatter,
   loggable,
   rootLogger,
-} from '@likec4/log'
+} from '@c4docs/likec4-log'
 import type { TelemetryReporter } from '@vscode/extension-telemetry'
 import { defineLogger, defineService } from 'reactive-vscode'
 import * as vscode from 'vscode'

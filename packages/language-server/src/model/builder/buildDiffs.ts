@@ -1,8 +1,8 @@
-import type * as c4 from '@likec4/core'
-import { isGlobalFqn } from '@likec4/core'
-import { mergeElementOverlay } from '@likec4/core/compute-view'
-import { FqnRef } from '@likec4/core/types'
-import { parentFqn, sortParentsFirst } from '@likec4/core/utils'
+import type * as c4 from '@c4docs/likec4-core'
+import { isGlobalFqn } from '@c4docs/likec4-core'
+import { mergeElementOverlay } from '@c4docs/likec4-core/compute-view'
+import { FqnRef } from '@c4docs/likec4-core/types'
+import { parentFqn, sortParentsFirst } from '@c4docs/likec4-core/utils'
 import { groupBy, isNonNullish, isTruthy, mapValues, prop, unique, values } from 'remeda'
 import type { Writable } from 'type-fest'
 import type {

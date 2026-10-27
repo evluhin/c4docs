@@ -1,5 +1,5 @@
-import type { StepPath } from '@likec4/core'
-import { css, cx } from '@likec4/styles/css'
+import type { StepPath } from '@c4docs/likec4-core'
+import { css, cx } from '@c4docs/likec4-styles/css'
 import { m } from 'motion/react'
 import { Activity } from 'react'
 import { activeFrame, activeFrameBorder, levelBand, nestedBand, recessionOf } from './depth-of-field'

@@ -6,8 +6,8 @@
   "tasks": {
     "typecheck": {
       "dependsOn": [
-        "@likec4/styles#sources",
-        "@likec4/diagram#typecheck",
+        "@c4docs/likec4-styles#sources",
+        "@c4docs/likec4-diagram#typecheck",
       ],
       "inputs": [
         "src/*.ts",

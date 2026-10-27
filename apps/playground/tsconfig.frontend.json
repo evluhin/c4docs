@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@likec4/tsconfig/react-lib.json",
+  "extends": "@c4docs/likec4-tsconfig/react-lib.json",
   "compilerOptions": {
     "composite": true,
     "tsBuildInfoFile": "lib/frontend.tsbuildinfo",
@@ -25,7 +25,7 @@
       "$/*": [
         "./src/*"
       ],
-      "@likec4/styles/*": [
+      "@c4docs/likec4-styles/*": [
         "./styled-system/*"
       ]
     }

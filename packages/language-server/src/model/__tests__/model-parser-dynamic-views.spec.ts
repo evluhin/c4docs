@@ -1,4 +1,4 @@
-import { invariant, stepGuards } from '@likec4/core'
+import { invariant, stepGuards } from '@c4docs/likec4-core'
 import { describe } from 'vitest'
 import type { URI } from 'vscode-uri'
 import type { ParsedAstDynamicView, ParsedAstView } from '../../ast'

@@ -1,5 +1,5 @@
-import type { NodeModel } from '@likec4/core/model'
-import type { aux, NodeId, ViewId } from '@likec4/core/types'
+import type { NodeModel } from '@c4docs/likec4-core/model'
+import type { aux, NodeId, ViewId } from '@c4docs/likec4-core/types'
 import type { FC, FunctionComponent } from 'react'
 import type { BaseNodePropsWithData } from '../base/types'
 import { useLikeC4Model } from '../hooks/useLikeC4Model'
@@ -69,7 +69,7 @@ function customDiagramNode<
  *   ElementToolbar,
  *   DefaultHandles,
  *   ElementTags
- * } from '@likec4/diagram/custom'
+ * } from '@c4docs/likec4-diagram/custom'
  *
  * const CustomElementNode = elementNode(({ nodeProps, nodeModel }) => (
  *   <ElementNodeContainer nodeProps={nodeProps}>
@@ -131,7 +131,7 @@ export type ElementNodeProps<A extends Any = Unknown> = {
  *   IfNotReadOnly,
  *   DeploymentElementToolbar,
  *   DefaultHandles,
- * } from '@likec4/diagram/custom'
+ * } from '@c4docs/likec4-diagram/custom'
  *
  * const CustomDeploymentNode = deploymentNode(({ nodeProps, nodeModel }) => (
  *   <ElementNodeContainer nodeProps={nodeProps}>
@@ -187,7 +187,7 @@ export type DeploymentNodeProps<A extends Any = Unknown> = {
  *   IfEnabled,
  *   CompoundElementToolbar,
  *   DefaultHandles,
- * } from '@likec4/diagram/custom'
+ * } from '@c4docs/likec4-diagram/custom'
  *
  * const CustomCompoundElementNode = compoundElementNode(({ nodeProps, nodeModel }) => (
  *   <CompoundNodeContainer nodeProps={props}>
@@ -233,7 +233,7 @@ export type CompoundElementNodeProps<A extends Any = Unknown> = {
  *   CompoundActions,
  *   CompoundDeploymentToolbar,
  *   DefaultHandles,
- * } from '@likec4/diagram/custom'
+ * } from '@c4docs/likec4-diagram/custom'
  *
  * const CustomCompoundDeploymentNode = compoundDeploymentNode(({ nodeProps, nodeModel }) => (
  *   <CompoundNodeContainer nodeProps={nodeProps}>
@@ -272,7 +272,7 @@ export type CompoundDeploymentNodeProps<A extends Any = Unknown> = {
  *   CompoundNodeContainer,
  *   CompoundTitle,
  *   DefaultHandles,
- * } from '@likec4/diagram/custom'
+ * } from '@c4docs/likec4-diagram/custom'
  *
  * const CustomViewGroupNode = viewGroupNode(({ nodeProps, nodeModel }) => (
  *   <CompoundNodeContainer nodeProps={nodeProps}>

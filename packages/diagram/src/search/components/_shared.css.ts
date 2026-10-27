@@ -1,5 +1,5 @@
-import { css, sva } from '@likec4/styles/css'
-import { emptyBox } from '@likec4/styles/recipes'
+import { css, sva } from '@c4docs/likec4-styles/css'
+import { emptyBox } from '@c4docs/likec4-styles/recipes'
 
 // export const titleColor = '--title-color'
 // export const descriptionColor = '---description-color'

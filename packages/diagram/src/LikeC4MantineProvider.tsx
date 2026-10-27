@@ -1,6 +1,6 @@
-import { css } from '@likec4/styles/css'
-import type { Token, TokenCategory, Tokens } from '@likec4/styles/tokens'
-import { token } from '@likec4/styles/tokens'
+import { css } from '@c4docs/likec4-styles/css'
+import type { Token, TokenCategory, Tokens } from '@c4docs/likec4-styles/tokens'
+import { token } from '@c4docs/likec4-styles/tokens'
 import {
   type CSSVariablesResolver,
   type DefaultMantineColor,

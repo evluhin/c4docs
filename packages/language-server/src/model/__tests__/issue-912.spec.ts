@@ -1,5 +1,5 @@
-import type { ViewId } from '@likec4/core'
-import { withReadableEdges } from '@likec4/core/compute-view'
+import type { ViewId } from '@c4docs/likec4-core'
+import { withReadableEdges } from '@c4docs/likec4-core/compute-view'
 import { describe, it, vi } from 'vitest'
 import { createTestServices } from '../../test'
 
