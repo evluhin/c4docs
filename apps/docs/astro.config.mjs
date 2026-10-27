@@ -153,9 +153,9 @@ export default defineConfig({
       alias: {
         // '@c4docs/likec4-icons': new URL('../../packages/icons', import.meta.url).pathname,
         // '@c4docs/likec4-core': new URL('../../packages/core/src', import.meta.url).pathname,
-        'likec4/model': new URL('../../packages/likec4/src/model', import.meta.url).pathname,
+        '@c4docs/likec4/model': new URL('../../packages/likec4/src/model', import.meta.url).pathname,
         // Alias to bundled React components, can't use 'development' condition
-        'likec4/react': new URL('../../packages/react/dist/index.mjs', import.meta.url).pathname,
+        '@c4docs/likec4/react': new URL('../../packages/react/dist/index.mjs', import.meta.url).pathname,
         '@': new URL('./src', import.meta.url).pathname,
       },
     },

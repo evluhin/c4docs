@@ -20,13 +20,13 @@
       "node"
     ],
     "paths": {
-      "likec4/vite-plugin/internal": [
+      "@c4docs/likec4/vite-plugin/internal": [
         "./src/internal.ts"
       ],
-      "likec4/model": [
+      "@c4docs/likec4/model": [
         "../core/src/index.ts"
       ],
-      "likec4/react": [
+      "@c4docs/likec4/react": [
         "../react/src/index.ts"
       ]
     }

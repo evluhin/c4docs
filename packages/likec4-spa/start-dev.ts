@@ -56,11 +56,11 @@ const main = defineCommand({
         conditions: ['sources', 'import', 'default'],
         alias: {
           // Local paths for dev
-          'likec4/react': resolve('../react/dist/index.mjs'),
+          '@c4docs/likec4/react': resolve('../react/dist/index.mjs'),
           '@c4docs/likec4-diagram/adhoc-editor': resolve('../diagram/src/adhoc-editor/index.ts'),
           '@c4docs/likec4-diagram/custom': resolve('../diagram/src/custom/index.ts'),
           '@c4docs/likec4-diagram': resolve('../diagram/src/index.ts'),
-          'likec4/vite-plugin/internal': resolve('../vite-plugin/src/internal.ts'),
+          '@c4docs/likec4/vite-plugin/internal': resolve('../vite-plugin/src/internal.ts'),
         },
       },
       plugins: [
