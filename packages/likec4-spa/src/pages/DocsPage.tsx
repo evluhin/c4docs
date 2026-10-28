@@ -210,6 +210,13 @@ const prose = css({
   // Live diagram embeds / mermaid manage their own chrome — just give them room.
   '& [data-likec4-view-embed], & [data-mermaid]': {
     marginBlock: '6',
+    overflow: 'auto',
+  },
+  // Clamp the injected child <svg> (mermaid output / error graphic) the same way
+  // `& img` is clamped, so an oversized diagram cannot overflow into the nav gutter.
+  '& [data-likec4-view-embed] svg, & [data-mermaid] svg': {
+    maxWidth: '[100%]',
+    height: 'auto',
   },
 
   // GitHub alert callouts (<div class="markdown-alert markdown-alert-*">).
@@ -423,13 +430,18 @@ export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
         if (source.trim() === '') {
           continue
         }
+        const renderId = `docs-mermaid-${slug}-${i}`
         try {
-          const svg = await renderMermaid(`docs-mermaid-${slug}-${i}`, source, colorScheme)
+          const svg = await renderMermaid(renderId, source, colorScheme)
           if (cancelled) return
           node.innerHTML = svg
         } catch {
           if (cancelled) return
           node.replaceChildren(inlineNotice('Failed to render Mermaid diagram'))
+          // On a parse error mermaid leaves its error graphic as an orphan
+          // `<div id="d{renderId}">` attached to <body>, which otherwise floats
+          // over the nav gutter. Remove it; the inline notice above is the UI.
+          document.getElementById(`d${renderId}`)?.remove()
         }
       }
     })()
