@@ -67,7 +67,7 @@ const docsShell = css({
 // recipe constrains the TEXT measure to ~68ch (item 1). Wide blocks (tables,
 // code, images, embeds) break out to the full container width.
 const contentContainer = css({
-  maxWidth: '[960px]',
+  maxWidth: '[1100px]',
   marginInline: 'auto',
   paddingInline: 'lg',
   paddingBlock: 'xl',
@@ -83,14 +83,14 @@ const prose = css({
   '& > * + *': { marginTop: 'md' },
   '& > *:first-child': { marginTop: '0' },
 
-  // Measure: constrain the text column to ~68ch, centered. Wide block content
-  // breaks out below.
+  // Width: text and wide blocks share the FULL content-column width (no narrow
+  // ch-based measure cap), so headings, paragraphs, tables, code, and diagrams
+  // all align to the same left and right edges — one consistent column (the
+  // Backstage/MkDocs look). The reading width is governed by `contentContainer`
+  // (maxWidth above), not a per-block ch cap. Left-aligned, no per-block centering.
   '& > *': {
-    maxWidth: '[68ch]',
-    marginInline: 'auto',
-  },
-  '& > table, & > pre, & > img, & > figure, & > .markdown-alert, & > [data-likec4-view-embed], & > [data-mermaid]': {
     maxWidth: '[100%]',
+    marginInline: '0',
   },
 
   // Heading hierarchy: clear size contrast, semibold, more space above than
