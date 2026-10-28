@@ -54,61 +54,223 @@ const docsShell = css({
     backgroundColor: '[var(--mantine-color-body)]',
     borderInlineEndColor: '[var(--mantine-color-default-border)]',
   },
+  // Subtle sticky header: a translucent body wash + backdrop blur keeps it
+  // readable over scrolling content in both themes without a heavy bar.
   '& .mantine-AppShell-header': {
-    backgroundColor: '[var(--mantine-color-body)]',
+    backgroundColor: '[color-mix(in srgb, var(--mantine-color-body) 80%, transparent)]',
     borderBottomColor: '[var(--mantine-color-default-border)]',
+    backdropFilter: '[saturate(180%) blur(8px)]',
   },
 })
 
+// Breakout container: caps the overall reading column at ~960px while the prose
+// recipe constrains the TEXT measure to ~68ch (item 1). Wide blocks (tables,
+// code, images, embeds) break out to the full container width.
 const contentContainer = css({
-  maxWidth: '[820px]',
+  maxWidth: '[960px]',
   marginInline: 'auto',
-  paddingInline: 'md',
-  paddingBlock: 'sm',
+  paddingInline: 'lg',
+  paddingBlock: 'xl',
 })
 
 const prose = css({
-  lineHeight: '[1.55]',
-  fontSize: '[0.9375rem]',
-  '& h1, & h2, & h3, & h4': {
-    fontWeight: '[600]',
-    lineHeight: '[1.25]',
-    marginTop: 'md',
-    marginBottom: 'xs',
+  fontSize: '[1rem]',
+  lineHeight: '[1.65]',
+  color: '[var(--mantine-color-text)]',
+
+  // Vertical rhythm: uniform spacing between flow blocks (owl selector); the
+  // first block never adds a top margin.
+  '& > * + *': { marginTop: 'md' },
+  '& > *:first-child': { marginTop: '0' },
+
+  // Measure: constrain the text column to ~68ch, centered. Wide block content
+  // breaks out below.
+  '& > *': {
+    maxWidth: '[68ch]',
+    marginInline: 'auto',
   },
-  '& h1': { fontSize: '[1.7rem]', marginTop: '0' },
-  '& h2': { fontSize: '[1.35rem]' },
-  '& h3': { fontSize: '[1.15rem]' },
-  '& p, & ul, & ol, & blockquote, & pre, & table': {
-    marginBottom: 'sm',
-  },
-  '& ul, & ol': {
-    paddingLeft: 'lg',
-  },
-  '& li': {
-    marginBottom: '[2px]',
-  },
-  '& a': {
-    textDecoration: 'underline',
-  },
-  '& code': {
-    fontFamily: '[monospace]',
-    fontSize: '[0.9em]',
-  },
-  '& pre': {
-    overflowX: 'auto',
-    padding: 'md',
-    borderRadius: 'sm',
-    backgroundColor: 'likec4.panel.bg',
-  },
-  '& img': {
+  '& > table, & > pre, & > img, & > figure, & > .markdown-alert, & > [data-likec4-view-embed], & > [data-mermaid]': {
     maxWidth: '[100%]',
   },
+
+  // Heading hierarchy: clear size contrast, semibold, more space above than
+  // below, subtle h2 rule, scroll-margin so anchors clear the sticky header.
+  '& :is(h1, h2, h3, h4)': {
+    fontWeight: '[600]',
+    lineHeight: '[1.25]',
+    color: '[var(--mantine-color-text)]',
+    marginTop: '8',
+    marginBottom: '3',
+    scrollMarginTop: '[60px]',
+  },
+  '& h1': { fontSize: '[2rem]', marginTop: '0' },
+  '& h2': {
+    fontSize: '[1.5rem]',
+    paddingBottom: '2',
+    borderBottom: 'subtle',
+  },
+  '& h3': { fontSize: '[1.25rem]' },
+  '& h4': { fontSize: '[1.05rem]' },
+
+  // Links: accent color, underline only on hover (not every link raw-underlined).
+  '& a': {
+    color: 'text.link',
+    textDecoration: 'none',
+    textUnderlineOffset: '[2px]',
+    _hover: { textDecoration: 'underline' },
+  },
+
+  // Lists: comfortable indentation + item spacing; readable nesting.
+  '& ul, & ol': { paddingLeft: '6' },
+  '& li': { marginBottom: '1' },
+  '& li > ul, & li > ol': { marginTop: '1', marginBottom: '0' },
+
+  // Inline code (not inside <pre>): subtle chip.
+  '& :not(pre) > code': {
+    fontFamily: '[var(--mantine-font-family-monospace)]',
+    fontSize: '[0.875em]',
+    backgroundColor: 'surface.code',
+    paddingInline: '1.5',
+    paddingBlock: '0.5',
+    borderRadius: 'sm',
+    border: 'subtle',
+  },
+
+  // Code blocks: soft bordered box with horizontal scroll; reset inner <code>
+  // so it does not inherit the inline-code chrome. Prism owns token colors.
+  '& pre': {
+    backgroundColor: 'surface.code',
+    border: 'subtle',
+    borderRadius: 'md',
+    padding: 'md',
+    overflowX: 'auto',
+    fontSize: '[0.875rem]',
+    lineHeight: '[1.5]',
+  },
+  '& pre code': {
+    background: 'transparent',
+    border: 'none',
+    padding: '0',
+    fontSize: '[inherit]',
+  },
+
+  // Tables (docs are table-heavy): full-width, header shading, zebra striping,
+  // rounded outer corners (border-separate keeps the radius clean).
+  '& table': {
+    width: '[100%]',
+    borderCollapse: 'separate',
+    borderSpacing: '[0]',
+    fontSize: '[0.9375rem]',
+    border: 'subtle',
+    borderRadius: 'md',
+    overflow: 'hidden',
+  },
+  '& thead': {
+    backgroundColor: 'surface.sunken',
+  },
+  '& th': {
+    textAlign: 'left',
+    fontWeight: '[600]',
+    padding: '[8px 12px]',
+    borderBottom: 'default',
+  },
+  '& td': {
+    padding: '[8px 12px]',
+    borderTop: 'subtle',
+  },
+  '& tbody tr:nth-child(even)': {
+    backgroundColor: 'surface.sunken',
+  },
+
+  // Plain blockquotes (no [!...] alert class): left accent bar + muted wash.
   '& blockquote': {
-    borderLeftWidth: '[3px]',
+    borderLeftWidth: 'extra',
     borderLeftStyle: 'solid',
+    borderLeftColor: 'border.default',
     paddingLeft: 'md',
-    opacity: '[0.8]',
+    paddingBlock: '2',
+    backgroundColor: 'surface.sunken',
+    borderRadius: 'sm',
+    color: 'text.dimmed',
+  },
+  '& blockquote > *:first-child': { marginTop: '0' },
+  '& blockquote > *:last-child': { marginBottom: '0' },
+
+  // Images: contained, rounded, subtle lift, centered with breathing room.
+  '& img': {
+    maxWidth: '[100%]',
+    height: 'auto',
+    display: 'block',
+    marginInline: 'auto',
+    marginBlock: '4',
+    borderRadius: 'md',
+    border: 'subtle',
+    boxShadow: 'xs',
+  },
+  // Live diagram embeds / mermaid manage their own chrome — just give them room.
+  '& [data-likec4-view-embed], & [data-mermaid]': {
+    marginBlock: '6',
+  },
+
+  // GitHub alert callouts (<div class="markdown-alert markdown-alert-*">).
+  // Colored left border + tinted bg + title color per type; octicon follows
+  // the title color via currentColor. Mantine color-scale vars keep both
+  // themes legible.
+  '& .markdown-alert': {
+    borderRadius: 'md',
+    padding: 'md',
+    borderLeftWidth: 'extra',
+    borderLeftStyle: 'solid',
+  },
+  '& .markdown-alert > *:first-child': { marginTop: '0' },
+  '& .markdown-alert > *:last-child': { marginBottom: '0' },
+  '& .markdown-alert-title': {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '2',
+    fontWeight: '[600]',
+    marginTop: '0',
+    marginBottom: '2',
+  },
+  '& .markdown-alert-title svg': {
+    width: '[16px]',
+    height: '[16px]',
+    fill: 'currentColor',
+  },
+  '& .markdown-alert-note': {
+    borderLeftColor: '[var(--mantine-color-blue-filled)]',
+    backgroundColor: '[var(--mantine-color-blue-light)]',
+  },
+  '& .markdown-alert-note .markdown-alert-title': {
+    color: '[var(--mantine-color-blue-text)]',
+  },
+  '& .markdown-alert-tip': {
+    borderLeftColor: '[var(--mantine-color-green-filled)]',
+    backgroundColor: '[var(--mantine-color-green-light)]',
+  },
+  '& .markdown-alert-tip .markdown-alert-title': {
+    color: '[var(--mantine-color-green-text)]',
+  },
+  '& .markdown-alert-important': {
+    borderLeftColor: '[var(--mantine-color-violet-filled)]',
+    backgroundColor: '[var(--mantine-color-violet-light)]',
+  },
+  '& .markdown-alert-important .markdown-alert-title': {
+    color: '[var(--mantine-color-violet-text)]',
+  },
+  '& .markdown-alert-warning': {
+    borderLeftColor: '[var(--mantine-color-yellow-filled)]',
+    backgroundColor: '[var(--mantine-color-yellow-light)]',
+  },
+  '& .markdown-alert-warning .markdown-alert-title': {
+    color: '[var(--mantine-color-yellow-text)]',
+  },
+  '& .markdown-alert-caution': {
+    borderLeftColor: '[var(--mantine-color-red-filled)]',
+    backgroundColor: '[var(--mantine-color-red-light)]',
+  },
+  '& .markdown-alert-caution .markdown-alert-title': {
+    color: '[var(--mantine-color-red-text)]',
   },
 })
 
