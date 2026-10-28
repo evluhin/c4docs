@@ -21,7 +21,7 @@ jobs:
     name: 📦 npm
     runs-on: ubuntu-24.04-arm
     timeout-minutes: 5
-    if: ${{ github.repository_owner == 'likec4' }}
+    if: ${{ github.repository_owner == 'evluhin' }}
     environment: release
     steps:
       - uses: actions/checkout@v7
@@ -53,10 +53,16 @@ jobs:
       - name: ⚙️ build
         run: pnpm ci:build
 
+      # OIDC Trusted Publishing requires npm CLI >= 11.5.1; the npm bundled with
+      # Node 24 in setup-node may be older, so upgrade it before publishing.
+      - name: 🛠️ Ensure npm supports trusted publishing
+        run: npm install -g npm@latest
+
+      # No NODE_AUTH_TOKEN: OIDC Trusted Publishing does not use a registry token.
+      # secrets.GITHUB_TOKEN is a GitHub Actions token (not an npm token); passing
+      # it forces npm into token auth and breaks OIDC.
       - name: 📦 publish
         run: pnpm publish -r --no-git-checks --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   create-tag:
     runs-on: ubuntu-24.04-arm
