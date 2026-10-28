@@ -6,7 +6,7 @@
   "homepage": "https://likec4.dev",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/likec4/likec4.git",
+    "url": "git+https://github.com/evluhin/c4docs.git",
     "directory": "packages/likec4-spa"
   },
   "license": "MIT",

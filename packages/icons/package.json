@@ -7,10 +7,10 @@
   "description": "Bundled React SVG icons, used in LikeC4 Diagram",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/likec4/likec4.git",
+    "url": "git+https://github.com/evluhin/c4docs.git",
     "directory": "packages/icons"
   },
-  "bugs": "https://github.com/likec4/likec4/issues",
+  "bugs": "https://github.com/evluhin/c4docs/issues",
   "type": "module",
   "types": "all.d.ts",
   "module": "all.js",

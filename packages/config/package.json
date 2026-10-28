@@ -3,10 +3,10 @@
   "version": "1.60.0",
   "description": "A configuration package for LikeC4.",
   "homepage": "https://likec4.dev",
-  "bugs": "https://github.com/likec4/likec4/issues",
+  "bugs": "https://github.com/evluhin/c4docs/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/likec4/likec4.git",
+    "url": "git+https://github.com/evluhin/c4docs.git",
     "directory": "packages/config"
   },
   "license": "MIT",

@@ -16,12 +16,12 @@
   ],
   "homepage": "https://likec4.dev",
   "bugs": {
-    "url": "https://github.com/likec4/likec4/issues",
+    "url": "https://github.com/evluhin/c4docs/issues",
     "email": "denis@davydkov.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/likec4/likec4.git",
+    "url": "git+https://github.com/evluhin/c4docs.git",
     "directory": "packages/vscode"
   },
   "license": "MIT",
