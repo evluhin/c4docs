@@ -61,8 +61,17 @@ jobs:
       # No NODE_AUTH_TOKEN: OIDC Trusted Publishing does not use a registry token.
       # secrets.GITHUB_TOKEN is a GitHub Actions token (not an npm token); passing
       # it forces npm into token auth and breaks OIDC.
+      # Publish only the packages this fork ships (the CLI + its runtime deps),
+      # which are the ones configured with an npm Trusted Publisher. A bare `-r`
+      # would try to publish every public package and abort on the first one
+      # without a Trusted Publisher (OIDC 404).
       - name: 📦 publish
-        run: pnpm publish -r --no-git-checks --provenance --access public
+        run: >-
+          pnpm
+          --filter @c4docs/likec4
+          --filter @c4docs/likec4-core
+          --filter @c4docs/likec4-icons
+          publish --no-git-checks --provenance --access public
 
   create-tag:
     runs-on: ubuntu-24.04-arm
