@@ -30,11 +30,14 @@ function parser() {
             'div': [
               // Sanitizer-safe placeholders emitted by the docs modeling passes.
               // `data-likec4-view-embed` carries the embed index; `data-mermaid`
-              // marks a block whose escaped source is the div's text child.
+              // marks a mermaid block and `data-mermaid-src` carries its raw
+              // source base64-encoded on a single line (so markdown cannot
+              // re-parse indented mermaid lines as an indented code block).
               // hast-util-sanitize expects the camelCased property name for
               // `data-*` attributes.
               'dataLikec4ViewEmbed',
               'dataMermaid',
+              'dataMermaidSrc',
             ],
             'svg': [
               'width',

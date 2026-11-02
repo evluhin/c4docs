@@ -426,7 +426,11 @@ export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
     void (async () => {
       for (let i = 0; i < mermaidNodes.length; i++) {
         const node = mermaidNodes[i]!
-        const source = node.textContent ?? ''
+        // The raw mermaid source is carried base64-encoded on `data-mermaid-src`
+        // (see extractMermaidBlocks): a single-line attribute survives markdown
+        // without having its indented lines re-parsed as an indented code block.
+        // Fall back to textContent for safety, but the attribute is canonical.
+        const source = decodeMermaidSource(node)
         if (source.trim() === '') {
           continue
         }
@@ -508,6 +512,30 @@ const inlineNoticeClass = css({
   color: '[var(--mantine-color-orange-text)]',
   backgroundColor: '[var(--mantine-color-orange-light)]',
 })
+
+/**
+ * Recovers the raw mermaid source carried on a `[data-mermaid]` placeholder.
+ *
+ * The docs modeling pass base64-encodes the source onto `data-mermaid-src` so
+ * markdown cannot split indented mermaid lines into a separate code block. We
+ * base64-decode it here (UTF-8 safe via `escape`/`decodeURIComponent`). Falls
+ * back to `textContent` for resilience against any legacy/un-encoded placeholder.
+ */
+function decodeMermaidSource(node: HTMLElement): string {
+  const encoded = node.getAttribute('data-mermaid-src')
+  if (encoded) {
+    try {
+      // atob yields a binary (Latin1) string; reinterpret the bytes as UTF-8 so
+      // non-ASCII diagram labels round-trip exactly.
+      const binary = atob(encoded)
+      const bytes = Uint8Array.from(binary, (ch) => ch.charCodeAt(0))
+      return new TextDecoder().decode(bytes)
+    } catch {
+      // Malformed payload: fall through to textContent below.
+    }
+  }
+  return node.textContent ?? ''
+}
 
 /**
  * Builds a non-fatal inline notice as a detached DOM node, used by the mermaid

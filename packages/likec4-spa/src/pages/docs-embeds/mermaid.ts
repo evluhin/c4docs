@@ -22,6 +22,11 @@ export async function renderMermaid(id: string, source: string, theme: 'light' |
   mermaid.initialize({
     startOnLoad: false,
     theme: theme === 'dark' ? 'dark' : 'default',
+    // `loose` + htmlLabels matches how GitHub and VS Code render mermaid, so
+    // diagrams that use `<br/>` HTML labels (common in these docs) render the
+    // same way here. The source is already sanitized upstream by rehype-sanitize.
+    securityLevel: 'loose',
+    flowchart: { htmlLabels: true },
   })
   const { svg } = await mermaid.render(id, source)
   return svg

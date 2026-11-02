@@ -358,9 +358,18 @@ export function resolveViewLinks(
  */
 const FENCED_BLOCK_RE = /(^|\n)```([^\s`\n]+)[ \t]*\r?\n([\s\S]*?)\r?\n```[ \t]*(?=\n|$)/g
 
-/** HTML-escapes `&`, `<`, and `>` so rehype-sanitize keeps a plain text child. */
-function escapeHtmlText(text: string): string {
-  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+/**
+ * Encodes arbitrary (possibly multiline/indented) source into a single-line,
+ * URL-safe-but-standard base64 string. Keeping the payload on one line of pure
+ * `[A-Za-z0-9+/=]` means remark/rehype sees an opaque inline attribute value
+ * with no indented lines to misinterpret as an indented code block, and it
+ * survives rehype-sanitize (which allows those characters in attribute values).
+ * UTF-8 safe and exact round-tripping.
+ */
+function encodeSourceBase64(source: string): string {
+  // Buffer is always available in the Node-side language server; TextEncoder
+  // keeps it correct for non-ASCII mermaid labels.
+  return Buffer.from(source, 'utf8').toString('base64')
 }
 
 /**
@@ -459,8 +468,15 @@ export function extractLikeC4ViewEmbeds(
 
 /**
  * Finds fenced ```mermaid blocks and replaces each with the sanitizer-safe
- * placeholder `<div data-mermaid>…</div>`, carrying the RAW mermaid source as an
- * HTML-escaped text child (so rehype-sanitize keeps a plain div with safe text).
+ * placeholder `<div data-mermaid data-mermaid-src="<base64>"></div>` — an EMPTY
+ * element whose raw mermaid source is carried base64-encoded on a single-line
+ * attribute.
+ *
+ * Carrying the source as a multiline text child (the previous approach) let
+ * markdown re-parse any 4+-space-indented mermaid line (e.g. `subgraph` children)
+ * as an indented code block, splitting the diagram and leaking the remainder into
+ * a separate `<pre><code>`. A single-line base64 attribute has no indented lines
+ * to misinterpret and round-trips exactly, so the SPA recovers the COMPLETE source.
  *
  * Pure: returns the rewritten body.
  */
@@ -471,7 +487,7 @@ export function extractMermaidBlocks(body: string): { body: string } {
       if (info !== 'mermaid') {
         return whole
       }
-      return `${lead}<div data-mermaid>${escapeHtmlText(blockBody)}</div>`
+      return `${lead}<div data-mermaid data-mermaid-src="${encodeSourceBase64(blockBody)}"></div>`
     },
   )
   return { body: rewritten }

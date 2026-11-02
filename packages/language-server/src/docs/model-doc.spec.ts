@@ -1,3 +1,4 @@
+import { markdownToHtml } from '@c4docs/likec4-core/utils'
 import { describe, expect, it, vi } from 'vitest'
 import type { DocLinkDiagnostic, DocLinkResolution, DocViewLinkState, DocViewResolution } from './model-doc'
 import {
@@ -346,15 +347,82 @@ describe('extractLikeC4ViewEmbeds', () => {
 })
 
 describe('extractMermaidBlocks', () => {
-  it('replaces a ```mermaid block with a data-mermaid div carrying escaped source', () => {
-    const { body } = extractMermaidBlocks('# H\n\n```mermaid\ngraph TD\n  A --> B\n```\n')
-    expect(body).toContain('<div data-mermaid>graph TD\n  A --&gt; B</div>')
+  /** Recovers the base64 source carried on the first data-mermaid-src attribute. */
+  const decodeSrc = (body: string): string => {
+    const match = /data-mermaid-src="([^"]*)"/.exec(body)
+    expect(match, 'expected a data-mermaid-src attribute').not.toBeNull()
+    return Buffer.from(match![1]!, 'base64').toString('utf8')
+  }
+
+  it('replaces a ```mermaid block with an empty data-mermaid div carrying base64 source', () => {
+    const source = 'graph TD\n  A --> B'
+    const { body } = extractMermaidBlocks(`# H\n\n\`\`\`mermaid\n${source}\n\`\`\`\n`)
+    // Empty element: no multiline text child, just a single-line attribute.
+    expect(body).toContain('<div data-mermaid data-mermaid-src="')
+    expect(body).toContain('></div>')
     expect(body).not.toContain('```mermaid')
+    // The attribute round-trips the source exactly.
+    expect(decodeSrc(body)).toBe(source)
   })
 
-  it('HTML-escapes &, < and > in the source', () => {
+  it('base64 round-trips special characters (&, <, >) exactly', () => {
+    const source = 'X & <Y> Z'
     const { body } = extractMermaidBlocks('```mermaid\nX & <Y> Z\n```')
-    expect(body).toBe('<div data-mermaid>X &amp; &lt;Y&gt; Z</div>')
+    expect(decodeSrc(body)).toBe(source)
+    // Payload stays on one line of base64 alphabet only.
+    const attr = /data-mermaid-src="([^"]*)"/.exec(body)![1]!
+    expect(attr).toMatch(/^[A-Za-z0-9+/=]*$/)
+    expect(attr).not.toContain('\n')
+  })
+
+  it('carries the COMPLETE source of a block with indented subgraph lines', () => {
+    // Regression: based on the real failing diagram. 4+-space-indented lines
+    // (subgraph children) previously leaked into a separate indented code block.
+    const source = [
+      'flowchart TD',
+      '    B[Browser] --> AK[Akamai edge<br/>sets headers]',
+      '    subgraph WAF[CloudFront WAF us-east-1]',
+      '      direction TB',
+      '      W1[Allow Akamai IP set]',
+      '      W2[Allow x-waf-secret header]',
+      '      W3[Block /preview; default BLOCK]',
+      '    end',
+      '    CF --- WAF',
+      '    subgraph INV[Cache invalidation]',
+      '      SNS1[Status SNS] --> SQS[(Invalidation SQS)]',
+      '      SQS --> LAM[Cache Invalidation Lambda] --> CF',
+      '    end',
+    ].join('\n')
+    const { body } = extractMermaidBlocks('## 2. Current serving flow\n\n```mermaid\n' + source + '\n```\n')
+    // Exactly one placeholder, source round-trips byte-for-byte including indents.
+    expect((body.match(/data-mermaid-src=/g) ?? []).length).toBe(1)
+    const decoded = decodeSrc(body)
+    expect(decoded).toBe(source)
+    expect(decoded).toContain('subgraph WAF[CloudFront WAF us-east-1]')
+    expect(decoded).toContain('      W1[Allow Akamai IP set]')
+    expect(decoded).toContain('subgraph INV[Cache invalidation]')
+  })
+
+  it('survives markdownToHtml without splitting indented lines into a <pre><code>', () => {
+    const source = [
+      'flowchart TD',
+      '    subgraph WAF[CloudFront WAF us-east-1]',
+      '      direction TB',
+      '      W1[Allow Akamai IP set]',
+      '    end',
+    ].join('\n')
+    const { body } = extractMermaidBlocks('```mermaid\n' + source + '\n```')
+    const html = markdownToHtml(body)
+    // The placeholder survives sanitization with both data attributes...
+    expect(html).toContain('data-mermaid')
+    expect(html).toContain('data-mermaid-src="')
+    // ...and the full source is still recoverable from the attribute (not split).
+    const match = /data-mermaid-src="([^"]*)"/.exec(html)
+    expect(match).not.toBeNull()
+    expect(Buffer.from(match![1]!, 'base64').toString('utf8')).toBe(source)
+    // The indented mermaid lines did NOT leak into an indented code block.
+    expect(html).not.toContain('<pre><code')
+    expect(html).not.toContain('W1[Allow Akamai IP set]</code>')
   })
 
   it('does not touch a bare ```likec4 or ```likec4-view block', () => {
