@@ -518,7 +518,7 @@ const inlineNoticeClass = css({
  *
  * The docs modeling pass base64-encodes the source onto `data-mermaid-src` so
  * markdown cannot split indented mermaid lines into a separate code block. We
- * base64-decode it here (UTF-8 safe via `escape`/`decodeURIComponent`). Falls
+ * base64-decode it here (UTF-8 safe via `atob` + `TextDecoder`). Falls
  * back to `textContent` for resilience against any legacy/un-encoded placeholder.
  */
 function decodeMermaidSource(node: HTMLElement): string {
