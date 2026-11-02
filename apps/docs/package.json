@@ -1,6 +1,6 @@
 {
   "name": "@c4docs/likec4-docs-astro",
-  "version": "1.60.1",
+  "version": "1.60.2",
   "private": true,
   "type": "module",
   "scripts": {

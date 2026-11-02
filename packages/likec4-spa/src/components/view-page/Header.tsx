@@ -124,13 +124,19 @@ function BackToDiagramButton({ isTablet }: { isTablet: boolean }) {
 
   return (
     <Button
-      component={Link}
-      to={isInsideProject ? '/project/$projectId/view/$viewId/' : '/view/$viewId/'}
-      params={isInsideProject ? { projectId: project.id, viewId } : { viewId }}
       size={size}
       fz={fz}
       variant="subtle"
-      color="gray">
+      color="gray"
+      renderRoot={(props) =>
+        isInsideProject
+          ? (
+            <Link
+              to="/project/$projectId/view/$viewId/"
+              params={{ projectId: project.id, viewId }}
+              {...props} />
+          )
+          : <Link to="/view/$viewId/" params={{ viewId }} {...props} />}>
       Back to diagram
     </Button>
   )

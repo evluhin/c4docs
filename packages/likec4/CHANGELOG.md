@@ -1,5 +1,17 @@
 # likec4
 
+## 1.60.2
+
+### Patch Changes
+
+- The "Back to diagram" button on the "diagram not found" page no longer leads to a 404. It now returns to the diagram when the view exists, or to the overview otherwise.
+
+- Associated-document links on diagram elements and views now open the correct docs page. A link to a Markdown file inside the docs folder (for example `02-edge-service.md`) now navigates to its rendered docs route (`/docs/architecture/02-edge-service/`) instead of landing on the "diagram not found" error page.
+
+- Mermaid diagrams with indented lines (such as `subgraph` blocks and their children) now render in docs instead of failing with "Failed to render Mermaid diagram".
+- Updated dependencies []:
+  - @c4docs/likec4-core@1.60.2
+
 ## 1.60.1
 
 ### Patch Changes

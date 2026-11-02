@@ -1,6 +1,6 @@
 {
   "name": "@c4docs/likec4-playground",
-  "version": "1.60.1",
+  "version": "1.60.2",
   "private": true,
   "sideEffects": false,
   "type": "module",

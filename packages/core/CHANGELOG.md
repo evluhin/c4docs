@@ -1,5 +1,9 @@
 # @likec4/core
 
+## 1.60.2
+
+No changes in this release.
+
 ## 1.60.1
 
 ### Patch Changes

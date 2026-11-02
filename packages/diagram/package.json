@@ -1,6 +1,6 @@
 {
   "name": "@c4docs/likec4-diagram",
-  "version": "1.60.1",
+  "version": "1.60.2",
   "description": "A React component library for rendering software architecture diagrams",
   "homepage": "https://likec4.dev",
   "bugs": "https://github.com/evluhin/c4docs/issues",

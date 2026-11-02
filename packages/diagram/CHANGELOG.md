@@ -1,5 +1,13 @@
 # @likec4/diagram
 
+## 1.60.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @c4docs/likec4-core@1.60.2
+  - @c4docs/likec4-styles@1.60.2
+
 ## 1.60.1
 
 ### Patch Changes
