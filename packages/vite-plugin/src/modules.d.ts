@@ -21,6 +21,8 @@ declare module 'likec4:projects' {
     exportFormats: readonly WebappExportFormat[]
     /** Whether this project opts in to docs as the default landing page */
     docsLanding: boolean
+    /** Configured docs directory (relative to project root); undefined when docs are not configured */
+    docsDir: string | undefined
   }
   export const isSingleProject: boolean
   export const projects: readonly [Project, ...Project[]]

@@ -67,6 +67,7 @@ export function ViewReact() {
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       <LikeC4Diagram
         view={compareView ?? view}
+        docsDir={project.docsDir}
         zoomable
         pannable
         controls

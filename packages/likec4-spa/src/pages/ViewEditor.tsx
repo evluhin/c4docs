@@ -51,6 +51,7 @@ export function ViewEditor() {
   const diagram = (
     <LikeC4Diagram
       view={compareView ?? view}
+      docsDir={project.docsDir}
       zoomable
       pannable
       controls

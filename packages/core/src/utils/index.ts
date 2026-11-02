@@ -20,6 +20,12 @@ export {
 export { collapseUnchanged, diffLines, type LineChange } from './diff-lines'
 
 export {
+  docLinkHref,
+  docRoutePath,
+  encodeRoutePath,
+} from './docs/doc-route'
+
+export {
   type ParsedViewBlock,
   type ParsedViewBlockError,
   type ParsedViewBlockState,

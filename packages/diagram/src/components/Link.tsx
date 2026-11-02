@@ -1,18 +1,32 @@
 import type { Link as LinkData } from '@c4docs/likec4-core'
+import { docLinkHref } from '@c4docs/likec4-core/utils'
 import { css, cx } from '@c4docs/likec4-styles/css'
 import { styled } from '@c4docs/likec4-styles/jsx'
 import { type BadgeProps, ActionIcon, Badge, CopyButton } from '@mantine/core'
 import { IconCheck, IconCopy } from '@tabler/icons-react'
 import { forwardRef } from 'react'
+import { useDocsConfig } from '../context'
 import { GithubIcon } from './GithubIcon'
 
 const GITHUB_PREFIX = 'https://github.com/'
 
 export const Link = forwardRef<HTMLDivElement, Omit<BadgeProps, 'children' | 'classNames'> & { value: LinkData }>(
   ({ value, className, ...props }, ref) => {
+    const docsConfig = useDocsConfig()
+    // An element/view's associated document is a relative `.md` link into the
+    // project's docs dir. When docs are configured, resolve it to the in-app
+    // `/docs/<route>/` route (root-absolute; `.md` stripped; trailing slash) so
+    // clicking opens the rendered doc instead of being treated as view
+    // navigation. `value.relative` is project-root-relative (includes the docs
+    // dir); it is absent for links already relative to the root, so fall back to
+    // `value.url`.
+    const docHref = docsConfig
+      ? docLinkHref({ relative: value.relative ?? value.url, docsDir: docsConfig.docsDir })
+      : null
     // If the url is already a full url, use it as is.
     // Otherwise, it's a relative url and we need to make it absolute.
-    const url = value.url.includes('://') ? value.url : new window.URL(value.url, window.location.href).toString()
+    const url = docHref
+      ?? (value.url.includes('://') ? value.url : new window.URL(value.url, window.location.href).toString())
     let isGithub = url.startsWith(GITHUB_PREFIX)
 
     return (

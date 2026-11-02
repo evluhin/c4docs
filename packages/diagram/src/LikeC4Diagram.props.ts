@@ -113,6 +113,15 @@ export interface LikeC4DiagramProperties<A extends Any = Unknown> {
   className?: string | undefined
 
   /**
+   * Configured docs directory of the project (relative to the project root,
+   * default `docs`). When set, an element/view's associated-document `link`
+   * (a `.md` file inside this dir) renders as the in-app `/docs/<route>/` route
+   * instead of a plain relative URL. Supplied by the data-wiring layer
+   * (`@c4docs/likec4-spa`); omit for projects without docs.
+   */
+  docsDir?: string | undefined
+
+  /**
    * Enable/disable panning
    * @default true
    */

@@ -6,12 +6,19 @@
 // Portions of this file have been modified by NVIDIA CORPORATION & AFFILIATES.
 
 /**
- * Pure docs-discovery helpers: mapping a `.md` file path (relative to the docs
- * directory) to a stable route path, and detecting duplicate route paths.
+ * Pure docs-discovery helpers: detecting duplicate route paths among discovered
+ * `.md` files.
  *
- * The file-system scan itself lives in the docs service (Node, I/O); this module
- * stays pure so it can be unit-tested without touching the disk.
+ * The path→route conversion itself (`docRoutePath`, `encodeRoutePath`) is the
+ * canonical implementation in `@c4docs/likec4-core/utils`; it is re-exported here
+ * so existing importers keep working while the diagram UI shares the same
+ * conversion. The file-system scan lives in the docs service (Node, I/O); this
+ * module stays pure so it can be unit-tested without touching the disk.
  */
+
+import { docRoutePath, encodeRoutePath } from '@c4docs/likec4-core/utils'
+
+export { docRoutePath, encodeRoutePath }
 
 export interface DiscoveredDoc {
   /** stable route path (no extension), e.g. 'adr/0001-use-event-bus' or '' for the root index */
@@ -41,40 +48,6 @@ function normalizeRelative(relativePath: string): string {
     .replace(/\\/g, '/')
     .replace(/^\.\//, '')
     .replace(/^\/+/, '')
-}
-
-/**
- * Maps a `.md` file path (relative to the docs directory) to its route path.
- *
- * - strips the `.md` extension
- * - `index.md` maps to its folder path (root `index.md` → `''`)
- */
-export function docRoutePath(relativePath: string): string {
-  const normalized = normalizeRelative(relativePath)
-  const withoutExt = normalized.replace(/\.md$/i, '')
-  const segments = withoutExt.split('/')
-  const last = segments[segments.length - 1]
-  if (last === 'index') {
-    segments.pop()
-  }
-  return segments.join('/')
-}
-
-/**
- * Encodes a route path for use in a URL, applying {@link encodeURIComponent}
- * **per segment** (not to the whole path) so `/` separators survive while
- * URL-significant characters inside a segment (spaces, `#`, `?`, …) are escaped.
- *
- * The route path itself (the `DocsModel.pages` key) stays in its human form with
- * literal spaces; this encoded form is what hrefs embed. The SPA reverses it by
- * decoding each segment before looking the page up, so a segment with a space
- * round-trips: `unified token` ↔ `unified%20token` ↔ `unified token`.
- */
-export function encodeRoutePath(route: string): string {
-  if (route === '') {
-    return ''
-  }
-  return route.split('/').map(encodeURIComponent).join('/')
 }
 
 /**

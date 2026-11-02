@@ -7,6 +7,8 @@ export {
   useEnabledFeatures,
 } from './DiagramFeatures'
 export type { EnabledFeatures } from './DiagramFeatures'
+export type { DocsConfig } from './DocsConfigContext'
+export { DocsConfigProvider, useDocsConfig } from './DocsConfigContext'
 export { EnsureMantine } from './EnsureMantine'
 export { FramerMotionConfig } from './FramerMotionConfig'
 export { IconRenderer, IconRendererProvider } from './IconRenderer'

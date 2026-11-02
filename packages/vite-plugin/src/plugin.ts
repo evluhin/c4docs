@@ -271,6 +271,7 @@ export function LikeC4VitePlugin({
       folder: p.folder.toString(),
       landingPage: p.config.landingPage,
       docsLanding: p.config.docs?.landing === true,
+      docsDir: p.config.docs ? (p.config.docs.dir ?? 'docs') : undefined,
       exportFormats: effectiveWebappExportFormats(p.config),
     })) satisfies (data: ProjectsData) => any
     let _last: any

@@ -22,6 +22,8 @@ type ProjectData = {
   exportFormats: WebappExportFormat[]
   /** Whether this project opts in to docs as the default landing page */
   docsLanding: boolean
+  /** Configured docs directory (relative to project root); undefined when docs are not configured */
+  docsDir: string | undefined
 }
 
 const code = (projects: NonEmptyArray<ProjectData>) => `
@@ -70,6 +72,7 @@ export const projectsModule = {
         relationshipBrowserDefaultScope: p.config.webapp?.relationshipsBrowser?.defaultScope ?? 'view',
         exportFormats: effectiveWebappExportFormats(p.config),
         docsLanding: p.config.docs?.landing === true,
+        docsDir: p.config.docs ? (p.config.docs.dir ?? 'docs') : undefined,
       }))),
       moduleType: 'js',
     }

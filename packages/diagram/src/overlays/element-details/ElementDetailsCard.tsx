@@ -15,6 +15,7 @@ import type {
   scalar,
   ViewId,
 } from '@c4docs/likec4-core/types'
+import { docLinkHref } from '@c4docs/likec4-core/utils'
 import { css, cx } from '@c4docs/likec4-styles/css'
 import { HStack, styled } from '@c4docs/likec4-styles/jsx'
 import {
@@ -49,7 +50,7 @@ import { clamp, entries, isNullish, map, only, partition, pipe } from 'remeda'
 import { Markdown } from '../../base-primitives'
 import { ElementTag } from '../../base-primitives/element/ElementTags'
 import { Link } from '../../components/Link'
-import { DiagramFeatures, IconRenderer, IfEnabled } from '../../context'
+import { DiagramFeatures, IconRenderer, IfEnabled, useDocsConfig } from '../../context'
 import { useCallbackRef, useUpdateEffect } from '../../hooks'
 import { useCurrentViewModel } from '../../hooks/useCurrentViewModel'
 import { useDiagram } from '../../hooks/useDiagram'
@@ -144,6 +145,14 @@ export function ElementDetailsCard({
   }
 
   const defaultLink = only(elementModel.links)
+  const docsConfig = useDocsConfig()
+  // Resolve an associated-document link (a `.md` file inside the docs dir) to
+  // its in-app `/docs/<route>/` route, matching the `Link` component. Falls back
+  // to the raw DSL url for external/non-doc links.
+  const defaultLinkHref = defaultLink
+    ? ((docsConfig && docLinkHref({ relative: defaultLink.relative ?? defaultLink.url, docsDir: docsConfig.docsDir }))
+      ?? defaultLink.url)
+    : undefined
   const controls = useDragControls()
 
   const isCompound = (nodeModel?.$node.children?.length ?? 0) > 0
@@ -359,7 +368,7 @@ export function ElementDetailsCard({
                 {defaultLink && (
                   <ActionIcon
                     component="a"
-                    href={defaultLink.url}
+                    href={defaultLinkHref}
                     target="_blank"
                     size="lg"
                     variant="default"
