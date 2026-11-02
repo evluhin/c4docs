@@ -25,7 +25,7 @@ import {
 import { AnimatePresence } from 'motion/react'
 import { memo, useCallback, useState } from 'react'
 import { enabledWebappExportFormats } from '../../export-formats'
-import { useCurrentProject, useCurrentViewId } from '../../hooks'
+import { useCurrentProject, useCurrentViewId, useLikeC4Views } from '../../hooks'
 import { ColorSchemeToggle } from '../ColorSchemeToggle'
 import { NavigationPanel } from '../NavigationPanel'
 import { DocsBackrefButton } from './DocsBackrefButton'
@@ -78,17 +78,7 @@ export const Header = memo(() => {
                     <ExportButton />
                   </>
                 )
-                : (
-                  <Button
-                    component={Link}
-                    to={'../'}
-                    size={isTablet ? 'compact-md' : 'xs'}
-                    fz={isTablet ? 'sm' : 'xs'}
-                    variant="subtle"
-                    color="gray">
-                    Back to diagram
-                  </Button>
-                )}
+                : <BackToDiagramButton isTablet={isTablet} />}
 
               <Divider orientation="vertical" visibleFrom="md" />
               <ColorSchemeToggle />
@@ -100,6 +90,51 @@ export const Header = memo(() => {
     </>
   )
 })
+
+/**
+ * "Back to diagram" affordance shown on non-diagram view routes (e.g. the
+ * `.dot`/`.d2`/`.mmd`/`.puml` export pages and the view-not-found error page).
+ *
+ * The destination is a typed route, never a bare `/view/` link:
+ * - when the current viewId resolves to a real view, go back to its diagram
+ *   (`/view/$viewId/` or the project-scoped variant);
+ * - otherwise (view-not-found error page) fall back to the overview route `/`,
+ *   the same destination "Go to overview" uses, so the button never lands on
+ *   the catch-all 404 page.
+ */
+function BackToDiagramButton({ isTablet }: { isTablet: boolean }) {
+  const project = useCurrentProject()
+  const viewId = useCurrentViewId()
+  const views = useLikeC4Views()
+  const isInsideProject = useMatches({
+    select: matches => matches.some(({ routeId }) => routeId === '/project/$projectId'),
+  })
+  const hasView = views.some(v => v.id === viewId)
+
+  const size = isTablet ? 'compact-md' : 'xs'
+  const fz = isTablet ? 'sm' : 'xs'
+
+  if (!hasView) {
+    return (
+      <Button component={Link} to="/" size={size} fz={fz} variant="subtle" color="gray">
+        Back to diagram
+      </Button>
+    )
+  }
+
+  return (
+    <Button
+      component={Link}
+      to={isInsideProject ? '/project/$projectId/view/$viewId/' : '/view/$viewId/'}
+      params={isInsideProject ? { projectId: project.id, viewId } : { viewId }}
+      size={size}
+      fz={fz}
+      variant="subtle"
+      color="gray">
+      Back to diagram
+    </Button>
+  )
+}
 
 function DocsButton({ isTablet }: { isTablet: boolean }) {
   const project = useCurrentProject()
