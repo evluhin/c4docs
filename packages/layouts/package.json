@@ -1,6 +1,6 @@
 {
   "name": "@c4docs/likec4-layouts",
-  "version": "1.60.2",
+  "version": "1.60.3",
   "description": "Layout algorithms for LikeC4 views",
   "homepage": "https://likec4.dev",
   "bugs": "https://github.com/evluhin/c4docs/issues",

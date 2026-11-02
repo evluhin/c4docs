@@ -1,5 +1,13 @@
 # likec4
 
+## 1.60.3
+
+### Patch Changes
+
+- Embedded Mermaid diagrams in docs can now be opened fullscreen with zoom and pan by clicking them.
+- Updated dependencies []:
+  - @c4docs/likec4-core@1.60.3
+
 ## 1.60.2
 
 ### Patch Changes

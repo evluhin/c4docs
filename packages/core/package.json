@@ -1,6 +1,6 @@
 {
   "name": "@c4docs/likec4-core",
-  "version": "1.60.2",
+  "version": "1.60.3",
   "description": "A core package for LikeC4, containing types, api, utilities and guards.",
   "homepage": "https://likec4.dev",
   "bugs": "https://github.com/evluhin/c4docs/issues",
