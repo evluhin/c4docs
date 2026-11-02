@@ -1,5 +1,49 @@
 # likec4
 
+## 1.60.1
+
+### Patch Changes
+
+- fed0422: Documentation-as-code: write Markdown docs alongside your `.c4` files and have LikeC4 build them into the site. Docs are discovered from a `docs/` folder (configurable), rendered with a tree navigation sidebar, and can be made the default landing page via the new optional `docs` project config block.
+  
+  Links inside docs are resolved at build time: relative `.md` links between docs become in-app navigation, and `likec4://view/<id>` links open the referenced diagram (carrying `?focus` and `?dynamic`).
+  
+  You can take full control of the navigation with an optional `docs/nav.yaml`: list pages and sections in the order and nesting you want, with custom labels, mkdocs-style. When present it defines the whole docs tree; any docs you leave out stay reachable by direct link but are hidden from the sidebar. Without it, docs keep ordering by convention.
+  
+  The LikeC4 SDK gains `docsModel(projectId)`, which returns a project's documentation model (navigation tree, pages, and entry page).
+- Documentation pages now render text and wide blocks (tables, diagrams, code) in one consistent full-width column.
+- 279b851: Docs can now embed live diagrams and Mermaid charts. Add a `likec4-view` fenced block to a Markdown doc to embed an interactive diagram by `view` id, optionally setting `focus`, `dynamic`, `theme`, and `padding`. Add a `mermaid` fenced block to render a Mermaid chart inline. References are resolved against your model at build time, and unresolved references (unknown view id, unknown focus element, or a malformed directive) are reported without breaking the build.
+  
+  A view's diagram page now shows a "Referenced in docs" control listing the docs that embed or link to that view, so you can jump straight from a diagram to the documentation that uses it.
+  
+  Doc links to pages whose names contain spaces now resolve correctly: route paths are encoded per segment so a page under a folder like `unified token` opens as expected, and the `.md` extension no longer leaks into the URL.
+- 788ca60: Export the diagrams your docs reference as static SVG images for use in external documentation systems. The new `likec4 export image` command renders every view embedded or linked from a doc to an SVG file with a content-hashed name and writes an `images.json` manifest mapping each view id to its image. Re-running leaves unchanged views with stable file names, and views referenced with `dynamic: sequence` are exported as their sequence layout.
+  
+  Publish your documentation to MkDocs or Backstage TechDocs with the new `likec4 export techdocs` command. It writes one Markdown page per doc plus a `mkdocs.yml` navigation, replacing each embedded view with its exported image and a link back to the interactive diagram, passing Mermaid diagrams through untouched, and rewriting inter-doc and `likec4://` links to their destinations. Use `--site-url` to point the interactive links at your hosted LikeC4 site.
+  
+  Export a portable Markdown bundle with the new `likec4 export markdown-bundle` command, for publishing to Confluence or any other external system. It writes one standard-Markdown page per doc, an `images/` folder with the exported view images referenced by relative path, and a `manifest.json` describing the document tree and order. The output is platform-neutral: delivery to your publisher of choice lives in your own CI. Mermaid diagrams are left as Mermaid fenced blocks, and `--site-url` optionally adds a link back to the interactive diagram.
+- fbe7d10: New `likec4 skill check` command verifies that an installed agent skill is compatible with your `likec4` version: it reads the skill's declared `likec4` range and, on a mismatch, fails loudly with a non-zero exit and a message naming both the running version and the required range.
+- beac294: docs pages restyled for readability
+- 348ce1e: Documentation links now navigate inside the app: clicking a relative `.md` link between docs or a `likec4://view/<id>` link moves you to the target page or diagram without a full page reload, keeping the site fast and the view state intact.
+- ca1ba7b: Model diffs, see [discussion #1192](https://github.com/likec4/likec4/discussions/1192): new `diff` block, a named change set of the model (`remove` elements and relationships, `add` model elements, `extend` existing elements). The model stays as is: diffs are validated against it, and views can reference elements that a diff adds.
+- c313fb0: Model diffs: apply, discard and safe delete, see [discussion #1192](https://github.com/likec4/likec4/discussions/1192):
+  
+  - Apply or discard a diff: the `add` blocks are merged into the element definitions of the model files. Code actions in the editor, `likec4 diff list`, and `likec4 diff apply|discard [--dry-run]`.
+  - Overlapping diffs (both change the same element or relationship, or one depends on the other) are reported on both diffs and never resolved automatically: applying an overlapping diff needs a confirmation (`--accept-overlaps`). Other diffs are never edited; the diffs an edit breaks are reported.
+  - Safe delete: remove an element and everything that references it in one edit, with a dry run that reports relationships, deployed instances, affected views and orphans. Code action in the editor, `likec4 safe-delete [--dry-run]`, and the MCP tools `removal-impact` and `list-diffs`.
+- 250bd2c: Model diffs in the UI, see [discussion #1192](https://github.com/likec4/likec4/discussions/1192):
+  
+  - Compare views: the view before and after the diff in one diagram, with added, removed and modified elements and relationships marked. Switch between as-is, changes and to-be modes in the playground, `likec4 start` and static builds (`likec4 build`). Vite plugin users get them from the `likec4:diffs` virtual module.
+  - Playground: review the changes of each file before they are applied, and roll back an applied change.
+- cde1705: The toolchain is now published under the `@c4docs` npm scope. Install `@c4docs/likec4` instead of `likec4`, and depend on the scoped package names (for example `@c4docs/likec4-core`, `@c4docs/likec4-diagram`, `@c4docs/likec4-react`). The CLI command remains `likec4`.
+- Updated dependencies [aaa53f4]
+- Updated dependencies [fed0422]
+- Updated dependencies [279b851]
+- Updated dependencies [ca1ba7b]
+- Updated dependencies [c313fb0]
+- Updated dependencies [9e106b8]
+  - @c4docs/likec4-core@1.60.1
+
 ## 1.60.0
 
 ### Patch Changes

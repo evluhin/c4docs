@@ -1,5 +1,30 @@
 # @likec4/core
 
+## 1.60.1
+
+### Patch Changes
+
+- aaa53f4: Support styled and nested `group` boundaries around deployment nodes and instances in deployment views.
+- fed0422: Documentation-as-code: write Markdown docs alongside your `.c4` files and have LikeC4 build them into the site. Docs are discovered from a `docs/` folder (configurable), rendered with a tree navigation sidebar, and can be made the default landing page via the new optional `docs` project config block.
+  
+  Links inside docs are resolved at build time: relative `.md` links between docs become in-app navigation, and `likec4://view/<id>` links open the referenced diagram (carrying `?focus` and `?dynamic`).
+  
+  You can take full control of the navigation with an optional `docs/nav.yaml`: list pages and sections in the order and nesting you want, with custom labels, mkdocs-style. When present it defines the whole docs tree; any docs you leave out stay reachable by direct link but are hidden from the sidebar. Without it, docs keep ordering by convention.
+  
+  The LikeC4 SDK gains `docsModel(projectId)`, which returns a project's documentation model (navigation tree, pages, and entry page).
+- 279b851: Docs can now embed live diagrams and Mermaid charts. Add a `likec4-view` fenced block to a Markdown doc to embed an interactive diagram by `view` id, optionally setting `focus`, `dynamic`, `theme`, and `padding`. Add a `mermaid` fenced block to render a Mermaid chart inline. References are resolved against your model at build time, and unresolved references (unknown view id, unknown focus element, or a malformed directive) are reported without breaking the build.
+  
+  A view's diagram page now shows a "Referenced in docs" control listing the docs that embed or link to that view, so you can jump straight from a diagram to the documentation that uses it.
+  
+  Doc links to pages whose names contain spaces now resolve correctly: route paths are encoded per segment so a page under a folder like `unified token` opens as expected, and the `.md` extension no longer leaks into the URL.
+- ca1ba7b: Model diffs, see [discussion #1192](https://github.com/likec4/likec4/discussions/1192): new `diff` block, a named change set of the model (`remove` elements and relationships, `add` model elements, `extend` existing elements). The model stays as is: diffs are validated against it, and views can reference elements that a diff adds.
+- c313fb0: Model diffs: apply, discard and safe delete, see [discussion #1192](https://github.com/likec4/likec4/discussions/1192):
+  
+  - Apply or discard a diff: the `add` blocks are merged into the element definitions of the model files. Code actions in the editor, `likec4 diff list`, and `likec4 diff apply|discard [--dry-run]`.
+  - Overlapping diffs (both change the same element or relationship, or one depends on the other) are reported on both diffs and never resolved automatically: applying an overlapping diff needs a confirmation (`--accept-overlaps`). Other diffs are never edited; the diffs an edit breaks are reported.
+  - Safe delete: remove an element and everything that references it in one edit, with a dry run that reports relationships, deployed instances, affected views and orphans. Code action in the editor, `likec4 safe-delete [--dry-run]`, and the MCP tools `removal-impact` and `list-diffs`.
+- 9e106b8: Preserve explicit relationships to parent elements when descendant relationships point in the opposite direction, while still removing redundant same-direction relationships. Fixes [#3302](https://github.com/likec4/likec4/issues/3302)
+
 ## 1.60.0
 
 ### Patch Changes

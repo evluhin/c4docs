@@ -1,5 +1,21 @@
 # @likec4/generators
 
+## 1.60.1
+
+### Patch Changes
+
+- aaa53f4: Support styled and nested `group` boundaries around deployment nodes and instances in deployment views.
+- Updated dependencies [aaa53f4]
+- Updated dependencies [fed0422]
+- Updated dependencies [279b851]
+- Updated dependencies [773bd9c]
+- Updated dependencies [ca1ba7b]
+- Updated dependencies [c313fb0]
+- Updated dependencies [9e106b8]
+  - @c4docs/likec4-core@1.60.1
+  - @c4docs/likec4-config@1.60.1
+  - @c4docs/likec4-log@1.60.1
+
 ## 1.60.0
 
 ### Patch Changes

@@ -1,5 +1,28 @@
 # @likec4/playground
 
+## 1.60.1
+
+### Patch Changes
+
+- Updated dependencies [aaa53f4]
+- Updated dependencies [aa82a7c]
+- Updated dependencies [fed0422]
+- Updated dependencies [279b851]
+- Updated dependencies [24b4f44]
+- Updated dependencies [d00fa0c]
+- Updated dependencies [ca1ba7b]
+- Updated dependencies [c313fb0]
+- Updated dependencies [250bd2c]
+- Updated dependencies [9e106b8]
+  - @c4docs/likec4-core@1.60.1
+  - @c4docs/likec4-generators@1.60.1
+  - @c4docs/likec4-language-server@1.60.1
+  - @c4docs/likec4-diagram@1.60.1
+  - @c4docs/likec4-style-preset@1.60.1
+  - @c4docs/likec4-styles@1.60.1
+  - @c4docs/likec4-log@1.60.1
+  - @c4docs/likec4-tsconfig@1.60.1
+
 ## 1.60.0
 
 ### Patch Changes

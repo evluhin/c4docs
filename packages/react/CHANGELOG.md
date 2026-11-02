@@ -1,5 +1,17 @@
 # @likec4/react
 
+## 1.60.1
+
+### Patch Changes
+
+- Updated dependencies [aaa53f4]
+- Updated dependencies [fed0422]
+- Updated dependencies [279b851]
+- Updated dependencies [ca1ba7b]
+- Updated dependencies [c313fb0]
+- Updated dependencies [9e106b8]
+  - @c4docs/likec4-core@1.60.1
+
 ## 1.60.0
 
 ### Patch Changes
