@@ -35,6 +35,7 @@ import { applyBaseToDocHtml } from './doc-html-base'
 import type { EmbedResolution, EmbedViewProps } from './docs-embeds/embed'
 import { resolveEmbed } from './docs-embeds/embed'
 import { renderMermaid } from './docs-embeds/mermaid'
+import { MermaidLightbox } from './docs-embeds/MermaidLightbox'
 
 export interface DocsPageProps {
   $docs: Atom<DocsModel>
@@ -212,6 +213,22 @@ const prose = css({
     marginBlock: '6',
     overflow: 'auto',
   },
+  // Rendered mermaid diagrams are clickable: open a fullscreen zoom/pan lightbox.
+  // `data-mermaid-interactive` is set by the hydration pass once the SVG exists,
+  // so the hint only appears on diagrams that actually rendered (not on the
+  // placeholder or an error notice). likec4-view embeds are untouched.
+  '& [data-mermaid][data-mermaid-interactive]': {
+    cursor: '[zoom-in]',
+    borderRadius: 'md',
+    transition: '[box-shadow 120ms ease]',
+    _hover: {
+      boxShadow: 'xs',
+    },
+    _focusVisible: {
+      outline: '[2px solid var(--mantine-color-blue-filled)]',
+      outlineOffset: '[2px]',
+    },
+  },
   // Clamp the injected child <svg> (mermaid output / error graphic) the same way
   // `& img` is clamped, so an oversized diagram cannot overflow into the nav gutter.
   '& [data-likec4-view-embed] svg, & [data-mermaid] svg': {
@@ -357,6 +374,9 @@ export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
 
   const contentRef = useRef<HTMLDivElement | null>(null)
   const [embedPortals, setEmbedPortals] = useState<EmbedPortal[]>([])
+  // Transient UI state for the mermaid fullscreen lightbox (per AGENTS.md,
+  // useState is fine for local UI state). `null` = closed.
+  const [lightbox, setLightbox] = useState<{ svg: string; title: string } | null>(null)
 
   useDocumentTitle(page ? `${page.title} — ${pageTitle}` : pageTitle)
 
@@ -419,6 +439,9 @@ export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
       return
     }
     let cancelled = false
+    // Per-node teardown for the click/keyboard triggers wired on rendered
+    // diagrams, collected so they detach on cleanup (navigation / re-theme).
+    const teardowns: Array<() => void> = []
     const mermaidNodes = [...container.querySelectorAll<HTMLElement>('[data-mermaid]')]
     const slug = path.replace(/[^\w-]/g, '_')
     // Render blocks sequentially: mermaid relies on global state + a shared DOM
@@ -439,6 +462,11 @@ export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
           const svg = await renderMermaid(renderId, source, colorScheme)
           if (cancelled) return
           node.innerHTML = svg
+          // Make this rendered diagram a fullscreen-lightbox trigger. The SVG
+          // string is captured here so the overlay shows the exact same markup
+          // without re-rendering. Only mermaid diagrams get this; likec4-view
+          // embeds keep their own interactive preview and are not touched.
+          teardowns.push(makeMermaidInteractive(node, svg, page?.title ?? 'Diagram', setLightbox))
         } catch {
           if (cancelled) return
           node.replaceChildren(inlineNotice('Failed to render Mermaid diagram'))
@@ -451,8 +479,9 @@ export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
     })()
     return () => {
       cancelled = true
+      teardowns.forEach((teardown) => teardown())
     }
-  }, [html, path, colorScheme])
+  }, [html, path, colorScheme, page?.title])
 
   return (
     <AppShell
@@ -496,6 +525,11 @@ export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
           })}
         </Box>
       </AppShell.Main>
+      <MermaidLightbox
+        svg={lightbox?.svg ?? null}
+        title={lightbox?.title ?? 'Diagram'}
+        onClose={() => setLightbox(null)}
+      />
     </AppShell>
   )
 }
@@ -535,6 +569,48 @@ function decodeMermaidSource(node: HTMLElement): string {
     }
   }
   return node.textContent ?? ''
+}
+
+/**
+ * Turns a rendered mermaid placeholder into a keyboard-operable trigger that
+ * opens the fullscreen lightbox with the already-rendered SVG markup.
+ *
+ * Applied only to `[data-mermaid]` nodes after a successful render, so
+ * likec4-view embeds (which own their own interactive preview) are never
+ * affected. Returns a teardown that removes the listeners and the added
+ * attributes when the effect re-runs or the doc unmounts.
+ */
+function makeMermaidInteractive(
+  node: HTMLElement,
+  svg: string,
+  title: string,
+  open: (state: { svg: string; title: string }) => void,
+): () => void {
+  node.setAttribute('data-mermaid-interactive', '')
+  node.setAttribute('role', 'button')
+  node.setAttribute('tabindex', '0')
+  node.setAttribute('aria-haspopup', 'dialog')
+  node.setAttribute('aria-label', `Open diagram "${title}" fullscreen`)
+
+  const onClick = () => open({ svg, title })
+  const onKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar') {
+      event.preventDefault()
+      open({ svg, title })
+    }
+  }
+  node.addEventListener('click', onClick)
+  node.addEventListener('keydown', onKeyDown)
+
+  return () => {
+    node.removeEventListener('click', onClick)
+    node.removeEventListener('keydown', onKeyDown)
+    node.removeAttribute('data-mermaid-interactive')
+    node.removeAttribute('role')
+    node.removeAttribute('tabindex')
+    node.removeAttribute('aria-haspopup')
+    node.removeAttribute('aria-label')
+  }
 }
 
 /**
