@@ -38,7 +38,9 @@ jobs:
         with:
           node-version: '24' # Required for OIDC publishing
           cache: 'pnpm'
-          registry-url: 'https://registry.npmjs.org'
+          # No registry-url: it writes an .npmrc with `_authToken=${NODE_AUTH_TOKEN}`,
+          # making pnpm try token auth (empty token -> 404) instead of the OIDC
+          # trusted-publishing token exchange.
 
       - name: 🛠️ Cache for turbo
         uses: rharkor/caching-for-turbo@v2.5.2
