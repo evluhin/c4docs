@@ -431,10 +431,13 @@ describe('extractMermaidBlocks', () => {
     expect(body).toBe(raw)
   })
 
-  it('round-trips a sequenceDiagram with <br/> notes, rect and alt blocks byte-for-byte', () => {
-    // Regression: the real failing block #4. Notes with HTML <br/>, `rect rgb(...)`
-    // background blocks, `alt/else/end`, square brackets and semicolons in message
-    // text must all survive the extract -> encode -> decode pipeline unchanged.
+  it('round-trips a sequenceDiagram with <br/> notes, rect, alt blocks and bracketed text byte-for-byte', () => {
+    // Guards the extract -> encode -> decode pipeline for the large block that was
+    // reported as failing to render. These are the constructs that distinguish it
+    // from the blocks that always rendered: notes with HTML `<br/>`, `rect rgb(...)`
+    // background bands, an `alt/else/end` frame, and `[AUTO]`/`[CODE]` bracket tags.
+    // The pipeline must carry every one of them through unchanged so the raw source
+    // reaches the mermaid renderer exactly as authored.
     const source = [
       'sequenceDiagram',
       '    autonumber',
@@ -450,7 +453,7 @@ describe('extractMermaidBlocks', () => {
       '    else Denied',
       '        GW-->>L: 403 Forbidden',
       '    end',
-      '    GW->>GW: [AUTO] Verify SigV4 signature; identify IAM principal (Lambda role)',
+      '    GW->>GW: [AUTO] Verify SigV4 signature, identify IAM principal (Lambda role)',
       '    note over L: enforced by API Gateway + IAM.<br/>All AuthNZ before traffic reaches the VPC.',
     ].join('\n')
     const { body } = extractMermaidBlocks('# H\n\n```mermaid\n' + source + '\n```\n')
@@ -462,6 +465,6 @@ describe('extractMermaidBlocks', () => {
     expect(decoded).toContain('rect rgb(240,240,240)')
     expect(decoded).toContain('alt Allowed')
     expect(decoded).toContain('[AUTO] Lambda runtime injects credentials into env vars')
-    expect(decoded).toContain('signature; identify IAM principal (Lambda role)')
+    expect(decoded).toContain('Verify SigV4 signature, identify IAM principal (Lambda role)')
   })
 })
