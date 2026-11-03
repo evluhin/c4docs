@@ -17,6 +17,7 @@ import type {
   PluginOption,
 } from 'vite'
 import { detectAI } from './ai/detect-ai'
+import { createDocsAssetsMiddleware } from './docsAssetsMiddleware'
 import { iconBundlePlugin } from './icon-bundle-plugin'
 import { logger } from './logger'
 import { enablePluginRPC } from './rpc'
@@ -380,6 +381,14 @@ export function LikeC4VitePlugin({
       if (!rpcEnabled) {
         return
       }
+      // Serve doc-referenced static assets (images, PDFs) in dev at the same
+      // root-absolute URLs the model rewrote them to and the build copies them
+      // to. Registered here in the pre-hook phase (not the returned post hook)
+      // so it runs BEFORE Vite's HTML fallback middleware, which otherwise
+      // rewrites the asset request to `/index.html` and the docs route renders a
+      // "not found" page for the asset URL.
+      server.middlewares.use(createDocsAssetsMiddleware(likec4, server, logger))
+
       // Enable RPC via HMR
       enablePluginRPC.call(
         this,
