@@ -1,5 +1,9 @@
 # @likec4/log
 
+## 1.60.4
+
+No changes in this release.
+
 ## 1.60.3
 
 No changes in this release.

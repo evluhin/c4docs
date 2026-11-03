@@ -1,6 +1,6 @@
 {
   "name": "@c4docs/likec4-spa",
-  "version": "1.60.3",
+  "version": "1.60.4",
   "private": true,
   "description": "Single-page application for rendering architecture diagrams",
   "homepage": "https://likec4.dev",

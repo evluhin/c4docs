@@ -1,6 +1,6 @@
 {
   "name": "@c4docs/likec4-generators",
-  "version": "1.60.3",
+  "version": "1.60.4",
   "description": "Converts LikeC4 Model to other formats, like Mermaid, PlantUML, SVG, etc. Also generates typings for Model API and React",
   "homepage": "https://likec4.dev",
   "bugs": "https://github.com/evluhin/c4docs/issues",

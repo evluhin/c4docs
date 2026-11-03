@@ -1,5 +1,15 @@
 # likec4
 
+## 1.60.4
+
+### Patch Changes
+
+- Docs: images and other static assets referenced from Markdown docs via relative links now render in the dev server (`likec4 start`), matching the production build. Replacing a referenced asset on disk is served without restarting the dev server.
+
+- Docs: opening a different doc from the navigation tree now scrolls the page back to the top so the new doc's header is visible, while in-page heading anchor links still jump to the linked heading.
+- Updated dependencies []:
+  - @c4docs/likec4-core@1.60.4
+
 ## 1.60.3
 
 ### Patch Changes
