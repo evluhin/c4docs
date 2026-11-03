@@ -430,4 +430,38 @@ describe('extractMermaidBlocks', () => {
     const { body } = extractMermaidBlocks(raw)
     expect(body).toBe(raw)
   })
+
+  it('round-trips a sequenceDiagram with <br/> notes, rect and alt blocks byte-for-byte', () => {
+    // Regression: the real failing block #4. Notes with HTML <br/>, `rect rgb(...)`
+    // background blocks, `alt/else/end`, square brackets and semicolons in message
+    // text must all survive the extract -> encode -> decode pipeline unchanged.
+    const source = [
+      'sequenceDiagram',
+      '    autonumber',
+      '    actor L as BFF Lambda',
+      '    participant GW as API Gateway (AWS_IAM auth)',
+      '    note over L: Lambda injects creds<br/>(AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY)<br/>via STS',
+      '    rect rgb(240,240,240)',
+      '    note right of L: Credential Resolution',
+      '    L->>L: [AUTO] Lambda runtime injects credentials into env vars',
+      '    end',
+      '    alt Allowed',
+      '        GW-->>L: 200 OK',
+      '    else Denied',
+      '        GW-->>L: 403 Forbidden',
+      '    end',
+      '    GW->>GW: [AUTO] Verify SigV4 signature; identify IAM principal (Lambda role)',
+      '    note over L: enforced by API Gateway + IAM.<br/>All AuthNZ before traffic reaches the VPC.',
+    ].join('\n')
+    const { body } = extractMermaidBlocks('# H\n\n```mermaid\n' + source + '\n```\n')
+    expect((body.match(/data-mermaid-src=/g) ?? []).length).toBe(1)
+    const decoded = decodeSrc(body)
+    expect(decoded).toBe(source)
+    // The constructs that distinguish this block are all intact.
+    expect(decoded).toContain('<br/>')
+    expect(decoded).toContain('rect rgb(240,240,240)')
+    expect(decoded).toContain('alt Allowed')
+    expect(decoded).toContain('[AUTO] Lambda runtime injects credentials into env vars')
+    expect(decoded).toContain('signature; identify IAM principal (Lambda role)')
+  })
 })

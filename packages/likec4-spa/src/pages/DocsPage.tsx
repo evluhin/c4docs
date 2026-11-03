@@ -299,6 +299,26 @@ const prose = css({
 })
 
 /**
+ * Walks up from `node` to the nearest ancestor that actually scrolls vertically
+ * (an `overflow-y` of `auto`/`scroll` with real overflow). Returns `null` when
+ * nothing between the node and the document scrolls — the caller then falls back
+ * to scrolling the window. Used to reset scroll on doc-to-doc navigation without
+ * hard-coding which element (Mantine's `AppShell.Main` vs the window) scrolls.
+ */
+function findScrollableAncestor(node: HTMLElement | null): HTMLElement | null {
+  let current = node?.parentElement ?? null
+  while (current) {
+    const style = window.getComputedStyle(current)
+    const overflowY = style.overflowY
+    if ((overflowY === 'auto' || overflowY === 'scroll') && current.scrollHeight > current.clientHeight) {
+      return current
+    }
+    current = current.parentElement
+  }
+  return null
+}
+
+/**
  * Internal in-app route prefixes that the click interceptor routes through
  * TanStack Router. A pathname is internal when it equals one of these exactly
  * (e.g. `/docs`) or starts with one followed by a `/` (e.g. `/docs/architecture`).
@@ -379,6 +399,28 @@ export function DocsPage({ $docs, path, projectId }: DocsPageProps) {
   const [lightbox, setLightbox] = useState<{ svg: string; title: string } | null>(null)
 
   useDocumentTitle(page ? `${page.title} — ${pageTitle}` : pageTitle)
+
+  // Reset scroll to the top of the new doc on every doc-to-doc navigation.
+  //
+  // Docs share a single route (`/docs/$`) and differ only by the `path` splat,
+  // so TanStack Router keeps the component mounted and does NOT reset scroll
+  // between docs. Without this, clicking a doc while scrolled down leaves the
+  // reader partway through the new page instead of at its header.
+  //
+  // We only force the top when the URL has no `#anchor`, so clicking a heading
+  // anchor within a doc still jumps to that heading rather than being yanked up.
+  useEffect(() => {
+    if (window.location.hash !== '') {
+      return
+    }
+    const scroller = findScrollableAncestor(contentRef.current)
+    if (scroller) {
+      scroller.scrollTop = 0
+    }
+    // Fall back to the document scroller too, in case the layout scrolls the
+    // window rather than an inner element.
+    window.scrollTo(0, 0)
+  }, [path])
 
   // Intercept clicks on rewritten internal links so they navigate as SPA
   // transitions instead of full page reloads. Modifier/middle clicks,
