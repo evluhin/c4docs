@@ -15,6 +15,7 @@ import { clamp, isTruthy } from 'remeda'
 import k from 'tinyrainbow'
 import { withQuery } from 'ufo'
 import type { ViteLogger } from '../../../logger'
+import { type SvgStyleDefaults, optimizeExportedSvg } from './optimize-svg'
 
 /**
  * Global key the export page writes the rendered SVG markup to; must match
@@ -22,6 +23,13 @@ import type { ViteLogger } from '../../../logger'
  * Duplicated as a literal because the SPA is a private, non-importable package.
  */
 const EXPORT_SVG_RESULT_KEY = '__likec4ExportSvg'
+
+/**
+ * Global key the export page writes the browser-computed style defaults to; must
+ * match `EXPORT_SVG_DEFAULTS_KEY` in `packages/likec4-spa/src/pages/ExportPage.tsx`.
+ * Duplicated as a literal because the SPA is a private, non-importable package.
+ */
+const EXPORT_SVG_DEFAULTS_KEY = '__likec4ExportSvgDefaults'
 
 type TakeScreenshotParams = {
   browserContext: BrowserContext
@@ -188,7 +196,14 @@ export async function takeScreenshot({
           EXPORT_SVG_RESULT_KEY,
           { timeout },
         ).then(handle => handle.jsonValue() as Promise<string>)
-        await writeFile(path, svg, 'utf-8')
+        // The export page also exposes the browser's computed style defaults so we
+        // can strip the ~99% redundant inline styles html-to-image dumps onto every
+        // node, without altering how the SVG renders. Shrinks 30 MB files to ~1 MB.
+        const defaults = await page.evaluate(
+          key => (window as unknown as Record<string, SvgStyleDefaults | undefined>)[key] ?? {},
+          EXPORT_SVG_DEFAULTS_KEY,
+        )
+        await writeFile(path, optimizeExportedSvg(svg, defaults), 'utf-8')
       } else {
         await exportPage.screenshot({
           animations: 'disabled',

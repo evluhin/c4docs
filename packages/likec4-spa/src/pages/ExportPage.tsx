@@ -117,9 +117,106 @@ async function downloadAsJpeg({
 export const EXPORT_SVG_RESULT_KEY = '__likec4ExportSvg'
 
 /**
- * Converts the export viewport into an SVG string, exposes it on `window` for the
- * CLI capture step, and starts a browser download. Keeps a transparent background
- * like PNG.
+ * Global key the SVG export writes the browser-computed style defaults to (a
+ * `prop -> value` map). The CLI reads it alongside {@link EXPORT_SVG_RESULT_KEY}
+ * to strip redundant inline styles from the exported SVG. Must match
+ * `EXPORT_SVG_DEFAULTS_KEY` in `packages/likec4/src/cli/export/png/takeScreenshot.ts`.
+ */
+export const EXPORT_SVG_DEFAULTS_KEY = '__likec4ExportSvgDefaults'
+
+/**
+ * Splits a serialized `cssText` into `prop -> value` pairs, treating only
+ * top-level `;` as separators so values with `;` inside parentheses stay intact.
+ */
+function parseCssTextDeclarations(cssText: string): Record<string, string> {
+  const out: Record<string, string> = {}
+  let depth = 0
+  let start = 0
+  const push = (chunk: string) => {
+    const trimmed = chunk.trim()
+    if (trimmed === '') {
+      return
+    }
+    const colon = trimmed.indexOf(':')
+    if (colon < 0) {
+      return
+    }
+    out[trimmed.slice(0, colon).trim()] = trimmed.slice(colon + 1).trim()
+  }
+  for (let i = 0; i < cssText.length; i++) {
+    const ch = cssText[i]
+    if (ch === '(') {
+      depth++
+    } else if (ch === ')') {
+      depth = depth > 0 ? depth - 1 : 0
+    } else if (ch === ';' && depth === 0) {
+      push(cssText.slice(start, i))
+      start = i + 1
+    }
+  }
+  push(cssText.slice(start))
+  return out
+}
+
+/**
+ * Serializes a reference element's computed style into a `prop -> value` map,
+ * using the exact code path `html-to-image` applies to every node
+ * (`getComputedStyle(ref).cssText` copied onto a clone's `style`). Because it is
+ * the same browser and the same mechanism, default declarations in the exported
+ * SVG match this map byte-for-byte.
+ */
+function serializeComputedStyle(reference: Element): Record<string, string> {
+  const clone = document.createElement('div')
+  const source = window.getComputedStyle(reference)
+  if (source.cssText) {
+    clone.style.cssText = source.cssText
+  } else {
+    // Some engines return an empty cssText; fall back to enumerating properties,
+    // mirroring html-to-image's own fallback branch.
+    for (let i = 0; i < source.length; i++) {
+      const name = source.item(i)
+      clone.style.setProperty(name, source.getPropertyValue(name), source.getPropertyPriority(name))
+    }
+  }
+  return parseCssTextDeclarations(clone.style.cssText)
+}
+
+/**
+ * Captures the browser's default computed style as a `prop -> value` map the CLI
+ * can strip from the exported SVG.
+ *
+ * Defaults are captured from BOTH a plain HTML element and a bare SVG element, and
+ * only properties whose default value is identical in both contexts are kept. This
+ * is essential for correctness: some properties have element-type-dependent
+ * defaults (e.g. `overflow` is `visible` on a `<div>` but `hidden` on a nested
+ * `<svg>`). Stripping such a declaration would flip rendering. The intersection
+ * keeps only element-type-independent defaults, which are always safe to drop.
+ */
+function captureStyleDefaults(): Record<string, string> {
+  const htmlRef = document.createElement('div')
+  const svgRef = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+  document.body.appendChild(htmlRef)
+  document.body.appendChild(svgRef)
+  try {
+    const htmlDefaults = serializeComputedStyle(htmlRef)
+    const svgDefaults = serializeComputedStyle(svgRef)
+    const shared: Record<string, string> = {}
+    for (const [prop, value] of Object.entries(htmlDefaults)) {
+      if (svgDefaults[prop] === value) {
+        shared[prop] = value
+      }
+    }
+    return shared
+  } finally {
+    htmlRef.remove()
+    svgRef.remove()
+  }
+}
+
+/**
+ * Converts the export viewport into an SVG string, exposes it (and the browser
+ * style defaults) on `window` for the CLI capture step, and starts a browser
+ * download. Keeps a transparent background like PNG.
  */
 async function downloadAsSvg({
   filename,
@@ -137,9 +234,11 @@ async function downloadAsSvg({
     })
     const comma = dataUrl.indexOf(',')
     const svg = decodeURIComponent(dataUrl.slice(comma + 1))
-    // Expose the markup for the CLI capture step (it reads this via page.evaluate).
-    const svgWindow = window as unknown as Record<string, string>
+    // Expose the markup and style defaults for the CLI capture step (it reads
+    // these via page.evaluate and strips redundant inline styles before writing).
+    const svgWindow = window as unknown as Record<string, unknown>
     svgWindow[EXPORT_SVG_RESULT_KEY] = svg
+    svgWindow[EXPORT_SVG_DEFAULTS_KEY] = captureStyleDefaults()
     await triggerDownload(dataUrl, `${filename}.svg`)
   } catch (err) {
     console.error(err)
