@@ -1,5 +1,9 @@
 # @likec4/lsp
 
+## 1.60.5
+
+No changes in this release.
+
 ## 1.60.4
 
 No changes in this release.

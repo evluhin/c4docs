@@ -1,6 +1,6 @@
 {
   "name": "@c4docs/likec4-mcp",
-  "version": "1.60.4",
+  "version": "1.60.5",
   "description": "Model Context Protocol server for LikeC4",
   "keywords": [
     "likec4",

@@ -1,5 +1,12 @@
 # @likec4/styles
 
+## 1.60.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @c4docs/likec4-style-preset@1.60.5
+
 ## 1.60.4
 
 ### Patch Changes

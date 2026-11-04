@@ -1,7 +1,7 @@
 {
   "name": "@c4docs/likec4-vscode",
   "displayName": "LikeC4",
-  "version": "1.60.4",
+  "version": "1.60.5",
   "private": true,
   "description": "Support for the LikeC4 modeling language",
   "categories": [

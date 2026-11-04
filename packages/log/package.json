@@ -1,6 +1,6 @@
 {
   "name": "@c4docs/likec4-log",
-  "version": "1.60.4",
+  "version": "1.60.5",
   "description": "Shared interface for logging",
   "homepage": "https://likec4.dev",
   "bugs": "https://github.com/evluhin/c4docs/issues",
