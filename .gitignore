@@ -149,3 +149,9 @@ docs/PR-REVIEW-AND-BOT-RESPONSES.md
 
 # Architecture-intelligence planning docs (internal, not official project docs)
 docs/architecture-intelligence/
+
+# Agent/workflow dev artifacts — never commit (kept out of public history)
+.agents/tasks/
+.worktrees/
+# Local Kiro tooling (specs, agents, steering) — local-only, not part of the public artifact
+.kiro/
