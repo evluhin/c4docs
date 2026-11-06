@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { discoverDocs, docRoutePath, encodeRoutePath } from './discovery'
+import { discoverDocs, docRoutePath, encodeRoutePath, findMisplacedNavFiles, isNavFile } from './discovery'
 
 describe('encodeRoutePath', () => {
   it('returns the root route unchanged', () => {
@@ -60,5 +60,49 @@ describe('discoverDocs', () => {
     expect(diagnostics[0]!.files).toEqual(['adr.md', 'adr/index.md'])
     // the first (sorted) file is kept, not dropped silently
     expect(docs).toEqual([{ path: 'adr', relativePath: 'adr.md' }])
+  })
+})
+
+describe('isNavFile', () => {
+  it('matches nav.yaml and nav.yml (case-insensitive)', () => {
+    expect(isNavFile('nav.yaml')).toBe(true)
+    expect(isNavFile('nav.yml')).toBe(true)
+    expect(isNavFile('architecture/NAV.YAML')).toBe(true)
+    expect(isNavFile('a/b/nav.yml')).toBe(true)
+  })
+
+  it('does not match other files', () => {
+    expect(isNavFile('index.md')).toBe(false)
+    expect(isNavFile('navigation.yaml')).toBe(false)
+    expect(isNavFile('nav.json')).toBe(false)
+  })
+})
+
+describe('findMisplacedNavFiles', () => {
+  it('flags subfolder nav.yaml and nav.yml but not the root nav.yaml', () => {
+    const misplaced = findMisplacedNavFiles([
+      'nav.yaml',
+      'index.md',
+      'architecture/nav.yaml',
+      'architecture/a.md',
+      'adr/sub/nav.yml',
+    ])
+    expect(misplaced).toEqual(['adr/sub/nav.yml', 'architecture/nav.yaml'])
+  })
+
+  it('returns nothing when only the root nav.yaml is present', () => {
+    expect(findMisplacedNavFiles(['nav.yaml', 'index.md', 'guide.md'])).toEqual([])
+  })
+
+  it('normalizes backslashes and leading ./ before deciding', () => {
+    expect(findMisplacedNavFiles(['.\\architecture\\nav.yaml', './nav.yaml'])).toEqual([
+      'architecture/nav.yaml',
+    ])
+  })
+
+  it('flags a root nav.yml variant only when nested (root nav.yml is not read)', () => {
+    // A root `nav.yml` is itself ignored by the loader, so it is not "misplaced".
+    expect(findMisplacedNavFiles(['nav.yml'])).toEqual([])
+    expect(findMisplacedNavFiles(['sub/nav.yml'])).toEqual(['sub/nav.yml'])
   })
 })

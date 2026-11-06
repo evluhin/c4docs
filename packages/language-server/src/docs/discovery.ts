@@ -85,3 +85,46 @@ export function discoverDocs(relativePaths: readonly string[]): DocsDiscoveryRes
   docs.sort((a, b) => a.path.localeCompare(b.path))
   return { docs, diagnostics }
 }
+
+/**
+ * The navigation file names recognized at the docs root. The root loader in
+ * `buildDocsModel` reads EXACTLY `<docsDir>/nav.yaml`; `nav.yml` is listed here
+ * only so a `.yml` placed in a subfolder is still reported as misplaced (a root
+ * `nav.yml` is itself ignored by the loader, matching that lenient behavior).
+ */
+const NAV_FILE_NAMES: ReadonlySet<string> = new Set(['nav.yaml', 'nav.yml'])
+
+/**
+ * Whether the basename of the given path is a recognized nav file (`nav.yaml`
+ * or `nav.yml`), case-insensitively.
+ */
+export function isNavFile(path: string): boolean {
+  const name = path.replace(/\\/g, '/').split('/').pop() ?? ''
+  return NAV_FILE_NAMES.has(name.toLowerCase())
+}
+
+/**
+ * Finds `nav.yaml` / `nav.yml` files located in a docs SUBFOLDER instead of at
+ * the docs root.
+ *
+ * Navigation is read from EXACTLY ONE file at the docs root (`<docsDir>/nav.yaml`);
+ * a nav file in any subfolder (at any depth) is silently ignored by the loader,
+ * which confuses users whose per-folder ordering has no effect. This pure helper
+ * flags those misplaced files so the service can warn.
+ *
+ * @param relativePaths file paths relative to the docs dir (any slash style)
+ * @returns the misplaced files' paths, normalized to forward slashes and sorted
+ */
+export function findMisplacedNavFiles(relativePaths: readonly string[]): string[] {
+  const misplaced: string[] = []
+  for (const relativePath of relativePaths) {
+    const normalized = normalizeRelative(relativePath)
+    // A root nav file has no path separator (e.g. `nav.yaml`); anything with a
+    // separator sits in a subfolder and is therefore misplaced.
+    if (isNavFile(normalized) && normalized.includes('/')) {
+      misplaced.push(normalized)
+    }
+  }
+  misplaced.sort()
+  return misplaced
+}

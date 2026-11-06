@@ -61,13 +61,16 @@ describe('LikeC4Docs', () => {
   ) {
     const prefix = `${docsDir}/`
     const navPath = `${docsDir}/nav.yaml`
-    // scanDirectory only returns markdown files (the real filter is isMarkdownFile).
-    vi.mocked(fs.scanDirectory as any).mockResolvedValue(
-      Object.keys(files).map((rel) => ({
-        uri: URI.file(`${docsDir}/${rel}`),
-        isFile: true,
-        isDirectory: false,
-      })),
+    // scanDirectory is called with a filter (isMarkdownFile for docs, isNavFile for
+    // the misplaced-nav scan). Honor it so each call returns only matching files.
+    const allFiles = Object.keys(files).map((rel) => ({
+      uri: URI.file(`${docsDir}/${rel}`),
+      isFile: true,
+      isDirectory: false,
+    }))
+    vi.mocked(fs.scanDirectory as any).mockImplementation(
+      async (_dir: URI, filter: (path: string, isDirectory: boolean) => boolean) =>
+        allFiles.filter((f) => filter(f.uri.fsPath, false)),
     )
     vi.mocked(fs.exists as any).mockImplementation(async (uri: URI) => uri.fsPath === navPath && nav != null)
     vi.mocked(fs.readFile as any).mockImplementation(async (uri: URI) => {
@@ -221,6 +224,46 @@ describe('LikeC4Docs', () => {
       .filter(r => r.level === 'warning')
       .map(r => String(r.rawMessage))
     expect(warnings.some(m => m.includes('nope.md') || m.toLowerCase().includes('link'))).toBe(true)
+  })
+
+  it('warns about a nav.yaml placed in a docs subfolder (ignored by the loader)', async ({ expect }) => {
+    const records = captureLogRecords()
+    const { fs, projectId, docs } = await createTestServices()
+    mockDocs(fs, docsDir, {
+      'index.md': '# Home',
+      'architecture/a.md': '# A',
+      'architecture/nav.yaml': 'nav:\n  - a.md\n',
+    })
+
+    // The misplaced nav file does not fail the model; convention order is used.
+    const model = await docs.docsModel(projectId)
+    expect(model.pages['']).toBeDefined()
+
+    const warnings = records
+      .filter(r => r.level === 'warning')
+      .map(r => String(r.rawMessage))
+    expect(warnings.some(m => m.includes('architecture/nav.yaml') && m.includes('docs root'))).toBe(true)
+  })
+
+  it('does not warn about a correctly-placed root nav.yaml', async ({ expect }) => {
+    const records = captureLogRecords()
+    const { fs, projectId, docs } = await createTestServices()
+    mockDocs(
+      fs,
+      docsDir,
+      {
+        'index.md': '# Home',
+        'nav.yaml': 'nav:\n  - index.md\n',
+      },
+      'nav:\n  - index.md\n',
+    )
+
+    await docs.docsModel(projectId)
+
+    const warnings = records
+      .filter(r => r.level === 'warning')
+      .map(r => String(r.rawMessage))
+    expect(warnings.some(m => m.includes('is ignored') && m.includes('docs root'))).toBe(false)
   })
 
   it('builds tree order, nesting, and labels from nav.yaml and hides unlisted files', async ({ expect }) => {

@@ -12,6 +12,7 @@ import { posix } from 'node:path'
 import type {
   DocsUpdateEvent,
   DocsUpdateListener,
+  FileSystemProvider,
   LikeC4Docs,
 } from '../filesystem/types'
 import { isMarkdownFile } from '../filesystem/utils'
@@ -19,7 +20,7 @@ import { logger as rootLogger } from '../logger'
 import type { LikeC4Services, LikeC4SharedServices } from '../module'
 import { ADisposable, safeCall } from '../utils'
 import type { Project } from '../workspace/ProjectsManager'
-import { discoverDocs, docRoutePath } from './discovery'
+import { discoverDocs, docRoutePath, findMisplacedNavFiles, isNavFile } from './discovery'
 import type { DocLinkDiagnostic, DocLinkResolution, DocViewLinkState, DocViewResolution } from './model-doc'
 import { modelDocFile } from './model-doc'
 import { assembleDocsTreeFromNav, parseNavYaml } from './nav'
@@ -170,6 +171,8 @@ export class DefaultLikeC4Docs extends ADisposable implements LikeC4Docs {
     // Add the docs dir to the watch set so dev picks up changes (mirrors .c4 scan).
     this.services.workspace.FileSystemWatcher?.watch(docsDir.fsPath)
 
+    await this.warnOnMisplacedNavFiles(projectId, docsDir, provider)
+
     const relativePaths = files.map((f) => UriUtils.relative(docsDir, f.uri))
     const { docs } = discoverDocs(relativePaths)
 
@@ -233,6 +236,33 @@ export class DefaultLikeC4Docs extends ADisposable implements LikeC4Docs {
     }
 
     return assembleDocsTree(pages, { entryConfig })
+  }
+
+  /**
+   * Warns (never errors) about `nav.yaml` / `nav.yml` files placed in a docs
+   * SUBFOLDER. Navigation is read from exactly `<docsDir>/nav.yaml`; a nav file
+   * in a subfolder is silently ignored (the tree falls back to convention order),
+   * which confuses users whose per-folder ordering has no effect. The scan reuses
+   * the provider's recursive {@link FileSystemProvider.scanDirectory} with a nav
+   * filter, so it catches a nav file at any depth without a separate deep crawl.
+   * Diagnostics go through the same `docsLogger.warn` channel as link/nav
+   * diagnostics, so they surface in `likec4 build` output and dev-server logs.
+   */
+  private async warnOnMisplacedNavFiles(
+    projectId: ProjectId,
+    docsDir: URI,
+    provider: FileSystemProvider,
+  ): Promise<void> {
+    const navFiles = await provider.scanDirectory(docsDir, (path, isDirectory) => !isDirectory && isNavFile(path))
+    const relativeNavPaths = navFiles.map((f) => UriUtils.relative(docsDir, f.uri))
+    const misplaced = findMisplacedNavFiles(relativeNavPaths)
+    for (const path of misplaced) {
+      docsLogger.warn(
+        `[${projectId}] nav.yaml found at ${path} is ignored; navigation is only read from the docs root `
+          + `(${docsDir.path}/nav.yaml). Move it to the docs root (paths become relative to the docs dir, `
+          + `e.g. ${path.replace(/nav\.ya?ml$/i, '01-system.md')}) or remove it.`,
+      )
+    }
   }
 
   /**
