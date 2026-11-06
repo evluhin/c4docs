@@ -58,10 +58,17 @@ order: 1
 
 **Explicit `docs/nav.yaml`:** mkdocs-style; paths relative to docs dir, `.md` optional.
 
+**Location — critical:** the nav file MUST be at the **docs root**: `<docs dir>/nav.yaml` (e.g. `docs/nav.yaml`). There is exactly ONE nav file for the whole docs tree. A `nav.yaml` placed in any subfolder (e.g. `docs/architecture/nav.yaml`) is **NOT read** — it is silently ignored, and the tree falls back to convention (alphabetical) order. Do not create per-folder nav files.
+
+Because paths are relative to the **docs dir** (not to the nav file's folder), entries for files in subfolders must include the subfolder prefix. To order and label the files inside `docs/architecture/`, put this in `docs/nav.yaml` (NOT in `docs/architecture/nav.yaml`):
+
 ```yaml
 nav:
   - Overview: index.md
-  - Architecture: architecture.md
+  - Architecture:
+      - architecture/index.md
+      - System: architecture/01-system.md
+      - architecture/02-edge-service.md
   - ADRs:
       - adr/0001-use-event-bus.md
       - Adopt LikeC4: adr/0002-adopt-likec4.md
@@ -72,6 +79,9 @@ nav:
 - Label = explicit nav label, else page title.
 - Non-existent target → diagnostic (entry kept). Malformed YAML / missing `nav:` → lenient fallback to convention.
 - First nav doc = default entry, unless `docs.entry` overrides.
+- A subfolder with an `index.md` becomes a section whose landing page is that `index.md`; list the folder's children under a section entry as shown above.
+
+**No `docs/nav.yaml`? → convention mode.** Order is: frontmatter `order` (ascending number) first, then alphabetical by label. To control order WITHOUT a nav.yaml, add `order` to each doc's frontmatter (`order: 1`, `order: 2`, …). A list of links written in an `index.md`'s Markdown BODY does NOT affect nav order — only frontmatter `order` or an explicit root `nav.yaml` does.
 
 ## Embed views
 
