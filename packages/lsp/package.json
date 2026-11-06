@@ -1,6 +1,6 @@
 {
   "name": "@c4docs/likec4-lsp",
-  "version": "1.60.5",
+  "version": "1.60.6",
   "description": "Standalone LikeC4 Language Server for editor integrations",
   "keywords": [
     "likec4",

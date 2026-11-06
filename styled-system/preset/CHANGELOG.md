@@ -1,5 +1,9 @@
 # @likec4/style-preset
 
+## 1.60.6
+
+No changes in this release.
+
 ## 1.60.5
 
 No changes in this release.

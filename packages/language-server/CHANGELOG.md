@@ -1,5 +1,16 @@
 # @likec4/language-server
 
+## 1.60.6
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @c4docs/likec4-config@1.60.6
+  - @c4docs/likec4-core@1.60.6
+  - @c4docs/likec4-generators@1.60.6
+  - @c4docs/likec4-layouts@1.60.6
+  - @c4docs/likec4-log@1.60.6
+
 ## 1.60.5
 
 ### Patch Changes
